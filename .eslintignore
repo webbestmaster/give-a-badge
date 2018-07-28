@@ -1,0 +1,34 @@
+# IDE
+/.idea/
+
+# npm
+node_modules
+
+# flow
+flow-typed/npm
+
+# dist
+/dist/
+/prod/
+
+# res
+/_res
+
+# tools
+/tools
+
+# reports
+/flow-coverage
+
+# example
+
+# /* eslint consistent-this: ["error", "unit", "aggressor"] */
+
+# /* eslint-disable no-unused-vars */
+# var React = require('react');
+# /* eslint-enable no-unused-vars */
+
+# // eslint-disable-next-line no-unused-vars
+# var React = require('react');
+
+# var React = require('react'); // eslint-disable-line no-unused-vars
