@@ -1,12 +1,9 @@
 // @flow
 
-/* global BUILD_DATE */
-
 /* eslint consistent-this: ["error", "view"] */
 
 import type {Node} from 'react';
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
 import style from './style.scss';
 
 // eslint-disable-next-line react/prefer-stateless-function
