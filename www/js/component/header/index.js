@@ -12,11 +12,12 @@ import type {SystemType} from '../system/reducer';
 type ReduxPropsType = {|
     system: SystemType
 |};
-type PassedPropsType = {};
+type PassedPropsType = {||};
 type StateType = {};
 
 class Header extends Component<ReduxPropsType, PassedPropsType, StateType> {
-    props: ReduxPropsType & PassedPropsType;
+    // eslint-disable-next-line id-match
+    props: $Exact<{...ReduxPropsType, ...PassedPropsType}>;
     state: StateType;
 
     constructor() {
