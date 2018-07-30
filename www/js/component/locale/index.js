@@ -27,6 +27,7 @@ type PassedPropsType = {|
 class Locale extends Component<ReduxPropsType, PassedPropsType, StateType> {
     // eslint-disable-next-line id-match
     props: $Exact<{...ReduxPropsType, ...PassedPropsType}>;
+
     state: StateType;
 
     getLocalizedString(): string {

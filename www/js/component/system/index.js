@@ -18,6 +18,7 @@ type StateType = {||};
 
 class System extends Component<PropsType, StateType> {
     props: PropsType;
+
     state: StateType;
 
     componentDidMount() {

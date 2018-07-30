@@ -15,6 +15,7 @@ type StateType = {||};
 
 class Auth extends Component<PropsType, StateType> {
     props: PropsType;
+
     state: StateType;
 
     render(): Node {
