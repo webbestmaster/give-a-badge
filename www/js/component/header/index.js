@@ -7,7 +7,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../app-reducer';
 import style from './style.scss';
-import Search from './search';
+import serviceStyle from '../../../css/service.scss';
+// import Search from './search';
 import UserInfo from './user-info';
 
 type ReduxPropsType = {|
@@ -34,9 +35,13 @@ class Header extends Component<ReduxPropsType, PassedPropsType, StateType> {
     renderDesktop(): Node {
         return (
             <header className={style.header}>
-                <Search/>
-                <button type="button">GaB</button>
-                <UserInfo/>
+                <div className={serviceStyle.max_width}>
+                    <div className={style.give_a_badge}>
+                        Give
+                        <div/>A Badge
+                    </div>
+                    <UserInfo/>
+                </div>
             </header>
         );
     }

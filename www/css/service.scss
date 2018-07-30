@@ -1,5 +1,13 @@
 ///* stylelint-disable selector-pseudo-class-no-unknown, max-nesting-depth */
 //@import './var';
+
+.max_width {
+    margin: 0 auto;
+    max-width: 1200px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
 //
 //.hidden {
 //    display: none !important;

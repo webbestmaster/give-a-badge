@@ -1,0 +1,5 @@
+- var path = 'assets/img/';
+
+//- SVG
+mixin svg( _icon )
+    svg(class= attributes.class): use(xlink:href= path + 'sprite.svg#' + _icon)

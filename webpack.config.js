@@ -31,7 +31,7 @@ const definePluginParams = {
     // IS_DEVELOPMENT: JSON.stringify(IS_DEVELOPMENT)
 };
 
-const imageRETest = /\.(png|jpg|jpeg|gif|svg)(\?[\d&.=a-z]+)?$/;
+const imageRETest = /\.(png|jpg|jpeg|gif|svg|wof{2}|wof{2}2)(\?[\d&.=a-z]+)?$/;
 
 const webpackConfig = {
     entry: ['./www/css/root.scss', 'babel-polyfill', 'whatwg-fetch', './www/js/index.js'],

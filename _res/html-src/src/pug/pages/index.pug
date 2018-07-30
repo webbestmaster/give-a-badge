@@ -1,0 +1,202 @@
+extends ../_common/_layout
+
+block variables
+    - var title = 'Главная';
+
+block header
+    include ../_common/_header
+
+block content
+    .cardsContainer
+        .container
+            .cardsCategories#cardsContainer
+                .cardsCategories-item
+                    a.cardCategory.js-outsideclick(href="#categoryPeopleList" data-toggle)
+                        .cardCategory-circle.categoryCircle.orange
+                            .categoryCircle-icon
+                                +svg('cup-star').icon
+                            .categoryCircle-iconStatus.is-check
+                                +svg('check').icon.icon-status-check
+                        .cardCategory-users
+                            .categoryUserList.categoryUserList--collapsed.categoryUserList--centered
+                                .categoryUserList-item
+                                    .userPic.userPic--bordered: img(src=path+'user1.jpg', alt="User 1")
+                                .categoryUserList-item
+                                    .userPic.userPic--bordered: img(src=path+'user2.jpg', alt="User 2")
+                                .categoryUserList-item
+                                    .userPic.userPic--bordered: img(src=path+'user3.jpg', alt="User 3")
+                                .categoryUserList-item
+                                    .userPic.userPic--bordered: img(src=path+'user4.jpg', alt="User 4")
+                                .categoryUserList-item
+                                    .userPic.userPic--bordered: img(src=path+'user5.jpg', alt="User 5")
+                                .categoryUserList-item
+                                    .userPic.userPic--bordered: img(src=path+'user6.jpg', alt="User 6")
+                        .cardCategory-desc
+                            p Changing the global strategy programs the experimental creative. The psychological environment…
+                        .cardCategory-footer
+                            .cardCategoryCreator
+                                .cardCategoryCreator-image
+                                    img(src=path+'cardCreatorImage.jpg', alt="Creator")
+                                .cardCategoryCreator-data
+                                    .cardCategoryCreator-date 12.07.2018
+                    // .cardCategory
+                // .cardsCategories-item
+
+
+                .cardsCategories-item
+                    a.cardCategory.js-outsideclick(href="#categoryPeopleList" data-toggle)
+                        .cardCategory-circle.categoryCircle.red
+                            .categoryCircle-icon
+                                +svg('heart').icon
+                        .cardCategory-users
+                            .categoryUserList.categoryUserList--bordered.categoryUserList--collapsed.categoryUserList--more
+                                .categoryUserList-item
+                                    .userPic.userPic--bordered: img(src=path+'user1.jpg', alt="User 1")
+                                .categoryUserList-item
+                                    .userPic.userPic--bordered: img(src=path+'user2.jpg', alt="User 2")
+                                .categoryUserList-moretext and 252 people
+                        .cardCategory-desc
+                            p The art of media planning unnaturally programming the experimental dictates of the consumer…
+                        .cardCategory-footer
+                            .cardCategoryCreator
+                                .cardCategoryCreator-image
+                                    img(src=path+'cardCreatorImage.jpg', alt="Creator")
+                                .cardCategoryCreator-data
+                                    .cardCategoryCreator-date 10.07.2018
+                    // .cardCategory
+                // .cardsCategories-item
+
+                .cardsCategories-item
+                    a.cardCategory.js-outsideclick(href="#categoryPeopleList" data-toggle)
+                        .cardCategory-circle.categoryCircle.blue
+                            .categoryCircle-icon
+                                +svg('gift').icon
+                            .categoryCircle-iconStatus.is-clock
+                                +svg('clock').icon.icon-status-clock
+                        .cardCategory-users
+                            .categoryUserList.categoryUserList--collapsed.categoryUserList--centered
+                                .categoryUserList-item
+                                    .userPic.userPic--bordered: img(src=path+'user1.jpg', alt="User 1")
+                        .cardCategory-desc
+                            p The dictate of the consumer, discarding the details, is based on the experience of everyday use…
+                        .cardCategory-footer
+                            .cardCategoryCreator
+                                .cardCategoryCreator-image
+                                    img(src=path+'user6.jpg', alt="Creator")
+                                .cardCategoryCreator-data
+                                    .cardCategoryCreator-date 02.07.2018
+                    // .cardCategory
+                // .cardsCategories-item
+
+                .cardsCategories-item
+                    a.cardCategory.js-outsideclick(href="#categoryPeopleList" data-toggle)
+                        .cardCategory-circle.categoryCircle.purple
+                            .categoryCircle-icon
+                                +svg('star').icon
+                            .categoryCircle-iconStatus.is-closed
+                                +svg('cross').icon.icon-status-close
+                        .cardCategory-users
+                            .categoryUserList.categoryUserList--collapsed.categoryUserList--centered
+                                .categoryUserList-item
+                                    .userPic.userPic--bordered: img(src=path+'user1.jpg', alt="User 1")
+                        .cardCategory-desc
+                            p Behavioral targeting categorically creates rebranding. The identity of the top manager produces content…
+                        .cardCategory-footer
+                            .cardCategoryCreator
+                                .cardCategoryCreator-image
+                                    img(src=path+'user6.jpg', alt="Creator")
+                                .cardCategoryCreator-data
+                                    .cardCategoryCreator-date 29.06.2018
+                    // .cardCategory
+                // .cardsCategories-item
+
+                .cardsCategories-item
+                    a.cardCategory.js-outsideclick(href="#categoryPeopleList" data-toggle)
+                        .cardCategory-circle.categoryCircle.orange-dark
+                            .categoryCircle-icon
+                                +svg('envelope').icon
+                            .categoryCircle-iconStatus.is-check
+                                +svg('check').icon.icon-status-check
+                        .cardCategory-users
+                            .categoryUserList.categoryUserList--collapsed.categoryUserList--centered
+                                .categoryUserList-item
+                                    .userPic.userPic--bordered: img(src=path+'user1.jpg', alt="User 1")
+                                .categoryUserList-item
+                                    .userPic.userPic--bordered: img(src=path+'user2.jpg', alt="User 2")
+                                .categoryUserList-item
+                                    .userPic.userPic--bordered: img(src=path+'user3.jpg', alt="User 3")
+                                .categoryUserList-item
+                                    .userPic.userPic--bordered: img(src=path+'user4.jpg', alt="User 4")
+                                .categoryUserList-item
+                                    .userPic.userPic--bordered: img(src=path+'user5.jpg', alt="User 5")
+                                .categoryUserList-item
+                                    .userPic.userPic--bordered: img(src=path+'user6.jpg', alt="User 6")
+                        .cardCategory-desc
+                            p According to recent research, the media channel is based on a thorough analysis of the data…
+                        .cardCategory-footer
+                            .cardCategoryCreator
+                                .cardCategoryCreator-image
+                                    img(src=path+'cardCreatorImage.jpg', alt="Creator")
+                                .cardCategoryCreator-data
+                                    .cardCategoryCreator-date 25.06.2018
+                    // .cardCategory
+                // .cardsCategories-item
+
+                .cardsCategories-item
+                    a.cardCategory.js-outsideclick(href="#categoryPeopleList" data-toggle)
+                        .cardCategory-circle.categoryCircle.red
+                            .categoryCircle-icon
+                                +svg('heart').icon
+                        .cardCategory-users
+                            .categoryUserList.categoryUserList--bordered.categoryUserList--collapsed
+                                .categoryUserList-item
+                                    .userPic.userPic--bordered: img(src=path+'user1.jpg', alt="User 1")
+                                .categoryUserList-item
+                                    .userPic.userPic--bordered: img(src=path+'user2.jpg', alt="User 2")
+                                .categoryUserList-item
+                                    .userPic.userPic--bordered: img(src=path+'user3.jpg', alt="User 3")
+                        .cardCategory-desc
+                            p The impact on the consumer is exclusively broadcast by the media weight. Targeting is constructive…
+                        .cardCategory-footer
+                            .cardCategoryCreator
+                                .cardCategoryCreator-image
+                                    img(src=path+'cardCreatorImage.jpg', alt="Creator")
+                                .cardCategoryCreator-data
+                                    .cardCategoryCreator-date 20.06.2018
+                    // .cardCategory
+                // .cardsCategories-item
+
+                .cardsCategories-item
+                    a.cardCategory.js-outsideclick(href="#categoryPeopleList" data-toggle)
+                        .cardCategory-circle.categoryCircle.blue
+                            .categoryCircle-icon
+                                +svg('users').icon
+                            .categoryCircle-iconStatus.is-clock
+                                +svg('clock').icon.icon-status-clock
+                        .cardCategory-users
+                            .categoryUserList.categoryUserList--bordered.categoryUserList--collapsed.categoryUserList--centered
+                                .categoryUserList-item
+                                    .userPic.userPic--bordered: img(src=path+'user1.jpg', alt="User 1")
+                                .categoryUserList-item
+                                    .userPic.userPic--bordered: img(src=path+'user2.jpg', alt="User 2")
+                        .cardCategory-desc
+                            p The advertising community, as is commonly believed, traditionally consolidates the complex social… status. Segmentation of the market, as follows from the above, directively concentrates the convergent industry standard.
+                        .cardCategory-footer
+                            .cardCategoryCreator
+                                .cardCategoryCreator-image
+                                    img(src=path+'user6.jpg', alt="Creator")
+                                .cardCategoryCreator-data
+                                    .cardCategoryCreator-date 12.06.2018
+                    // .cardCategory
+                // .cardsCategories-item
+
+            // .cardsCategories
+        // .container
+    // .cardsContainer
+
+    include ../blocks/modal-categories
+
+    include ../blocks/modal-category
+
+block footer
+    //- include ../_common/_footer

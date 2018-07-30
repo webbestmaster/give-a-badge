@@ -1,0 +1,32 @@
+{
+   "name": "assembly",
+   "version": "1.0.0",
+   "description": "",
+   "main": "index.js",
+   "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+   },
+   "author": "Tishuk Nadezda",
+   "license": "ISC",
+   "devDependencies": {
+      "browser-sync": "^2.24.5",
+      "gulp": "^3.9.1",
+      "gulp-autoprefixer": "*",
+      "gulp-concat": "*",
+      "gulp-connect": "*",
+      "gulp-csso": "*",
+      "gulp-image": "*",
+      "gulp-jsmin": "*",
+      "gulp-load-plugins": "*",
+      "gulp-notify": "*",
+      "gulp-pug": "*",
+      "gulp-rename": "*",
+      "gulp-sass": "*",
+      "gulp-sequence": "*",
+      "gulp-sourcemaps": "*",
+      "gulp-stylus": "*",
+      "gulp-svg-sprite": "*",
+      "gulp-svgmin": "*",
+      "gulp-watch": "*"
+   }
+}
