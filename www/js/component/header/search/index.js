@@ -11,7 +11,7 @@ import {system} from '../../../app-reducer';
 
 type ReduxPropsType = {|
     // eslint-disable-next-line id-match
-    system: $PropertyType<ReduxPropsType, 'system'>
+    +system: $PropertyType<GlobalStateType, 'system'>
 |};
 
 type PassedPropsType = {|

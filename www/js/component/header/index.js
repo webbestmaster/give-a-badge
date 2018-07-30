@@ -7,12 +7,12 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../app-reducer';
 import style from './style.scss';
-import type {SystemType} from '../system/reducer';
 import Search from './search';
 import UserInfo from './user-info';
 
 type ReduxPropsType = {|
-    system: SystemType
+    // eslint-disable-next-line id-match
+    +system: $PropertyType<GlobalStateType, 'system'>
 |};
 type PassedPropsType = {||};
 type StateType = {};

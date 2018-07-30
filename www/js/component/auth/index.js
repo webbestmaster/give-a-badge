@@ -8,24 +8,38 @@ import type {Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../app-reducer';
+import Login from './popup/login';
 
-type PropsType = {||};
+type ReduxPropsType = {|
+    // eslint-disable-next-line id-match
+    +auth: $PropertyType<GlobalStateType, 'auth'>
+|};
 
-type StateType = {||};
+type PassedPropsType = {|
+    // passedProp: string
+|};
 
-class Auth extends Component<PropsType, StateType> {
-    props: PropsType;
+type StateType = {|
+    +state: number
+|};
+
+class Auth extends Component<ReduxPropsType, PassedPropsType, StateType> {
+    // eslint-disable-next-line id-match
+    props: $Exact<{...ReduxPropsType, ...PassedPropsType}>;
 
     state: StateType;
 
-    render(): Node {
-        return null;
+    render(): Array<Node> {
+        const view = this;
+        const {props} = view;
+
+        return [<Login key="login" isOpen={props.auth.popup.login.isOpen}/>];
     }
 }
 
 export default connect(
     (state: GlobalStateType): {} => ({
-        // auth: state.auth
+        auth: state.auth
     }),
     {}
 )(Auth);

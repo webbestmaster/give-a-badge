@@ -10,7 +10,7 @@ import style from './style.scss';
 
 type ReduxPropsType = {|
     // eslint-disable-next-line id-match
-    system: $PropertyType<ReduxPropsType, 'system'>
+    +system: $PropertyType<GlobalStateType, 'system'>
 |};
 
 type PassedPropsType = {|
@@ -18,7 +18,7 @@ type PassedPropsType = {|
 |};
 
 type StateType = {|
-    state: number
+    +state: number
 |};
 
 class UserInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
