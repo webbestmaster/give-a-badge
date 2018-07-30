@@ -8,6 +8,8 @@ import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../app-reducer';
 import style from './style.scss';
 import type {SystemType} from '../system/reducer';
+import Search from './search';
+import UserInfo from './user-info';
 
 type ReduxPropsType = {|
     system: SystemType
@@ -30,11 +32,19 @@ class Header extends Component<ReduxPropsType, PassedPropsType, StateType> {
     }
 
     renderDesktop(): Node {
-        return <header className={style.header}/>;
+        return (
+            <header className={style.header}>
+                <Search/>
+                <button type="button">GaB</button>
+                <UserInfo/>
+            </header>
+        );
     }
 
     renderMobile(): Node {
-        return <header className={style.header}/>;
+        const view = this;
+
+        return view.renderDesktop();
     }
 
     render(): Node {

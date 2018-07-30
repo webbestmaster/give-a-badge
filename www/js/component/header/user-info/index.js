@@ -9,18 +9,19 @@ import type {GlobalStateType} from '../../../app-reducer';
 import style from './style.scss';
 
 type ReduxPropsType = {|
-    reduxProp: boolean
+    // eslint-disable-next-line id-match
+    system: $PropertyType<ReduxPropsType, 'system'>
 |};
 
 type PassedPropsType = {|
-    passedProp: string
+    // passedProp: string
 |};
 
 type StateType = {|
     state: number
 |};
 
-class MyReactComponent extends Component<ReduxPropsType, PassedPropsType, StateType> {
+class UserInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
     // eslint-disable-next-line id-match
     props: $Exact<{...ReduxPropsType, ...PassedPropsType}>;
     state: StateType;
@@ -34,22 +35,35 @@ class MyReactComponent extends Component<ReduxPropsType, PassedPropsType, StateT
         };
     }
 
-    render(): Node {
+    renderDesktop(): Node {
         const view = this;
-        const {props, state} = view;
 
         return (
             <div>
-                {'\u00A0'}
-                {'\u2026'}
+                <h3>photo</h3>
+                <h3>name</h3>
+                <h3>logout button</h3>
             </div>
         );
+    }
+
+    renderMobile(): Node {
+        const view = this;
+
+        return view.renderDesktop();
+    }
+
+    render(): Node {
+        const view = this;
+        const {props} = view;
+
+        return props.system.screen.isDesktop ? view.renderDesktop() : view.renderMobile();
     }
 }
 
 export default connect(
     (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
-        reduxProp: true
+        system: state.system
     }),
     {}
-)(MyReactComponent);
+)(UserInfo);

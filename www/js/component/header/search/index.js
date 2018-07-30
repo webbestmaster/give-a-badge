@@ -4,36 +4,70 @@
 
 import type {Node} from 'react';
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import type {GlobalStateType} from '../../../app-reducer';
 import style from './style.scss';
+import {system} from '../../../app-reducer';
+
+type ReduxPropsType = {|
+    // eslint-disable-next-line id-match
+    system: $PropertyType<ReduxPropsType, 'system'>
+|};
 
 type PassedPropsType = {|
-    passedProp: string
+    // passedProp: string
 |};
 
 type StateType = {|
-    state: number
+    isActive: boolean
 |};
 
-export default class MyReactComponent extends Component<PassedPropsType, StateType> {
-    props: PassedPropsType;
+class Search extends Component<ReduxPropsType, PassedPropsType, StateType> {
+    // eslint-disable-next-line id-match
+    props: $Exact<{...ReduxPropsType, ...PassedPropsType}>;
     state: StateType;
 
     constructor() {
         super();
-
         const view = this;
 
         view.state = {
-            state: 0
+            isActive: false
         };
     }
 
-    render(): Node {
+    renderDesktop(): Node {
+        const view = this;
+
         return (
             <div>
-                {'\u00A0'}
-                {'\u2026'}
+                <input
+                    key="input"
+                    onFocus={(): void => view.setState({isActive: true})}
+                    onBlur={(): void => view.setState({isActive: false})}
+                    type="text"
+                />
             </div>
         );
     }
+
+    renderMobile(): Node {
+        const view = this;
+
+        return view.renderDesktop();
+    }
+
+    render(): Node {
+        const view = this;
+        const {props} = view;
+
+        return props.system.screen.isDesktop ? view.renderDesktop() : view.renderMobile();
+    }
 }
+
+export default connect(
+    (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
+        system: state.system
+    }),
+    {}
+)(Search);
