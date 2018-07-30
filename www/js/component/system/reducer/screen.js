@@ -5,34 +5,52 @@
 import type {OnResizeType} from '../action';
 import {systemConst} from '../const';
 
-type ScreenWidthNameType = 'desktop' | 'tablet' | 'mobile';
+const screenNameMap = {
+    // key and value have to be the same,
+    // $Value<typeof screenNameMap> - translate 'desktop', 'tablet', 'mobile' to type string
+    desktop: 'desktop',
+    tablet: 'tablet',
+    mobile: 'mobile'
+};
+
+// eslint-disable-next-line id-match
+type ScreenWidthNameType = $Keys<typeof screenNameMap>;
 
 const screenMinWidth: {[key: ScreenWidthNameType]: number} = {
-    desktop: 1280,
-    tablet: 768,
-    mobile: 320
+    [screenNameMap.desktop]: 1280,
+    [screenNameMap.tablet]: 768,
+    [screenNameMap.mobile]: 320
 };
 
 export type ScreenType = {|
     width: number,
     height: number,
+    isDesktop: boolean,
+    isTablet: boolean,
+    isMobile: boolean,
     name: ScreenWidthNameType,
     ltThen: Array<ScreenWidthNameType>
 |};
 
 function getScreenName(screenWidth: number): ScreenWidthNameType {
-    let screenName = 'mobile';
+    let screenName = screenNameMap.mobile;
 
-    Object.keys(screenMinWidth).every(
-        (screenNameInList: ScreenWidthNameType): boolean => {
-            if (screenWidth >= screenMinWidth[screenNameInList]) {
-                screenName = screenNameInList;
-                return false;
+    Object.keys(screenMinWidth)
+        .sort(
+            (screenNameA: ScreenWidthNameType, screenNameB: ScreenWidthNameType): number => {
+                return screenMinWidth[screenNameB] - screenMinWidth[screenNameA];
             }
+        )
+        .every(
+            (screenNameInList: ScreenWidthNameType): boolean => {
+                if (screenWidth >= screenMinWidth[screenNameInList]) {
+                    screenName = screenNameInList;
+                    return false;
+                }
 
-            return true;
-        }
-    );
+                return true;
+            }
+        );
 
     return screenName;
 }
@@ -50,10 +68,15 @@ function getLtThen(screenWidth: number): Array<ScreenWidthNameType> {
 }
 
 function getScreenState(width: number, height: number): ScreenType {
+    const screenName = getScreenName(width);
+
     return {
         width,
         height,
-        name: getScreenName(width),
+        isDesktop: screenName === screenNameMap.desktop,
+        isTablet: screenName === screenNameMap.tablet,
+        isMobile: screenName === screenNameMap.mobile,
+        name: screenName,
         ltThen: getLtThen(width)
     };
 }

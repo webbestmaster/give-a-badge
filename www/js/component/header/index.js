@@ -28,17 +28,23 @@ class Header extends Component<ReduxPropsType, PassedPropsType, StateType> {
         view.state = {};
     }
 
+    renderDesktop(): Node {
+        return <header className={style.header}>desktop</header>;
+    }
+
+    renderMobile(): Node {
+        return <header className={style.header}>mobile</header>;
+    }
+
     render(): Node {
         const view = this;
         const {props, state} = view;
 
-        return (
-            <header className={style.header}>
-                the header {props.system.screen.name}
-                {'\u00A0'}
-                {'\u2026'}
-            </header>
-        );
+        if (props.system.screen.isMobile) {
+            return view.renderMobile();
+        }
+
+        return view.renderDesktop();
     }
 }
 
