@@ -13,9 +13,10 @@ import routes from './routes';
 export default function App(): Node[] {
     return [
         <Auth key="auth"/>,
-        <System key="system"/>,
-        <Switch key="switch">
-            <Route component={Home} path={routes.index} exact/>
-        </Switch>
+        <System key="system">
+            <Switch key="switch">
+                <Route component={Home} path={routes.index} exact/>
+            </Switch>
+        </System>
     ];
 }

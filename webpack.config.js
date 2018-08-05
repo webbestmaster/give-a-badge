@@ -31,7 +31,7 @@ const definePluginParams = {
     // IS_DEVELOPMENT: JSON.stringify(IS_DEVELOPMENT)
 };
 
-const imageRETest = /\.(png|jpg|jpeg|gif|svg|wof{2}|wof{2}2)(\?[\d&.=a-z]+)?$/;
+const fileRegExp = /\.(png|jpg|jpeg|gif|svg|wof{2}|wof{2}2)(\?[\d&.=a-z]+)?$/;
 
 const webpackConfig = {
     entry: ['./www/css/root.scss', 'babel-polyfill', 'whatwg-fetch', './www/js/index.js'],
@@ -67,7 +67,7 @@ const webpackConfig = {
                             chunks: 'initial',
                             name: 'image',
                             priority: -15,
-                            test: imageRETest
+                            test: fileRegExp
                         },
                         vendor: {
                             chunks: 'initial',
@@ -107,7 +107,7 @@ const webpackConfig = {
                 loader: 'babel-loader'
             },
             {
-                test: imageRETest,
+                test: fileRegExp,
                 use: [
                     {
                         loader: 'base64-inline-loader',

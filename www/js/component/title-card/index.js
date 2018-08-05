@@ -8,9 +8,7 @@ import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../app-reducer';
 import style from './style.scss';
 
-type ReduxPropsType = {|
-    +reduxProp: boolean
-|};
+type ReduxPropsType = {};
 
 type PassedPropsType = {|
     // +passedProp: string
@@ -20,13 +18,15 @@ type StateType = {|
     +state: number
 |};
 
+// eslint-disable-next-line id-match
+type PropsType = $Exact<{...ReduxPropsType, ...PassedPropsType}>;
+
 class TitleCard extends Component<ReduxPropsType, PassedPropsType, StateType> {
-    // eslint-disable-next-line id-match
-    props: $Exact<{...ReduxPropsType, ...PassedPropsType}>;
+    props: PropsType;
     state: StateType;
 
-    constructor() {
-        super();
+    constructor(props: PropsType) {
+        super(props);
 
         const view = this;
 
@@ -48,8 +48,6 @@ class TitleCard extends Component<ReduxPropsType, PassedPropsType, StateType> {
 }
 
 export default connect(
-    (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
-        reduxProp: true
-    }),
+    (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({}),
     {}
 )(TitleCard);

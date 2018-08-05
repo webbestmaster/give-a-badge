@@ -7,10 +7,11 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../../app-reducer';
 import style from './style.scss';
+import type {SystemType} from '../../system/reducer';
 
 type ReduxPropsType = {|
     // eslint-disable-next-line id-match
-    +system: $PropertyType<GlobalStateType, 'system'>
+    +system: SystemType
 |};
 
 type PassedPropsType = {|
@@ -21,13 +22,15 @@ type StateType = {|
     +state: number
 |};
 
+// eslint-disable-next-line id-match
+type PropsType = $Exact<{...ReduxPropsType, ...PassedPropsType}>;
+
 class UserInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
-    // eslint-disable-next-line id-match
-    props: $Exact<{...ReduxPropsType, ...PassedPropsType}>;
+    props: PropsType;
     state: StateType;
 
-    constructor() {
-        super();
+    constructor(props: PropsType) {
+        super(props);
         const view = this;
 
         view.state = {

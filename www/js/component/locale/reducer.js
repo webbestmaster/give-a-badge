@@ -5,6 +5,12 @@
 import {combineReducers} from 'redux';
 import {localeConst} from './const';
 import type {LocaleNameType, SetLocaleType} from './action';
+import type {ActionDataType} from '../../app-reducer-type';
+
+export const localeNameReference: {[key: string]: LocaleNameType} = {
+    enUs: 'en-US',
+    ruRu: 'ru-RU'
+};
 
 function getLocaleName(): LocaleNameType {
     const savedLocaleName = window.localStorage.getItem(localeConst.key.localStorage.localeName);
@@ -24,11 +30,15 @@ export type LocaleType = {|
 |};
 
 export default combineReducers({
-    name: (localeName: LocaleNameType = initialLocaleName, {type, payload}: SetLocaleType): LocaleNameType => {
-        if (type !== localeConst.action.type.setLocale) {
+    name: (localeName: LocaleNameType = initialLocaleName, actionData: ActionDataType): LocaleNameType => {
+        if (actionData.type !== localeConst.action.type.setLocale) {
             return localeName;
         }
 
-        return payload.localeName;
+        if (typeof actionData.payload === 'undefined') {
+            return localeName;
+        }
+
+        return actionData.payload.localeName;
     }
 });

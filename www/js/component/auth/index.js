@@ -7,39 +7,47 @@
 import type {Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import type {SetUserType} from './action';
+import {setUser} from './action';
+import type {AuthType, UserType} from './reducer';
 import type {GlobalStateType} from '../../app-reducer';
-import Login from './popup/login';
 
 type ReduxPropsType = {|
-    // eslint-disable-next-line id-match
-    +auth: $PropertyType<GlobalStateType, 'auth'>
+    +auth: AuthType
 |};
 
-type PassedPropsType = {|
-    // passedProp: string
+type ReduxActionType = {|
+    +setUser: (userState: UserType) => SetUserType
 |};
 
-type StateType = {|
-    +state: number
-|};
+type PassedPropsType = {||};
+
+type StateType = null;
 
 class Auth extends Component<ReduxPropsType, PassedPropsType, StateType> {
     // eslint-disable-next-line id-match
-    props: $Exact<{...ReduxPropsType, ...PassedPropsType}>;
-
+    props: $Exact<{...PassedPropsType, ...ReduxPropsType, ...ReduxActionType}>;
     state: StateType;
 
-    render(): Array<Node> {
+    componentDidMount() {
         const view = this;
         const {props} = view;
 
-        return [<Login key="login" isOpen={props.auth.popup.login.isOpen}/>];
+        props.setUser({id: 'default-user-id'});
+    }
+
+    render(): Node {
+        return null;
     }
 }
 
+const reduxAction: ReduxActionType = {
+    setUser
+};
+
 export default connect(
-    (state: GlobalStateType): {} => ({
+    (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
         auth: state.auth
     }),
-    {}
+    reduxAction
 )(Auth);

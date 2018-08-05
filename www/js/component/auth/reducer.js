@@ -1,33 +1,34 @@
 // @flow
 
-/* global window */
-
 import {combineReducers} from 'redux';
-import type {ActionOpenPopupType} from './action';
+import type {SetUserType} from './action';
 import {authConst} from './const';
+import type {ActionDataType} from '../../app-reducer-type';
+import {isUndefined} from '../../lib/is';
 
-type PopupStateType = {|
-    +login: {|
-        +isOpen: boolean
-    |}
+export type UserType = {|
+    +id: string
 |};
 
-export type AuthType = {|
-    popup: PopupStateType
-|};
-
-const popupInitialState: PopupStateType = {
-    login: {
-        isOpen: false
-    }
+const defaultUserState: UserType = {
+    id: ''
 };
 
+// module
+export type AuthType = {|
+    +user: UserType
+|};
+
 export default combineReducers({
-    popup: (initialState: PopupStateType = popupInitialState, action: ActionOpenPopupType): PopupStateType => {
-        return {
-            login: {
-                isOpen: action.type === authConst.action.type.openLoginPopup
-            }
-        };
+    user: (userState: UserType = defaultUserState, actionData: ActionDataType): UserType => {
+        if (actionData.type !== authConst.action.type.setUserState) {
+            return userState;
+        }
+
+        if (typeof actionData.payload === 'undefined') {
+            return userState;
+        }
+
+        return actionData.payload;
     }
 });

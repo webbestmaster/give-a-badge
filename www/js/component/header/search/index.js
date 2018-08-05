@@ -8,10 +8,10 @@ import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../../app-reducer';
 import style from './style.scss';
 import {system} from '../../../app-reducer';
+import type {SystemType} from '../../system/reducer';
 
 type ReduxPropsType = {|
-    // eslint-disable-next-line id-match
-    +system: $PropertyType<GlobalStateType, 'system'>
+    +system: SystemType
 |};
 
 type PassedPropsType = {|

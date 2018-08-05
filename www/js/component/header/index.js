@@ -10,22 +10,24 @@ import style from './style.scss';
 import serviceStyle from '../../../css/service.scss';
 // import Search from './search';
 import UserInfo from './user-info';
+import type {SystemType} from '../system/reducer';
 
 type ReduxPropsType = {|
-    // eslint-disable-next-line id-match
-    +system: $PropertyType<GlobalStateType, 'system'>
+    +system: SystemType
 |};
 type PassedPropsType = {||};
 type StateType = {};
 
+// eslint-disable-next-line id-match
+type PropsType = $Exact<{...PassedPropsType, ...ReduxPropsType}>;
+
 class Header extends Component<ReduxPropsType, PassedPropsType, StateType> {
-    // eslint-disable-next-line id-match
-    props: $Exact<{...ReduxPropsType, ...PassedPropsType}>;
+    props: PropsType;
 
     state: StateType;
 
-    constructor() {
-        super();
+    constructor(props: PropsType) {
+        super(props);
 
         const view = this;
 

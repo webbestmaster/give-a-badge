@@ -1,25 +1,16 @@
 // @flow
 
+import type {UserType} from './reducer';
 import {authConst} from './const';
 
-export type ActionOpenLoginPopupType = {|
-    +type: 'auth__open_login_popup'
+export type SetUserType = {|
+    type: 'auth__set-user-state',
+    payload: UserType
 |};
 
-export function openLoginPopup(): ActionOpenLoginPopupType {
+export function setUser(userState: UserType): SetUserType {
     return {
-        type: authConst.action.type.openLoginPopup
+        type: authConst.action.type.setUserState,
+        payload: userState
     };
 }
-
-export type ActionCloseLoginPopupType = {|
-    +type: 'auth__close_login_popup'
-|};
-
-export function closeLoginPopup(): ActionCloseLoginPopupType {
-    return {
-        type: authConst.action.type.closeLoginPopup
-    };
-}
-
-export type ActionOpenPopupType = ActionOpenLoginPopupType | ActionCloseLoginPopupType;

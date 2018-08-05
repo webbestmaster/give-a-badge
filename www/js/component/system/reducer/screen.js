@@ -2,82 +2,78 @@
 
 /* global window */
 
-import type {OnResizeType} from '../action';
 import {systemConst} from '../const';
+import type {ActionDataType} from '../../../app-reducer-type';
 
-const screenNameMap = {
-    // key and value have to be the same,
-    // $Value<typeof screenNameMap> - translate 'desktop', 'tablet', 'mobile' to type string
+type ScreenWidthNameType = 'desktop' | 'tablet' | 'mobile';
+
+const screenMinWidth: {[key: ScreenWidthNameType]: number} = {
+    desktop: 1280,
+    tablet: 768,
+    mobile: 320
+};
+
+export const screenNameReference: {[key: ScreenWidthNameType]: ScreenWidthNameType} = {
     desktop: 'desktop',
     tablet: 'tablet',
     mobile: 'mobile'
 };
 
-// eslint-disable-next-line id-match
-type ScreenWidthNameType = $Keys<typeof screenNameMap>;
-
-const screenMinWidth: {[key: ScreenWidthNameType]: number} = {
-    [screenNameMap.desktop]: 1280,
-    [screenNameMap.tablet]: 768,
-    [screenNameMap.mobile]: 320
-};
-
 export type ScreenType = {|
     width: number,
     height: number,
+    name: ScreenWidthNameType,
     isDesktop: boolean,
     isTablet: boolean,
     isMobile: boolean,
-    name: ScreenWidthNameType,
-    ltThen: Array<ScreenWidthNameType>
+    littleThen: Array<ScreenWidthNameType>,
+    isLandscape: boolean,
+    isPortrait: boolean
 |};
 
 function getScreenName(screenWidth: number): ScreenWidthNameType {
-    let screenName = screenNameMap.mobile;
+    let screenName = 'mobile';
 
-    Object.keys(screenMinWidth)
-        .sort(
-            (screenNameA: ScreenWidthNameType, screenNameB: ScreenWidthNameType): number => {
-                return screenMinWidth[screenNameB] - screenMinWidth[screenNameA];
+    Object.keys(screenMinWidth).every(
+        (screenNameInList: ScreenWidthNameType): boolean => {
+            if (screenWidth >= screenMinWidth[screenNameInList]) {
+                screenName = screenNameInList;
+                return false;
             }
-        )
-        .every(
-            (screenNameInList: ScreenWidthNameType): boolean => {
-                if (screenWidth >= screenMinWidth[screenNameInList]) {
-                    screenName = screenNameInList;
-                    return false;
-                }
 
-                return true;
-            }
-        );
+            return true;
+        }
+    );
 
     return screenName;
 }
 
-function getLtThen(screenWidth: number): Array<ScreenWidthNameType> {
-    const ltThenList = [];
+function getLittleThen(screenWidth: number): Array<ScreenWidthNameType> {
+    const littleThenList = [];
 
     Object.keys(screenMinWidth).forEach((screenName: ScreenWidthNameType) => {
         if (screenWidth < screenMinWidth[screenName]) {
-            ltThenList.push(screenName);
+            littleThenList.push(screenName);
         }
     });
 
-    return ltThenList;
+    return littleThenList;
 }
 
 function getScreenState(width: number, height: number): ScreenType {
+    const isLandscape = width > height; // use >, do not use >=, if width === height it is portrait
     const screenName = getScreenName(width);
 
     return {
         width,
         height,
-        isDesktop: screenName === screenNameMap.desktop,
-        isTablet: screenName === screenNameMap.tablet,
-        isMobile: screenName === screenNameMap.mobile,
         name: screenName,
-        ltThen: getLtThen(width)
+        littleThen: getLittleThen(width),
+        isDesktop: screenName === screenNameReference.desktop,
+        isTablet: screenName === screenNameReference.tablet,
+        isMobile: screenName === screenNameReference.mobile,
+        isLandscape,
+        isPortrait: !isLandscape
     };
 }
 
@@ -85,12 +81,16 @@ const {clientWidth, clientHeight} = window.document.documentElement;
 
 const defaultScreenState = getScreenState(clientWidth, clientHeight);
 
-export default (screenState: ScreenType = defaultScreenState, {type, payload}: OnResizeType): ScreenType => {
-    if (type !== systemConst.action.type.resize) {
+export default (screenState: ScreenType = defaultScreenState, actionData: ActionDataType): ScreenType => {
+    if (actionData.type !== systemConst.action.type.resize) {
         return screenState;
     }
 
-    const {width, height} = payload;
+    if (typeof actionData.payload === 'undefined') {
+        return screenState;
+    }
+
+    const {width, height} = actionData.payload;
 
     if (screenState.width === width && screenState.height === height) {
         return screenState;
