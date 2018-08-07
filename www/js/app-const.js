@@ -1,18 +1,12 @@
 // @flow
 /* global window, IS_PRODUCTION */
 
-export type AppConstType = {|
-    +api: {|
-        +url: string
-    |}
-|};
-
 const {hostname, origin} = window.location;
 
-const appConst: AppConstType = {
+const appConst = {
     api: {
-        // eslint-disable-next-line id-match
-        url: IS_PRODUCTION ? origin : 'http://my-best-site.com'
+        url: 'http://206.81.28.99:1313',
+        getMe: '/api/users/current?id=1'
     }
 };
 
