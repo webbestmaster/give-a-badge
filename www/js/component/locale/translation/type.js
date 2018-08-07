@@ -2,7 +2,7 @@
 
 export type LangDataType = {|
     /* eslint-disable id-match */
-    +LANGUAGE: string,
+    +LANGUAGE_NAME: string,
 
     // spec symbols
     +SPACE: ' '

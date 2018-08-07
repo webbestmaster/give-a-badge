@@ -1,7 +1,6 @@
 // @flow
 /* global window */
 
-import {initializeEnvironment} from './app/helper.js';
 import React from 'react';
 import {render} from 'react-dom';
 import BrowserRouter from 'react-router-dom/BrowserRouter';
@@ -13,13 +12,6 @@ import {composeWithDevTools} from 'redux-devtools-extension/developmentOnly';
 import App from './app';
 
 import * as reducers from './app-reducer';
-
-initializeEnvironment()
-    .then((): void => console.log('Environment is initialized!'))
-    .catch((error: Error) => {
-        console.error('error with initialize environment');
-        console.error(error);
-    });
 
 const reducer = combineReducers({
     ...reducers

@@ -2,9 +2,9 @@
 
 import type {LangDataType} from '../type';
 
-export const enUs: LangDataType = {
+export const zhCn: LangDataType = {
     /* eslint-disable id-match */
-    LANGUAGE_NAME: 'English',
+    LANGUAGE_NAME: '简体中文',
 
     // spec symbols
     SPACE: ' '

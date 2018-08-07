@@ -26,11 +26,18 @@
     display: block;
 }
 
-.locale__ru_ru {
-    display: block;
-}
-
 .locale__en_us {
     display: block;
 }
 
+.locale__ru_ru {
+    display: block;
+}
+
+.locale__zh_ch {
+    display: block;
+}
+
+.locale__zh_tw {
+    display: block;
+}

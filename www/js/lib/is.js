@@ -17,11 +17,11 @@ export function isNotUndefined(value: mixed): boolean %checks {
 }
 
 export function isBoolean(value: mixed): boolean %checks {
-    return value === true || value === false;
+    return typeof value === 'boolean';
 }
 
 export function isNotBoolean(value: mixed): boolean %checks {
-    return value !== true && value !== false;
+    return typeof value !== 'boolean';
 }
 
 export function isNumber(value: mixed): boolean %checks {

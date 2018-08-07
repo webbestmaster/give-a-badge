@@ -2,11 +2,23 @@
 
 /* global window, PROJECT_ID */
 
-import type {LocaleNameType} from './action';
-import {ruRu} from './translation/ru-ru/data';
-import {enUs} from './translation/en-us/data';
+export type LocaleNameType = 'en-US' | 'ru-RU' | 'zh-CN' | 'zh-TW';
 
-const localeNameList: Array<LocaleNameType> = ['en-US', 'ru-RU'];
+import {enUs} from './translation/en-us/data';
+import {ruRu} from './translation/ru-ru/data';
+import {zhCn} from './translation/zh-cn/data';
+import {zhTw} from './translation/zh-tw/data';
+
+export const localeNameReference: {[key: string]: LocaleNameType} = {
+    enUs: 'en-US',
+    ruRu: 'ru-RU',
+    zhCN: 'zh-CN',
+    zhTW: 'zh-TW'
+};
+
+const localeNameList: Array<LocaleNameType> = Object.keys(localeNameReference).map(
+    (localeKey: string): LocaleNameType => localeNameReference[localeKey]
+);
 
 export const localeConst = {
     action: {
@@ -23,14 +35,19 @@ export const localeConst = {
             localeName: PROJECT_ID + '-locale-name-v.1.0'
         }
     },
-    localeNameList,
-    langName: {
-        'ru-RU': 'Русский',
-        'en-US': 'English'
-    }
+    localeNameList
 };
 
 export const allLocales = {
     'en-US': enUs,
-    'ru-RU': ruRu
+    'ru-RU': ruRu,
+    'zh-CN': zhCn,
+    'zh-TW': zhTw
+};
+
+export const allLangCodes = {
+    'en-US': 'en',
+    'ru-RU': 'su',
+    'zh-CN': 'zh',
+    'zh-TW': 'tw'
 };

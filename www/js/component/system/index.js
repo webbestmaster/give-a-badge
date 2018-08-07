@@ -12,10 +12,10 @@ import {onResize} from './action';
 import type {GlobalStateType} from '../../app-reducer';
 import type {SystemType} from './reducer';
 import classnames from 'classnames';
-import style from './style.scss';
+import style from './style.css';
 import {screenNameReference} from './reducer/screen';
 import type {LocaleType} from '../locale/reducer';
-import {localeNameReference} from '../locale/reducer';
+import {localeNameReference} from '../locale/const';
 
 type ReduxPropsType = {|
     +system: SystemType,
@@ -25,6 +25,10 @@ type ReduxPropsType = {|
 type ReduxActionType = {|
     +onResize: (width: number, height: number) => OnResizeType
 |};
+
+const reduxAction: ReduxActionType = {
+    onResize // imported from actions
+};
 
 type PassedPropsType = {|
     // +passedProp: string
@@ -81,7 +85,9 @@ class System extends Component<ReduxPropsType, PassedPropsType, StateType> {
             [style.lt_desktop_width]: littleThenList.includes(screenNameReference.desktop),
             [style.lt_tablet_width]: littleThenList.includes(screenNameReference.tablet),
             [style.locale__en_us]: localeName === localeNameReference.enUs,
-            [style.locale__ru_ru]: localeName === localeNameReference.ruRu
+            [style.locale__ru_ru]: localeName === localeNameReference.ruRu,
+            [style.locale__zh_ch]: localeName === localeNameReference.zhCN,
+            [style.locale__zh_tw]: localeName === localeNameReference.zhTW
         });
     }
 
@@ -92,10 +98,6 @@ class System extends Component<ReduxPropsType, PassedPropsType, StateType> {
         return <div className={view.getClassName()}>{props.children}</div>;
     }
 }
-
-const reduxAction: ReduxActionType = {
-    onResize // imported from actions
-};
 
 export default connect(
     (state: GlobalStateType): ReduxPropsType => ({

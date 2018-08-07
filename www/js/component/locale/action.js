@@ -3,8 +3,7 @@
 /* global window */
 
 import {localeConst} from './const';
-
-export type LocaleNameType = 'en-US' | 'ru-RU';
+import type {LocaleNameType} from './const';
 
 export type SetLocaleType = {|
     +type: 'locale__set-locale',
