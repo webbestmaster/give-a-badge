@@ -45,7 +45,7 @@ class UserInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
             <div>
                 <h3>photo</h3>
                 <h3>name</h3>
-                <h3>logout button</h3>
+                <h3 className={style.logout_button}>logout button</h3>
             </div>
         );
     }

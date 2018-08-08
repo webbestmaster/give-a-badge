@@ -5,12 +5,14 @@
         "react",
         "flow"
     ],
+    "plugins": [
+        "transform-runtime"
+    ],
     "env": {
         "development": {
             "plugins": [
-                [
-                    "flow-runtime"
-                ],
+                "transform-runtime",
+                "flow-runtime",
                 "transform-decorators-legacy"
             ]
         }
