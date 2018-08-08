@@ -53,7 +53,12 @@ class UserInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
     renderMobile(): Node {
         const view = this;
 
-        return view.renderDesktop();
+        return (
+            <div className={style.user_info__mobile}>
+                <div className={style.logout_button}/>
+                <img className={style.user_avatar} src="http://via.placeholder.com/34x34" alt=""/>
+            </div>
+        );
     }
 
     render(): Node {

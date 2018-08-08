@@ -8,12 +8,6 @@
     padding-top: 9px;
 }
 
-.user_info__mobile {
-    @extend %user-info--desktop;
-
-    display: block;
-}
-
 .logout_button {
     background-image: url('./i/logout.svg');
     background-position: center center;
@@ -45,4 +39,18 @@
     height: 34px;
     margin-top: 10px;
     width: 34px;
+}
+
+.user_info__mobile {
+    @extend %user-info--desktop;
+
+    padding-right: 0;
+
+    .logout_button {
+        width: 35px;
+    }
+
+    .user_avatar {
+        margin-right: 4px;
+    }
 }
