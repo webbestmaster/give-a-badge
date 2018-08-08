@@ -1,9 +1,47 @@
 // the css
+@import './../../../../css/var';
+
+.user_info__desktop,
+%user-info--desktop {
+    float: right;
+    padding-right: 2px;
+    padding-top: 9px;
+}
+
+.user_info__mobile {
+    @extend %user-info--desktop;
+
+    display: block;
+}
 
 .logout_button {
-    background-color: #c00;
     background-image: url('./i/logout.svg');
+    background-position: center center;
     background-repeat: no-repeat;
-    height: 40px;
-    width: 40px;
+    cursor: pointer;
+    float: right;
+    height: 50px;
+    transition: opacity 0.3s ease-out;
+    width: 50px;
+
+    &:hover {
+        opacity: 0.75;
+    }
+}
+
+.user_name {
+    box-sizing: border-box;
+    color: #d8d8d8;
+    float: right;
+    font-family: 'pt-sans-regular', $main-font-family, sans-serif;
+    font-size: 14px;
+    min-width: 122px;
+    padding: 17px 16px 0 15px;
+}
+
+.user_avatar {
+    border-radius: 6px;
+    float: right;
+    margin-top: 10px;
+    width: 34px;
 }

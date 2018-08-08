@@ -42,10 +42,10 @@ class UserInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const view = this;
 
         return (
-            <div>
-                <h3>photo</h3>
-                <h3>name</h3>
-                <h3 className={style.logout_button}>logout button</h3>
+            <div className={style.user_info__desktop}>
+                <div className={style.logout_button}/>
+                <h5 className={style.user_name}>Hello, Michael!</h5>
+                <img className={style.user_avatar} src="http://via.placeholder.com/50x50" alt=""/>
             </div>
         );
     }
