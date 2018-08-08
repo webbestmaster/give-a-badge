@@ -1,10 +1,11 @@
 // @flow
 
 import {combineReducers} from 'redux';
-import type {SetUserType} from './action';
+import type {SetUserType, PopupStateType} from './action';
 import {authConst} from './const';
 import type {ActionDataType} from '../../app-reducer-type';
 import {isUndefined} from '../../lib/is';
+import appConst from '../../app-const';
 
 export type UserType = {|
     +id: string
@@ -14,9 +15,21 @@ const defaultUserState: UserType = {
     id: ''
 };
 
-// module
+export type PopupNameType = 'login';
+
+export type PopupMapStateType = {|
+    +login: PopupStateType
+|};
+
+const defaultPopupMapState: PopupMapStateType = {
+    [authConst.popupName.login]: {
+        isOpen: false
+    }
+};
+
 export type AuthType = {|
-    +user: UserType
+    +user: UserType,
+    +popup: PopupMapStateType
 |};
 
 export default combineReducers({
@@ -30,5 +43,20 @@ export default combineReducers({
         }
 
         return actionData.payload;
+    },
+    popup: (popupMapState: PopupMapStateType = defaultPopupMapState, actionData: ActionDataType): PopupMapStateType => {
+        if (actionData.type !== authConst.action.type.setPopupState) {
+            return popupMapState;
+        }
+
+        if (typeof actionData.payload === 'undefined') {
+            return popupMapState;
+        }
+
+        const {popupName, state} = actionData.payload;
+
+        const newState = {...popupMapState[popupName], ...state};
+
+        return {...popupMapState, [popupName]: newState};
     }
 });

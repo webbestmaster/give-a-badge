@@ -31,7 +31,7 @@ class Auth extends Component<ReduxPropsType, PassedPropsType, StateType> {
     state: StateType;
 
     async getMe(): Promise<mixed> {
-        return await fetch(appConst.api.url + appConst.api.getMe, {
+        return await fetch(appConst.api.getMe, {
             credentials: 'include',
             method: 'GET',
             mode: 'no-cors'
