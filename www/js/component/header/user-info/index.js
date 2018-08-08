@@ -45,7 +45,7 @@ class UserInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
             <div className={style.user_info__desktop}>
                 <div className={style.logout_button}/>
                 <h5 className={style.user_name}>Hello, Michael!</h5>
-                <img className={style.user_avatar} src="http://via.placeholder.com/50x50" alt=""/>
+                <img className={style.user_avatar} src="http://via.placeholder.com/34x34" alt=""/>
             </div>
         );
     }
