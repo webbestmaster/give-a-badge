@@ -1,7 +1,7 @@
 // @flow
 
 export type LangDataType = {|
-    /* eslint-disable id-match */
+    /* eslint-disable id-match, id-length */
     +LANGUAGE_NAME: string,
 
     // spec symbols

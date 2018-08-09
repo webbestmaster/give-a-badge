@@ -9,7 +9,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../app-reducer';
 import type {LocaleType} from './reducer';
-import {allLocales} from './const';
+import {allLocales, localeConst} from './const';
+import type {LocaleNameType} from './const';
 import type {LangKeyType} from './translation/type';
 
 type StateType = null;
@@ -22,37 +23,33 @@ type PassedPropsType = {|
     +stringKey: LangKeyType
 |};
 
+export function getLocalizedString(stringKey: LangKeyType, localeName: LocaleNameType): string {
+    // eslint-disable-next-line id-match
+    if (!IS_PRODUCTION) {
+        if (!stringKey) {
+            console.error('stringKey is not define', stringKey);
+            return 'TEXT';
+        }
+
+        if (!allLocales[localeConst.defaults.localeName].hasOwnProperty(stringKey)) {
+            console.error('has no key stringKey', stringKey);
+            return stringKey;
+        }
+    }
+
+    return allLocales[localeName][stringKey];
+}
+
 class Locale extends Component<ReduxPropsType, PassedPropsType, StateType> {
     // eslint-disable-next-line id-match
     props: $Exact<{...ReduxPropsType, ...PassedPropsType}>;
     state: StateType;
 
-    getLocalizedString(): string {
-        const view = this;
-        const {props} = view;
-        const {locale, stringKey} = props;
-
-        // eslint-disable-next-line id-match
-        if (!IS_PRODUCTION) {
-            if (!stringKey) {
-                console.error('stringKey is not define', stringKey);
-                return 'TEXT';
-            }
-
-            if (!allLocales['en-US'].hasOwnProperty(stringKey)) {
-                console.error('has no key stringKey', stringKey);
-                return stringKey;
-            }
-        }
-
-        return allLocales[locale.name][stringKey];
-    }
-
     render(): string {
         const view = this;
         const {props} = view;
 
-        return view.getLocalizedString();
+        return getLocalizedString(props.stringKey, props.locale.name);
     }
 }
 
