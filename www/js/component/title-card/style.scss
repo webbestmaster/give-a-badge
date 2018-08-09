@@ -22,4 +22,31 @@
 
 .people_list {
     display: block;
+    padding: 29px 0 10px;
+}
+
+.people_face {
+    border: 2px solid #fff;
+    border-radius: 100%;
+    display: block;
+    float: left;
+    height: 49px;
+    margin-left: -16px;
+    width: 49px;
+
+    &:first-child {
+        margin-left: 0;
+    }
+}
+
+.review {
+    display: block;
+}
+
+.bottom_face {
+    display: none;
+}
+
+.date {
+    display: none;
 }

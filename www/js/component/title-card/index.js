@@ -7,6 +7,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../app-reducer';
 import style from './style.scss';
+import serviceStyle from '../../../css/service.scss';
+import classnames from 'classnames';
 
 type ReduxPropsType = {};
 
@@ -42,9 +44,22 @@ class TitleCard extends Component<ReduxPropsType, PassedPropsType, StateType> {
         return (
             <div className={style.card}>
                 <img className={style.badge_icon} src="http://via.placeholder.com/100x100" alt=""/>
-                <div className={style.people_list}>
-                    <h1>we</h1>
+                <div className={classnames(serviceStyle.clear_self, style.people_list)}>
+                    <img className={style.people_face} src="http://via.placeholder.com/47x47" alt=""/>
+                    <img className={style.people_face} src="http://via.placeholder.com/47x47" alt=""/>
+                    <img className={style.people_face} src="http://via.placeholder.com/47x47" alt=""/>
+                    {/* <img className={style.people_face} src="http://via.placeholder.com/47x47" alt=""/>*/}
+                    {/* <img className={style.people_face} src="http://via.placeholder.com/47x47" alt=""/>*/}
+                    {/* <img className={style.people_face} src="http://via.placeholder.com/47x47" alt=""/>*/}
+                    {/* <img className={style.people_face} src="http://via.placeholder.com/47x47" alt=""/>*/}
                 </div>
+                <p className={style.review}>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam corporis dolor eaque ex expedita
+                    fugit hic in ipsum libero obcaecati perferendis placeat, rerum sequi similique sint soluta sunt,
+                    unde voluptatibus!
+                </p>
+                <img className={style.bottom_face} src="http://via.placeholder.com/47x47" alt=""/>
+                <p className={style.date}>10.21.2018</p>
             </div>
         );
     }
