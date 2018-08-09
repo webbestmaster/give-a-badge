@@ -40,8 +40,11 @@ class TitleCard extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const {props, state} = view;
 
         return (
-            <div>
-                <h1>title card</h1>
+            <div className={style.card}>
+                <img className={style.badge_icon} src="http://via.placeholder.com/100x100" alt=""/>
+                <div className={style.people_list}>
+                    <h1>we</h1>
+                </div>
             </div>
         );
     }

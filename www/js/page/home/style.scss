@@ -1,3 +1,11 @@
-.logo {
-    font-size: 40px;
+@import './../../../css/var';
+
+.card_list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: $max-app-width;
+    padding: 48px 0 50px;
 }

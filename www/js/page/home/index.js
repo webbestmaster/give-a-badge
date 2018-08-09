@@ -15,22 +15,19 @@ export default class Home extends Component<void, void> {
         return <TitleCard key={Math.random()}/>;
     }
 
-    renderCardList(): Array<Node> {
+    renderCardList(): Node {
         const view = this;
 
-        return [1, 2, 3].map((): Node => view.renderCard());
+        return (
+            <div key="card-list" className={style.card_list}>
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((): Node => view.renderCard())}
+            </div>
+        );
     }
 
     render(): Array<Node> {
         const view = this;
 
-        return [
-            <Header key="header"/>,
-            <div key="other">
-                <Locale stringKey="SPACE"/>
-                <h1 className={style.logo}>GaB</h1>
-                {view.renderCardList()}
-            </div>
-        ];
+        return [<Header key="header"/>, view.renderCardList()];
     }
 }
