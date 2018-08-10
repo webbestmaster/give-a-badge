@@ -9,8 +9,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../app-reducer';
 import type {LocaleType} from './reducer';
-import {allLocales, localeConst} from './const';
 import type {LocaleNameType} from './const';
+import {allLocales, localeConst} from './const';
 import type {LangKeyType} from './translation/type';
 
 type StateType = null;

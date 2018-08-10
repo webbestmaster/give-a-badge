@@ -5,7 +5,6 @@
 import type {Node} from 'react';
 import React, {Component} from 'react';
 import style from './style.scss';
-import Locale from '../../component/locale';
 import Header from '../../component/header';
 import TitleCard from '../../component/title-card';
 

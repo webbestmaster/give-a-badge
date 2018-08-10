@@ -1,11 +1,9 @@
 // @flow
 
 import {combineReducers} from 'redux';
-import type {SetUserType, PopupStateType} from './action';
+import type {PopupStateType} from './action';
 import {authConst} from './const';
 import type {ActionDataType} from '../../app-reducer-type';
-import {isUndefined} from '../../lib/is';
-import appConst from '../../app-const';
 
 export type UserType = {|
     +id: string

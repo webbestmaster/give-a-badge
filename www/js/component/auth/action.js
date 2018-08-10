@@ -1,6 +1,6 @@
 // @flow
 
-import type {UserType, PopupNameType} from './reducer';
+import type {PopupNameType, UserType} from './reducer';
 import {authConst} from './const';
 
 export type SetUserType = {|

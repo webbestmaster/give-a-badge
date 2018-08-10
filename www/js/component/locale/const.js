@@ -16,6 +16,13 @@ export const localeNameReference: {[key: string]: LocaleNameType} = {
     zhTW: 'zh-TW'
 };
 
+export const allLocales = {
+    'en-US': enUs,
+    'ru-RU': ruRu,
+    'zh-CN': zhCn,
+    'zh-TW': zhTw
+};
+
 const localeNameList: Array<LocaleNameType> = Object.keys(localeNameReference).map(
     (localeKey: string): LocaleNameType => localeNameReference[localeKey]
 );
@@ -36,18 +43,4 @@ export const localeConst = {
         }
     },
     localeNameList
-};
-
-export const allLocales = {
-    'en-US': enUs,
-    'ru-RU': ruRu,
-    'zh-CN': zhCn,
-    'zh-TW': zhTw
-};
-
-export const allLangCodes = {
-    'en-US': 'en',
-    'ru-RU': 'su',
-    'zh-CN': 'zh',
-    'zh-TW': 'tw'
 };
