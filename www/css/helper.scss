@@ -1,0 +1,44 @@
+/* stylelint-disable value-no-vendor-prefix */
+
+$vendor-list: ('-webkit-', '-moz-', '-ms-', '-o-', '');
+
+@mixin prefix-key($property, $value) {
+    @each $prefix in $vendor-list {
+        #{$prefix + $property}: $value;
+    }
+}
+
+@mixin prefix-value($property, $value) {
+    @each $prefix in $vendor-list {
+        #{$property}: #{$prefix + $value};
+    }
+}
+
+@mixin prefix-key-value($property, $value) {
+    @each $prefix in $vendor-list {
+        #{$prefix + $property}: #{$prefix + $value};
+    }
+}
+
+@mixin line-cap($line) {
+    @include prefix-key(line-clamp, $line);
+    @include prefix-key(box-orient, vertical);
+    @include prefix-value(display, box);
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+}
+
+@for $i from 1 through 10 {
+    .line_cap_#{$i} {
+        @include line-cap(#{$i});
+
+        font: inherit;
+
+        p,
+        div {
+            @include line-cap(#{$i});
+        }
+    }
+}

@@ -8,7 +8,9 @@ import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../app-reducer';
 import style from './style.scss';
 import serviceStyle from '../../../css/service.scss';
+import helperStyle from '../../../css/helper.scss';
 import classnames from 'classnames';
+import Locale from '../locale';
 
 type ReduxPropsType = {};
 
@@ -47,19 +49,26 @@ class TitleCard extends Component<ReduxPropsType, PassedPropsType, StateType> {
                 <div className={classnames(serviceStyle.clear_self, style.people_list)}>
                     <img className={style.people_face} src="http://via.placeholder.com/47x47" alt=""/>
                     <img className={style.people_face} src="http://via.placeholder.com/47x47" alt=""/>
-                    <img className={style.people_face} src="http://via.placeholder.com/47x47" alt=""/>
                     {/* <img className={style.people_face} src="http://via.placeholder.com/47x47" alt=""/>*/}
                     {/* <img className={style.people_face} src="http://via.placeholder.com/47x47" alt=""/>*/}
                     {/* <img className={style.people_face} src="http://via.placeholder.com/47x47" alt=""/>*/}
                     {/* <img className={style.people_face} src="http://via.placeholder.com/47x47" alt=""/>*/}
+                    <p className={style.people_face_counter}>
+                        and 252 people
+                        {/* <Locale stringKey="SPACE"/>*/}
+                    </p>
                 </div>
-                <p className={style.review}>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam corporis dolor eaque ex expedita
-                    fugit hic in ipsum libero obcaecati perferendis placeat, rerum sequi similique sint soluta sunt,
-                    unde voluptatibus!
-                </p>
-                <img className={style.bottom_face} src="http://via.placeholder.com/47x47" alt=""/>
-                <p className={style.date}>10.21.2018</p>
+                <div className={style.review}>
+                    <p className={helperStyle.line_cap_3}>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam corporis dolor eaque ex
+                        expedita fugit hic in ipsum libero obcaecati perferendis placeat, rerum sequi similique sint
+                        soluta sunt, unde voluptatibus!
+                    </p>
+                </div>
+                <div className={classnames(serviceStyle.clear_self, style.bottom_data_wrapper)}>
+                    <img className={style.bottom_face} src="http://via.placeholder.com/32x32" alt=""/>
+                    <p className={style.bottom_date}>10.07.2018</p>
+                </div>
             </div>
         );
     }
