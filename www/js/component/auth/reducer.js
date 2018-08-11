@@ -21,7 +21,7 @@ export type PopupMapStateType = {|
 
 const defaultPopupMapState: PopupMapStateType = {
     [authConst.popupName.login]: {
-        isOpen: true
+        isOpen: false
     }
 };
 

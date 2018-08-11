@@ -3,12 +3,9 @@
 
 const {hostname, origin} = window.location;
 
-const url = 'http://206.81.28.99:1313';
-
 const appConst = {
     api: {
-        url,
-        getMe: url + '/api/users/current?id=1'
+        getMe: '/api/users/current?id=1'
     }
 };
 

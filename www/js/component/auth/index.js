@@ -7,21 +7,29 @@
 import type {Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import type {SetUserType} from './action';
-import {setUser} from './action';
+import type {SetUserType, SetPopupStateType} from './action';
+import {setUser, openLoginPopup} from './action';
 import type {AuthType, UserType} from './reducer';
 import type {GlobalStateType} from '../../app-reducer';
-import appConst from '../../app-const';
+import LoginPopup from './popup/login';
+import {isBoolean} from '../../lib/is';
+import {getMe as apiGetMe} from './api';
 
 type ReduxPropsType = {|
     +auth: AuthType
 |};
 
 type ReduxActionType = {|
-    +setUser: (userState: UserType) => SetUserType
+    +setUser: (userState: UserType) => SetUserType,
+    +openLoginPopup: () => SetPopupStateType
 |};
 
 type PassedPropsType = {||};
+
+const reduxAction: ReduxActionType = {
+    setUser,
+    openLoginPopup
+};
 
 type StateType = null;
 
@@ -30,42 +38,30 @@ class Auth extends Component<ReduxPropsType, PassedPropsType, StateType> {
     props: $Exact<{...PassedPropsType, ...ReduxPropsType, ...ReduxActionType}>;
     state: StateType;
 
-    async getMe(): Promise<mixed> {
-        return await fetch(appConst.api.getMe, {
-            credentials: 'include',
-            method: 'GET',
-            mode: 'no-cors'
-        }).then(
-            (response: Response): Promise<mixed> => {
-                if (response.ok) {
-                    return response.json();
-                }
+    async loginCheck(): Promise<void> {
+        const view = this;
+        const {props} = view;
+        const {setUser: setUserAction, openLoginPopup: openLoginPopupAction} = props;
 
-                return Promise.resolve({hasError: true});
-            }
-        );
+        const getMeResult = await apiGetMe();
+
+        console.log('getMeResult:', getMeResult);
+
+        if (getMeResult.hasError === true) {
+            openLoginPopupAction();
+        }
     }
 
     async componentDidMount(): Promise<void> {
         const view = this;
-        const {props} = view;
-        const {setUser: setUserAction} = props;
 
-        const getMeResult = await view.getMe();
-
-        console.log('getMeResult:', getMeResult);
-
-        setUserAction({id: 'default-user-id'});
+        await view.loginCheck();
     }
 
-    render(): Node {
-        return null;
+    render(): Array<Node> {
+        return [<LoginPopup key="login-popup"/>];
     }
 }
-
-const reduxAction: ReduxActionType = {
-    setUser
-};
 
 export default connect(
     (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({

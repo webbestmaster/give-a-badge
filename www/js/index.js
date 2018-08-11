@@ -8,6 +8,8 @@ import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 import {applyMiddleware, combineReducers, createStore} from 'redux';
 import {composeWithDevTools} from 'redux-devtools-extension/developmentOnly';
+import muiTheme from './component/ui/mui-theme';
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 
 import App from './app';
 
@@ -27,7 +29,9 @@ const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
 render(
     <Provider store={store}>
         <BrowserRouter>
-            <App/>
+            <MuiThemeProvider theme={muiTheme}>
+                <App/>
+            </MuiThemeProvider>
         </BrowserRouter>
     </Provider>,
     window.document.querySelector('.js-app-wrapper')
