@@ -7,6 +7,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../../app-reducer';
 import style from './style.scss';
+import serviceStyle from '../../../../css/service.scss';
 import type {SystemType} from '../../system/reducer';
 
 type ReduxPropsType = {|
@@ -44,7 +45,9 @@ class UserInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
         return (
             <div className={style.user_info__desktop}>
                 <div className={style.logout_button}/>
-                <h5 className={style.user_name}>Hello, Michael!</h5>
+                <h5 className={style.user_name}>
+                    <span className={serviceStyle.ellipsis}>Hello, Michael!</span>
+                </h5>
                 <img className={style.user_avatar} src="http://via.placeholder.com/34x34" alt=""/>
             </div>
         );
