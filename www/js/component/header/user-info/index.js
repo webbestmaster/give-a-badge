@@ -1,5 +1,7 @@
 // @flow
 
+/* global window */
+
 /* eslint consistent-this: ["error", "view"] */
 
 import type {Node} from 'react';
@@ -9,10 +11,14 @@ import type {GlobalStateType} from '../../../app-reducer';
 import style from './style.scss';
 import serviceStyle from '../../../../css/service.scss';
 import type {SystemType} from '../../system/reducer';
+import type {AuthType} from '../../auth/reducer';
+import Locale from '../../locale';
+import * as authApi from '../../auth/api';
 
 type ReduxPropsType = {|
     // eslint-disable-next-line id-match
-    +system: SystemType
+    +system: SystemType,
+    +auth: AuthType
 |};
 
 type PassedPropsType = {|
@@ -39,27 +45,40 @@ class UserInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
         };
     }
 
+    async logout(): Promise<void> {
+        await authApi.logout();
+        window.location.reload();
+    }
+
     renderDesktop(): Node {
         const view = this;
+        const {props} = view;
+        const {auth} = props;
 
         return (
             <div className={style.user_info__desktop}>
-                <div className={style.logout_button}/>
+                <div className={style.logout_button} onClick={async (): Promise<void> => await view.logout()}/>
                 <h5 className={style.user_name}>
-                    <span className={serviceStyle.ellipsis}>Hello, Michael!</span>
+                    <span className={serviceStyle.ellipsis}>
+                        {/* <Locale stringKey="SPACE"/>*/}
+                        {'Hello, '}
+                        {auth.user.name}!
+                    </span>
                 </h5>
-                <img className={style.user_avatar} src="http://via.placeholder.com/34x34" alt=""/>
+                <img className={style.user_avatar} src={auth.user.imageUrl} alt=""/>
             </div>
         );
     }
 
     renderMobile(): Node {
         const view = this;
+        const {props} = view;
+        const {auth} = props;
 
         return (
             <div className={style.user_info__mobile}>
-                <div className={style.logout_button}/>
-                <img className={style.user_avatar} src="http://via.placeholder.com/34x34" alt=""/>
+                <div className={style.logout_button} onClick={async (): Promise<void> => await view.logout()}/>
+                <img className={style.user_avatar} src={auth.user.imageUrl} alt=""/>
             </div>
         );
     }
@@ -74,7 +93,8 @@ class UserInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
 export default connect(
     (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
-        system: state.system
+        system: state.system,
+        auth: state.auth
     }),
     {}
 )(UserInfo);

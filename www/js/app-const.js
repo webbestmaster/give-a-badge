@@ -6,7 +6,8 @@ const {hostname, origin} = window.location;
 const appConst = {
     api: {
         getMe: '/api/users/current?id=1',
-        login: '/login'
+        login: '/login',
+        logout: '/logout'
     }
 };
 

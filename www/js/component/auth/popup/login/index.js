@@ -6,7 +6,9 @@ import type {Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../../../app-reducer';
-import type {AuthType} from '../../reducer';
+import type {AuthType, UserType} from '../../reducer';
+import {closeLoginPopup, setUser} from '../../action';
+import type {SetPopupStateType, SetUserType} from '../../action';
 import {authConst} from '../../const';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -24,9 +26,10 @@ type ReduxPropsType = {|
     auth: AuthType
 |};
 
-type ReduxActionType = {
-    // +setSmth: (smth: string) => string
-};
+type ReduxActionType = {|
+    +closeLoginPopup: () => SetPopupStateType,
+    +setUser: (userData: UserType) => SetUserType
+|};
 
 type PassedPropsType = {|
     // +passedProp: string
@@ -38,7 +41,8 @@ type PropsType = $Exact<{...PassedPropsType, ...ReduxActionType, ...ReduxPropsTy
 type StateType = null;
 
 const reduxAction: ReduxActionType = {
-    // setSmth // imported from actions
+    closeLoginPopup,
+    setUser
 };
 
 type NodeType = {|
@@ -66,12 +70,20 @@ class LoginPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
     async onFormSubmit(evt: SyntheticEvent<EventTarget>): Promise<void> {
         evt.preventDefault();
         const view = this;
+        const {node, props} = view;
+        const {setUser: setUserAction, closeLoginPopup: closeLoginPopupAction} = props;
 
-        const loginValue = view.node.login === null ? '' : view.node.login.value;
-        const passwordValue = view.node.password === null ? '' : view.node.password.value;
+        const loginValue = node.login === null ? '' : node.login.value;
+        const passwordValue = node.password === null ? '' : node.password.value;
         const meData = await api.login(loginValue, passwordValue);
 
-        console.log(meData);
+        if (meData.hasError) {
+            console.error(`can not login with login: ${loginValue} and password=${passwordValue}`);
+            return;
+        }
+
+        setUserAction(meData.userData);
+        closeLoginPopupAction();
     }
 
     render(): Node {

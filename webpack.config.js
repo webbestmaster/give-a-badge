@@ -254,7 +254,8 @@ const webpackConfig = {
             {
                 context: [
                     '/api/',
-                    '/login' // or /api/login
+                    '/login',
+                    '/logout'
                 ],
                 target: 'http://206.81.28.99:1313',
                 changeOrigin: true // for this option only: see documentations here https://github.com/chimurai/http-proxy-middleware#http-proxy-middleware-options

@@ -52,3 +52,16 @@ export async function login(username: string, password: string): Promise<GetMeRe
         })
         .then(getMe);
 }
+
+export async function logout(): Promise<void> {
+    return await window
+        .fetch(appConst.api.logout, defaultFetchProps)
+        .then((): void => console.log('---> logout'))
+        .catch(
+            (error: Error): Error => {
+                console.error('can not logout');
+                console.error(error);
+                return error;
+            }
+        );
+}
