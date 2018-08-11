@@ -51,6 +51,9 @@ class Auth extends Component<ReduxPropsType, PassedPropsType, StateType> {
         }
 
         setUserAction(getMeResult.userData);
+
+        console.error('---> remove request, this is for test only');
+        console.log(await api.getNewsList(1, 2, getMeResult.userData.id));
     }
 
     async componentDidMount(): Promise<void> {
