@@ -23,8 +23,12 @@ $vendor-list: ('-webkit-', '-moz-', '-ms-', '-o-', '');
 @mixin line-cap($line) {
     @include prefix-key(line-clamp, $line);
     @include prefix-key(box-orient, vertical);
-    @include prefix-value(display, box);
 
+    // do not use 'prefix-value' here -> @include prefix-value(display, box);
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-box;
+    display: -o-box;
     overflow: hidden;
     text-overflow: ellipsis;
     word-break: break-word;
