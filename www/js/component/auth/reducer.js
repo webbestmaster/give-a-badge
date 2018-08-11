@@ -6,11 +6,21 @@ import {authConst} from './const';
 import type {ActionDataType} from '../../app-reducer-type';
 
 export type UserType = {|
-    +id: string
+    +email: null,
+    +id: number,
+    +imageUrl: string,
+    +name: string,
+    +title: string,
+    +userPermissions: Array<string>
 |};
 
 const defaultUserState: UserType = {
-    id: ''
+    email: null,
+    id: 0,
+    imageUrl: 'http://via.placeholder.com/34x34',
+    name: '%username%',
+    title: 'shit_codeMaker',
+    userPermissions: []
 };
 
 export type PopupNameType = 'login';

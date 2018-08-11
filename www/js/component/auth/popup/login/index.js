@@ -13,6 +13,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import * as api from '../../api';
+import style from './style.scss';
 // import Paper from '@material-ui/core/Paper';
 // import Typography from '@material-ui/core/Typography';
 // import Locale from '../../../locale';
@@ -62,16 +63,15 @@ class LoginPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
         };
     }
 
-    async onLoginClick(): Promise<void> {
+    async onFormSubmit(evt: SyntheticEvent<EventTarget>): Promise<void> {
+        evt.preventDefault();
         const view = this;
 
         const loginValue = view.node.login === null ? '' : view.node.login.value;
         const passwordValue = view.node.password === null ? '' : view.node.password.value;
+        const meData = await api.login(loginValue, passwordValue);
 
-        console.log(loginValue, passwordValue);
-
-        await api.login(loginValue, passwordValue);
-        await api.getMe();
+        console.log(meData);
     }
 
     render(): Node {
@@ -94,39 +94,41 @@ class LoginPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
                 // aria-labelledby="alert-dialog-slide-title"
                 // aria-describedby="alert-dialog-slide-description"
             >
-                <DialogTitle id="alert-dialog-slide-title">
-                    {/* <Locale stringKey="SPACE"/> */}
-                    Login
-                </DialogTitle>
-                <TextField
-                    placeholder="Login"
-                    required
-                    type="text"
-                    autoComplete="current-password"
-                    inputRef={(login: HTMLInputElement | null) => {
-                        view.node.login = login;
-                    }}
-                />
-                <TextField
-                    placeholder="Password"
-                    required
-                    type="password"
-                    autoComplete="current-password"
-                    margin="normal"
-                    inputRef={(password: HTMLInputElement | null) => {
-                        view.node.password = password;
-                    }}
-                />
-                <br/>
-                <Button
-                    onClick={async (): Promise<void> => await view.onLoginClick()}
-                    margin="normal"
-                    variant="contained"
-                    color="primary"
+                <form
+                    className={style.form}
+                    onSubmit={async (evt: SyntheticEvent<EventTarget>): Promise<void> => await view.onFormSubmit(evt)}
+                    action="/login"
+                    method="post"
                 >
-                    {/* <Locale stringKey="SPACE"/> */}
-                    login
-                </Button>
+                    <DialogTitle id="alert-dialog-slide-title">
+                        {/* <Locale stringKey="SPACE"/> */}
+                        Login
+                    </DialogTitle>
+                    <TextField
+                        placeholder="Login"
+                        required
+                        type="text"
+                        autoComplete="current-password"
+                        inputRef={(login: HTMLInputElement | null) => {
+                            view.node.login = login;
+                        }}
+                    />
+                    <TextField
+                        placeholder="Password"
+                        required
+                        type="password"
+                        autoComplete="current-password"
+                        margin="normal"
+                        inputRef={(password: HTMLInputElement | null) => {
+                            view.node.password = password;
+                        }}
+                    />
+                    <br/>
+                    <Button margin="normal" variant="contained" color="primary" type="submit">
+                        {/* <Locale stringKey="SPACE"/> */}
+                        login
+                    </Button>
+                </form>
             </Dialog>
         );
     }

@@ -3,10 +3,9 @@
 /* global window, fetch */
 
 import appConst from '../../app-const';
+import type {UserType} from './reducer';
 
-type GetMeResponseType = {|
-    +hasGetMeError: boolean
-|};
+type GetMeResponseType = {|+hasError: true|} | {|+hasError: false, +userData: UserType|};
 
 const defaultFetchProps = {
     credentials: 'include',
@@ -27,12 +26,15 @@ export async function getMe(): Promise<GetMeResponseType> {
         .then(
             async (response: Response): Promise<GetMeResponseType> => {
                 if (response.ok) {
-                    console.log(await response.json());
-                    return {hasGetMeError: false};
-                    // return response.json();
+                    const userData: UserType = await response.json();
+
+                    return {
+                        hasError: false,
+                        userData
+                    };
                 }
 
-                return {hasGetMeError: true};
+                return {hasError: true};
             }
         );
 }
@@ -41,23 +43,12 @@ type LoginMeResponseType = {|
     +hasErrorLogin: boolean
 |};
 
-export async function login(username: string, password: string): Promise<LoginMeResponseType> {
+export async function login(username: string, password: string): Promise<GetMeResponseType> {
     return await window
         .fetch(appConst.api.login, {
             ...defaultFetchProps,
             method: 'POST',
             body: `username=${username}&password=${password}`
         })
-        .then(
-            async (response: Response): Promise<LoginMeResponseType> => {
-                if (response.ok) {
-                    console.log(await response.json());
-                    return {hasErrorLogin: false};
-                    // return response.json();
-                }
-                // console.log(await response.json());
-
-                return {hasErrorLogin: true};
-            }
-        );
+        .then(getMe);
 }

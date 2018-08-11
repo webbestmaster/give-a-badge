@@ -45,11 +45,12 @@ class Auth extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
         const getMeResult = await api.getMe();
 
-        console.log('getMeResult:', getMeResult);
-
-        if (getMeResult.hasGetMeError === true) {
+        if (getMeResult.hasError === true) {
             openLoginPopupAction();
+            return;
         }
+
+        setUserAction(getMeResult.userData);
     }
 
     async componentDidMount(): Promise<void> {
