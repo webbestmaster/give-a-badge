@@ -5,50 +5,59 @@
 import appConst from '../../app-const';
 
 type GetMeResponseType = {|
-    +hasError: boolean
+    +hasGetMeError: boolean
 |};
+
+const defaultFetchProps = {
+    credentials: 'include',
+    headers: {
+        'Access-Control-Allow-Headers': '*',
+        Accept: 'application/json, text/javascript, */*; q=0.01',
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+    },
+    mode: 'no-cors'
+};
 
 export async function getMe(): Promise<GetMeResponseType> {
     return await window
         .fetch(appConst.api.getMe, {
-            credentials: 'include',
-            method: 'GET',
-            mode: 'no-cors'
+            ...defaultFetchProps,
+            method: 'GET'
         })
         .then(
-            async (response: Response): Promise<{hasError: boolean}> => {
+            async (response: Response): Promise<GetMeResponseType> => {
                 if (response.ok) {
-                    return {hasError: false};
+                    console.log(await response.json());
+                    return {hasGetMeError: false};
                     // return response.json();
                 }
 
-                return {hasError: true};
+                return {hasGetMeError: true};
             }
         );
 }
 
-export async function login(username: string, password: string): Promise<GetMeResponseType> {
+type LoginMeResponseType = {|
+    +hasErrorLogin: boolean
+|};
+
+export async function login(username: string, password: string): Promise<LoginMeResponseType> {
     return await window
         .fetch(appConst.api.login, {
-            credentials: 'include',
+            ...defaultFetchProps,
             method: 'POST',
-            mode: 'no-cors',
-            headers: {
-                Accept: 'application/json, text/javascript, */*; q=0.01',
-                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-            },
             body: `username=${username}&password=${password}`
         })
         .then(
-            async (response: Response): Promise<{hasError: boolean}> => {
+            async (response: Response): Promise<LoginMeResponseType> => {
                 if (response.ok) {
                     console.log(await response.json());
-                    return {hasError: false};
+                    return {hasErrorLogin: false};
                     // return response.json();
                 }
                 // console.log(await response.json());
 
-                return {hasError: true};
+                return {hasErrorLogin: true};
             }
         );
 }

@@ -47,7 +47,7 @@ class Auth extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
         console.log('getMeResult:', getMeResult);
 
-        if (getMeResult.hasError === true) {
+        if (getMeResult.hasGetMeError === true) {
             openLoginPopupAction();
         }
     }
