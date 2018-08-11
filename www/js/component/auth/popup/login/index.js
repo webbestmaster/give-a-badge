@@ -12,6 +12,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import * as api from '../../api';
 // import Paper from '@material-ui/core/Paper';
 // import Typography from '@material-ui/core/Typography';
 // import Locale from '../../../locale';
@@ -61,13 +62,16 @@ class LoginPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
         };
     }
 
-    onLoginClick() {
+    async onLoginClick(): Promise<void> {
         const view = this;
 
         const loginValue = view.node.login === null ? '' : view.node.login.value;
         const passwordValue = view.node.password === null ? '' : view.node.password.value;
 
         console.log(loginValue, passwordValue);
+
+        await api.login(loginValue, passwordValue);
+        await api.getMe();
     }
 
     render(): Node {
@@ -114,7 +118,12 @@ class LoginPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
                     }}
                 />
                 <br/>
-                <Button onClick={(): void => view.onLoginClick()} margin="normal" variant="contained" color="primary">
+                <Button
+                    onClick={async (): Promise<void> => await view.onLoginClick()}
+                    margin="normal"
+                    variant="contained"
+                    color="primary"
+                >
                     {/* <Locale stringKey="SPACE"/> */}
                     login
                 </Button>

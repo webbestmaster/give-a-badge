@@ -13,7 +13,7 @@ import type {AuthType, UserType} from './reducer';
 import type {GlobalStateType} from '../../app-reducer';
 import LoginPopup from './popup/login';
 import {isBoolean} from '../../lib/is';
-import {getMe as apiGetMe} from './api';
+import * as api from './api';
 
 type ReduxPropsType = {|
     +auth: AuthType
@@ -43,7 +43,7 @@ class Auth extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const {props} = view;
         const {setUser: setUserAction, openLoginPopup: openLoginPopupAction} = props;
 
-        const getMeResult = await apiGetMe();
+        const getMeResult = await api.getMe();
 
         console.log('getMeResult:', getMeResult);
 
