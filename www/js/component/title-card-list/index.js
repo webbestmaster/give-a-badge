@@ -84,7 +84,7 @@ class TitleCardList extends Component<ReduxPropsType, PassedPropsType, StateType
             <div key="card-list" className={style.card_list}>
                 {newsList.map(
                     (newsInList: NewsType): Node =>
-                        <TitleCard key={newsInList.id}/>
+                        <TitleCard key={newsInList.id} newsData={newsInList}/>
 
                 )}
             </div>

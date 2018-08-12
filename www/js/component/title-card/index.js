@@ -6,15 +6,18 @@ import type {Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../app-reducer';
-import style from './style.scss';
 import serviceStyle from '../../../css/service.scss';
 import helperStyle from '../../../css/helper.scss';
+import style from './style.scss';
 import classnames from 'classnames';
 import Locale from '../locale';
+import moment from 'moment';
+import type {NewsType, NewsUserType} from '../title-card-list/api';
 
 type ReduxPropsType = {};
 
 type PassedPropsType = {|
+    newsData: NewsType
     // +passedProp: string
 |};
 
@@ -39,35 +42,49 @@ class TitleCard extends Component<ReduxPropsType, PassedPropsType, StateType> {
         };
     }
 
+    renderFaceList(): Node {
+        const view = this;
+        const {props, state} = view;
+        const {newsData} = props;
+        const userList = newsData.toUsers;
+        const peopleFaceClassName = classnames(style.people_face, {
+            [style.people_face__single]: userList.length === 1
+        });
+
+        return (
+            <div className={classnames(serviceStyle.clear_self, style.people_list)}>
+                {userList.map(
+                    (userInList: NewsUserType): Node =>
+                        <img key={userInList.id} className={peopleFaceClassName} src={userInList.imageUrl} alt=""/>
+
+                )}
+                {/*
+                    <p className={style.people_face_counter}>
+                        and 252 people
+                         <Locale stringKey="SPACE"/>
+                    </p>
+                */}
+            </div>
+        );
+    }
+
     render(): Node {
         const view = this;
         const {props, state} = view;
+        const {newsData} = props;
 
         return (
             <div className={style.card}>
-                <img className={style.badge_icon} src="http://via.placeholder.com/100x100" alt=""/>
-                <div className={classnames(serviceStyle.clear_self, style.people_list)}>
-                    <img className={style.people_face} src="http://via.placeholder.com/47x47" alt=""/>
-                    <img className={style.people_face} src="http://via.placeholder.com/47x47" alt=""/>
-                    {/* <img className={style.people_face} src="http://via.placeholder.com/47x47" alt=""/>*/}
-                    {/* <img className={style.people_face} src="http://via.placeholder.com/47x47" alt=""/>*/}
-                    {/* <img className={style.people_face} src="http://via.placeholder.com/47x47" alt=""/>*/}
-                    {/* <img className={style.people_face} src="http://via.placeholder.com/47x47" alt=""/>*/}
-                    <p className={style.people_face_counter}>
-                        and 252 people
-                        {/* <Locale stringKey="SPACE"/>*/}
-                    </p>
-                </div>
+                <img className={style.badge_icon} src={newsData.reason.imageUrl} alt=""/>
+
+                {view.renderFaceList()}
+
                 <div className={style.review}>
-                    <p className={helperStyle.line_cap_3}>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam corporis dolor eaque ex
-                        expedita fugit hic in ipsum libero obcaecati perferendis placeat, rerum sequi similique sint
-                        soluta sunt, unde voluptatibus!
-                    </p>
+                    <p className={classnames(helperStyle.line_cap_3, style.review__text)}>{newsData.comment}</p>
                 </div>
                 <div className={classnames(serviceStyle.clear_self, style.bottom_data_wrapper)}>
-                    <img className={style.bottom_face} src="http://via.placeholder.com/32x32" alt=""/>
-                    <p className={style.bottom_date}>10.07.2018</p>
+                    <img className={style.bottom_face} src={newsData.author.imageUrl} alt=""/>
+                    <p className={style.bottom_date}>{moment(newsData.date).format('DD.MM.YYYY')}</p>
                 </div>
             </div>
         );

@@ -18,11 +18,13 @@
     "stylelint:fix": "stylelint ./**/*.scss --fix",
     "flow": "flow stop; flow;",
     "prettier": "prettier --write \"./www/**/*.js\"",
+    "flow-typed": "flow-typed install moment@2.x.x",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "@material-ui/core": "^1.4.3",
     "classnames": "^2.2.6",
+    "moment": "^2.22.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-redux": "^5.0.7",
