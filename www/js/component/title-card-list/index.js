@@ -9,14 +9,18 @@ import type {GlobalStateType} from '../../app-reducer';
 import style from './style.scss';
 import type {AuthType} from '../auth/reducer';
 import TitleCard from '../title-card';
+import type {ApplyGetNewListResponseType} from './action';
+import {applyGetNewListResponse} from './action';
+import * as api from './api';
+import type {GetNewsListType} from './api';
 
 type ReduxPropsType = {|
     +auth: AuthType
 |};
 
-type ReduxActionType = {
-    // +setSmth: (smth: string) => string
-};
+type ReduxActionType = {|
+    +applyGetNewListResponse: (getNewsListResponse: GetNewsListType) => ApplyGetNewListResponseType
+|};
 
 type PassedPropsType = {
     // +passedProp: string
@@ -28,17 +32,32 @@ type PropsType = $Exact<{...PassedPropsType, ...ReduxActionType, ...ReduxPropsTy
 type StateType = null;
 
 const reduxAction: ReduxActionType = {
-    // setSmth // imported from actions
+    applyGetNewListResponse
 };
+
+const pageSize = 2;
 
 class TitleCardList extends Component<ReduxPropsType, PassedPropsType, StateType> {
     // eslint-disable-next-line id-match
     props: PropsType;
     state: StateType;
 
-    async fetchNews(): Promise<void> {}
+    async fetchNews(pageIndex: number): Promise<void> {
+        const view = this;
+        const {props} = view;
+        const {auth, applyGetNewListResponse: applyGetNewListResponseAction} = props;
 
-    async componentDidUpdate(prevProps: PropsType, prevState: StateType): Promise<void> {
+        const getNewsListResponse = await api.getNewsList(pageIndex, pageSize, auth.user.id);
+
+        if (getNewsListResponse === null) {
+            console.error('can not get news list');
+            return;
+        }
+
+        applyGetNewListResponseAction(getNewsListResponse);
+    }
+
+    async componentDidUpdate(prevProps: PropsType, prevState: StateType, snapshot?: mixed): Promise<void> {
         const view = this;
         const {props} = view;
         const {auth} = props;
@@ -46,7 +65,7 @@ class TitleCardList extends Component<ReduxPropsType, PassedPropsType, StateType
 
         if (auth.user.id !== prevAuth.user.id) {
             console.log('login detected, fetch news');
-            await view.fetchNews();
+            await view.fetchNews(0);
             return;
         }
     }

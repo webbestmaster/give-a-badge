@@ -13,33 +13,38 @@ export type NewsUserType = {|
 |};
 
 export type NewsType = {|
+    +author: NewsUserType,
+    +comment: string,
     +id: number,
+    +date: number,
     +entityId: number,
     +newsType: NewsTypeType,
-    +comment: string,
+    +reason: {|
+        id: number,
+        imageUrl: string,
+        name: string
+    |},
     +toUsers: Array<NewsUserType>,
-    +author: NewsUserType,
-    +tags: [],
-    +date: number
+    +tags: []
 |};
 
 export type GetNewsListType = {|
     +content: Array<NewsType>,
-    +last: boolean,
-    +totalPages: number,
-    +totalElements: number,
-    +sort: Array<{|
-        +direction: 'DESC' | 'ASC',
-        +property: string,
-        +ignoreCase: boolean,
-        +nullHandling: 'NATIVE',
-        +descending: boolean,
-        +ascending: boolean
-    |}>,
-    +numberOfElements: number,
     +first: boolean,
+    +last: boolean,
+    +number: number,
+    +numberOfElements: number,
     +size: number,
-    +number: number
+    +sort: Array<{|
+        +ascending: boolean,
+        +descending: boolean,
+        +direction: 'DESC' | 'ASC',
+        +ignoreCase: boolean,
+        +property: string,
+        +nullHandling: 'NATIVE'
+    |}>,
+    +totalPages: number,
+    +totalElements: number
 |};
 
 export async function getNewsList(
