@@ -38,14 +38,15 @@ class TitleCardList extends Component<ReduxPropsType, PassedPropsType, StateType
 
     async fetchNews(): Promise<void> {}
 
-    componentDidUpdate(prevProps: PropsType, prevState: StateType) {
+    async componentDidUpdate(prevProps: PropsType, prevState: StateType): Promise<void> {
         const view = this;
         const {props} = view;
-        const nowAuth = props.auth;
+        const {auth} = props;
         const prevAuth = prevProps.auth;
 
-        if (nowAuth.user.id !== prevAuth.user.id) {
+        if (auth.user.id !== prevAuth.user.id) {
             console.log('login detected, fetch news');
+            await view.fetchNews();
             return;
         }
     }
