@@ -12,10 +12,13 @@ import TitleCard from '../title-card';
 import type {ApplyGetNewListResponseType} from './action';
 import {applyGetNewListResponse} from './action';
 import * as api from './api';
-import type {GetNewsListType} from './api';
+import type {GetNewsListType, NewsType} from './api';
+import type {TitleNewsListType} from './reducer';
+import {extractNewsList} from './helper';
 
 type ReduxPropsType = {|
-    +auth: AuthType
+    +auth: AuthType,
+    +titleNewsList: TitleNewsListType
 |};
 
 type ReduxActionType = {|
@@ -35,7 +38,7 @@ const reduxAction: ReduxActionType = {
     applyGetNewListResponse
 };
 
-const pageSize = 2;
+const pageSize = 3;
 
 class TitleCardList extends Component<ReduxPropsType, PassedPropsType, StateType> {
     // eslint-disable-next-line id-match
@@ -70,16 +73,20 @@ class TitleCardList extends Component<ReduxPropsType, PassedPropsType, StateType
         }
     }
 
-    renderCard(): Node {
-        return <TitleCard key={Math.random()}/>;
-    }
-
     renderCardList(): Node {
         const view = this;
+        const {props} = view;
+        const {titleNewsList} = props;
+
+        const newsList = extractNewsList(titleNewsList);
 
         return (
             <div key="card-list" className={style.card_list}>
-                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map((): Node => view.renderCard())}
+                {newsList.map(
+                    (newsInList: NewsType): Node =>
+                        <TitleCard key={newsInList.id}/>
+
+                )}
             </div>
         );
     }
@@ -93,7 +100,8 @@ class TitleCardList extends Component<ReduxPropsType, PassedPropsType, StateType
 
 export default connect(
     (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
-        auth: state.auth
+        auth: state.auth,
+        titleNewsList: state.titleNewsList
     }),
     reduxAction
 )(TitleCardList);
