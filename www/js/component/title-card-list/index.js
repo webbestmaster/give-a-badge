@@ -15,6 +15,7 @@ import * as api from './api';
 import type {GetNewsListType, NewsType} from './api';
 import type {TitleNewsListType} from './reducer';
 import {extractNewsList} from './helper';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 type ReduxPropsType = {|
     +auth: AuthType,
@@ -38,17 +39,20 @@ const reduxAction: ReduxActionType = {
     applyGetNewListResponse
 };
 
-const pageSize = 3;
+const pageSize = 1;
 
 class TitleCardList extends Component<ReduxPropsType, PassedPropsType, StateType> {
     // eslint-disable-next-line id-match
     props: PropsType;
     state: StateType;
 
-    async fetchNews(pageIndex: number): Promise<void> {
+    async fetchNews(): Promise<void> {
         const view = this;
         const {props} = view;
-        const {auth, applyGetNewListResponse: applyGetNewListResponseAction} = props;
+        const {auth, applyGetNewListResponse: applyGetNewListResponseAction, titleNewsList} = props;
+        const {newsResponseList} = titleNewsList;
+
+        const pageIndex = newsResponseList.length;
 
         const getNewsListResponse = await api.getNewsList(pageIndex, pageSize, auth.user.id);
 
@@ -68,7 +72,7 @@ class TitleCardList extends Component<ReduxPropsType, PassedPropsType, StateType
 
         if (auth.user.id !== prevAuth.user.id) {
             console.log('login detected, fetch news');
-            await view.fetchNews(0);
+            await view.fetchNews();
             return;
         }
     }
@@ -80,13 +84,36 @@ class TitleCardList extends Component<ReduxPropsType, PassedPropsType, StateType
 
         const newsList = extractNewsList(titleNewsList);
 
+        // example https://codesandbox.io/s/w3w89k7x8
+
         return (
             <div key="card-list" className={style.card_list}>
-                {newsList.map(
-                    (newsInList: NewsType): Node =>
-                        <TitleCard key={newsInList.id} newsData={newsInList}/>
+                <InfiniteScroll
+                    dataLength={newsList.length} // This is important field to render the next data
+                    next={(): Promise<void> => view.fetchNews()}
+                    hasMore
+                    loader={<h4>Loading...</h4>}
+                    endMessage={
+                        <p style={{textAlign: 'center'}}>
+                            <b>Yay! You have seen it all</b>
+                        </p>
+                    }
+                    // below props only if you need pull down functionality
+                    // refreshFunction={this.refresh}
+                    // pullDownToRefresh
+                    // pullDownToRefreshContent={
+                    /* <h3 style={{textAlign: 'center'}}>&#8595; Pull down to refresh</h3>*/
+                    /* }*/
+                    // releaseToRefreshContent={
+                    /* <h3 style={{textAlign: 'center'}}>&#8593; Release to refresh</h3>*/
+                    /* }*/
+                >
+                    {newsList.map(
+                        (newsInList: NewsType): Node =>
+                            <TitleCard key={newsInList.id} newsData={newsInList}/>
 
-                )}
+                    )}
+                </InfiniteScroll>
             </div>
         );
     }
