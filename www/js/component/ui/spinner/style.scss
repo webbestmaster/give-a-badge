@@ -1,0 +1,14 @@
+.spinner_wrapper {
+    height: 75px;
+    overflow: hidden;
+    position: relative;
+}
+
+.spinner {
+    height: 50px;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    width: 50px;
+}

@@ -16,6 +16,7 @@ import type {GetNewsListType, NewsType} from './api';
 import type {TitleNewsListType} from './reducer';
 import {extractNewsList} from './helper';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import Spinner from '../ui/spinner';
 
 type ReduxPropsType = {|
     +auth: AuthType,
@@ -97,18 +98,15 @@ class TitleCardList extends Component<ReduxPropsType, PassedPropsType, StateType
                 dataLength={newsList.length} // This is important field to render the next data
                 next={(): Promise<void> => view.fetchNews()}
                 hasMore={!lastNewsResponse.last}
-                loader={<h4>Loading...</h4>}
-                endMessage={
-                    <p style={{textAlign: 'center'}}>
-                        <b>Yay! You have seen it all</b>
-                    </p>
-                }
+                loader={<Spinner/>}
             >
-                {newsList.map(
-                    (newsInList: NewsType): Node =>
-                        <TitleCard key={newsInList.id} newsData={newsInList}/>
+                <div className={style.card_list}>
+                    {newsList.map(
+                        (newsInList: NewsType): Node =>
+                            <TitleCard key={newsInList.id} newsData={newsInList}/>
 
-                )}
+                    )}
+                </div>
             </InfiniteScroll>
         );
     }
@@ -116,7 +114,7 @@ class TitleCardList extends Component<ReduxPropsType, PassedPropsType, StateType
     render(): Node {
         const view = this;
 
-        return <div className={style.card_list}>{view.renderCardList()}</div>;
+        return view.renderCardList();
     }
 }
 
