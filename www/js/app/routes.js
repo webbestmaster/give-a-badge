@@ -1,7 +1,7 @@
 // @flow
 
 const routes = {
-    index: '/'
+    index: '/:smth?'
 };
 
 export default routes;
