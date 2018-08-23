@@ -17,7 +17,14 @@ type ReduxActionType = {};
 type PassedPropsType = {};
 
 // eslint-disable-next-line id-match
-type PropsType = {...$Exact<ContextRouter>, +children?: Array<Node>, ...PassedPropsType, ...ReduxPropsType, ...ReduxActionType};
+type PropsType = $ReadOnly<{
+    // eslint-disable-next-line id-match
+    ...$Exact<ContextRouter>,
+    +children?: Array<Node>,
+    ...ReduxPropsType,
+    ...ReduxActionType,
+    ...PassedPropsType
+}>;
 
 type StateType = {|
     +state: number
@@ -40,8 +47,6 @@ class BadgeCageroryList extends Component<ReduxPropsType, PassedPropsType, State
         view.state = {
             state: 0
         };
-
-        debugger
     }
 
     render(): Node {

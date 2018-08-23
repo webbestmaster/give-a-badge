@@ -16,10 +16,10 @@ export default function App(): Node[] {
         <Auth key="auth"/>,
         <System key="system">
             <Switch key="switch">
-                <Route component={BadgeCageroryList} path="/cat" exact/>
                 <Route component={Home} path={routes.index} exact>
-                    {/*<Switch key="switch2">*/}
-                    {/*</Switch>*/}
+                    <Route component={BadgeCageroryList} path="/cat" exact/>
+                    {/* <Switch key="switch2">*/}
+                    {/* </Switch>*/}
                 </Route>
             </Switch>
         </System>
