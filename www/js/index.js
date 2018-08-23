@@ -28,11 +28,9 @@ const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
 /* eslint-disable react/jsx-max-depth */
 render(
     <Provider store={store}>
-        <BrowserRouter>
-            <MuiThemeProvider theme={muiTheme}>
-                <App/>
-            </MuiThemeProvider>
-        </BrowserRouter>
+        <MuiThemeProvider theme={muiTheme}>
+            <App/>
+        </MuiThemeProvider>
     </Provider>,
     window.document.querySelector('.js-app-wrapper')
 );

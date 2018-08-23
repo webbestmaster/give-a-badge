@@ -34,7 +34,7 @@ const reduxAction: ReduxActionType = {
     // setSmth // imported from actions
 };
 
-class BadgeCageroryList extends Component<ReduxPropsType, PassedPropsType, StateType> {
+class BadgeCategoryList extends Component<ReduxPropsType, PassedPropsType, StateType> {
     // eslint-disable-next-line id-match
     props: PropsType;
     state: StateType;
@@ -68,4 +68,4 @@ export default connect(
         // reduxProp: true
     }),
     reduxAction
-)(BadgeCageroryList);
+)(BadgeCategoryList);
