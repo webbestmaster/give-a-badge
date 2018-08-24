@@ -46,6 +46,7 @@
         z-index: -1;
     }
 
+    &.give_a_badge__active,
     &:active,
     &:hover {
         &:after {

@@ -31,7 +31,7 @@ const reduxAction: ReduxActionType = {
     // setSmth // imported from actions
 };
 
-class HalfPopupWrapper extends Component<ReduxPropsType, PassedPropsType, StateType> {
+class HalfPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
     // eslint-disable-next-line id-match
     props: PropsType;
     state: StateType;
@@ -59,4 +59,4 @@ export default connect(
         // reduxProp: true
     }),
     reduxAction
-)(HalfPopupWrapper);
+)(HalfPopup);

@@ -11,18 +11,42 @@ import Route from 'react-router-dom/Route';
 import BadgeCategoryList from '../../component/badge-category-list';
 import Switch from 'react-router-dom/Switch';
 import BrowserRouter from 'react-router-dom/BrowserRouter';
+import withRouter from 'react-router-dom/withRouter';
+import {connect} from 'react-redux';
+import type {GlobalStateType} from '../../app-reducer';
+import type {SystemType} from '../../component/system/reducer';
+import type {ContextRouter} from 'react-router-dom';
+
+type ReduxPropsType = {|
+    +system: SystemType
+|};
+type PassedPropsType = {};
+type StateType = null;
+
+// eslint-disable-next-line id-match
+type PropsType = {...PassedPropsType, ...$Exact<ContextRouter>, ...ReduxPropsType};
 
 // eslint-disable-next-line react/prefer-stateless-function
-export default class Home extends Component<void, void> {
+class Home extends Component<ReduxPropsType, PassedPropsType, StateType> {
+    props: PropsType;
+    state: StateType;
+
     render(): Array<Node> {
         return [
             <Header key="header"/>,
             <TitleCardList key="title-card-list"/>,
-            <BrowserRouter basename="/" key="home-switch">
-                <Switch key="home-switch">
-                    <Route component={BadgeCategoryList} path="/badge-category-list" exact/>
-                </Switch>
-            </BrowserRouter>
+            <Switch key="home-switch">
+                <Route component={BadgeCategoryList} path="/badge-category-list" exact/>
+            </Switch>
         ];
     }
 }
+
+export default withRouter(
+    connect(
+        (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
+            system: state.system
+        }),
+        {}
+    )(Home)
+);

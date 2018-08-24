@@ -7,7 +7,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../app-reducer';
 import style from './style.scss';
-import HalfPopupWrapper from '../half-popup-wrapper';
+import HalfPopup from '../half-popup';
 import type {ContextRouter} from 'react-router-dom';
 
 type ReduxPropsType = {};
@@ -55,9 +55,9 @@ class BadgeCategoryList extends Component<ReduxPropsType, PassedPropsType, State
 
         return (
             <div>
-                <HalfPopupWrapper>
+                <HalfPopup>
                     <h1>badge category</h1>
-                </HalfPopupWrapper>
+                </HalfPopup>
             </div>
         );
     }
