@@ -15,12 +15,13 @@ import NotFound from '../component/not-found';
 export default function App(): Array<Node> {
     return [
         <Auth key="auth"/>,
-        <System key="system"/>,
-        <BrowserRouter key="router">
-            <Switch>
-                <Route component={Home} path={routes.index.index} exact/>
-                <Route component={NotFound}/>
-            </Switch>
-        </BrowserRouter>
+        <System key="system">
+            <BrowserRouter>
+                <Switch>
+                    <Route component={Home} path={routes.index.index} exact/>
+                    <Route component={NotFound}/>
+                </Switch>
+            </BrowserRouter>
+        </System>
     ];
 }
