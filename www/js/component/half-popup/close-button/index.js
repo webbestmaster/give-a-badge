@@ -8,7 +8,7 @@ import type {ContextRouter} from 'react-router-dom';
 import style from './style.scss';
 
 type PassedPropsType = {|
-    +passedProp: string
+    // +passedProp: string
 |};
 
 type PropsType = {
@@ -21,7 +21,7 @@ type StateType = {|
     +state: number
 |};
 
-export default class MyReactComponent extends Component<PropsType, StateType> {
+export default class CloseButton extends Component<PropsType, StateType> {
     props: PropsType;
     state: StateType;
 

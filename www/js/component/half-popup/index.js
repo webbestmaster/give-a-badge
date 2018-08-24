@@ -7,6 +7,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../app-reducer';
 import style from './style.scss';
+import CloseButton from './close-button';
 
 type ReduxPropsType = {
     // +reduxProp: boolean
@@ -50,7 +51,15 @@ class HalfPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const view = this;
         const {props, state} = view;
 
-        return <div>{props.children}</div>;
+        return (
+            <div className={style.half_popup__wrapper}>
+                <div className={style.half_popup__fade}/>
+                <div className={style.half_popup__set_container_position}>
+                    <CloseButton/>
+                    <div className={style.half_popup__container}>{props.children}</div>
+                </div>
+            </div>
+        );
     }
 }
 

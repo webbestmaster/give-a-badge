@@ -1,1 +1,31 @@
 //
+.half_popup__wrapper,
+%half-popup--wrapper {
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+}
+
+.half_popup__fade {
+    @extend %half-popup--wrapper;
+
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 0;
+}
+
+.half_popup__set_container_position {
+    @extend %half-popup--wrapper;
+
+    box-sizing: border-box;
+    padding-left: 100px;
+    padding-top: 100px;
+}
+
+.half_popup__container {
+    background-color: #fff;
+    display: block;
+    position: fixed;
+}
