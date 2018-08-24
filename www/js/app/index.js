@@ -10,6 +10,7 @@ import Auth from '../component/auth';
 import Home from '../page/home';
 import routes from './routes';
 import BrowserRouter from 'react-router-dom/BrowserRouter';
+import NotFound from '../component/not-found';
 
 export default function App(): Array<Node> {
     return [
@@ -17,7 +18,8 @@ export default function App(): Array<Node> {
         <System key="system"/>,
         <BrowserRouter key="router">
             <Switch>
-                <Route component={Home} path={routes.index} exact/>
+                <Route component={Home} path={routes.index.index} exact/>
+                <Route component={NotFound}/>
             </Switch>
         </BrowserRouter>
     ];
