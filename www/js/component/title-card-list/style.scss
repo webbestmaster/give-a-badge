@@ -1,4 +1,5 @@
 @import './../../../css/var';
+@import './../header/style';
 
 .card_list {
     display: flex;
@@ -6,7 +7,7 @@
     flex-wrap: wrap;
     justify-content: center;
     margin: 0 auto;
-    max-width: $max-app-width;
-    padding: 28px 0 50px;
+    //max-width: $max-app-width;
+    padding: 28px + $header-height 0 50px;
 }
 
