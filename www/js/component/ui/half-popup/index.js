@@ -5,11 +5,11 @@
 import type {Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import type {GlobalStateType} from '../../app-reducer';
+import type {GlobalStateType} from '../../../app-reducer';
 import style from './style.scss';
 import CloseButton from './close-button';
-import {setIsScrollEnable} from '../system/action';
-import type {OnSetIsScrollEnableType} from '../system/action';
+import {setIsScrollEnable} from '../../system/action';
+import type {OnSetIsScrollEnableType} from '../../system/action';
 
 type ReduxPropsType = {
     // +reduxProp: boolean

@@ -7,8 +7,12 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../app-reducer';
 import style from './style.scss';
-import HalfPopup from '../half-popup';
+import HalfPopup from '../ui/half-popup';
 import type {ContextRouter} from 'react-router-dom';
+import {getBadgeCategoryList} from './api';
+import type {BadgeCategoryListType, BadgeCategoryType} from './api';
+import {extractCategoryList} from './helper';
+import Locale from '../locale';
 
 type ReduxPropsType = {};
 
@@ -20,14 +24,18 @@ type PassedPropsType = {};
 type PropsType = $ReadOnly<{
     // eslint-disable-next-line id-match
     ...$Exact<ContextRouter>,
-    +children?: Array<Node>,
-    ...ReduxPropsType,
-    ...ReduxActionType,
-    ...PassedPropsType
+    // eslint-disable-next-line id-match
+    ...$Exact<ReduxPropsType>,
+    // eslint-disable-next-line id-match
+    ...$Exact<ReduxActionType>,
+    // eslint-disable-next-line id-match
+    ...$Exact<PassedPropsType>,
+    +children?: Array<Node>
 }>;
 
 type StateType = {|
-    +state: number
+    +state: number,
+    +badgeCategoryList: BadgeCategoryListType | null
 |};
 
 const reduxAction: ReduxActionType = {
@@ -45,20 +53,37 @@ class BadgeCategoryList extends Component<ReduxPropsType, PassedPropsType, State
         const view = this;
 
         view.state = {
-            state: 0
+            state: 0,
+            badgeCategoryList: null
         };
+    }
+
+    async componentDidMount(): Promise<void> {
+        const view = this;
+
+        const badgeCategoryList = await getBadgeCategoryList();
+
+        if (badgeCategoryList === null) {
+            console.error('can not get badge category list');
+            return;
+        }
+
+        view.setState({badgeCategoryList});
     }
 
     render(): Node {
         const view = this;
         const {props, state} = view;
 
+        const extractedCategoryList = extractCategoryList(state.badgeCategoryList || []);
+
         return (
-            <div>
-                <HalfPopup>
-                    <h1>badge category</h1>
-                </HalfPopup>
-            </div>
+            <HalfPopup>
+                <h3>
+                    <Locale stringKey="CATEGORY_LIST__CATEGORIES"/>
+                </h3>
+                {JSON.stringify(extractedCategoryList)}
+            </HalfPopup>
         );
     }
 }

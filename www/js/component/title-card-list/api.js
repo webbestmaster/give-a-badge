@@ -57,12 +57,11 @@ export async function getNewsList(
         .replace('{pageSize}', String(pageSize))
         .replace('{userId}', String(userId));
 
-    return await window.fetch(getNewUrl, defaultFetchProps).then(
-        async (response: Response): Promise<GetNewsListType | null> => {
-            if (response.ok) {
-                return await response.json();
-            }
-            return null;
-        }
-    );
+    const response: Response = await window.fetch(getNewUrl, defaultFetchProps);
+
+    if (response.ok) {
+        return await response.json();
+    }
+
+    return null;
 }
