@@ -1,1 +1,34 @@
 //
+
+.close_button__wrapper {
+    background-color: #fff;
+    border-radius: 100%;
+    box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    float: right;
+    height: 32px;
+    position: relative;
+    right: 26px;
+    top: -15px;
+    width: 32px;
+    z-index: 1;
+
+    &:before,
+    &:after {
+        background-color: #d0021b;
+        content: '';
+        height: 18px;
+        left: 50%;
+        position: absolute;
+        top: 50%;
+        width: 1px;
+    }
+
+    &:before {
+        transform: translate3d(-50%, -50%, 0) rotateZ(45deg);
+    }
+
+    &:after {
+        transform: translate3d(-50%, -50%, 0) rotateZ(-45deg);
+    }
+}

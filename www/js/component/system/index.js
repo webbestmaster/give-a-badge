@@ -16,6 +16,7 @@ import style from './style.css';
 import {screenNameReference} from './reducer/screen';
 import type {LocaleType} from '../locale/reducer';
 import {localeNameReference} from '../locale/const';
+import {setIsGlobalScrollEnable} from './helper';
 
 type ReduxPropsType = {|
     +system: SystemType,
@@ -66,6 +67,15 @@ class System extends Component<ReduxPropsType, PassedPropsType, StateType> {
             },
             false
         );
+    }
+
+    componentDidUpdate(prevProps: PropsType, prevState: StateType) {
+        const view = this;
+        const {props, state} = view;
+
+        if (props.system.scroll.isEnable !== prevProps.system.scroll.isEnable) {
+            setIsGlobalScrollEnable(props.system.scroll.isEnable);
+        }
     }
 
     getClassName(): string {

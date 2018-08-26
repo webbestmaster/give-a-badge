@@ -6,7 +6,7 @@
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 10;
+    z-index: 5;
 }
 
 .half_popup__fade {
@@ -20,12 +20,18 @@
     @extend %half-popup--wrapper;
 
     box-sizing: border-box;
-    padding-left: 100px;
-    padding-top: 100px;
+    padding-left: 275px;
+    padding-top: 98px;
+    z-index: 2;
 }
 
 .half_popup__container {
     background-color: #fff;
+    border-radius: 4px 0 0;
+    box-shadow: 0 0 18px 0 rgba(0, 0, 0, 0.1);
     display: block;
-    position: fixed;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    z-index: 0;
 }

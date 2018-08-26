@@ -20,15 +20,15 @@ export const screenNameReference: {[key: ScreenWidthNameType]: ScreenWidthNameTy
 };
 
 export type ScreenType = {|
-    width: number,
-    height: number,
-    name: ScreenWidthNameType,
-    isDesktop: boolean,
-    isTablet: boolean,
-    isMobile: boolean,
-    littleThen: Array<ScreenWidthNameType>,
-    isLandscape: boolean,
-    isPortrait: boolean
+    +width: number,
+    +height: number,
+    +name: ScreenWidthNameType,
+    +isDesktop: boolean,
+    +isTablet: boolean,
+    +isMobile: boolean,
+    +littleThen: Array<ScreenWidthNameType>,
+    +isLandscape: boolean,
+    +isPortrait: boolean
 |};
 
 function getScreenName(screenWidth: number): ScreenWidthNameType {

@@ -8,12 +8,15 @@ import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../app-reducer';
 import style from './style.scss';
 import CloseButton from './close-button';
+import {setIsScrollEnable} from '../system/action';
+import type {OnSetIsScrollEnableType} from '../system/action';
 
 type ReduxPropsType = {
     // +reduxProp: boolean
 };
 
 type ReduxActionType = {
+    setIsScrollEnable: (isEnable: boolean, disableId: string) => OnSetIsScrollEnableType
     // +setSmth: (smth: string) => string
 };
 
@@ -22,14 +25,23 @@ type PassedPropsType = {
 };
 
 // eslint-disable-next-line id-match
-type PropsType = $Exact<{...PassedPropsType, ...ReduxPropsType, ...ReduxActionType, children: Node | Array<Node>}>;
+type PropsType = $Exact<{
+    // eslint-disable-next-line id-match
+    ...$Exact<PassedPropsType>,
+    // eslint-disable-next-line id-match
+    ...$Exact<ReduxPropsType>,
+    // eslint-disable-next-line id-match
+    ...$Exact<ReduxActionType>,
+    children: Node | Array<Node>
+}>;
 
-type StateType = {|
-    +state: number
-|};
+type StateType = {
+    +state: number,
+    +disableScrollId: string
+};
 
 const reduxAction: ReduxActionType = {
-    // setSmth // imported from actions
+    setIsScrollEnable
 };
 
 class HalfPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
@@ -43,8 +55,23 @@ class HalfPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const view = this;
 
         view.state = {
-            state: 0
+            state: 0,
+            disableScrollId: 'half-popup--' + Math.random()
         };
+    }
+
+    componentDidMount() {
+        const view = this;
+        const {state, props} = view;
+
+        props.setIsScrollEnable(false, state.disableScrollId);
+    }
+
+    componentWillUnmount() {
+        const view = this;
+        const {state, props} = view;
+
+        props.setIsScrollEnable(true, state.disableScrollId);
     }
 
     render(): Node {

@@ -5,6 +5,7 @@
 import type {Node} from 'react';
 import React, {Component} from 'react';
 import type {ContextRouter} from 'react-router-dom';
+import withRouter from 'react-router-dom/withRouter';
 import style from './style.scss';
 
 type PassedPropsType = {|
@@ -21,7 +22,7 @@ type StateType = {|
     +state: number
 |};
 
-export default class CloseButton extends Component<PropsType, StateType> {
+class CloseButton extends Component<PropsType, StateType> {
     props: PropsType;
     state: StateType;
 
@@ -35,12 +36,18 @@ export default class CloseButton extends Component<PropsType, StateType> {
         };
     }
 
+    onClick() {
+        const view = this;
+        const {props} = view;
+
+        props.history.goBack();
+    }
+
     render(): Node {
-        return (
-            <div>
-                {'\u00A0'}
-                {'\u2026'}
-            </div>
-        );
+        const view = this;
+
+        return <div onClick={(): void => view.onClick()} className={style.close_button__wrapper}/>;
     }
 }
+
+export default withRouter(CloseButton);
