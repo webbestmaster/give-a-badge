@@ -1,12 +1,16 @@
 // @flow
 
-/* global window, IS_PRODUCTION */
+/* global window */
 
-// eslint-disable-next-line id-match
-const bodyNormalScroll = IS_PRODUCTION ? '' : 'scroll';
+import style from './style.css';
 
 export function setIsGlobalScrollEnable(isEnable: boolean) {
     const {body} = window.document;
+    const {classList} = body;
 
-    body.style.overflow = isEnable ? bodyNormalScroll : 'hidden';
+    if (isEnable) {
+        classList.remove(style.no_scroll_y);
+    } else {
+        classList.add(style.no_scroll_y);
+    }
 }
