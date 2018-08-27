@@ -7,11 +7,14 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../app-reducer';
 import style from './style.scss';
+import BadgeCategoryListItem from './item';
 import HalfPopup from '../ui/half-popup';
+import HalfPopupHeader from '../ui/half-popup/header';
 import type {ContextRouter} from 'react-router-dom';
 import {getBadgeCategoryList} from './api';
 import type {BadgeCategoryListType, BadgeCategoryType} from './api';
 import {extractCategoryList} from './helper';
+import type {ExtractedCategoryType} from './helper';
 import Locale from '../locale';
 
 type ReduxPropsType = {};
@@ -79,9 +82,16 @@ class BadgeCategoryList extends Component<ReduxPropsType, PassedPropsType, State
 
         return (
             <HalfPopup>
-                <h3>
+                <HalfPopupHeader>
                     <Locale stringKey="CATEGORY_LIST__CATEGORIES"/>
-                </h3>
+                </HalfPopupHeader>
+
+                {extractedCategoryList.map(
+                    (extractedCategory: ExtractedCategoryType): Node =>
+                        <BadgeCategoryListItem key={extractedCategory.name} category={extractedCategory}/>
+
+                )}
+
                 {JSON.stringify(extractedCategoryList)}
             </HalfPopup>
         );

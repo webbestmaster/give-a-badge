@@ -2,12 +2,12 @@
 
 import type {BadgeCategoryListType, BadgeCategoryType} from './api';
 
-type ExtractedCategoryType = {|
+export type ExtractedCategoryType = {|
     +name: string,
     +list: Array<BadgeCategoryType>
 |};
 
-type ExtractedCategoryListType = Array<ExtractedCategoryType>;
+export type ExtractedCategoryListType = Array<ExtractedCategoryType>;
 
 export function extractCategoryList(badgeCategoryList: BadgeCategoryListType): ExtractedCategoryListType {
     const extractedCategoryList = [];
