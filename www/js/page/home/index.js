@@ -20,11 +20,17 @@ import type {ContextRouter} from 'react-router-dom';
 type ReduxPropsType = {|
     +system: SystemType
 |};
+
+type ReduxActionType = {};
 type PassedPropsType = {};
 type StateType = null;
 
-// eslint-disable-next-line id-match
-type PropsType = {...PassedPropsType, ...$Exact<ContextRouter>, ...ReduxPropsType};
+type PropsType = $ReadOnly<$Exact<{
+        ...$Exact<PassedPropsType>,
+        ...$Exact<ReduxPropsType>,
+        ...$Exact<ReduxActionType>,
+        +children: Node
+    }>>;
 
 // eslint-disable-next-line react/prefer-stateless-function
 class Home extends Component<ReduxPropsType, PassedPropsType, StateType> {
