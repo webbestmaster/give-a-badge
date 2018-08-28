@@ -11,6 +11,8 @@ import type {ExtractedCategoryType} from '../helper';
 import HalfPopupSubHeader from '../../ui/half-popup/sub-header';
 import type {BadgeCategoryType} from '../api';
 import Link from 'react-router-dom/Link';
+import classNames from 'classnames';
+import serviceStyle from '../../../../css/service.scss';
 
 type ReduxPropsType = {|
     +reduxProp: boolean
@@ -65,12 +67,55 @@ class BadgeCategoryListItem extends Component<ReduxPropsType, PassedPropsType, S
         const {list} = category;
 
         return (
-            <div className="renderBadgeList">
+            <div className={style.badge_item_list}>
                 {list.map(
                     (badgeCategory: BadgeCategoryType): Node => {
                         return (
-                            <Link key={badgeCategory.id} to={`/give-badge/${badgeCategory.id}`} className="class111">
-                                {badgeCategory.imageUrl}
+                            <Link
+                                key={badgeCategory.id}
+                                to={`/give-badge/${badgeCategory.id}`}
+                                className={style.badge_item}
+                            >
+                                <img className={style.badge_image} src={badgeCategory.imageUrl} alt=""/>
+                            </Link>
+                        );
+                    }
+                )}
+                {list.map(
+                    (badgeCategory: BadgeCategoryType): Node => {
+                        return (
+                            <Link
+                                key={badgeCategory.id}
+                                to={`/give-badge/${badgeCategory.id}`}
+                                className={style.badge_item}
+                            >
+                                <img className={style.badge_image} src={badgeCategory.imageUrl} alt=""/>
+                            </Link>
+                        );
+                    }
+                )}
+                {list.map(
+                    (badgeCategory: BadgeCategoryType): Node => {
+                        return (
+                            <Link
+                                key={badgeCategory.id}
+                                to={`/give-badge/${badgeCategory.id}`}
+                                className={style.badge_item}
+                            >
+                                <img className={style.badge_image} src={badgeCategory.imageUrl} alt=""/>
+                            </Link>
+                        );
+                    }
+                )}
+                {list.map(
+                    (badgeCategory: BadgeCategoryType): Node => {
+                        return (
+                            <Link
+                                key={badgeCategory.id}
+                                to={`/give-badge/${badgeCategory.id}`}
+                                className={style.badge_item}
+                            >
+                                <img className={style.badge_image} src={badgeCategory.imageUrl} alt=""/>
                             </Link>
                         );
                     }
@@ -85,7 +130,7 @@ class BadgeCategoryListItem extends Component<ReduxPropsType, PassedPropsType, S
         const {category} = props;
 
         return (
-            <div className="render">
+            <div className={classNames(serviceStyle.clear_self, style.badge_category_list)}>
                 <HalfPopupSubHeader>{category.name}</HalfPopupSubHeader>
                 {view.renderBadgeList()}
             </div>

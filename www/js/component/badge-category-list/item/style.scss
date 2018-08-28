@@ -1,1 +1,27 @@
 //
+
+.badge_item_list {
+    clear: both;
+    width: 100%;
+}
+
+.badge_category_list {
+    clear: both;
+    padding-bottom: 9px;
+    width: 100%;
+}
+
+.badge_item {
+    float: left;
+    height: 100px;
+    margin: 0 27px 27px 0;
+    text-decoration: none;
+    width: 100px;
+}
+
+.badge_image {
+    border-radius: 50%;
+    display: block;
+    height: 100%;
+    width: 100%;
+}
