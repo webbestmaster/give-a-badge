@@ -5,8 +5,8 @@ const {hostname, origin} = window.location;
 
 const appConst = {
     api: {
-        getMe: '/api/users/current?id=1',
-        getNews: '/api/news?page={pageIndex}&size={pageSize}&userId={userId}',
+        getMe: '/api/users/current',
+        getNews: '/api/news?page={pageIndex}&size={pageSize}',
         getBadgeCategoryList: '/api/badges/catalog',
         login: '/login',
         logout: '/logout'

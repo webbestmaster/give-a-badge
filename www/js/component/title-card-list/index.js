@@ -55,7 +55,7 @@ class TitleCardList extends Component<ReduxPropsType, PassedPropsType, StateType
 
         const pageIndex = newsResponseList.length;
 
-        const getNewsListResponse = await api.getNewsList(pageIndex, pageSize, auth.user.id);
+        const getNewsListResponse = await api.getNewsList(pageIndex, pageSize);
 
         if (getNewsListResponse === null) {
             console.error('can not get news list');

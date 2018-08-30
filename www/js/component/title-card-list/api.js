@@ -47,15 +47,10 @@ export type GetNewsListType = {|
     +totalElements: number
 |};
 
-export async function getNewsList(
-    pageIndex: number,
-    pageSize: number,
-    userId: number
-): Promise<GetNewsListType | null> {
+export async function getNewsList(pageIndex: number, pageSize: number): Promise<GetNewsListType | null> {
     const getNewUrl = appConst.api.getNews
         .replace('{pageIndex}', String(pageIndex))
-        .replace('{pageSize}', String(pageSize))
-        .replace('{userId}', String(userId));
+        .replace('{pageSize}', String(pageSize));
 
     const response: Response = await window.fetch(getNewUrl, defaultFetchProps);
 
