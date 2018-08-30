@@ -11,7 +11,7 @@ import type {OnResizeType} from './action';
 import {onResize} from './action';
 import type {GlobalStateType} from '../../app-reducer';
 import type {SystemType} from './reducer';
-import classnames from 'classnames';
+import classNames from 'classnames';
 import style from './style.css';
 import {screenNameReference} from './reducer/screen';
 import type {LocaleType} from '../locale/reducer';
@@ -35,8 +35,12 @@ type PassedPropsType = {|
     // +passedProp: string
 |};
 
-// eslint-disable-next-line id-match
-type PropsType = $Exact<{...PassedPropsType, ...ReduxPropsType, ...ReduxActionType, +children: Node}>;
+type PropsType = $ReadOnly<$Exact<{
+        ...$Exact<PassedPropsType>,
+        ...$Exact<ReduxPropsType>,
+        ...$Exact<ReduxActionType>,
+        +children: Node
+    }>>;
 
 type StateType = null;
 
@@ -60,8 +64,8 @@ class System extends Component<ReduxPropsType, PassedPropsType, StateType> {
             'resize',
             () => {
                 const {documentElement} = window.document;
-                const width: number = documentElement.clientWidth;
-                const height: number = documentElement.clientHeight;
+                const width = documentElement.clientWidth;
+                const height = documentElement.clientHeight;
 
                 props.onResize(width, height);
             },
@@ -86,7 +90,7 @@ class System extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const littleThenList = screenProps.littleThen;
         const localeName = props.locale.name;
 
-        return classnames({
+        return classNames({
             [style.landscape]: screenProps.isLandscape,
             [style.portrait]: screenProps.isPortrait,
             [style.desktop]: screenProps.isDesktop,

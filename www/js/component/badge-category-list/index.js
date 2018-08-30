@@ -10,12 +10,12 @@ import style from './style.scss';
 import BadgeCategoryListItem from './item';
 import HalfPopup from '../ui/half-popup';
 import HalfPopupHeader from '../ui/half-popup/header';
-import type {ContextRouter} from 'react-router-dom';
 import {getBadgeCategoryList} from './api';
 import type {BadgeCategoryListType, BadgeCategoryType} from './api';
 import {extractCategoryList} from './helper';
 import type {ExtractedCategoryType} from './helper';
 import Locale from '../locale';
+import type {ContextRouterType} from '../../../type/react-router-dom-v4';
 
 type ReduxPropsType = {};
 
@@ -26,7 +26,7 @@ type PassedPropsType = {};
 // eslint-disable-next-line id-match
 type PropsType = $ReadOnly<{
     // eslint-disable-next-line id-match
-    ...$Exact<ContextRouter>,
+    ...$Exact<ContextRouterType>,
     // eslint-disable-next-line id-match
     ...$Exact<ReduxPropsType>,
     // eslint-disable-next-line id-match

@@ -27,7 +27,7 @@ export async function getMe(): Promise<GetMeResponseType> {
         .then(
             async (response: Response): Promise<GetMeResponseType> => {
                 if (response.ok) {
-                    const userData: UserType = await response.json();
+                    const userData = await response.json();
 
                     return {
                         hasError: false,

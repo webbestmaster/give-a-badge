@@ -4,7 +4,7 @@
 
 import type {Node} from 'react';
 import React, {Component} from 'react';
-import type {ContextRouter} from 'react-router-dom';
+import type {ContextRouterType} from '../../../../../type/react-router-dom-v4';
 import withRouter from 'react-router-dom/withRouter';
 import style from './style.scss';
 
@@ -15,7 +15,7 @@ type PassedPropsType = {|
 type PropsType = {
     ...PassedPropsType,
     // eslint-disable-next-line id-match
-    ...$Exact<ContextRouter>
+    ...$Exact<ContextRouterType>
 };
 
 type StateType = {|

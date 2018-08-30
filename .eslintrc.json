@@ -4,6 +4,7 @@
 {
     "parser": "babel-eslint",
     "extends": [
+        "plugin:jsx-a11y/recommended",
         "eslint:recommended",
         "plugin:flowtype/recommended",
         "plugin:react/all",
@@ -20,6 +21,7 @@
         "console": true
     },
     "plugins": [
+        "jsx-a11y",
         "no-use-extend-native",
         "import",
         "flowtype",
@@ -29,7 +31,8 @@
         "lodash",
         "optimize-regex",
         "unicorn",
-        "no-loops"
+        "no-loops",
+        "markdown"
     ],
     "env": {
         "es6": true,

@@ -15,7 +15,7 @@ import withRouter from 'react-router-dom/withRouter';
 import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../app-reducer';
 import type {SystemType} from '../../component/system/reducer';
-import type {ContextRouter} from 'react-router-dom';
+import type {ContextRouterType} from '../../../type/react-router-dom-v4';
 
 type ReduxPropsType = {|
     +system: SystemType
