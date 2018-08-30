@@ -57,7 +57,12 @@ class UserInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
         return (
             <div className={style.user_info__desktop}>
-                <div className={style.logout_button} onClick={async (): Promise<void> => await view.logout()}/>
+                <button
+                    type="button"
+                    className={style.logout_button}
+                    onClick={async (): Promise<void> => await view.logout()}
+                    onKeyPress={async (): Promise<void> => await view.logout()}
+                />
                 <h5 className={style.user_name}>
                     <span className={serviceStyle.ellipsis}>
                         {/* <Locale stringKey="SPACE"/>*/}
@@ -77,7 +82,12 @@ class UserInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
         return (
             <div className={style.user_info__mobile}>
-                <div className={style.logout_button} onClick={async (): Promise<void> => await view.logout()}/>
+                <button
+                    type="button"
+                    className={style.logout_button}
+                    onClick={async (): Promise<void> => await view.logout()}
+                    onKeyPress={async (): Promise<void> => await view.logout()}
+                />
                 <img className={style.user_avatar} src={auth.user.imageUrl} alt=""/>
             </div>
         );

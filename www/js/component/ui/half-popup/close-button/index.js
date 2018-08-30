@@ -46,7 +46,14 @@ class CloseButton extends Component<PropsType, StateType> {
     render(): Node {
         const view = this;
 
-        return <div onClick={(): void => view.onClick()} className={style.close_button__wrapper}/>;
+        return (
+            <button
+                type="button"
+                onKeyPress={(): void => view.onClick()}
+                onClick={(): void => view.onClick()}
+                className={style.close_button__wrapper}
+            />
+        );
     }
 }
 
