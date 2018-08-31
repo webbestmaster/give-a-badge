@@ -12,6 +12,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
 
 const DEVELOPMENT = 'development';
 const PRODUCTION = 'production';
@@ -225,7 +226,15 @@ const webpackConfig = {
             }
         ]
     },
+    // resolve module warning, see DuplicatePackageCheckerPlugin
+    resolve: {
+        alias: {
+            warning: path.resolve(__dirname, 'node_modules/warning'),
+            '@babel/runtime': path.resolve(__dirname, 'node_modules/@babel/runtime')
+        }
+    },
     plugins: [
+        new DuplicatePackageCheckerPlugin(),
         new CleanWebpackPlugin(['./dist']),
         new webpack.DefinePlugin(definePluginParams),
         new HtmlWebpackPlugin({
