@@ -12,7 +12,7 @@ export const defaultFetchProps = {
     credentials: 'include',
     headers: {
         'Access-Control-Allow-Headers': '*',
-        Accept: 'application/json, text/javascript, */*; q=0.01',
+        Accept: 'application/json, text/javascript, text/html, */*; q=0.01',
         'Content-Type': 'application/x-www-form-urlencoded; text/html; charset=UTF-8'
     },
     mode: 'no-cors'
