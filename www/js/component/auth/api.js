@@ -1,23 +1,21 @@
 // @flow
 
-/* global window, fetch, IS_PRODUCTION */
+/* global window, fetch */
 
 import appConst from '../../app-const';
 import type {UserType} from './reducer';
 
 type GetMeResponseType = {|+hasError: true|} | {|+hasError: false, +userData: UserType|};
 
-const mainDefaultFetchProps = {
+export const defaultFetchProps = {
     credentials: 'include',
     headers: {
         'Access-Control-Allow-Headers': '*',
-        Accept: 'application/json, text/javascript, text/html, */*; q=0.01',
-        'Content-Type': 'application/x-www-form-urlencoded; text/html; charset=UTF-8'
-    }
+        Accept: 'application/json, text/javascript, */*; q=0.01',
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+    },
+    mode: 'no-cors'
 };
-
-// eslint-disable-next-line id-match
-export const defaultFetchProps = IS_PRODUCTION ? mainDefaultFetchProps : {...mainDefaultFetchProps, mode: 'no-cors'};
 
 export async function getMe(): Promise<GetMeResponseType> {
     return await window
