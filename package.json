@@ -18,7 +18,8 @@
     "stylelint:fix": "stylelint ./**/*.scss --fix",
     "flow": "flow stop; flow;",
     "prettier": "prettier --write \"./www/**/*.js\"",
-    "flow-typed": "flow-typed install moment@2.x.x",
+    "mdlint": "eslint --ext md .",
+    "mdlint:fix": "eslint --ext md . --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
