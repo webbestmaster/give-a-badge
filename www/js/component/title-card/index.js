@@ -47,12 +47,17 @@ class TitleCard extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const {props, state} = view;
         const {newsData} = props;
         const userList = newsData.toUsers;
+        const isSingleItem = userList.length === 1;
         const peopleFaceClassName = classnames(style.people_face, {
-            [style.people_face__single]: userList.length === 1
+            [style.people_face__single]: isSingleItem
         });
 
         return (
-            <div className={classnames(serviceStyle.clear_self, style.people_list)}>
+            <div
+                className={classnames(serviceStyle.clear_self, style.people_list, {
+                    [style.people_list__single_item]: isSingleItem
+                })}
+            >
                 {userList.map(
                     (userInList: NewsUserType): Node =>
                         <img key={userInList.id} className={peopleFaceClassName} src={userInList.imageUrl} alt=""/>
