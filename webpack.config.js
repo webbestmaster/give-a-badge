@@ -229,8 +229,8 @@ const webpackConfig = {
     // resolve module warning, see DuplicatePackageCheckerPlugin
     resolve: {
         alias: {
-            warning: path.resolve(__dirname, 'node_modules/warning')
-            // '@babel/runtime': path.resolve(__dirname, 'node_modules/@babel/runtime')
+            warning: path.resolve(__dirname, 'node_modules/warning'),
+            '@babel/runtime': path.resolve(__dirname, 'node_modules/@babel/runtime')
         }
     },
     plugins: [
