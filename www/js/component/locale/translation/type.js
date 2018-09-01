@@ -5,6 +5,7 @@ export type LangDataType = {|
     +LANGUAGE_NAME: string,
 
     +CATEGORY_LIST__CATEGORIES: string,
+    +GIVE_THE_BADGE__PEOPLE: string,
 
     +LOGIN_POPUP__PLEASE_LOG_IN_OR_JOIN_NOW: string,
     +LOGIN_POPUP__INPUT_USERNAME: string,

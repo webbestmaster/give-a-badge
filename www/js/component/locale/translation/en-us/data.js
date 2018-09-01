@@ -7,6 +7,7 @@ export const enUs: LangDataType = {
     LANGUAGE_NAME: 'English',
 
     CATEGORY_LIST__CATEGORIES: 'Categories',
+    GIVE_THE_BADGE__PEOPLE: 'People',
 
     LOGIN_POPUP__PLEASE_LOG_IN_OR_JOIN_NOW: 'Please log in or join now.',
     LOGIN_POPUP__INPUT_USERNAME: 'Username',

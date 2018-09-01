@@ -7,6 +7,7 @@ export const ruRu: LangDataType = {
     LANGUAGE_NAME: 'Русский',
 
     CATEGORY_LIST__CATEGORIES: 'Categories',
+    GIVE_THE_BADGE__PEOPLE: 'People',
 
     LOGIN_POPUP__PLEASE_LOG_IN_OR_JOIN_NOW: 'Пожалуйста, войдите в систему или зарегистрируйтесь.',
     LOGIN_POPUP__INPUT_USERNAME: 'Логин',

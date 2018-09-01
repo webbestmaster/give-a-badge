@@ -23,15 +23,10 @@ type ReduxActionType = {};
 
 type PassedPropsType = {};
 
-// eslint-disable-next-line id-match
 type PropsType = $ReadOnly<{
-    // eslint-disable-next-line id-match
     ...$Exact<ContextRouterType>,
-    // eslint-disable-next-line id-match
     ...$Exact<ReduxPropsType>,
-    // eslint-disable-next-line id-match
     ...$Exact<ReduxActionType>,
-    // eslint-disable-next-line id-match
     ...$Exact<PassedPropsType>,
     +children?: Array<Node>
 }>;

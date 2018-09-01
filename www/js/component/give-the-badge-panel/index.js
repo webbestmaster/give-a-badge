@@ -7,6 +7,14 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../app-reducer';
 import style from './style.scss';
+import {extractCategoryList} from '../badge-category-list/helper';
+import HalfPopup from '../ui/half-popup';
+import HalfPopupHeader from '../ui/half-popup/header';
+import Locale from '../locale';
+import type {ContextRouterType} from '../../../type/react-router-dom-v4';
+import type {ExtractedCategoryType} from '../badge-category-list/helper';
+import BadgeCategoryListItem from '../badge-category-list/item';
+import {isString} from '../../lib/is';
 
 type ReduxPropsType = {
     // +reduxProp: boolean
@@ -24,6 +32,7 @@ type PropsType = $ReadOnly<$Exact<{
         ...$Exact<PassedPropsType>,
         ...$Exact<ReduxPropsType>,
         ...$Exact<ReduxActionType>,
+        ...$Exact<ContextRouterType>,
         +children: Node
     }>>;
 
@@ -50,15 +59,27 @@ class GiveTheBadgePanel extends Component<ReduxPropsType, PassedPropsType, State
         };
     }
 
+    componentDidMount() {
+        const view = this;
+        const {props, state} = view;
+
+        const badgeId = isString(props.match.params.badgeId) ? props.match.params.badgeId : null;
+
+        console.log('badge id:', badgeId);
+    }
+
     render(): Node {
         const view = this;
         const {props, state} = view;
 
         return (
-            <div>
-                {'\u00A0 - &nbsp;'}
-                {'\u2026 - ...'}
-            </div>
+            <HalfPopup>
+                <HalfPopupHeader>
+                    <Locale stringKey="GIVE_THE_BADGE__PEOPLE"/>
+                </HalfPopupHeader>
+
+                <h1>badge id: {props.match.params.badgeId}</h1>
+            </HalfPopup>
         );
     }
 }

@@ -7,6 +7,7 @@ export const zhTw: LangDataType = {
     LANGUAGE_NAME: '繁體中文',
 
     CATEGORY_LIST__CATEGORIES: 'Categories',
+    GIVE_THE_BADGE__PEOPLE: 'People',
 
     LOGIN_POPUP__PLEASE_LOG_IN_OR_JOIN_NOW: '請登錄或立即註冊。',
     LOGIN_POPUP__INPUT_USERNAME: '用戶名',

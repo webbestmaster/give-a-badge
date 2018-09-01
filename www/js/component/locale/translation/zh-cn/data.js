@@ -7,6 +7,7 @@ export const zhCn: LangDataType = {
     LANGUAGE_NAME: '简体中文',
 
     CATEGORY_LIST__CATEGORIES: 'Categories',
+    GIVE_THE_BADGE__PEOPLE: 'People',
 
     LOGIN_POPUP__PLEASE_LOG_IN_OR_JOIN_NOW: '请登录或立即注册。',
     LOGIN_POPUP__INPUT_USERNAME: '用户名',
