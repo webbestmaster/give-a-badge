@@ -66,7 +66,7 @@ class BadgeInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
         const badgeInfo =
             badgeCategoryList.find(
-                (badgeCategoryInList: BadgeCategoryType): boolean => badgeCategoryInList.id === badgeId
+                (badgeCategoryInList: BadgeCategoryType): boolean => String(badgeCategoryInList.id) === badgeId
             ) || null;
 
         if (badgeInfo === null) {

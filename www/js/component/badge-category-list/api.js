@@ -16,6 +16,8 @@ export type BadgeCategoryType = {|
 export type BadgeCategoryListType = Array<BadgeCategoryType>;
 
 export async function getBadgeCategoryList(): Promise<BadgeCategoryListType | null> {
+    // TODO: called from BadgeInfo and BadgeCategoryList - use cache
+    console.log('---> called from BadgeInfo and BadgeCategoryList - use cache');
     const getBadgeCategoryListUrl = appConst.api.getBadgeCategoryList;
 
     const response: Response = await window.fetch(getBadgeCategoryListUrl, defaultFetchProps);

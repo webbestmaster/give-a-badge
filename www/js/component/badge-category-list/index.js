@@ -33,7 +33,7 @@ type PropsType = $ReadOnly<{
 
 type StateType = {|
     +state: number,
-    +badgeCategoryList: BadgeCategoryListType | null
+    +badgeCategoryList: ?BadgeCategoryListType
 |};
 
 const reduxAction: ReduxActionType = {
@@ -56,17 +56,25 @@ class BadgeCategoryList extends Component<ReduxPropsType, PassedPropsType, State
         };
     }
 
-    async componentDidMount(): Promise<void> {
+    async fetchBadgeCategoryList(): Promise<BadgeCategoryListType | null> {
         const view = this;
 
         const badgeCategoryList = await getBadgeCategoryList();
 
         if (badgeCategoryList === null) {
             console.error('can not get badge category list');
-            return;
+            return null;
         }
 
         view.setState({badgeCategoryList});
+
+        return badgeCategoryList;
+    }
+
+    async componentDidMount(): Promise<void> {
+        const view = this;
+
+        await view.fetchBadgeCategoryList();
     }
 
     render(): Node {
