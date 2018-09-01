@@ -15,6 +15,8 @@ import type {ContextRouterType} from '../../../type/react-router-dom-v4';
 import type {ExtractedCategoryType} from '../badge-category-list/helper';
 import BadgeCategoryListItem from '../badge-category-list/item';
 import {isString} from '../../lib/is';
+import BadgeForm from './badge-form';
+import BadgeInfo from './badge-info';
 
 type ReduxPropsType = {
     // +reduxProp: boolean
@@ -79,6 +81,8 @@ class GiveTheBadgePanel extends Component<ReduxPropsType, PassedPropsType, State
                 </HalfPopupHeader>
 
                 <h1>badge id: {props.match.params.badgeId}</h1>
+                <BadgeInfo/>
+                <BadgeForm/>
             </HalfPopup>
         );
     }
