@@ -1,11 +1,13 @@
 // @flow
 
 const badgeCategoryList = 'badge-category-list';
+const giveTheBadge = 'give-the-badge/:badgeId';
 
 const routes = {
     index: {
-        index: `/(smth|${badgeCategoryList})?`,
-        badgeCategoryList: `/${badgeCategoryList}`
+        index: '/',
+        badgeCategoryList: `/${badgeCategoryList}`,
+        giveTheBadge: `/${giveTheBadge}`
     }
 };
 

@@ -8,8 +8,8 @@ const appConst = {
         getMe: '/api/users/current',
         getNews: '/api/news?page={pageIndex}&size={pageSize}',
         getBadgeCategoryList: '/api/badges/catalog',
-        login: '/login',
-        logout: '/logout'
+        login: '/do-login',
+        logout: '/do-logout'
     }
 };
 

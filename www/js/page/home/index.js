@@ -9,13 +9,15 @@ import Header from '../../component/header';
 import TitleCardList from '../../component/title-card-list';
 import Route from 'react-router-dom/Route';
 import BadgeCategoryList from '../../component/badge-category-list';
+import GiveTheBadgePanel from '../../component/give-the-badge-panel';
 import Switch from 'react-router-dom/Switch';
-import BrowserRouter from 'react-router-dom/BrowserRouter';
+// import BrowserRouter from 'react-router-dom/BrowserRouter';
 import withRouter from 'react-router-dom/withRouter';
 import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../app-reducer';
 import type {SystemType} from '../../component/system/reducer';
-import type {ContextRouterType} from '../../../type/react-router-dom-v4';
+import routes from '../../app/routes';
+// import type {ContextRouterType} from '../../../type/react-router-dom-v4';
 
 type ReduxPropsType = {|
     +system: SystemType
@@ -42,7 +44,8 @@ class Home extends Component<ReduxPropsType, PassedPropsType, StateType> {
             <Header key="header"/>,
             <TitleCardList key="title-card-list"/>,
             <Switch key="home-switch">
-                <Route component={BadgeCategoryList} path="/badge-category-list" exact/>
+                <Route component={BadgeCategoryList} path={routes.index.badgeCategoryList} exact/>
+                <Route component={GiveTheBadgePanel} path={routes.index.giveTheBadge} exact/>
             </Switch>
         ];
     }
