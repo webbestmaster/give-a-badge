@@ -1,5 +1,4 @@
 /* stylelint-disable max-nesting-depth */
-
 @import './../../../css/var';
 
 $header-height: 72px;
@@ -38,6 +37,7 @@ $header-height: 72px;
     &:after {
         background-color: #5291ff;
         border-radius: 100%;
+        box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.15);
         box-sizing: border-box;
         content: '';
         height: 138px;
@@ -56,7 +56,7 @@ $header-height: 72px;
     &:hover {
         &:after {
             border-radius: 0;
-            height: 72px;
+            height: 74px;
             transform: translate3d(-50%, -50%, 0);
             width: 100%;
         }

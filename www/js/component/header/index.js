@@ -46,9 +46,13 @@ class Header extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const view = this;
         const {props, state} = view;
         const pathName = props.location.pathname;
+        const indexPath = routes.index.index;
+
         const pathList = Object.values(routes.index);
 
-        return pathList.some((path: mixed): boolean => path === pathName);
+        return pathList
+            .filter((path: mixed): boolean => path !== indexPath)
+            .some((path: mixed): boolean => path === pathName);
     }
 
     renderDesktop(): Node {

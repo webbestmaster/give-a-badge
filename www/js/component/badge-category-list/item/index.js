@@ -13,6 +13,7 @@ import type {BadgeCategoryType} from '../api';
 import Link from 'react-router-dom/Link';
 import classNames from 'classnames';
 import serviceStyle from '../../../../css/service.scss';
+import {getBadgePath} from '../../../app/routes';
 
 type ReduxPropsType = {|
     +reduxProp: boolean
@@ -73,7 +74,7 @@ class BadgeCategoryListItem extends Component<ReduxPropsType, PassedPropsType, S
                         return (
                             <Link
                                 key={badgeCategory.id}
-                                to={`/give-badge/${badgeCategory.id}`}
+                                to={getBadgePath(badgeCategory.id)}
                                 className={style.badge_item}
                             >
                                 <img className={style.badge_image} src={badgeCategory.imageUrl} alt=""/>
@@ -86,7 +87,7 @@ class BadgeCategoryListItem extends Component<ReduxPropsType, PassedPropsType, S
                         return (
                             <Link
                                 key={badgeCategory.id}
-                                to={`/give-badge/${badgeCategory.id}`}
+                                to={getBadgePath(badgeCategory.id)}
                                 className={style.badge_item}
                             >
                                 <img className={style.badge_image} src={badgeCategory.imageUrl} alt=""/>
@@ -99,7 +100,7 @@ class BadgeCategoryListItem extends Component<ReduxPropsType, PassedPropsType, S
                         return (
                             <Link
                                 key={badgeCategory.id}
-                                to={`/give-badge/${badgeCategory.id}`}
+                                to={getBadgePath(badgeCategory.id)}
                                 className={style.badge_item}
                             >
                                 <img className={style.badge_image} src={badgeCategory.imageUrl} alt=""/>
@@ -112,7 +113,7 @@ class BadgeCategoryListItem extends Component<ReduxPropsType, PassedPropsType, S
                         return (
                             <Link
                                 key={badgeCategory.id}
-                                to={`/give-badge/${badgeCategory.id}`}
+                                to={getBadgePath(badgeCategory.id)}
                                 className={style.badge_item}
                             >
                                 <img className={style.badge_image} src={badgeCategory.imageUrl} alt=""/>

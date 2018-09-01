@@ -1,13 +1,14 @@
 // @flow
 
-const badgeCategoryList = 'badge-category-list';
-const giveTheBadge = 'give-the-badge/:badgeId';
+export function getBadgePath(badgeId: number | string): string {
+    return `/give-the-badge/${badgeId}`;
+}
 
 const routes = {
     index: {
         index: '/',
-        badgeCategoryList: `/${badgeCategoryList}`,
-        giveTheBadge: `/${giveTheBadge}`
+        badgeCategoryList: '/badge-category-list',
+        giveTheBadge: getBadgePath(':badgeId')
     }
 };
 
