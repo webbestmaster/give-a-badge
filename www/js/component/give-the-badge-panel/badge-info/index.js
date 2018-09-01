@@ -6,6 +6,8 @@ import type {Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../../app-reducer';
+import {getBadgeCategoryList} from '../../badge-category-list/api';
+import type {BadgeCategoryType} from '../../badge-category-list/api';
 import style from './style.scss';
 
 type ReduxPropsType = {
@@ -17,7 +19,7 @@ type ReduxActionType = {
 };
 
 type PassedPropsType = {|
-    // +passedProp: string
+    badgeId: string
 |};
 
 type PropsType = $ReadOnly<$Exact<{
@@ -28,7 +30,7 @@ type PropsType = $ReadOnly<$Exact<{
     }>>;
 
 type StateType = {|
-    +state: number
+    +badgeInfo: ?BadgeCategoryType
 |};
 
 const reduxAction: ReduxActionType = {
@@ -46,15 +48,53 @@ class BadgeInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const view = this;
 
         view.state = {
-            state: 0
+            badgeInfo: null
         };
+    }
+
+    async fetchBadgeInfo(): Promise<BadgeCategoryType | null> {
+        const view = this;
+        const {props, state} = view;
+        const {badgeId} = props;
+
+        const badgeCategoryList = await getBadgeCategoryList();
+
+        if (badgeCategoryList === null) {
+            console.error('can not get getBadgeCategoryList', badgeCategoryList);
+            return null;
+        }
+
+        const badgeInfo =
+            badgeCategoryList.find(
+                (badgeCategoryInList: BadgeCategoryType): boolean => badgeCategoryInList.id === badgeId
+            ) || null;
+
+        if (badgeInfo === null) {
+            console.error('can not find badgeInfo', badgeInfo);
+            return null;
+        }
+
+        view.setState({badgeInfo});
+
+        return badgeInfo;
+    }
+
+    async componentDidMount(): Promise<void> {
+        const view = this;
+
+        await view.fetchBadgeInfo();
     }
 
     render(): Node {
         const view = this;
         const {props, state} = view;
+        const {badgeInfo} = state;
 
-        return <div>badge info</div>;
+        if (badgeInfo === null) {
+            return null;
+        }
+
+        return <div>{JSON.stringify(badgeInfo)}</div>;
     }
 }
 

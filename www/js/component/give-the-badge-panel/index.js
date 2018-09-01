@@ -74,6 +74,13 @@ class GiveTheBadgePanel extends Component<ReduxPropsType, PassedPropsType, State
         const view = this;
         const {props, state} = view;
 
+        const badgeId = isString(props.match.params.badgeId) ? props.match.params.badgeId : null;
+
+        if (badgeId === null) {
+            console.error('badgeId is not defined, props', props);
+            return null;
+        }
+
         return (
             <HalfPopup>
                 <HalfPopupHeader>
@@ -81,7 +88,9 @@ class GiveTheBadgePanel extends Component<ReduxPropsType, PassedPropsType, State
                 </HalfPopupHeader>
 
                 <h1>badge id: {props.match.params.badgeId}</h1>
-                <BadgeInfo/>
+                <br/>
+                <br/>
+                <BadgeInfo badgeId={badgeId}/>
                 <BadgeForm/>
             </HalfPopup>
         );
