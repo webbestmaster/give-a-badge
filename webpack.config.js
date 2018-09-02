@@ -264,6 +264,7 @@ const webpackConfig = {
                 context: [
                     '/api/',
                     '/login',
+                    '/login-page',
                     '/logout'
                 ],
                 target: 'http://206.81.28.99:1313',

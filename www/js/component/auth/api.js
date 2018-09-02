@@ -36,6 +36,13 @@ export async function getMe(): Promise<GetMeResponseType> {
 
                 return {hasError: true};
             }
+        )
+        .catch(
+            (error: Error): GetMeResponseType => {
+                console.error('login error');
+                console.error(error);
+                return {hasError: true};
+            }
         );
 }
 

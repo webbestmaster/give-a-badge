@@ -11,8 +11,8 @@ import type {SetUserType, SetPopupStateType} from './action';
 import {setUser, openLoginPopup} from './action';
 import type {AuthType, UserType} from './reducer';
 import type {GlobalStateType} from '../../app-reducer';
-import LoginPopup from './popup/login';
-import {isBoolean} from '../../lib/is';
+// import LoginPopup from './popup/login';
+// import {isBoolean} from '../../lib/is';
 import * as api from './api';
 
 type ReduxPropsType = {|
@@ -31,12 +31,49 @@ const reduxAction: ReduxActionType = {
     openLoginPopup
 };
 
-type StateType = null;
+type StateType = {|
+    +isAllPopupLoaded: boolean
+|};
+
+type PropsType = $Exact<{...PassedPropsType, ...ReduxPropsType, ...ReduxActionType}>;
+
+type PopupStoreType = {
+    LoginPopup: null | Component
+};
+
+const popupStore: PopupStoreType = {
+    LoginPopup: null
+};
 
 class Auth extends Component<ReduxPropsType, PassedPropsType, StateType> {
     // eslint-disable-next-line id-match
-    props: $Exact<{...PassedPropsType, ...ReduxPropsType, ...ReduxActionType}>;
+    props: PropsType;
     state: StateType;
+
+    constructor(props: PropsType) {
+        super(props);
+
+        const view = this;
+
+        view.state = {
+            isAllPopupLoaded: false
+        };
+    }
+
+    async loadAllPopup(): Promise<void> {
+        const view = this;
+        const {state} = view;
+
+        if (state.isAllPopupLoaded) {
+            return;
+        }
+
+        const LoginPopupRequire = await import('./popup/login');
+
+        popupStore.LoginPopup = LoginPopupRequire.default;
+
+        view.setState({isAllPopupLoaded: true});
+    }
 
     async loginCheck(): Promise<void> {
         const view = this;
@@ -46,6 +83,7 @@ class Auth extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const getMeResult = await api.getMe();
 
         if (getMeResult.hasError === true) {
+            await view.loadAllPopup();
             openLoginPopupAction();
             return;
         }
@@ -60,7 +98,22 @@ class Auth extends Component<ReduxPropsType, PassedPropsType, StateType> {
     }
 
     render(): Array<Node> {
-        return [<LoginPopup key="login-popup"/>];
+        const view = this;
+        const {state} = view;
+
+        if (state.isAllPopupLoaded === false) {
+            return [null];
+        }
+
+        const componentList = [];
+
+        const {LoginPopup} = popupStore;
+
+        if (LoginPopup !== null) {
+            componentList.push(<LoginPopup key="login-popup"/>);
+        }
+
+        return componentList;
     }
 }
 
