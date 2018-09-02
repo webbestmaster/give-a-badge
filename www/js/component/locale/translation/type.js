@@ -7,6 +7,10 @@ export type LangDataType = {|
     +CATEGORY_LIST__CATEGORIES: string,
     +GIVE_THE_BADGE__PEOPLE: string,
 
+    +SEARCH_PEOPLE__INPUT_PLACEHOLDER: string,
+    +SEARCH_PEOPLE__TEXT_AREA_PLACEHOLDER: string,
+    +SEARCH_PEOPLE__SUBMIT_BUTTON: string,
+
     +LOGIN_POPUP__PLEASE_LOG_IN_OR_JOIN_NOW: string,
     +LOGIN_POPUP__INPUT_USERNAME: string,
     +LOGIN_POPUP__INPUT_PASSWORD: string,

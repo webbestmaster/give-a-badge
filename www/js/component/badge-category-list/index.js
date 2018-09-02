@@ -94,56 +94,6 @@ class BadgeCategoryList extends Component<ReduxPropsType, PassedPropsType, State
                         <BadgeCategoryListItem key={extractedCategory.name} category={extractedCategory}/>
 
                 )}
-                {extractedCategoryList.map(
-                    (extractedCategory: ExtractedCategoryType): Node =>
-                        <BadgeCategoryListItem key={extractedCategory.name} category={extractedCategory}/>
-
-                )}
-                {extractedCategoryList.map(
-                    (extractedCategory: ExtractedCategoryType): Node =>
-                        <BadgeCategoryListItem key={extractedCategory.name} category={extractedCategory}/>
-
-                )}
-                {extractedCategoryList.map(
-                    (extractedCategory: ExtractedCategoryType): Node =>
-                        <BadgeCategoryListItem key={extractedCategory.name} category={extractedCategory}/>
-
-                )}
-                {extractedCategoryList.map(
-                    (extractedCategory: ExtractedCategoryType): Node =>
-                        <BadgeCategoryListItem key={extractedCategory.name} category={extractedCategory}/>
-
-                )}
-                {extractedCategoryList.map(
-                    (extractedCategory: ExtractedCategoryType): Node =>
-                        <BadgeCategoryListItem key={extractedCategory.name} category={extractedCategory}/>
-
-                )}
-                {extractedCategoryList.map(
-                    (extractedCategory: ExtractedCategoryType): Node =>
-                        <BadgeCategoryListItem key={extractedCategory.name} category={extractedCategory}/>
-
-                )}
-                {extractedCategoryList.map(
-                    (extractedCategory: ExtractedCategoryType): Node =>
-                        <BadgeCategoryListItem key={extractedCategory.name} category={extractedCategory}/>
-
-                )}
-                {extractedCategoryList.map(
-                    (extractedCategory: ExtractedCategoryType): Node =>
-                        <BadgeCategoryListItem key={extractedCategory.name} category={extractedCategory}/>
-
-                )}
-                {extractedCategoryList.map(
-                    (extractedCategory: ExtractedCategoryType): Node =>
-                        <BadgeCategoryListItem key={extractedCategory.name} category={extractedCategory}/>
-
-                )}
-                {extractedCategoryList.map(
-                    (extractedCategory: ExtractedCategoryType): Node =>
-                        <BadgeCategoryListItem key={extractedCategory.name} category={extractedCategory}/>
-
-                )}
             </HalfPopup>
         );
     }

@@ -82,45 +82,6 @@ class BadgeCategoryListItem extends Component<ReduxPropsType, PassedPropsType, S
                         );
                     }
                 )}
-                {list.map(
-                    (badgeCategory: BadgeCategoryType): Node => {
-                        return (
-                            <Link
-                                key={badgeCategory.id}
-                                to={getBadgePath(badgeCategory.id)}
-                                className={style.badge_item}
-                            >
-                                <img className={style.badge_image} src={badgeCategory.imageUrl} alt=""/>
-                            </Link>
-                        );
-                    }
-                )}
-                {list.map(
-                    (badgeCategory: BadgeCategoryType): Node => {
-                        return (
-                            <Link
-                                key={badgeCategory.id}
-                                to={getBadgePath(badgeCategory.id)}
-                                className={style.badge_item}
-                            >
-                                <img className={style.badge_image} src={badgeCategory.imageUrl} alt=""/>
-                            </Link>
-                        );
-                    }
-                )}
-                {list.map(
-                    (badgeCategory: BadgeCategoryType): Node => {
-                        return (
-                            <Link
-                                key={badgeCategory.id}
-                                to={getBadgePath(badgeCategory.id)}
-                                className={style.badge_item}
-                            >
-                                <img className={style.badge_image} src={badgeCategory.imageUrl} alt=""/>
-                            </Link>
-                        );
-                    }
-                )}
             </div>
         );
     }

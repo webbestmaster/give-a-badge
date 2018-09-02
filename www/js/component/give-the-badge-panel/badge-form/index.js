@@ -6,10 +6,11 @@ import type {Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../../app-reducer';
-import style from './style.scss';
+import Locale, {getLocalizedString} from '../../locale';
+import type {LocaleType} from '../../locale/reducer';
 
 type ReduxPropsType = {
-    // +reduxProp: boolean
+    locale: LocaleType
 };
 
 type ReduxActionType = {
@@ -56,7 +57,31 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
         return (
             <div>
-                <h1>badge form</h1>
+                <form action="#">
+                    <h1>search people panel</h1>
+
+                    <input
+                        type="text"
+                        placeholder={getLocalizedString('SEARCH_PEOPLE__INPUT_PLACEHOLDER', props.locale.name)}
+                    />
+
+                    <div>founded people result</div>
+
+                    <textarea
+                        id=""
+                        cols="30"
+                        rows="10"
+                        placeholder={getLocalizedString('SEARCH_PEOPLE__TEXT_AREA_PLACEHOLDER', props.locale.name)}
+                    />
+
+                    <br/>
+                    <br/>
+                    <br/>
+
+                    <button type="submit">
+                        <Locale stringKey="SEARCH_PEOPLE__SUBMIT_BUTTON"/>
+                    </button>
+                </form>
             </div>
         );
     }
@@ -64,6 +89,7 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
 export default connect(
     (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
+        locale: state.locale
         // reduxProp: true
     }),
     reduxAction
