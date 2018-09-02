@@ -87,11 +87,14 @@ class GiveTheBadgePanel extends Component<ReduxPropsType, PassedPropsType, State
                     <Locale stringKey="GIVE_THE_BADGE__PEOPLE"/>
                 </HalfPopupHeader>
 
-                <h1>badge id: {props.match.params.badgeId}</h1>
-                <br/>
-                <br/>
                 <BadgeInfo badgeId={badgeId}/>
                 <BadgeForm/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
             </HalfPopup>
         );
     }

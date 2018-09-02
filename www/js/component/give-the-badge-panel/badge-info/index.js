@@ -30,7 +30,7 @@ type PropsType = $ReadOnly<$Exact<{
     }>>;
 
 type StateType = {|
-    +badgeInfo: ?BadgeCategoryType
+    +badgeInfo: BadgeCategoryType | null
 |};
 
 const reduxAction: ReduxActionType = {
@@ -94,7 +94,13 @@ class BadgeInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
             return null;
         }
 
-        return <div>{JSON.stringify(badgeInfo)}</div>;
+        return (
+            <div>
+                <img src={badgeInfo.imageUrl} alt={badgeInfo.name}/>
+                <h3>{badgeInfo.name}</h3>
+                <p>{badgeInfo.description}</p>
+            </div>
+        );
     }
 }
 
