@@ -51,6 +51,10 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
         };
     }
 
+    async updateSearch(searchString: string): Promise<void> {
+        console.log('search', searchString);
+    }
+
     render(): Node {
         const view = this;
         const {props, state} = view;
@@ -61,6 +65,9 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
                     <h1>search people panel</h1>
 
                     <input
+                        onInput={(evt: SyntheticEvent<EventTarget>): Promise<void> =>
+                            view.updateSearch(evt.currentTarget.value)
+                        }
                         type="text"
                         placeholder={getLocalizedString('SEARCH_PEOPLE__INPUT_PLACEHOLDER', props.locale.name)}
                     />
