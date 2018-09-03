@@ -22,6 +22,8 @@ export async function getBadgeCategoryList(): Promise<BadgeCategoryListType | nu
     const response = await fetchX<BadgeCategoryListType>(getBadgeCategoryListUrl, defaultFetchProps);
 
     if (response instanceof Error) {
+        console.error('getBadgeCategoryList: can not get badge category list', getBadgeCategoryListUrl);
+        console.error(response);
         return null;
     }
 
