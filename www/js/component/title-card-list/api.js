@@ -20,10 +20,11 @@ export type NewsType = {|
     +entityId: number,
     +newsType: NewsTypeType,
     +reason: {|
-        id: number,
-        imageUrl: string,
-        name: string
+        +id: number,
+        +imageUrl: string,
+        +name: string
     |},
+    +totalToUsers: number,
     +toUsers: Array<NewsUserType>,
     +tags: []
 |};

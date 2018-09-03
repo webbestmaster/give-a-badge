@@ -8,6 +8,8 @@ import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../../app-reducer';
 import Locale, {getLocalizedString} from '../../locale';
 import type {LocaleType} from '../../locale/reducer';
+import {searchUser} from './api';
+import type {FoundedUserListType, FoundedUserType} from './api';
 
 type ReduxPropsType = {
     locale: LocaleType
@@ -29,7 +31,8 @@ type PropsType = $ReadOnly<$Exact<{
     }>>;
 
 type StateType = {|
-    +state: number
+    +searchUserList: FoundedUserListType,
+    +hasSearchInputFocus: boolean
 |};
 
 const reduxAction: ReduxActionType = {
@@ -47,12 +50,40 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const view = this;
 
         view.state = {
-            state: 0
+            hasSearchInputFocus: false,
+            searchUserList: []
         };
     }
 
     async updateSearch(searchString: string): Promise<void> {
-        console.log('search', searchString);
+        const view = this;
+
+        if (searchString === '') {
+            view.setState({searchUserList: []});
+            return;
+        }
+
+        const searchUserList = await searchUser(searchString);
+
+        if (searchUserList === null) {
+            view.setState({searchUserList: []});
+            console.error('can not find users by query:', searchString);
+            return;
+        }
+
+        view.setState({searchUserList});
+    }
+
+    renderSearchUserList(): Node {
+        const view = this;
+        const {props, state} = view;
+
+        return (
+            <div>
+                <div>founded people result, input has focus: {state.hasSearchInputFocus ? 'y' : 'n'}</div>
+                <div>{JSON.stringify(state.searchUserList)}</div>
+            </div>
+        );
     }
 
     render(): Node {
@@ -65,14 +96,20 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
                     <h1>search people panel</h1>
 
                     <input
-                        onInput={(evt: SyntheticEvent<EventTarget>): Promise<void> =>
-                            view.updateSearch(evt.currentTarget.value)
-                        }
+                        onFocus={() => {
+                            view.setState({hasSearchInputFocus: true});
+                        }}
+                        onBlur={() => {
+                            view.setState({hasSearchInputFocus: false});
+                        }}
+                        onInput={async (evt: SyntheticEvent<HTMLInputElement>): Promise<void> => {
+                            await view.updateSearch(evt.currentTarget.value);
+                        }}
                         type="text"
                         placeholder={getLocalizedString('SEARCH_PEOPLE__INPUT_PLACEHOLDER', props.locale.name)}
                     />
 
-                    <div>founded people result</div>
+                    {view.renderSearchUserList()}
 
                     <textarea
                         id=""
