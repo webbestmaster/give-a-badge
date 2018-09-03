@@ -4,6 +4,7 @@
 
 import appConst from '../../app-const';
 import {defaultFetchProps} from '../auth/api';
+import {fetchX} from '../../lib/fetch-x';
 
 export type BadgeCategoryType = {|
     +id: number,
@@ -16,15 +17,13 @@ export type BadgeCategoryType = {|
 export type BadgeCategoryListType = Array<BadgeCategoryType>;
 
 export async function getBadgeCategoryList(): Promise<BadgeCategoryListType | null> {
-    // TODO: called from BadgeInfo and BadgeCategoryList - use cache
-    console.log('---> called from BadgeInfo and BadgeCategoryList - use cache');
     const getBadgeCategoryListUrl = appConst.api.getBadgeCategoryList;
 
-    const response: Response = await window.fetch(getBadgeCategoryListUrl, defaultFetchProps);
+    const response = await fetchX<BadgeCategoryListType>(getBadgeCategoryListUrl, defaultFetchProps);
 
-    if (response.ok) {
-        return await response.json();
+    if (response instanceof Error) {
+        return null;
     }
 
-    return null;
+    return response;
 }
