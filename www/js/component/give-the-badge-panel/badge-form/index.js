@@ -57,8 +57,9 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
     async updateSearch(searchString: string): Promise<void> {
         const view = this;
+        const minSearchStringLength = 3;
 
-        if (searchString === '') {
+        if (searchString.length < minSearchStringLength) {
             view.setState({searchUserList: []});
             return;
         }
