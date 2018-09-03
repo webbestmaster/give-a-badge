@@ -1,8 +1,6 @@
 // @flow
 /* global window, fetch, setTimeout */
 
-// import {isNotUndefined} from './is';
-
 const promiseCache = {};
 
 type OptionsType = {|
@@ -24,7 +22,6 @@ export function fetchX<ExpectedResponseType>(
     const cacheProperty = url + ' - ' + JSON.stringify(options);
 
     if (promiseCache.hasOwnProperty(cacheProperty)) {
-        // const definedOptions = isNotUndefined(options) ? options : {};
         console.log(`fetchX - url: ${url}, options: ${JSON.stringify(options || {})} - get from cache`);
         return promiseCache[cacheProperty];
     }
