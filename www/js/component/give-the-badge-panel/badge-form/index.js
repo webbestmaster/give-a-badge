@@ -33,6 +33,7 @@ type PropsType = $ReadOnly<$Exact<{
     }>>;
 
 type StateType = {|
+    +searchString: string,
     +searchUserList: FoundedUserListType,
     +hasSearchInputFocus: boolean
 |};
@@ -60,6 +61,11 @@ const searchData = {
     }
 };
 
+// TODO: return MIN_SEARCH_STRING_LENGTH to 3
+console.warn('TODO: return MIN_SEARCH_STRING_LENGTH to 3');
+// eslint-disable-next-line id-match
+const MIN_SEARCH_STRING_LENGTH = 1;
+
 class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
     // eslint-disable-next-line id-match
     props: PropsType;
@@ -71,28 +77,37 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const view = this;
 
         view.state = {
+            searchString: '',
             hasSearchInputFocus: false,
             searchUserList: []
         };
     }
 
-    async updateSearch(searchString: string): Promise<void> {
+    async updateSearch(inputSearchString: string): Promise<void> {
         const view = this;
-        // TODO: return minSearchStringLength to 3
 
-        console.warn('TODO: return minSearchStringLength to 3');
-        const minSearchStringLength = 1;
+        view.setState({searchString: inputSearchString});
 
-        if (searchString.length < minSearchStringLength) {
+        // eslint-disable-next-line id-match
+        if (inputSearchString.length < MIN_SEARCH_STRING_LENGTH) {
             view.setState({searchUserList: []});
             return;
         }
 
-        const searchUserList = await searchUser(searchString);
+        const searchUserList = await searchUser(inputSearchString);
+
+        // get actual state here
+        const {state} = view;
+        const {searchString} = state;
+
+        if (searchString !== inputSearchString) {
+            console.log('---> search result is not actualized', searchString, inputSearchString);
+            return;
+        }
 
         if (searchUserList === null) {
             view.setState({searchUserList: []});
-            console.error('can not find users by query:', searchString);
+            console.error('can not find users by query:', inputSearchString);
             return;
         }
 
@@ -102,14 +117,41 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
     renderSearchUserList(): Node {
         const view = this;
         const {props, state} = view;
+        const {searchUserList, searchString, hasSearchInputFocus} = state;
+        const searchUserListLength = searchUserList.length;
+
+        // eslint-disable-next-line id-match
+        if (searchString.length < MIN_SEARCH_STRING_LENGTH) {
+            return null;
+        }
+
+        if (searchUserListLength === 0 && hasSearchInputFocus) {
+            return (
+                <div>
+                    <p>
+                        <Locale stringKey="SEARCH_PEOPLE__NO_RESULT"/>
+                    </p>
+                    <p>{searchString}</p>
+                </div>
+            );
+        }
 
         return (
-            <Transition in={state.hasSearchInputFocus} timeout={searchData.transition.duration}>
+            <Transition in={hasSearchInputFocus} timeout={searchData.transition.duration}>
                 {(transitionState: TransitionStatus): Node => {
                     return (
                         <div style={{...searchData.style.initial, ...searchData.style.transition[transitionState]}}>
-                            <div>founded people result, input has focus: {state.hasSearchInputFocus ? 'y' : 'n'}</div>
-                            <div>{JSON.stringify(state.searchUserList)}</div>
+                            <div>founded people result, input has focus: {hasSearchInputFocus ? 'y' : 'n'}</div>
+                            {searchUserList.map(
+                                (foundedUser: FoundedUserType): Node => {
+                                    return (
+                                        <div key={foundedUser.id}>
+                                            {JSON.stringify(foundedUser)}
+                                            <hr/>
+                                        </div>
+                                    );
+                                }
+                            )}
                         </div>
                     );
                 }}

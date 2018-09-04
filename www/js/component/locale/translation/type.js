@@ -10,6 +10,7 @@ export type LangDataType = {|
     +SEARCH_PEOPLE__INPUT_PLACEHOLDER: string,
     +SEARCH_PEOPLE__TEXT_AREA_PLACEHOLDER: string,
     +SEARCH_PEOPLE__SUBMIT_BUTTON: string,
+    +SEARCH_PEOPLE__NO_RESULT: string,
 
     +LOGIN_POPUP__PLEASE_LOG_IN_OR_JOIN_NOW: string,
     +LOGIN_POPUP__INPUT_USERNAME: string,

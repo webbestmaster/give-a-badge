@@ -12,6 +12,7 @@ export const zhTw: LangDataType = {
     SEARCH_PEOPLE__INPUT_PLACEHOLDER: 'Search people...',
     SEARCH_PEOPLE__TEXT_AREA_PLACEHOLDER: 'Description...',
     SEARCH_PEOPLE__SUBMIT_BUTTON: 'Submit',
+    SEARCH_PEOPLE__NO_RESULT: 'No people found...',
 
     LOGIN_POPUP__PLEASE_LOG_IN_OR_JOIN_NOW: '請登錄或立即註冊。',
     LOGIN_POPUP__INPUT_USERNAME: '用戶名',
