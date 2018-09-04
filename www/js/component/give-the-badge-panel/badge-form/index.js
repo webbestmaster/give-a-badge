@@ -10,6 +10,8 @@ import Locale, {getLocalizedString} from '../../locale';
 import type {LocaleType} from '../../locale/reducer';
 import {searchUser} from './api';
 import type {FoundedUserListType, FoundedUserType} from './api';
+import Transition from 'react-transition-group/Transition';
+import type {TransitionStatus} from 'react-transition-group';
 
 type ReduxPropsType = {
     locale: LocaleType
@@ -37,6 +39,25 @@ type StateType = {|
 
 const reduxAction: ReduxActionType = {
     // setSmth // imported from actions
+};
+
+const searchData = {
+    transition: {
+        duration: 1000
+    },
+    style: {
+        initial: {
+            transition: 'opacity 1000ms ease-in-out',
+            opacity: 0
+        },
+        transition: {
+            entering: {opacity: 0},
+            entered: {opacity: 1},
+            exiting: {opacity: 1},
+            exited: {opacity: 0},
+            unmounted: {display: 'none'}
+        }
+    }
 };
 
 class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
@@ -83,10 +104,16 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const {props, state} = view;
 
         return (
-            <div>
-                <div>founded people result, input has focus: {state.hasSearchInputFocus ? 'y' : 'n'}</div>
-                <div>{JSON.stringify(state.searchUserList)}</div>
-            </div>
+            <Transition in={state.hasSearchInputFocus} timeout={searchData.transition.duration}>
+                {(transitionState: TransitionStatus): Node => {
+                    return (
+                        <div style={{...searchData.style.initial, ...searchData.style.transition[transitionState]}}>
+                            <div>founded people result, input has focus: {state.hasSearchInputFocus ? 'y' : 'n'}</div>
+                            <div>{JSON.stringify(state.searchUserList)}</div>
+                        </div>
+                    );
+                }}
+            </Transition>
         );
     }
 
