@@ -78,7 +78,7 @@ class LoginPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const meData = await api.login(loginValue, passwordValue);
 
         if (meData.hasError) {
-            console.error(`can not login with login: ${loginValue} and password=${passwordValue}`);
+            console.error(`can not login with login: ${loginValue} and password: ${passwordValue}`);
             return;
         }
 
