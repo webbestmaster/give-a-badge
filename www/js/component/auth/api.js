@@ -7,7 +7,8 @@ import type {UserType} from './reducer';
 
 type GetMeResponseType = {|+hasError: true|} | {|+hasError: false, +userData: UserType|};
 
-export const defaultFetchProps = {
+export const defaultFetchGetProps = {
+    method: 'GET',
     credentials: 'include',
     headers: {
         'Access-Control-Allow-Headers': '*',
@@ -17,12 +18,18 @@ export const defaultFetchProps = {
     mode: 'no-cors'
 };
 
+export const defaultFetchPostProps = {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    mode: 'cors'
+};
+
 export async function getMe(): Promise<GetMeResponseType> {
     return await window
-        .fetch(appConst.api.getMe, {
-            ...defaultFetchProps,
-            method: 'GET'
-        })
+        .fetch(appConst.api.getMe, defaultFetchGetProps)
         .then(
             async (response: Response): Promise<GetMeResponseType> => {
                 if (response.ok) {
@@ -53,7 +60,8 @@ type LoginMeResponseType = {|
 export async function login(username: string, password: string): Promise<GetMeResponseType> {
     return await window
         .fetch(appConst.api.login, {
-            ...defaultFetchProps,
+            // here is no mistake, login request should be with defaultFetchGetProps
+            ...defaultFetchGetProps,
             method: 'POST',
             body: `username=${username}&password=${password}`
         })
@@ -62,7 +70,7 @@ export async function login(username: string, password: string): Promise<GetMeRe
 
 export async function logout(): Promise<void> {
     return await window
-        .fetch(appConst.api.logout, defaultFetchProps)
+        .fetch(appConst.api.logout, defaultFetchGetProps)
         .then((): void => console.log('---> logout'))
         .catch(
             (error: Error): Error => {

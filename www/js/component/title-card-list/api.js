@@ -3,7 +3,7 @@
 /* global window */
 
 import appConst from '../../app-const';
-import {defaultFetchProps} from '../auth/api';
+import {defaultFetchGetProps} from '../auth/api';
 
 export type NewsTypeType = 'BADGE_ASSIGNMENT';
 export type NewsUserType = {|
@@ -53,7 +53,7 @@ export async function getNewsList(pageIndex: number, pageSize: number): Promise<
         .replace('{pageIndex}', String(pageIndex))
         .replace('{pageSize}', String(pageSize));
 
-    const response: Response = await window.fetch(getNewUrl, defaultFetchProps);
+    const response: Response = await window.fetch(getNewUrl, defaultFetchGetProps);
 
     if (response.ok) {
         return await response.json();
