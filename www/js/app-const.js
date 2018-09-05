@@ -9,6 +9,7 @@ const appConst = {
         getNews: '/api/news?page={pageIndex}&size={pageSize}',
         getBadgeCategoryList: '/api/badges/catalog',
         searchUser: '/api/users/search?name={userName}&size=10',
+        badgeAssignee: '/api/users/search?name={userName}&size=10',
         // todo: replace with do-*
         login: '/login',
         logout: '/logout'

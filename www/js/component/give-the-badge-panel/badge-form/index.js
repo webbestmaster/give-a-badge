@@ -8,14 +8,16 @@ import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../../app-reducer';
 import Locale, {getLocalizedString} from '../../locale';
 import type {LocaleType} from '../../locale/reducer';
-import {searchUser} from './api';
+import type {AuthType} from '../../auth/reducer';
+import {badgeAssign, searchUser} from './api';
 import type {FoundedUserListType, FoundedUserType} from './api';
 import FoundedUser from './founded-user';
 import Transition from 'react-transition-group/Transition';
 import type {TransitionStatus} from 'react-transition-group';
 
 type ReduxPropsType = {
-    +locale: LocaleType
+    +locale: LocaleType,
+    +auth: AuthType
 };
 
 type ReduxActionType = {
@@ -130,10 +132,20 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const view = this;
         const {props, state} = view;
         const {selectedUserList, descriptionText} = state;
-        const {badgeId} = props;
+        const {badgeId, auth} = props;
 
         console.log('---> submit form');
         console.log(selectedUserList, descriptionText, badgeId);
+
+        const resultBadgeAssign = await badgeAssign({
+            assignerId: auth.user.id,
+            badgeId: parseInt(badgeId, 10),
+            comment: descriptionText,
+            tags: [],
+            usersIds: selectedUserList.map((foundedUser: FoundedUserType): number => foundedUser.id)
+        });
+
+        console.log(resultBadgeAssign);
     }
 
     getFromSelectedUserById(userId: number): FoundedUserType | null {
@@ -323,7 +335,8 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
 export default connect(
     (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
-        locale: state.locale
+        locale: state.locale,
+        auth: state.auth
         // reduxProp: true
     }),
     reduxAction
