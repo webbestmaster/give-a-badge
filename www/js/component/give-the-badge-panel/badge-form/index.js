@@ -226,6 +226,34 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
         );
     }
 
+    renderSelectedUserList(): Node {
+        const view = this;
+        const {props, state} = view;
+        const {selectedUserList} = state;
+
+        return (
+            <div>
+                <h1>selected user list</h1>
+                <div>
+                    {selectedUserList.map(
+                        (foundedUser: FoundedUserType): Node => {
+                            return (
+                                <button
+                                    type="button"
+                                    onClick={(): void => view.removeFromSelectedUserList(foundedUser)}
+                                    onKeyPress={(): void => view.removeFromSelectedUserList(foundedUser)}
+                                    key={foundedUser.id}
+                                >
+                                    <img src={foundedUser.imageUrl} alt={foundedUser.name}/>
+                                </button>
+                            );
+                        }
+                    )}
+                </div>
+            </div>
+        );
+    }
+
     render(): Node {
         const view = this;
         const {props, state} = view;
@@ -250,6 +278,7 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
                     />
 
                     {view.renderSearchUserList()}
+                    {view.renderSelectedUserList()}
 
                     <textarea
                         id=""
