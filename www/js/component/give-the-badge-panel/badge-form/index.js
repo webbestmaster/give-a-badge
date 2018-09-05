@@ -35,6 +35,7 @@ type PropsType = $ReadOnly<$Exact<{
 type StateType = {|
     +searchString: string,
     +searchUserList: FoundedUserListType,
+    +selectedUserList: FoundedUserListType,
     +hasSearchInputFocus: boolean
 |};
 
@@ -79,7 +80,8 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
         view.state = {
             searchString: '',
             hasSearchInputFocus: false,
-            searchUserList: []
+            searchUserList: [],
+            selectedUserList: []
         };
     }
 
@@ -114,6 +116,61 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
         view.setState({searchUserList});
     }
 
+    getFromSelectedUserById(userId: number): FoundedUserType | null {
+        const view = this;
+        const {props, state} = view;
+        const {selectedUserList} = state;
+
+        return (
+            selectedUserList.find(
+                (userInList: FoundedUserType): boolean => {
+                    return userInList.id === userId;
+                }
+            ) || null
+        );
+    }
+
+    isInSelectedUserList(userId: number): boolean {
+        const view = this;
+
+        return Boolean(view.getFromSelectedUserById(userId));
+    }
+
+    addToSelectedUserList(user: FoundedUserType) {
+        const view = this;
+        const {props, state} = view;
+        const {selectedUserList} = state;
+
+        if (view.isInSelectedUserList(user.id)) {
+            console.error('can not add the same user twice');
+            return;
+        }
+
+        selectedUserList.push(user);
+
+        view.setState(state);
+    }
+
+    removeFromSelectedUserList(user: FoundedUserType) {
+        const view = this;
+        const {props, state} = view;
+        const {selectedUserList} = state;
+
+        const userInList = view.getFromSelectedUserById(user.id);
+
+        if (userInList === null) {
+            console.error('can not remove the same, user not exist is selectedUserList');
+            return;
+        }
+
+        const userIndex = selectedUserList.indexOf(userInList);
+
+        selectedUserList.splice(userIndex, 1);
+
+        view.setState(state);
+    }
+
+    // eslint-disable-next-line sonarjs/cognitive-complexity
     renderSearchUserList(): Node {
         const view = this;
         const {props, state} = view;
@@ -145,10 +202,28 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
                             {searchUserList.map(
                                 (foundedUser: FoundedUserType): Node => {
                                     return (
-                                        <div key={foundedUser.id}>
-                                            {JSON.stringify(foundedUser)}
+                                        <button
+                                            type="button"
+                                            onClick={(): void =>
+                                                view.isInSelectedUserList(foundedUser.id) ?
+                                                    view.removeFromSelectedUserList(foundedUser) :
+                                                    view.addToSelectedUserList(foundedUser)
+                                            }
+                                            onKeyPress={(): void =>
+                                                view.isInSelectedUserList(foundedUser.id) ?
+                                                    view.removeFromSelectedUserList(foundedUser) :
+                                                    view.addToSelectedUserList(foundedUser)
+                                            }
+                                            key={foundedUser.id}
+                                        >
+                                            <h1>
+                                                is in selected: {view.isInSelectedUserList(foundedUser.id) ? 'y' : 'n'}
+                                            </h1>
+                                            <img src={foundedUser.imageUrl} alt={foundedUser.name}/>
+                                            <h1>{foundedUser.name}</h1>
+
                                             <hr/>
-                                        </div>
+                                        </button>
                                     );
                                 }
                             )}
