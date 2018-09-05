@@ -10,6 +10,7 @@ import Locale, {getLocalizedString} from '../../locale';
 import type {LocaleType} from '../../locale/reducer';
 import {searchUser} from './api';
 import type {FoundedUserListType, FoundedUserType} from './api';
+import FoundedUser from './founded-user';
 import Transition from 'react-transition-group/Transition';
 import type {TransitionStatus} from 'react-transition-group';
 
@@ -201,29 +202,20 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
                             <div>founded people result, input has focus: {hasSearchInputFocus ? 'y' : 'n'}</div>
                             {searchUserList.map(
                                 (foundedUser: FoundedUserType): Node => {
-                                    return (
-                                        <button
-                                            type="button"
-                                            onClick={(): void =>
-                                                view.isInSelectedUserList(foundedUser.id) ?
-                                                    view.removeFromSelectedUserList(foundedUser) :
-                                                    view.addToSelectedUserList(foundedUser)
-                                            }
-                                            onKeyPress={(): void =>
-                                                view.isInSelectedUserList(foundedUser.id) ?
-                                                    view.removeFromSelectedUserList(foundedUser) :
-                                                    view.addToSelectedUserList(foundedUser)
-                                            }
-                                            key={foundedUser.id}
-                                        >
-                                            <h1>
-                                                is in selected: {view.isInSelectedUserList(foundedUser.id) ? 'y' : 'n'}
-                                            </h1>
-                                            <img src={foundedUser.imageUrl} alt={foundedUser.name}/>
-                                            <h1>{foundedUser.name}</h1>
+                                    const foundedUserId = foundedUser.id;
+                                    const isInSelectedUserList = view.isInSelectedUserList(foundedUserId);
 
-                                            <hr/>
-                                        </button>
+                                    return (
+                                        <FoundedUser
+                                            onClick={(): void => {
+                                                return isInSelectedUserList ?
+                                                    view.removeFromSelectedUserList(foundedUser) :
+                                                    view.addToSelectedUserList(foundedUser);
+                                            }}
+                                            isActive={!isInSelectedUserList}
+                                            foundedUser={foundedUser}
+                                            key={foundedUserId}
+                                        />
                                     );
                                 }
                             )}
