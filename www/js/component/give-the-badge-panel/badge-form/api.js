@@ -39,9 +39,9 @@ export type BadgeAssignInputType = {|
 |};
 
 export async function badgeAssign(badgeAssigneeInput: BadgeAssignInputType): Promise<null> {
-    const badgeAssigneeUrl = appConst.api.badgeAssignee;
+    const badgeAssignUrl = appConst.api.badgeAssign;
 
-    const response = await fetch(badgeAssigneeUrl, {
+    const response = await fetch(badgeAssignUrl, {
         ...defaultFetchProps,
         headers: {
             'Content-Type': 'application/json;charset=UTF-8'
