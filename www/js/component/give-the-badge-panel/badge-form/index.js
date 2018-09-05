@@ -15,7 +15,7 @@ import Transition from 'react-transition-group/Transition';
 import type {TransitionStatus} from 'react-transition-group';
 
 type ReduxPropsType = {
-    locale: LocaleType
+    +locale: LocaleType
 };
 
 type ReduxActionType = {
@@ -23,6 +23,7 @@ type ReduxActionType = {
 };
 
 type PassedPropsType = {|
+    +badgeId: string
     // +passedProp: string
 |};
 
@@ -35,6 +36,7 @@ type PropsType = $ReadOnly<$Exact<{
 
 type StateType = {|
     +searchString: string,
+    +descriptionText: string,
     +searchUserList: FoundedUserListType,
     +selectedUserList: FoundedUserListType,
     +hasSearchInputFocus: boolean
@@ -80,6 +82,7 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
         view.state = {
             searchString: '',
+            descriptionText: '',
             hasSearchInputFocus: false,
             searchUserList: [],
             selectedUserList: []
@@ -117,18 +120,28 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
         view.setState({searchUserList});
     }
 
+    updateDescription(descriptionText: string) {
+        const view = this;
+
+        view.setState({descriptionText});
+    }
+
+    async submitForm(): Promise<void> {
+        const view = this;
+        const {props, state} = view;
+        const {selectedUserList, descriptionText} = state;
+        const {badgeId} = props;
+
+        console.log('---> submit form');
+        console.log(selectedUserList, descriptionText, badgeId);
+    }
+
     getFromSelectedUserById(userId: number): FoundedUserType | null {
         const view = this;
         const {props, state} = view;
         const {selectedUserList} = state;
 
-        return (
-            selectedUserList.find(
-                (userInList: FoundedUserType): boolean => {
-                    return userInList.id === userId;
-                }
-            ) || null
-        );
+        return selectedUserList.find((userInList: FoundedUserType): boolean => userInList.id === userId) || null;
     }
 
     isInSelectedUserList(userId: number): boolean {
@@ -260,7 +273,12 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
         return (
             <div>
-                <form action="#">
+                <form
+                    onSubmit={async (evt: SyntheticEvent<HTMLFormElement>): Promise<void> => {
+                        evt.preventDefault();
+                        await view.submitForm();
+                    }}
+                >
                     <h1>search people panel</h1>
 
                     <input
@@ -281,6 +299,9 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
                     {view.renderSelectedUserList()}
 
                     <textarea
+                        onInput={(evt: SyntheticEvent<HTMLInputElement>) => {
+                            view.updateDescription(evt.currentTarget.value);
+                        }}
                         id=""
                         cols="30"
                         rows="10"

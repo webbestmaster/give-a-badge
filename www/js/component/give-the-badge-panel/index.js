@@ -88,7 +88,7 @@ class GiveTheBadgePanel extends Component<ReduxPropsType, PassedPropsType, State
                 </HalfPopupHeader>
 
                 <BadgeInfo badgeId={badgeId}/>
-                <BadgeForm/>
+                <BadgeForm badgeId={badgeId}/>
                 <br/>
                 <br/>
                 <br/>

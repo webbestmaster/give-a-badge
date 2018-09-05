@@ -19,7 +19,7 @@ type ReduxActionType = {
 };
 
 type PassedPropsType = {|
-    badgeId: string
+    +badgeId: string
 |};
 
 type PropsType = $ReadOnly<$Exact<{
