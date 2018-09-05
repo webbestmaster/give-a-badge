@@ -44,7 +44,8 @@ export async function badgeAssign(badgeAssigneeInput: BadgeAssignInputType): Pro
     const response = await fetch(badgeAssignUrl, {
         ...defaultFetchProps,
         headers: {
-            'Content-Type': 'application/json;charset=UTF-8'
+            Accept: '*/*',
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify(badgeAssigneeInput),
         method: 'POST'
