@@ -37,12 +37,25 @@ type PropsType = $ReadOnly<$Exact<{
     }>>;
 
 type StateType = {|
+    +isAllComponentLoaded: boolean,
+    +snackbar: {|
+        +isOpen: boolean,
+        +isSuccess: boolean
+    |},
     +searchString: string,
     +descriptionText: string,
     +searchUserList: FoundedUserListType,
     +selectedUserList: FoundedUserListType,
     +hasSearchInputFocus: boolean
 |};
+
+type ComponentStoreType = {|
+    Snackbar: null | Component
+|};
+
+const componentStore: ComponentStoreType = {
+    Snackbar: null
+};
 
 const reduxAction: ReduxActionType = {
     // setSmth // imported from actions
@@ -83,12 +96,32 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const view = this;
 
         view.state = {
+            isAllComponentLoaded: false,
+            snackbar: {
+                isOpen: false,
+                isSuccess: false
+            },
             searchString: '',
             descriptionText: '',
             hasSearchInputFocus: false,
             searchUserList: [],
             selectedUserList: []
         };
+    }
+
+    async loadAllComponent(): Promise<void> {
+        const view = this;
+        const {state} = view;
+
+        if (state.isAllComponentLoaded) {
+            return;
+        }
+
+        const SnackbarRequire = await import('@material-ui/core/Snackbar');
+
+        componentStore.Snackbar = SnackbarRequire.default;
+
+        view.setState({isAllComponentLoaded: true});
     }
 
     async updateSearch(inputSearchString: string): Promise<void> {
@@ -147,11 +180,20 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
         if (resultBadgeAssign === null) {
             console.error('error with resultBadgeAssign');
+            view.setShowSnackbar(true, false);
             return;
         }
 
         console.log('badge assigned');
         console.log(resultBadgeAssign);
+        view.setShowSnackbar(true, true);
+    }
+
+    setShowSnackbar(isOpen: boolean, isSuccess: boolean) {
+        const view = this;
+        const {state} = view;
+
+        view.setState({snackbar: {...state.snackbar, isOpen, isSuccess}});
     }
 
     getFromSelectedUserById(userId: number): FoundedUserType | null {
@@ -285,6 +327,45 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
         );
     }
 
+    renderSnackBar(): Node {
+        const view = this;
+        const {props, state} = view;
+        const {Snackbar} = componentStore;
+        const snackbarIsOpen = state.snackbar.isOpen;
+
+        if (snackbarIsOpen) {
+            view.loadAllComponent()
+                .then((): void => console.log('all component loaded'))
+                .catch(
+                    (error: Error): Error => {
+                        console.error('error  with load component');
+                        console.error(error);
+
+                        return error;
+                    }
+                );
+        }
+
+        if (Snackbar === null) {
+            return null;
+        }
+
+        return (
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left'
+                }}
+                open={snackbarIsOpen}
+                autoHideDuration={6000}
+                onClose={() => {
+                    view.setState({snackbar: {...state.snackbar, isOpen: false}});
+                }}
+                message={state.snackbar.isSuccess ? 'Yes' : 'No'}
+            />
+        );
+    }
+
     render(): Node {
         const view = this;
         const {props, state} = view;
@@ -334,6 +415,8 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
                         <Locale stringKey="SEARCH_PEOPLE__SUBMIT_BUTTON"/>
                     </button>
                 </form>
+
+                {view.renderSnackBar()}
             </div>
         );
     }

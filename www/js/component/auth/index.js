@@ -37,9 +37,9 @@ type StateType = {|
 
 type PropsType = $Exact<{...PassedPropsType, ...ReduxPropsType, ...ReduxActionType}>;
 
-type PopupStoreType = {
+type PopupStoreType = {|
     LoginPopup: null | Component
-};
+|};
 
 const popupStore: PopupStoreType = {
     LoginPopup: null
