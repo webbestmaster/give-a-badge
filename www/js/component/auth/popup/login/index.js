@@ -14,6 +14,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
 import * as api from '../../api';
 import style from './style.scss';
 // import Paper from '@material-ui/core/Paper';
@@ -38,7 +39,12 @@ type PassedPropsType = {|
 // eslint-disable-next-line id-match
 type PropsType = $Exact<{...PassedPropsType, ...ReduxActionType, ...ReduxPropsType, +children?: Node}>;
 
-type StateType = null;
+type StateType = {|
+    +snackbar: {|
+        +isOpen: boolean,
+        +isSuccess: boolean
+    |}
+|};
 
 const reduxAction: ReduxActionType = {
     closeLoginPopup,
@@ -61,6 +67,13 @@ class LoginPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
         const view = this;
 
+        view.state = {
+            snackbar: {
+                isOpen: false,
+                isSuccess: false
+            }
+        };
+
         view.node = {
             login: null,
             password: null
@@ -79,11 +92,42 @@ class LoginPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
         if (meData.hasError) {
             console.error(`can not login with login: ${loginValue} and password: ${passwordValue}`);
+            view.setShowSnackbar(true, false);
             return;
         }
 
+        view.setShowSnackbar(true, true);
         setUserAction(meData.userData);
         closeLoginPopupAction();
+    }
+
+    setShowSnackbar(isOpen: boolean, isSuccess: boolean) {
+        const view = this;
+        const {state} = view;
+
+        view.setState({snackbar: {...state.snackbar, isOpen, isSuccess}});
+    }
+
+    renderSnackBar(): Node {
+        const view = this;
+        const {props, state} = view;
+        const snackbarIsOpen = state.snackbar.isOpen;
+
+        return (
+            <Snackbar
+                key="snackbar"
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center'
+                }}
+                open={snackbarIsOpen}
+                autoHideDuration={6000}
+                onClose={() => {
+                    view.setShowSnackbar(false, false);
+                }}
+                message={state.snackbar.isSuccess ? '%Yes%' : '%No%'}
+            />
+        );
     }
 
     render(): Node {
@@ -92,8 +136,9 @@ class LoginPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const {auth} = props;
         const {isOpen} = auth.popup[authConst.popupName.login];
 
-        return (
+        return [
             <Dialog
+                key="dialog"
                 open={isOpen}
                 // transition={Transition}
                 keepMounted
@@ -109,15 +154,13 @@ class LoginPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
                 <form
                     className={style.form}
                     onSubmit={async (evt: SyntheticEvent<EventTarget>): Promise<void> => await view.onFormSubmit(evt)}
-                    action="/login"
-                    method="post"
                 >
                     <DialogTitle id="alert-dialog-slide-title">
                         {/* <Locale stringKey="SPACE"/> */}
-                        Login
+                        %Login%
                     </DialogTitle>
                     <TextField
-                        placeholder="Login"
+                        placeholder="%Login%"
                         required
                         type="text"
                         autoComplete="current-password"
@@ -126,7 +169,7 @@ class LoginPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
                         }}
                     />
                     <TextField
-                        placeholder="Password"
+                        placeholder="%Password%"
                         required
                         type="password"
                         autoComplete="current-password"
@@ -138,11 +181,12 @@ class LoginPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
                     <br/>
                     <Button margin="normal" variant="contained" color="primary" type="submit">
                         {/* <Locale stringKey="SPACE"/> */}
-                        login
+                        %login%
                     </Button>
                 </form>
-            </Dialog>
-        );
+            </Dialog>,
+            view.renderSnackBar()
+        ];
     }
 }
 

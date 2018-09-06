@@ -359,9 +359,9 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
                 open={snackbarIsOpen}
                 autoHideDuration={6000}
                 onClose={() => {
-                    view.setState({snackbar: {...state.snackbar, isOpen: false}});
+                    view.setShowSnackbar(false, false);
                 }}
-                message={state.snackbar.isSuccess ? 'Yes' : 'No'}
+                message={state.snackbar.isSuccess ? '%Yes%' : '%No%'}
             />
         );
     }
