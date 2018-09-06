@@ -145,6 +145,12 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
             usersIds: selectedUserList.map((foundedUser: FoundedUserType): number => foundedUser.id)
         });
 
+        if (resultBadgeAssign === null) {
+            console.error('error with resultBadgeAssign');
+            return;
+        }
+
+        console.log('badge assigned');
         console.log(resultBadgeAssign);
     }
 

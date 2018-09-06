@@ -1,6 +1,6 @@
 // @flow
 
-/* global fetch */
+/* global window, fetch */
 
 import appConst from '../../../app-const';
 import {defaultFetchGetProps, defaultFetchPostProps} from '../../auth/api';
@@ -46,10 +46,18 @@ export type BadgeAssignResponseType = mixed;
 export async function badgeAssign(badgeAssigneeInput: BadgeAssignInputType): Promise<BadgeAssignResponseType | null> {
     const badgeAssignUrl = appConst.api.badgeAssign;
 
-    const response = await fetch(badgeAssignUrl, {
-        ...defaultFetchPostProps,
-        body: JSON.stringify(badgeAssigneeInput)
-    });
+    const response = await window
+        .fetch(badgeAssignUrl, {
+            ...defaultFetchPostProps,
+            body: JSON.stringify(badgeAssigneeInput)
+        })
+        .catch(
+            (error: Error): Error => {
+                console.error('badgeAssign: can not give badge', badgeAssignUrl, badgeAssigneeInput);
+                console.error(error);
+                return error;
+            }
+        );
 
     if (response instanceof Error) {
         console.error('badgeAssign: can not give badge', badgeAssignUrl, badgeAssigneeInput);
@@ -57,5 +65,5 @@ export async function badgeAssign(badgeAssigneeInput: BadgeAssignInputType): Pro
         return null;
     }
 
-    return response;
+    return true;
 }
