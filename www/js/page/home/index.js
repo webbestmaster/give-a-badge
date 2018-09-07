@@ -10,6 +10,7 @@ import TitleCardList from '../../component/title-card-list';
 import Route from 'react-router-dom/Route';
 import BadgeCategoryList from '../../component/badge-category-list';
 import GiveTheBadgePanel from '../../component/give-the-badge-panel';
+import BadgeWon from '../../component/badge-won';
 import Switch from 'react-router-dom/Switch';
 // import BrowserRouter from 'react-router-dom/BrowserRouter';
 import withRouter from 'react-router-dom/withRouter';
@@ -46,6 +47,7 @@ class Home extends Component<ReduxPropsType, PassedPropsType, StateType> {
             <Switch key="home-switch">
                 <Route component={BadgeCategoryList} path={routes.index.badgeCategoryList} exact/>
                 <Route component={GiveTheBadgePanel} path={routes.index.giveTheBadge} exact/>
+                <Route component={BadgeWon} path={routes.index.badgeWon} exact/>
             </Switch>
         ];
     }

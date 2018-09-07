@@ -27,6 +27,7 @@ export default function App(): Node {
                             <Route component={Home} path={routes.index.index} exact/>
                             <Route component={Home} path={routes.index.badgeCategoryList} exact/>
                             <Route component={Home} path={routes.index.giveTheBadge} exact/>
+                            <Route component={Home} path={routes.index.badgeWon} exact/>
                             <Route component={NotFound}/>
                         </Switch>
                     </BrowserRouter>
