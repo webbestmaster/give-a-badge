@@ -17,6 +17,8 @@ import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import * as api from '../../api';
 import style from './style.scss';
+import Locale, {getLocalizedString} from '../../../locale';
+import type {LocaleType} from '../../../locale/reducer';
 // import Paper from '@material-ui/core/Paper';
 // import Typography from '@material-ui/core/Typography';
 // import Locale from '../../../locale';
@@ -24,7 +26,8 @@ import style from './style.scss';
 // import style from './style.scss';
 
 type ReduxPropsType = {|
-    auth: AuthType
+    auth: AuthType,
+    locale: LocaleType
 |};
 
 type ReduxActionType = {|
@@ -111,7 +114,13 @@ class LoginPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
     renderSnackBar(): Node {
         const view = this;
         const {props, state} = view;
-        const snackbarIsOpen = state.snackbar.isOpen;
+        const {locale} = props;
+        const {snackbar} = state;
+        const {isSuccess, isOpen: snackbarIsOpen} = snackbar;
+
+        const message = isSuccess ?
+            '✔ ' + getLocalizedString('LOGIN_POPUP__LOGIN__SUCCESS', locale.name) :
+            '❌ ' + getLocalizedString('LOGIN_POPUP__LOGIN__ERROR', locale.name);
 
         return (
             <Snackbar
@@ -125,7 +134,7 @@ class LoginPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
                 onClose={() => {
                     view.setShowSnackbar(false, false);
                 }}
-                message={state.snackbar.isSuccess ? '%Yes%' : '%No%'}
+                message={message}
             />
         );
     }
@@ -133,34 +142,20 @@ class LoginPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
     render(): Node {
         const view = this;
         const {props, state} = view;
-        const {auth} = props;
+        const {auth, locale} = props;
         const {isOpen} = auth.popup[authConst.popupName.login];
 
         return [
-            <Dialog
-                key="dialog"
-                open={isOpen}
-                // transition={Transition}
-                keepMounted
-                // onClose={() => {
-                //     view.leaveGame();
-                // }}
-                // onClick={() => {
-                //     view.leaveGame();
-                // }}
-                // aria-labelledby="alert-dialog-slide-title"
-                // aria-describedby="alert-dialog-slide-description"
-            >
+            <Dialog key="dialog" open={isOpen} keepMounted>
                 <form
                     className={style.form}
                     onSubmit={async (evt: SyntheticEvent<EventTarget>): Promise<void> => await view.onFormSubmit(evt)}
                 >
                     <DialogTitle id="alert-dialog-slide-title">
-                        {/* <Locale stringKey="SPACE"/> */}
-                        %Login%
+                        <Locale stringKey="LOGIN_POPUP__HEADER"/>
                     </DialogTitle>
                     <TextField
-                        placeholder="%Login%"
+                        placeholder={getLocalizedString('LOGIN_POPUP__LOGIN_PLACEHOLDER', locale.name)}
                         required
                         type="text"
                         autoComplete="current-password"
@@ -169,7 +164,7 @@ class LoginPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
                         }}
                     />
                     <TextField
-                        placeholder="%Password%"
+                        placeholder={getLocalizedString('LOGIN_POPUP__PASSWORD_PLACEHOLDER', locale.name)}
                         required
                         type="password"
                         autoComplete="current-password"
@@ -180,8 +175,7 @@ class LoginPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
                     />
                     <br/>
                     <Button margin="normal" variant="contained" color="primary" type="submit">
-                        {/* <Locale stringKey="SPACE"/> */}
-                        %login%
+                        <Locale stringKey="LOGIN_POPUP__LOGIN_BUTTON"/>
                     </Button>
                 </form>
             </Dialog>,
@@ -192,7 +186,8 @@ class LoginPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
 export default connect(
     (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
-        auth: state.auth
+        auth: state.auth,
+        locale: state.locale
     }),
     reduxAction
 )(LoginPopup);

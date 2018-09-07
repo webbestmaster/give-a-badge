@@ -4,7 +4,14 @@ import type {LangDataType} from '../type';
 
 export const ruRu: LangDataType = {
     /* eslint-disable id-match, id-length */
-    LANGUAGE_NAME: 'Русский',
+    META__LANGUAGE_NAME: 'Русский',
+
+    LOGIN_POPUP__HEADER: 'Login',
+    LOGIN_POPUP__LOGIN_PLACEHOLDER: 'Login',
+    LOGIN_POPUP__PASSWORD_PLACEHOLDER: 'Password',
+    LOGIN_POPUP__LOGIN_BUTTON: 'Login',
+    LOGIN_POPUP__LOGIN__ERROR: 'Something wrong! Can not login...',
+    LOGIN_POPUP__LOGIN__SUCCESS: 'Welcome to the app!',
 
     CATEGORY_LIST__CATEGORIES: 'Categories',
     GIVE_THE_BADGE__PEOPLE: 'People',

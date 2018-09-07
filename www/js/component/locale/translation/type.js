@@ -2,7 +2,14 @@
 
 export type LangDataType = {|
     /* eslint-disable id-match, id-length */
-    +LANGUAGE_NAME: string,
+    +META__LANGUAGE_NAME: string,
+
+    +LOGIN_POPUP__HEADER: string,
+    +LOGIN_POPUP__LOGIN_PLACEHOLDER: string,
+    +LOGIN_POPUP__PASSWORD_PLACEHOLDER: string,
+    +LOGIN_POPUP__LOGIN_BUTTON: string,
+    +LOGIN_POPUP__LOGIN__ERROR: string,
+    +LOGIN_POPUP__LOGIN__SUCCESS: string,
 
     +CATEGORY_LIST__CATEGORIES: string,
     +GIVE_THE_BADGE__PEOPLE: string,
