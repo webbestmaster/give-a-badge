@@ -6,8 +6,8 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "start": "webpack-dev-server --mode development --content-base dist/ --host 0.0.0.0 --port 8282 --progress --no-inline --history-api-fallback",
-    "start-hot": "webpack-dev-server --mode development --inline --hot --content-base dist/ --host 0.0.0.0 --port 8282 --progress --history-api-fallback",
+    "start": "webpack-dev-server --mode development --content-base dist/ --host 0.0.0.0 --port 8183 --progress --no-inline --history-api-fallback",
+    "start-hot": "webpack-dev-server --mode development --inline --hot --content-base dist/ --host 0.0.0.0 --port 8183 --progress --history-api-fallback",
     "build": "cross-env NODE_ENV=production webpack --mode production --progress",
     "webpack": "webpack --mode development --progress",
     "check": "npm run eslint; npm run stylelint; npm run flow;",
