@@ -16,8 +16,8 @@ export const zhTw: LangDataType = {
     CATEGORY_LIST__CATEGORIES: 'Categories',
     GIVE_THE_BADGE__PEOPLE: 'People',
 
-    SEARCH_PEOPLE__INPUT_PLACEHOLDER: 'Search people...',
-    SEARCH_PEOPLE__TEXT_AREA_PLACEHOLDER: 'Description...',
+    SEARCH_PEOPLE__INPUT_PLACEHOLDER: 'Enter user name',
+    SEARCH_PEOPLE__TEXT_AREA_PLACEHOLDER: 'Enter comment here',
     SEARCH_PEOPLE__SUBMIT_BUTTON: 'Submit',
     SEARCH_PEOPLE__NO_RESULT: 'No people found...',
 

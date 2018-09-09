@@ -14,6 +14,7 @@ import type {FoundedUserListType, FoundedUserType} from './api';
 import FoundedUser from './founded-user';
 import Transition from 'react-transition-group/Transition';
 import type {TransitionStatus} from 'react-transition-group';
+import style from './style.scss';
 
 type ReduxPropsType = {
     +locale: LocaleType,
@@ -371,16 +372,16 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const {props, state} = view;
 
         return (
-            <div>
+            <div className={style.badge_form_wrapper}>
                 <form
+                    className={style.badge_form}
                     onSubmit={async (evt: SyntheticEvent<HTMLFormElement>): Promise<void> => {
                         evt.preventDefault();
                         await view.submitForm();
                     }}
                 >
-                    <h1>search people panel</h1>
-
                     <input
+                        className={style.search_input}
                         onFocus={() => {
                             view.setState({hasSearchInputFocus: true});
                         }}
@@ -398,20 +399,16 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
                     {view.renderSelectedUserList()}
 
                     <textarea
+                        className={style.badge_description}
                         onInput={(evt: SyntheticEvent<HTMLInputElement>) => {
                             view.updateDescription(evt.currentTarget.value);
                         }}
-                        id=""
                         cols="30"
                         rows="10"
                         placeholder={getLocalizedString('SEARCH_PEOPLE__TEXT_AREA_PLACEHOLDER', props.locale.name)}
                     />
 
-                    <br/>
-                    <br/>
-                    <br/>
-
-                    <button type="submit">
+                    <button className={style.submit_button} type="submit">
                         <Locale stringKey="SEARCH_PEOPLE__SUBMIT_BUTTON"/>
                     </button>
                 </form>

@@ -1,1 +1,23 @@
-//
+@import './../../../../css/service';
+@import './../style';
+
+.badge_form_wrapper {
+    display: block;
+    margin-left: $search-form-margin-left;
+}
+
+.badge_form {
+    display: block;
+}
+
+.search_input {
+    display: block;
+}
+
+.badge_description {
+    display: block;
+}
+
+.submit_button {
+    display: block;
+}
