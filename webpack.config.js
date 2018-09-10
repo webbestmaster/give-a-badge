@@ -166,7 +166,7 @@ const webpackConfig = {
                                 }
                             }
                         },
-
+                    'css-modules-flow-types-loader',
                     {
                         loader: 'css-loader',
                         options: {
@@ -203,7 +203,7 @@ const webpackConfig = {
                                 }
                             }
                         },
-
+                    'css-modules-flow-types-loader',
                     {
                         loader: 'css-loader',
                         options: {
