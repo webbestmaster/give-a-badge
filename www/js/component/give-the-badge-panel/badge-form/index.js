@@ -5,6 +5,7 @@
 import type {Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import classNames from 'classnames';
 import type {GlobalStateType} from '../../../app-reducer';
 import Locale, {getLocalizedString} from '../../locale';
 import type {LocaleType} from '../../locale/reducer';
@@ -15,6 +16,7 @@ import FoundedUser from './founded-user';
 import Transition from 'react-transition-group/Transition';
 import type {TransitionStatus} from 'react-transition-group';
 import style from './style.scss';
+import serviceStyle from '../../../../css/service.scss';
 
 type ReduxPropsType = {
     +locale: LocaleType,
@@ -108,6 +110,15 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
             searchUserList: [],
             selectedUserList: []
         };
+    }
+
+    isSubmitActive(): boolean {
+        const view = this;
+        const {state} = view;
+        const {descriptionText, selectedUserList} = state;
+        const minDescriptionSize = 10;
+
+        return Boolean(descriptionText.trim().length >= minDescriptionSize && selectedUserList.length > 0);
     }
 
     async loadAllComponent(): Promise<void> {
@@ -408,7 +419,10 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
                         placeholder={getLocalizedString('SEARCH_PEOPLE__TEXT_AREA_PLACEHOLDER', props.locale.name)}
                     />
 
-                    <button className={style.submit_button} type="submit">
+                    <button
+                        className={classNames(style.submit_button, {[serviceStyle.disabled]: !view.isSubmitActive()})}
+                        type="submit"
+                    >
                         <Locale stringKey="SEARCH_PEOPLE__SUBMIT_BUTTON"/>
                     </button>
                 </form>

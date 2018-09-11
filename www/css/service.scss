@@ -8,20 +8,19 @@
     padding-right: 10px;
 }
 
-//
 //.hidden {
 //    display: none !important;
 //}
-//
-//.disabled {
-//    opacity: 0.5;
-//    pointer-events: none; // see Can I Use
-//}
-//
+
+.disabled {
+    opacity: 0.5;
+    pointer-events: none; // see Can I Use
+}
+
 //.zero_opacity {
 //    opacity: 0;
 //}
-//
+
 %clear-self,
 .clear_self {
     &:after {
@@ -30,8 +29,7 @@
         display: block;
     }
 }
-//
-///*
+
 //.clear_full {
 //    clear: both;
 //
@@ -41,8 +39,7 @@
 //        display: block;
 //    }
 //}
-//*/
-//
+
 .ellipsis {
     display: block;
     font-family: inherit;
@@ -53,7 +50,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-//
+
 //.ta_c {
 //    text-align: center;
 //}
