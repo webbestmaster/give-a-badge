@@ -1,5 +1,6 @@
 @import './../../../../css/service';
 @import './../style';
+@import './../../ui/form';
 
 .badge_form_wrapper {
     display: block;
@@ -11,13 +12,21 @@
 }
 
 .search_input {
-    display: block;
+    @extend %input-text;
 }
 
 .badge_description {
-    display: block;
+    @extend %text-area;
 }
 
 .submit_button {
+    @extend %button;
+
+    float: right;
+    margin-top: 18px;
+}
+
+.selected_user_list {
     display: block;
+    min-height: 136px;
 }

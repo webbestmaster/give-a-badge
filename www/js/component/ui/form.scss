@@ -1,0 +1,38 @@
+%input-text,
+.input-text {
+    background-color: #fff;
+    border: 1px solid #d8d8d8;
+    border-radius: 4px;
+    box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    display: block;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    padding: 11px 16px 12px;
+    width: 100%;
+}
+
+%text-area,
+.text-area {
+    @extend %input-text;
+
+    height: 180px;
+    padding-bottom: 10px;
+    padding-top: 15px;
+    resize: none;
+}
+
+%button,
+.button {
+    background-color: #5291ff;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: #fff;
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    min-width: 202px;
+    padding: 12px;
+    text-align: center;
+    text-transform: uppercase;
+}

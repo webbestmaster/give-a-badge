@@ -34,20 +34,3 @@ body {
     line-height: $main-line-height;
     overflow-y: scroll;
 }
-
-%input-text,
-.input-text {
-    background-color: #fff;
-    border: 1px solid #333;
-    box-sizing: border-box;
-    display: block;
-    width: 100%;
-}
-
-%text-area,
-.text-area {
-    @extend %text-area;
-
-    padding-bottom: 10px;
-    padding-top: 10px;
-}
