@@ -1,1 +1,33 @@
 //
+@import './../../../../../css/service';
+
+.founded_user_wrapper {
+    @extend %clear-self;
+
+    color: #202020;
+    display: block;
+    padding: 14px 18px 13px;
+    text-decoration: none;
+
+    &:focus {
+        background-color: #afd0ff;
+    }
+}
+
+.founded_user_image {
+    border-radius: 100%;
+    display: block;
+    float: left;
+    width: 50px;
+}
+
+.founded_user_name_wrapper {
+    display: block;
+    margin-left: 200px;
+    overflow: hidden;
+    padding: 16px 10px 10px;
+}
+
+.founded_user_name {
+    @extend %ellipsis;
+}

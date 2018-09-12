@@ -280,11 +280,14 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
         }
 
         return (
-            <Transition in={hasSearchInputFocus} timeout={searchData.transition.duration}>
+            <Transition in={hasSearchInputFocus || true} timeout={searchData.transition.duration}>
                 {(transitionState: TransitionStatus): Node => {
                     return (
-                        <div style={{...searchData.style.initial, ...searchData.style.transition[transitionState]}}>
-                            <div>founded people result, input has focus: {hasSearchInputFocus ? 'y' : 'n'}</div>
+                        <div
+                            className={style.founded_user_list}
+                            style={{...searchData.style.initial, ...searchData.style.transition[transitionState]}}
+                        >
+                            {/* <div>founded people result, input has focus: {hasSearchInputFocus ? 'y' : 'n'}</div>*/}
                             {searchUserList.map(
                                 (foundedUser: FoundedUserType): Node => {
                                     const foundedUserId = foundedUser.id;

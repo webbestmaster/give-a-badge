@@ -5,6 +5,7 @@
 import type {Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import classNames from 'classnames';
 import type {GlobalStateType} from '../../../../app/app-reducer';
 import type {FoundedUserType} from '../api';
 import style from './style.scss';
@@ -59,13 +60,74 @@ class FoundedUser extends Component<ReduxPropsType, PassedPropsType, StateType> 
         const {foundedUser, onClick, isActive} = props;
         const {name, imageUrl} = foundedUser;
 
+        // <a/> with href="#/..." added for i11y only
         return (
-            <button type="button" onClick={onClick} onKeyPress={onClick}>
-                <h1>is in selected: {isActive ? 'y' : 'n'}</h1>
-                <img src={imageUrl} alt={name}/>
-                <h1>{name}</h1>
-                <hr/>
-            </button>
+            <a
+                href="/#/add-user-in-result"
+                className={classNames(style.founded_user_wrapper)}
+                onClick={(evt: SyntheticEvent<EventTarget>) => {
+                    evt.preventDefault();
+                    onClick();
+                }}
+                onKeyPress={(evt: SyntheticEvent<EventTarget>) => {
+                    evt.preventDefault();
+                    onClick();
+                }}
+            >
+                {/*
+                    <h5>is in selected: {isActive ? 'y' : 'n'}</h5>
+                    */}
+                <img className={style.founded_user_image} src={imageUrl} alt={name}/>
+                <div className={style.founded_user_name_wrapper}>
+                    <div className={style.founded_user_name}>
+                        {name}
+                        {name}
+                        {name}
+                        {name}
+                        {name}
+                        {name}
+                        {name}
+                        {name}
+                        {name}
+                        {name}
+                        {name}
+                        {name}
+                        {name}
+                        {name}
+                        {name}
+                        {name}
+                        {name}
+                        {name}
+                        {name}
+                        {name}
+                        {name}
+                        {name}
+                        {name}
+                        {name}
+                        {name}
+                        {name}
+                        {name}
+                        {name}
+                        {name}
+                        {name}
+                        {name}
+                        {name}
+                        {name}
+                        {name}
+                        {name}
+                        {name}
+                        {name}
+                        {name}
+                        {name}
+                        {name}
+                        {name}
+                        {name}
+                        {name}
+                        {name}
+                        {name}
+                    </div>
+                </div>
+            </a>
         );
     }
 }

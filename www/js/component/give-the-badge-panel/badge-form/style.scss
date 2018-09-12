@@ -30,3 +30,13 @@
     display: block;
     min-height: 136px;
 }
+
+.founded_user_list {
+    border: 1px solid #f6f9fd;
+    border-radius: 4px;
+    display: block;
+    margin-top: 17px;
+    max-height: 300px;
+    max-width: 100%;
+    overflow: auto;
+}
