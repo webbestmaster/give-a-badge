@@ -2,7 +2,7 @@
 
 /* global window */
 
-import appConst from '../../app-const';
+import appConst from '../../app/app-const';
 import {defaultFetchGetProps} from '../auth/api';
 
 export type NewsTypeType = 'BADGE_ASSIGNMENT';

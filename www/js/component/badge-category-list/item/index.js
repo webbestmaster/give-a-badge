@@ -5,7 +5,7 @@
 import type {Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import type {GlobalStateType} from '../../../app-reducer';
+import type {GlobalStateType} from '../../../app/app-reducer';
 import style from './style.scss';
 import type {ExtractedCategoryType} from '../helper';
 import HalfPopupSubHeader from '../../ui/half-popup/sub-header';
@@ -13,7 +13,7 @@ import type {BadgeCategoryType} from '../api';
 import Link from 'react-router-dom/Link';
 import classNames from 'classnames';
 import serviceStyle from '../../../../css/service.scss';
-import {getBadgePath} from '../../../app/routes';
+import {getBadgePath} from '../../app/routes';
 
 type ReduxPropsType = {|
     +reduxProp: boolean

@@ -6,7 +6,7 @@ import type {Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import classNames from 'classnames';
-import type {GlobalStateType} from '../../../app-reducer';
+import type {GlobalStateType} from '../../../app/app-reducer';
 import Locale, {getLocalizedString} from '../../locale';
 import type {LocaleType} from '../../locale/reducer';
 import type {AuthType} from '../../auth/reducer';

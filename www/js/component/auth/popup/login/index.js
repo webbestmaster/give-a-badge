@@ -5,7 +5,7 @@
 import type {Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import type {GlobalStateType} from '../../../../app-reducer';
+import type {GlobalStateType} from '../../../../app/app-reducer';
 import type {AuthType, UserType} from '../../reducer';
 import {closeLoginPopup, setUser} from '../../action';
 import type {SetPopupStateType, SetUserType} from '../../action';

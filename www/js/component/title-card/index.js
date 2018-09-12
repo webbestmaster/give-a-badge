@@ -5,7 +5,7 @@
 import type {Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import type {GlobalStateType} from '../../app-reducer';
+import type {GlobalStateType} from '../../app/app-reducer';
 import serviceStyle from '../../../css/service.scss';
 import helperStyle from '../../../css/helper.scss';
 import style from './style.scss';

@@ -2,7 +2,7 @@
 
 /* global window, fetch */
 
-import appConst from '../../../app-const';
+import appConst from '../../../app/app-const';
 import {defaultFetchGetProps, defaultFetchPostProps} from '../../auth/api';
 import {fetchX} from '../../../lib/fetch-x';
 

@@ -5,7 +5,7 @@
 import type {Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import type {GlobalStateType} from '../../app-reducer';
+import type {GlobalStateType} from '../../app/app-reducer';
 import style from './style.scss';
 import BadgeCategoryListItem from './item';
 import HalfPopup from '../ui/half-popup';

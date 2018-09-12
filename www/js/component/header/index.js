@@ -5,12 +5,12 @@
 import type {Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import type {GlobalStateType} from '../../app-reducer';
+import type {GlobalStateType} from '../../app/app-reducer';
 import style from './style.scss';
 import serviceStyle from '../../../css/service.scss';
 import withRouter from 'react-router-dom/withRouter';
 import Link from 'react-router-dom/Link';
-import routes from '../../app/routes';
+import routes from '../app/routes';
 import {isString} from '../../lib/is';
 import classNames from 'classnames';
 
