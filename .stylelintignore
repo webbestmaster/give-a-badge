@@ -1,9 +1,6 @@
 # dist
 /dist
 
-# res
-/_res
-
 # example
 # /* eslint-disable no-unused-vars */
 # var React = require('react');
