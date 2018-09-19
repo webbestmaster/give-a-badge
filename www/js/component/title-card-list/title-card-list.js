@@ -40,7 +40,7 @@ const reduxAction: ReduxActionType = {
     applyGetNewListResponse
 };
 
-const pageSize = 1;
+const pageSize = 20;
 
 class TitleCardList extends Component<ReduxPropsType, PassedPropsType, StateType> {
     // eslint-disable-next-line id-match
