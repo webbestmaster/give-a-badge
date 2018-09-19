@@ -11,13 +11,10 @@ import serviceStyle from '../../../css/service.scss';
 import withRouter from 'react-router-dom/withRouter';
 import Link from 'react-router-dom/Link';
 import routes from '../app/routes';
-import {isString} from '../../lib/is';
 import classNames from 'classnames';
-
 // import Search from './search';
 import UserInfo from './user-info/c-user-info';
 import type {SystemType} from '../system/reducer/root';
-import BrowserRouter from 'react-router-dom/BrowserRouter';
 import type {ContextRouterType} from '../../../type/react-router-dom-v4';
 
 type ReduxPropsType = {|

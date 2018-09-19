@@ -1,7 +1,7 @@
 // @flow
 
-import React, {Component} from 'react';
 import type {Node} from 'react';
+import React, {Component} from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import style from './style.scss';
 

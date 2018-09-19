@@ -10,7 +10,6 @@ import serviceStyle from '../../../css/service.scss';
 import helperStyle from '../../../css/helper.scss';
 import style from './style.scss';
 import classnames from 'classnames';
-import Locale from '../locale/c-locale';
 import moment from 'moment';
 import type {NewsType, NewsUserType} from '../title-card-list/api';
 

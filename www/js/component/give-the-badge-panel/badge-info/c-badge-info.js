@@ -6,8 +6,8 @@ import type {Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../../app/reducer';
-import {getBadgeCategoryList} from '../../badge-category-list/api';
 import type {BadgeCategoryType} from '../../badge-category-list/api';
+import {getBadgeCategoryList} from '../../badge-category-list/api';
 import style from './style.scss';
 
 type ReduxPropsType = {

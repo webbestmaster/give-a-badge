@@ -12,7 +12,6 @@ import style from './style.scss';
 import serviceStyle from '../../../../css/service.scss';
 import type {SystemType} from '../../system/reducer/root';
 import type {AuthType} from '../../auth/reducer';
-import Locale from '../../locale/c-locale';
 import * as authApi from '../../auth/api';
 
 type ReduxPropsType = {|

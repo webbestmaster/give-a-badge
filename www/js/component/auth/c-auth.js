@@ -7,8 +7,8 @@
 import type {Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import type {SetUserType, SetPopupStateType} from './action';
-import {setUser, openLoginPopup} from './action';
+import type {SetPopupStateType, SetUserType} from './action';
+import {openLoginPopup, setUser} from './action';
 import type {AuthType, UserType} from './reducer';
 import type {GlobalStateType} from '../../app/reducer';
 // import LoginPopup from './popup/login';

@@ -4,7 +4,6 @@
 
 import type {Node} from 'react';
 import React, {Component} from 'react';
-import style from './style.scss';
 import type {ContextRouterType} from '../../../type/react-router-dom-v4';
 
 type PassedPropsType = {
