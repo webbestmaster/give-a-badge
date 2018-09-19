@@ -11,7 +11,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
 
 const DEVELOPMENT = 'development';
@@ -84,8 +84,8 @@ const webpackConfig = {
             } :
             {
                 minimizer: [
-                    new UglifyJsPlugin({
-                        uglifyOptions: {
+                    new TerserPlugin({
+                        terserOptions: {
                             output: {
                                 comments: false,
                                 beautify: false

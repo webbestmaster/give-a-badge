@@ -5,7 +5,7 @@
 import type {Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import type {GlobalStateType} from '../../../../app/app-reducer';
+import type {GlobalStateType} from '../../../../app/reducer';
 import type {AuthType, UserType} from '../../reducer';
 import {closeLoginPopup, setUser} from '../../action';
 import type {SetPopupStateType, SetUserType} from '../../action';
@@ -17,7 +17,7 @@ import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import * as api from '../../api';
 import style from './style.scss';
-import Locale, {getLocalizedString} from '../../../locale';
+import Locale, {getLocalizedString} from '../../../locale/c-locale';
 import type {LocaleType} from '../../../locale/reducer';
 // import Paper from '@material-ui/core/Paper';
 // import Typography from '@material-ui/core/Typography';

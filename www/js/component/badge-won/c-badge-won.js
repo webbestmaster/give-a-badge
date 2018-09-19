@@ -5,14 +5,14 @@
 import type {Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import type {GlobalStateType} from '../../app/app-reducer';
+import type {GlobalStateType} from '../../app/reducer';
 import style from './style.scss';
 import type {ContextRouterType} from '../../../type/react-router-dom-v4';
-import HalfPopup from '../ui/half-popup';
-import HalfPopupHeader from '../ui/half-popup/header';
-import Locale from '../locale';
-import BadgeInfo from '../give-the-badge-panel/badge-info';
-import BadgeForm from '../give-the-badge-panel/badge-form';
+import HalfPopup from '../ui/half-popup/c-half-popup';
+import HalfPopupHeader from '../ui/half-popup/header/c-header';
+import Locale from '../locale/c-locale';
+import BadgeInfo from '../give-the-badge-panel/badge-info/c-badge-info';
+import BadgeForm from '../give-the-badge-panel/badge-form/c-badge-form';
 
 type ReduxPropsType = {
     // +reduxProp: boolean

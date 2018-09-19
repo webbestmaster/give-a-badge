@@ -5,12 +5,12 @@
 import type {Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import type {GlobalStateType} from '../../app/app-reducer';
+import type {GlobalStateType} from '../../app/reducer';
 import serviceStyle from '../../../css/service.scss';
 import helperStyle from '../../../css/helper.scss';
 import style from './style.scss';
 import classnames from 'classnames';
-import Locale from '../locale';
+import Locale from '../locale/c-locale';
 import moment from 'moment';
 import type {NewsType, NewsUserType} from '../title-card-list/api';
 

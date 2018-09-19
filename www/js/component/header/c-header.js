@@ -5,7 +5,7 @@
 import type {Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import type {GlobalStateType} from '../../app/app-reducer';
+import type {GlobalStateType} from '../../app/reducer';
 import style from './style.scss';
 import serviceStyle from '../../../css/service.scss';
 import withRouter from 'react-router-dom/withRouter';
@@ -15,8 +15,8 @@ import {isString} from '../../lib/is';
 import classNames from 'classnames';
 
 // import Search from './search';
-import UserInfo from './user-info';
-import type {SystemType} from '../system/reducer';
+import UserInfo from './user-info/c-user-info';
+import type {SystemType} from '../system/reducer/root';
 import BrowserRouter from 'react-router-dom/BrowserRouter';
 import type {ContextRouterType} from '../../../type/react-router-dom-v4';
 

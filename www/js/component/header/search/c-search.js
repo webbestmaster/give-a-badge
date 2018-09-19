@@ -5,8 +5,8 @@
 import type {Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import type {GlobalStateType} from '../../../app/app-reducer';
-import type {SystemType} from '../../system/reducer';
+import type {GlobalStateType} from '../../../app/reducer';
+import type {SystemType} from '../../system/reducer/root';
 
 type ReduxPropsType = {|
     +system: SystemType

@@ -5,18 +5,18 @@
 import type {Node} from 'react';
 import React, {Component} from 'react';
 // import style from './style.scss';
-import Header from '../../component/header';
-import TitleCardList from '../../component/title-card-list';
+import Header from '../../component/header/c-header';
+import TitleCardList from '../../component/title-card-list/title-card-list';
 import Route from 'react-router-dom/Route';
-import BadgeCategoryList from '../../component/badge-category-list';
-import GiveTheBadgePanel from '../../component/give-the-badge-panel';
-import BadgeWon from '../../component/badge-won';
+import BadgeCategoryList from '../../component/badge-category-list/c-badge-category-list';
+import GiveTheBadgePanel from '../../component/give-the-badge-panel/c-give-the-badge-panel';
+import BadgeWon from '../../component/badge-won/c-badge-won';
 import Switch from 'react-router-dom/Switch';
 // import BrowserRouter from 'react-router-dom/BrowserRouter';
 import withRouter from 'react-router-dom/withRouter';
 import {connect} from 'react-redux';
-import type {GlobalStateType} from '../../app/app-reducer';
-import type {SystemType} from '../../component/system/reducer';
+import type {GlobalStateType} from '../../app/reducer';
+import type {SystemType} from '../../component/system/reducer/root';
 import routes from '../../component/app/routes';
 // import type {ContextRouterType} from '../../../type/react-router-dom-v4';
 

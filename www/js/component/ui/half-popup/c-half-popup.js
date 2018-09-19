@@ -5,9 +5,9 @@
 import type {Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import type {GlobalStateType} from '../../../app/app-reducer';
+import type {GlobalStateType} from '../../../app/reducer';
 import style from './style.scss';
-import CloseButton from './close-button';
+import CloseButton from './close-button/c-close-button';
 import {setIsScrollEnable} from '../../system/action';
 import type {OnSetIsScrollEnableType} from '../../system/action';
 

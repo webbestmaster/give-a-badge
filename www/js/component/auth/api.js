@@ -2,7 +2,7 @@
 
 /* global window, fetch */
 
-import appConst from '../../app/app-const';
+import appConst from '../../app/const';
 import type {UserType} from './reducer';
 
 type GetMeResponseType = {|+hasError: true|} | {|+hasError: false, +userData: UserType|};

@@ -4,16 +4,16 @@ import type {Node} from 'react';
 import React from 'react';
 import Route from 'react-router-dom/Route';
 import Switch from 'react-router-dom/Switch';
-import muiTheme from '../ui/mui-theme';
+import muiTheme from '../ui/mui-theme/mui-theme';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
-import System from '../system';
-import Auth from '../auth';
+import System from '../system/c-system';
+import Auth from '../auth/c-auth';
 
-import Home from '../../page/home';
+import Home from '../../page/home/c-home';
 import routes from './routes';
 import BrowserRouter from 'react-router-dom/BrowserRouter';
-import NotFound from '../not-found';
-import ReduxStoreProvider from '../../app/app-provider';
+import NotFound from '../not-found/c-not-found';
+import ReduxStoreProvider from '../../app/provider';
 
 export default function App(): Node {
     return (

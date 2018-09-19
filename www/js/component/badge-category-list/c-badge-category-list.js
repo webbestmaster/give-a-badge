@@ -5,16 +5,16 @@
 import type {Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import type {GlobalStateType} from '../../app/app-reducer';
+import type {GlobalStateType} from '../../app/reducer';
 import style from './style.scss';
-import BadgeCategoryListItem from './item';
-import HalfPopup from '../ui/half-popup';
-import HalfPopupHeader from '../ui/half-popup/header';
+import BadgeCategoryListItem from './item/c-item';
+import HalfPopup from '../ui/half-popup/c-half-popup';
+import HalfPopupHeader from '../ui/half-popup/header/c-header';
 import {getBadgeCategoryList} from './api';
 import type {BadgeCategoryListType, BadgeCategoryType} from './api';
 import {extractCategoryList} from './helper';
 import type {ExtractedCategoryType} from './helper';
-import Locale from '../locale';
+import Locale from '../locale/c-locale';
 import type {ContextRouterType} from '../../../type/react-router-dom-v4';
 
 type ReduxPropsType = {};
