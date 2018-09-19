@@ -279,6 +279,9 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
             );
         }
 
+        // TODO: ---> hasSearchInputFocus || true, remove true
+        console.warn('---> hasSearchInputFocus || true, remove true');
+
         return (
             <Transition in={hasSearchInputFocus || true} timeout={searchData.transition.duration}>
                 {(transitionState: TransitionStatus): Node => {
