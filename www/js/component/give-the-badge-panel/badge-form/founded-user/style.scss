@@ -1,6 +1,13 @@
 //
 @import './../../../../../css/service';
 
+.founded_user_image {
+    border-radius: 100%;
+    display: block;
+    float: left;
+    width: 50px;
+}
+
 .founded_user_wrapper {
     @extend %clear-self;
 
@@ -10,20 +17,26 @@
     text-decoration: none;
 
     &:focus {
-        background-color: #afd0ff;
+        background-color: #d5d8dc;
     }
-}
 
-.founded_user_image {
-    border-radius: 100%;
-    display: block;
-    float: left;
-    width: 50px;
+    &:hover {
+        background-color: #f6f9fd;
+    }
+
+    &.already_selected {
+        background-color: #fff;
+        color: #666;
+
+        .founded_user_image {
+            opacity: 0.5;
+        }
+    }
 }
 
 .founded_user_name_wrapper {
     display: block;
-    margin-left: 200px;
+    margin-left: 52px;
     overflow: hidden;
     padding: 16px 10px 10px;
 }

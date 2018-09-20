@@ -9,6 +9,7 @@ import classNames from 'classnames';
 import type {GlobalStateType} from '../../../../app/reducer';
 import type {FoundedUserType} from '../api';
 import style from './style.scss';
+import {isString} from '../../../../lib/is';
 
 type ReduxPropsType = {
     // +reduxProp: boolean
@@ -21,7 +22,8 @@ type ReduxActionType = {
 type PassedPropsType = {|
     +foundedUser: FoundedUserType,
     +onClick: () => void,
-    +isActive: boolean
+    +isActive: boolean,
+    +className?: string
 |};
 
 type PropsType = $ReadOnly<$Exact<{
@@ -59,12 +61,13 @@ class FoundedUser extends Component<ReduxPropsType, PassedPropsType, StateType> 
         const {props, state} = view;
         const {foundedUser, onClick, isActive} = props;
         const {name, imageUrl} = foundedUser;
+        const additionalClassName = isString(props.className) ? props.className : '';
 
         // <a/> with href="#/..." added for i11y only
         return (
             <a
                 href="/#/add-user-in-result"
-                className={classNames(style.founded_user_wrapper)}
+                className={classNames(style.founded_user_wrapper, additionalClassName)}
                 onClick={(evt: SyntheticEvent<EventTarget>) => {
                     evt.preventDefault();
                     onClick();
@@ -79,53 +82,7 @@ class FoundedUser extends Component<ReduxPropsType, PassedPropsType, StateType> 
                     */}
                 <img className={style.founded_user_image} src={imageUrl} alt={name}/>
                 <div className={style.founded_user_name_wrapper}>
-                    <div className={style.founded_user_name}>
-                        {name}
-                        {name}
-                        {name}
-                        {name}
-                        {name}
-                        {name}
-                        {name}
-                        {name}
-                        {name}
-                        {name}
-                        {name}
-                        {name}
-                        {name}
-                        {name}
-                        {name}
-                        {name}
-                        {name}
-                        {name}
-                        {name}
-                        {name}
-                        {name}
-                        {name}
-                        {name}
-                        {name}
-                        {name}
-                        {name}
-                        {name}
-                        {name}
-                        {name}
-                        {name}
-                        {name}
-                        {name}
-                        {name}
-                        {name}
-                        {name}
-                        {name}
-                        {name}
-                        {name}
-                        {name}
-                        {name}
-                        {name}
-                        {name}
-                        {name}
-                        {name}
-                        {name}
-                    </div>
+                    <div className={style.founded_user_name}>{name}</div>
                 </div>
             </a>
         );

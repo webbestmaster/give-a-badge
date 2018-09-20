@@ -16,6 +16,7 @@ import FoundedUser from './founded-user/c-founded-user';
 import Transition from 'react-transition-group/Transition';
 import type {TransitionStatus} from 'react-transition-group';
 import style from './style.scss';
+import foundedUserStyle from './founded-user/style.scss';
 import serviceStyle from '../../../../css/service.scss';
 
 type ReduxPropsType = {
@@ -280,11 +281,8 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
         if (searchUserListLength === 0 && hasSearchInputFocus) {
             return (
-                <div>
-                    <p>
-                        <Locale stringKey="SEARCH_PEOPLE__NO_RESULT"/>
-                    </p>
-                    <p>{searchString}</p>
+                <div className={style.no_found_people}>
+                    <Locale stringKey="SEARCH_PEOPLE__NO_RESULT"/>
                 </div>
             );
         }
@@ -308,6 +306,7 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
                                     return (
                                         <FoundedUser
+                                            className={isInSelectedUserList ? foundedUserStyle.already_selected : ''}
                                             onClick={(): void => {
                                                 return isInSelectedUserList ?
                                                     view.removeFromSelectedUserList(foundedUser) :
