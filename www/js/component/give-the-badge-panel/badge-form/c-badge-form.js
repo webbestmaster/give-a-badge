@@ -49,7 +49,8 @@ type StateType = {|
     +descriptionText: string,
     +searchUserList: FoundedUserListType,
     +selectedUserList: FoundedUserListType,
-    +hasSearchInputFocus: boolean
+    +hasSearchInputFocus: boolean,
+    +isSearchInProgressCounter: number
 |};
 
 type ComponentStoreType = {|
@@ -108,7 +109,8 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
             descriptionText: '',
             hasSearchInputFocus: false,
             searchUserList: [],
-            selectedUserList: []
+            selectedUserList: [],
+            isSearchInProgressCounter: 0
         };
     }
 
@@ -147,7 +149,11 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
             return;
         }
 
+        view.setState({isSearchInProgressCounter: view.state.isSearchInProgressCounter + 1});
+
         const searchUserList = await searchUser(inputSearchString);
+
+        view.setState({isSearchInProgressCounter: view.state.isSearchInProgressCounter - 1});
 
         // get actual state here
         const {state} = view;
@@ -256,12 +262,16 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
         view.setState(state);
     }
 
-    // eslint-disable-next-line sonarjs/cognitive-complexity
+    // eslint-disable-next-line sonarjs/cognitive-complexity, complexity
     renderSearchUserList(): Node {
         const view = this;
         const {props, state} = view;
-        const {searchUserList, searchString, hasSearchInputFocus} = state;
+        const {searchUserList, searchString, hasSearchInputFocus, isSearchInProgressCounter} = state;
         const searchUserListLength = searchUserList.length;
+
+        if (searchUserList.length === 0 && isSearchInProgressCounter !== 0) {
+            return null;
+        }
 
         // eslint-disable-next-line id-match
         if (searchString.length < MIN_SEARCH_STRING_LENGTH) {
