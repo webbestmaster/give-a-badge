@@ -9,6 +9,7 @@
 
 .badge_form {
     display: block;
+    position: relative;
 }
 
 .search_input {
@@ -27,23 +28,51 @@
 }
 
 .selected_user_list {
+    @extend %clear-self;
+
+    box-sizing: border-box;
     display: block;
     min-height: 136px;
+    overflow: auto;
+    padding-top: 29px;
 }
 
 %founded-user-list,
 .founded_user_list {
+    background-color: #fff;
     border: 1px solid #f6f9fd;
     border-radius: 4px;
+    box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
     display: block;
     margin-top: 17px;
     max-height: 300px;
     max-width: 100%;
     overflow: auto;
+    position: absolute;
+    width: 100%;
 }
 
 .no_found_people {
     @extend %founded-user-list;
 
+    box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1);
+    padding: 20px;
     text-align: center;
+}
+
+.selected_user_wrapper {
+    cursor: pointer;
+    float: left;
+    height: 50px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    width: 50px;
+}
+
+.selected_user_image {
+    border-radius: 50%;
+    display: block;
+    height: 100%;
+    width: 100%;
 }

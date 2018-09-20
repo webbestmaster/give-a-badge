@@ -66,20 +66,22 @@ const reduxAction: ReduxActionType = {
     // setSmth // imported from actions
 };
 
+const transitionDuration = 150;
+
 const searchData = {
     transition: {
-        duration: 1000
+        duration: transitionDuration
     },
     style: {
         initial: {
-            transition: 'opacity 1000ms ease-in-out',
+            transition: `opacity ${transitionDuration}ms ease-in-out`,
             opacity: 0
         },
         transition: {
-            entering: {opacity: 0},
-            entered: {opacity: 1},
-            exiting: {opacity: 1},
-            exited: {opacity: 0},
+            entering: {opacity: 0, display: 'block'},
+            entered: {opacity: 1, display: 'block'},
+            exiting: {opacity: 1, display: 'block'},
+            exited: {opacity: 0, display: 'none'},
             unmounted: {display: 'none'}
         }
     }
@@ -291,11 +293,11 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
         console.warn('---> hasSearchInputFocus || true, remove true');
 
         return (
-            <Transition in={hasSearchInputFocus || true} timeout={searchData.transition.duration}>
+            <Transition in={hasSearchInputFocus} timeout={searchData.transition.duration}>
                 {(transitionState: TransitionStatus): Node => {
                     return (
                         <div
-                            className={style.founded_user_list}
+                            className={classNames(style.founded_user_list)}
                             style={{...searchData.style.initial, ...searchData.style.transition[transitionState]}}
                         >
                             {/* <div>founded people result, input has focus: {hasSearchInputFocus ? 'y' : 'n'}</div>*/}
@@ -337,12 +339,17 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
                     (foundedUser: FoundedUserType): Node => {
                         return (
                             <button
+                                className={style.selected_user_wrapper}
                                 type="button"
                                 onClick={(): void => view.removeFromSelectedUserList(foundedUser)}
                                 onKeyPress={(): void => view.removeFromSelectedUserList(foundedUser)}
                                 key={foundedUser.id}
                             >
-                                <img src={foundedUser.imageUrl} alt={foundedUser.name}/>
+                                <img
+                                    className={style.selected_user_image}
+                                    src={foundedUser.imageUrl}
+                                    alt={foundedUser.name}
+                                />
                             </button>
                         );
                     }
