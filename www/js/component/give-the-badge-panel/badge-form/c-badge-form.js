@@ -335,8 +335,12 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const {props, state} = view;
         const {selectedUserList} = state;
 
+        if (selectedUserList.length === 0) {
+            return <div key="selected-user-list" className={style.selected_user_list__empty}/>;
+        }
+
         return (
-            <div className={style.selected_user_list}>
+            <div key="selected-user-list" className={style.selected_user_list}>
                 {selectedUserList.map(
                     (foundedUser: FoundedUserType): Node => {
                         return (

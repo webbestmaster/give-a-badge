@@ -38,7 +38,12 @@
     display: block;
     //min-height: 136px;
     overflow: auto;
+    padding-bottom: 15px;
     padding-top: 29px;
+}
+
+.selected_user_list__empty {
+    height: 26px;
 }
 
 %founded-user-list,
