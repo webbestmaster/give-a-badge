@@ -5,6 +5,10 @@
 .badge_form_wrapper {
     display: block;
     margin-left: $search-form-margin-left;
+
+    &.badge_form_wrapper__mobile {
+        margin-left: 0;
+    }
 }
 
 .badge_form {
@@ -32,7 +36,7 @@
 
     box-sizing: border-box;
     display: block;
-    min-height: 136px;
+    //min-height: 136px;
     overflow: auto;
     padding-top: 29px;
 }

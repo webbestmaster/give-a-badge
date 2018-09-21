@@ -18,10 +18,12 @@ import type {TransitionStatus} from 'react-transition-group';
 import style from './style.scss';
 import foundedUserStyle from './founded-user/style.scss';
 import serviceStyle from '../../../../css/service.scss';
+import type {SystemType} from '../../system/reducer/root';
 
 type ReduxPropsType = {
     +locale: LocaleType,
-    +auth: AuthType
+    +auth: AuthType,
+    +system: SystemType
 };
 
 type ReduxActionType = {
@@ -407,7 +409,11 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const {props, state} = view;
 
         return (
-            <div className={style.badge_form_wrapper}>
+            <div
+                className={classNames(style.badge_form_wrapper, {
+                    [style.badge_form_wrapper__mobile]: props.system.screen.isMobile
+                })}
+            >
                 <form
                     className={style.badge_form}
                     onSubmit={async (evt: SyntheticEvent<HTMLFormElement>): Promise<void> => {
@@ -460,7 +466,8 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
 export default connect(
     (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
         locale: state.locale,
-        auth: state.auth
+        auth: state.auth,
+        system: state.system
         // reduxProp: true
     }),
     reduxAction
