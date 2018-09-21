@@ -30,15 +30,15 @@
     }
 }
 
-//.clear_full {
-//    clear: both;
-//
-//    &:after {
-//        clear: both;
-//        content: '';
-//        display: block;
-//    }
-//}
+.clear_full {
+    clear: both;
+
+    &:after {
+        clear: both;
+        content: '';
+        display: block;
+    }
+}
 
 %ellipsis,
 .ellipsis {

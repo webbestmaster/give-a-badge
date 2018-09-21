@@ -9,10 +9,12 @@ import type {GlobalStateType} from '../../../app/reducer';
 import type {BadgeCategoryType} from '../../badge-category-list/api';
 import {getBadgeCategoryList} from '../../badge-category-list/api';
 import style from './style.scss';
+import type {SystemType} from '../../system/reducer/root';
+import classNames from 'classnames';
 
-type ReduxPropsType = {
-    // +reduxProp: boolean
-};
+type ReduxPropsType = {|
+    +system: SystemType
+|};
 
 type ReduxActionType = {
     // +setSmth: (smth: string) => string
@@ -85,7 +87,7 @@ class BadgeInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
         await view.fetchBadgeInfo();
     }
 
-    render(): Node {
+    renderDesktop(): Node {
         const view = this;
         const {props, state} = view;
         const {badgeInfo} = state;
@@ -104,11 +106,40 @@ class BadgeInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
             </div>
         );
     }
+
+    renderMobile(): Node {
+        const view = this;
+        const {props, state} = view;
+        const {badgeInfo} = state;
+
+        if (badgeInfo === null) {
+            return null;
+        }
+
+        return (
+            <div className={style.badge_info}>
+                <img className={style.badge_image} src={badgeInfo.imageUrl} alt={badgeInfo.name}/>
+                <div className={classNames(style.text_block, style.text_block_mobile)}>
+                    <h3 className={style.badge_header}>{badgeInfo.name}</h3>
+                </div>
+                <div className={style.badge_p_mobile_wrapper}>
+                    <p className={style.badge_p}>{badgeInfo.description}</p>
+                </div>
+            </div>
+        );
+    }
+
+    render(): Node {
+        const view = this;
+        const {props} = view;
+
+        return props.system.screen.isMobile ? view.renderMobile() : view.renderDesktop();
+    }
 }
 
 export default connect(
     (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
-        // reduxProp: true
+        system: state.system
     }),
     reduxAction
 )(BadgeInfo);
