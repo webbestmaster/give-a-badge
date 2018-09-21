@@ -19,6 +19,9 @@ import style from './style.scss';
 import foundedUserStyle from './founded-user/style.scss';
 import serviceStyle from '../../../../css/service.scss';
 import type {SystemType} from '../../system/reducer/root';
+import withRouter from 'react-router-dom/withRouter';
+import type {ContextRouterType} from '../../../../type/react-router-dom-v4';
+import routes from '../../app/routes';
 
 type ReduxPropsType = {
     +locale: LocaleType,
@@ -35,12 +38,13 @@ type PassedPropsType = {|
     // +passedProp: string
 |};
 
-type PropsType = $ReadOnly<$Exact<{
-        ...$Exact<PassedPropsType>,
-        ...$Exact<ReduxPropsType>,
-        ...$Exact<ReduxActionType>,
-        +children: Node
-    }>>;
+type PropsType = $Exact<{
+    ...$Exact<PassedPropsType>,
+    ...$Exact<ReduxPropsType>,
+    ...$Exact<ReduxActionType>,
+    ...$Exact<ContextRouterType>,
+    +children: Node
+}>;
 
 type StateType = {|
     +isAllComponentLoaded: boolean,
@@ -388,6 +392,8 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
             return null;
         }
 
+        const {isSuccess} = state.snackbar;
+
         return (
             <Snackbar
                 anchorOrigin={{
@@ -395,12 +401,16 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
                     horizontal: 'left'
                 }}
                 open={snackbarIsOpen}
-                autoHideDuration={6000}
+                autoHideDuration={3000}
                 onClose={() => {
                     view.setShowSnackbar(false, false);
+
+                    if (isSuccess) {
+                        props.history.push(routes.index.index);
+                    }
                 }}
                 message={
-                    state.snackbar.isSuccess ?
+                    isSuccess ?
                         getLocalizedString('SNACK_BAR__GIVE_BADGE__SUCCESS', locale.name) :
                         getLocalizedString('SNACK_BAR__GIVE_BADGE__ERROR', locale.name)
                 }
@@ -475,4 +485,4 @@ export default connect(
         // reduxProp: true
     }),
     reduxAction
-)(BadgeForm);
+)(withRouter(BadgeForm));
