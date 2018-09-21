@@ -8,8 +8,10 @@ export type LangDataType = {|
     +LOGIN_POPUP__LOGIN_PLACEHOLDER: string,
     +LOGIN_POPUP__PASSWORD_PLACEHOLDER: string,
     +LOGIN_POPUP__LOGIN_BUTTON: string,
-    +LOGIN_POPUP__LOGIN__ERROR: string,
     +LOGIN_POPUP__LOGIN__SUCCESS: string,
+    +LOGIN_POPUP__LOGIN__ERROR: string,
+    +SNACK_BAR__GIVE_BADGE__SUCCESS: string,
+    +SNACK_BAR__GIVE_BADGE__ERROR: string,
 
     +CATEGORY_LIST__CATEGORIES: string,
     +GIVE_THE_BADGE__PEOPLE: string,

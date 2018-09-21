@@ -361,6 +361,7 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
     renderSnackBar(): Node {
         const view = this;
         const {props, state} = view;
+        const {locale} = props;
         const {Snackbar} = componentStore;
         const snackbarIsOpen = state.snackbar.isOpen;
 
@@ -392,7 +393,11 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
                 onClose={() => {
                     view.setShowSnackbar(false, false);
                 }}
-                message={state.snackbar.isSuccess ? '%Yes%' : '%No%'}
+                message={
+                    state.snackbar.isSuccess ?
+                        getLocalizedString('SNACK_BAR__GIVE_BADGE__SUCCESS', locale.name) :
+                        getLocalizedString('SNACK_BAR__GIVE_BADGE__ERROR', locale.name)
+                }
             />
         );
     }

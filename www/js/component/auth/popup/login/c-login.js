@@ -119,8 +119,8 @@ class LoginPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const {isSuccess, isOpen: snackbarIsOpen} = snackbar;
 
         const message = isSuccess ?
-            '✔ ' + getLocalizedString('LOGIN_POPUP__LOGIN__SUCCESS', locale.name) :
-            '❌ ' + getLocalizedString('LOGIN_POPUP__LOGIN__ERROR', locale.name);
+            getLocalizedString('LOGIN_POPUP__LOGIN__SUCCESS', locale.name) :
+            getLocalizedString('LOGIN_POPUP__LOGIN__ERROR', locale.name);
 
         return (
             <Snackbar

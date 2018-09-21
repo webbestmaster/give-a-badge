@@ -10,8 +10,10 @@ export const enUs: LangDataType = {
     LOGIN_POPUP__LOGIN_PLACEHOLDER: 'Login',
     LOGIN_POPUP__PASSWORD_PLACEHOLDER: 'Password',
     LOGIN_POPUP__LOGIN_BUTTON: 'Login',
-    LOGIN_POPUP__LOGIN__ERROR: 'Something wrong! Can not login...',
-    LOGIN_POPUP__LOGIN__SUCCESS: 'Welcome to the app!',
+    LOGIN_POPUP__LOGIN__SUCCESS: '✔ Welcome to the app!',
+    LOGIN_POPUP__LOGIN__ERROR: '❌ Something wrong! Can not login...',
+    SNACK_BAR__GIVE_BADGE__SUCCESS: '✔ Success!',
+    SNACK_BAR__GIVE_BADGE__ERROR: '❌ Error!',
 
     CATEGORY_LIST__CATEGORIES: 'Categories',
     GIVE_THE_BADGE__PEOPLE: 'People',
