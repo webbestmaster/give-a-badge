@@ -9,7 +9,6 @@ import classNames from 'classnames';
 import type {GlobalStateType} from '../../../app/reducer';
 import Locale, {getLocalizedString} from '../../locale/c-locale';
 import type {LocaleType} from '../../locale/reducer';
-import type {AuthType} from '../../auth/reducer';
 import type {FoundedUserListType, FoundedUserType} from './api';
 import {badgeAssign, searchUser} from './api';
 import FoundedUser from './founded-user/c-founded-user';
@@ -25,7 +24,7 @@ import routes from '../../app/routes';
 
 type ReduxPropsType = {
     +locale: LocaleType,
-    +auth: AuthType,
+    // +auth: AuthType,
     +system: SystemType
 };
 
@@ -127,7 +126,7 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const view = this;
         const {state} = view;
         const {descriptionText, selectedUserList} = state;
-        const minDescriptionSize = 10;
+        const minDescriptionSize = 2;
 
         return Boolean(descriptionText.trim().length >= minDescriptionSize && selectedUserList.length > 0);
     }
@@ -192,13 +191,12 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const view = this;
         const {props, state} = view;
         const {selectedUserList, descriptionText} = state;
-        const {badgeId, auth} = props;
+        const {badgeId} = props;
 
         console.log('---> submit form');
         console.log(selectedUserList, descriptionText, badgeId);
 
         const resultBadgeAssign = await badgeAssign({
-            assignerId: auth.user.id,
             badgeId: parseInt(badgeId, 10),
             comment: descriptionText,
             tags: [],
@@ -480,7 +478,7 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
 export default connect(
     (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
         locale: state.locale,
-        auth: state.auth,
+        // auth: state.auth,
         system: state.system
         // reduxProp: true
     }),

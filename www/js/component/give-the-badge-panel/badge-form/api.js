@@ -34,11 +34,10 @@ export async function searchUser(query: string): Promise<FoundedUserListType | n
 }
 
 export type BadgeAssignInputType = {|
-    assignerId: number,
-    badgeId: number,
-    comment: string,
-    tags: Array<string>,
-    usersIds: Array<number>
+    +badgeId: number,
+    +comment: string,
+    +tags: Array<string>,
+    +usersIds: Array<number>
 |};
 
 export type BadgeAssignResponseType = mixed;
