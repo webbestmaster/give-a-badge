@@ -12,6 +12,8 @@ import style from './style.scss';
 import classnames from 'classnames';
 import moment from 'moment';
 import type {NewsType, NewsUserType} from '../title-card-list/api';
+import Link from 'react-router-dom/Link';
+import {getBadgeWonPath} from '../app/routes';
 
 type ReduxPropsType = {};
 
@@ -102,7 +104,7 @@ class TitleCard extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const {newsData} = props;
 
         return (
-            <div className={style.card}>
+            <Link to={getBadgeWonPath(newsData.reason.id)} className={style.card}>
                 <img className={style.badge_icon} src={newsData.reason.imageUrl} alt=""/>
 
                 {view.renderFaceList()}
@@ -114,7 +116,7 @@ class TitleCard extends Component<ReduxPropsType, PassedPropsType, StateType> {
                     <img className={style.bottom_face} src={newsData.author.imageUrl} alt=""/>
                     <p className={style.bottom_date}>{moment(newsData.date).format('DD.MM.YYYY')}</p>
                 </div>
-            </div>
+            </Link>
         );
     }
 }
