@@ -6,13 +6,11 @@ import appConst from '../../../app/const';
 import {defaultFetchGetProps, defaultFetchPostProps} from '../../auth/api';
 import {fetchX} from '../../../lib/fetch-x';
 
-export type FoundedUserType = {|
+export type FoundedUserType = {
     +id: number,
     +name: string,
-    +email: null,
-    +title: string | null,
     +imageUrl: string
-|};
+};
 
 export type FoundedUserListType = Array<FoundedUserType>;
 
