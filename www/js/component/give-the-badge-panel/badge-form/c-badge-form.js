@@ -429,7 +429,7 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
                 })}
             >
                 <form
-                    className={style.badge_form}
+                    className={classNames(style.badge_form, {[serviceStyle.disabled]: state.snackbar.isSuccess})}
                     onSubmit={async (evt: SyntheticEvent<HTMLFormElement>): Promise<void> => {
                         evt.preventDefault();
                         await view.submitForm();
