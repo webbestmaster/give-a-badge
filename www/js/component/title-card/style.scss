@@ -32,6 +32,7 @@
     padding-right: 14px;
 }
 
+%people-face,
 .people_face {
     border: 2px solid #fff;
     border-radius: 100%;
@@ -52,13 +53,24 @@
     }
 }
 
-.people_face_counter {
-    color: $main-text-color;
-    font-size: 14px;
-    position: absolute;
-    right: 54px;
-    top: 45px;
+.people_face__number {
+    @extend %people-face;
+
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    padding-top: 12px;
+    text-align: center;
 }
+
+//.people_face_counter {
+//    color: $main-text-color;
+//    font-size: 14px;
+//    position: absolute;
+//    right: 54px;
+//    top: 45px;
+//}
 
 .review {
     color: $main-text-color;

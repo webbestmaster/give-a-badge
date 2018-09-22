@@ -51,6 +51,10 @@ class TitleCard extends Component<ReduxPropsType, PassedPropsType, StateType> {
             [style.people_face__single]: isSingleItem
         });
 
+        const maxVisibleFace = 6;
+
+        const isMoreThenMax = userList.length > maxVisibleFace;
+
         return (
             <div
                 className={classnames(serviceStyle.clear_self, style.people_list, {
@@ -58,9 +62,29 @@ class TitleCard extends Component<ReduxPropsType, PassedPropsType, StateType> {
                 })}
             >
                 {userList.map(
-                    (userInList: NewsUserType): Node =>
-                        <img key={userInList.id} className={peopleFaceClassName} src={userInList.imageUrl} alt=""/>
+                    (userInList: NewsUserType, faceIndex: number): Node => {
+                        if (!isMoreThenMax || faceIndex < maxVisibleFace - 1) {
+                            return (
+                                <img
+                                    key={userInList.id}
+                                    className={peopleFaceClassName}
+                                    src={userInList.imageUrl}
+                                    alt=""
+                                />
+                            );
+                        }
 
+                        if (faceIndex === maxVisibleFace - 1) {
+                            return (
+                                <div className={style.people_face__number} key="face-number">
+                                    +{newsData.totalToUsers - maxVisibleFace + 1}
+                                    &nbsp;
+                                </div>
+                            );
+                        }
+
+                        return null;
+                    }
                 )}
                 {/*
                     <p className={style.people_face_counter}>
