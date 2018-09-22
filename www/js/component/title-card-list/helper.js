@@ -7,7 +7,19 @@ export function extractNewsList(titleNewsList: TitleNewsListType): Array<NewsTyp
     const newsList = [];
 
     titleNewsList.newsResponseList.forEach((newsListType: GetNewsListType) => {
-        newsList.push(...newsListType.content);
+        const newsCandidateList = newsListType.content;
+
+        newsCandidateList.forEach((newsItem: NewsType) => {
+            const inInNewsList = newsList.some(
+                (newsItemInNewsList: NewsType): boolean => newsItemInNewsList.id === newsItem.id
+            );
+
+            if (inInNewsList) {
+                return;
+            }
+
+            newsList.push(newsItem);
+        });
     });
 
     return newsList;

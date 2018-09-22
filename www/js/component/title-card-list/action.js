@@ -6,15 +6,20 @@ import {titleCardListConst} from './const';
 export type ApplyGetNewListResponseType = {|
     +type: 'title-card-list__apply-get-new-list-response',
     +payload: {|
-        +getNewsListResponse: GetNewsListType
+        +getNewsListResponse: GetNewsListType,
+        +inBegin: boolean
     |}
 |};
 
-export function applyGetNewListResponse(getNewsListResponse: GetNewsListType): ApplyGetNewListResponseType {
+export function applyGetNewListResponse(
+    getNewsListResponse: GetNewsListType,
+    inBegin: boolean
+): ApplyGetNewListResponseType {
     return {
         type: titleCardListConst.action.type.applyGetNewListResponse,
         payload: {
-            getNewsListResponse
+            getNewsListResponse,
+            inBegin
         }
     };
 }

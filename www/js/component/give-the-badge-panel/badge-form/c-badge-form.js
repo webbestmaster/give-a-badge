@@ -21,16 +21,22 @@ import type {SystemType} from '../../system/reducer/root';
 import withRouter from 'react-router-dom/withRouter';
 import type {ContextRouterType} from '../../../../type/react-router-dom-v4';
 import routes from '../../app/routes';
+import * as api from '../../title-card-list/api';
+import type {TitleNewsListType} from '../../title-card-list/reducer';
+import {pageSize} from '../../title-card-list/title-card-list';
+import {applyGetNewListResponse} from '../../title-card-list/action';
+import type {GetNewsListType} from '../../title-card-list/api';
+import type {ApplyGetNewListResponseType} from '../../title-card-list/action';
 
 type ReduxPropsType = {
     +locale: LocaleType,
-    // +auth: AuthType,
+    +titleNewsList: TitleNewsListType,
     +system: SystemType
 };
 
-type ReduxActionType = {
-    // +setSmth: (smth: string) => string
-};
+type ReduxActionType = {|
+    +applyGetNewListResponse: (getNewsListResponse: GetNewsListType, inBegin: boolean) => ApplyGetNewListResponseType
+|};
 
 type PassedPropsType = {|
     +badgeId: string
@@ -68,7 +74,7 @@ const componentStore: ComponentStoreType = {
 };
 
 const reduxAction: ReduxActionType = {
-    // setSmth // imported from actions
+    applyGetNewListResponse
 };
 
 const transitionDuration = 150;
@@ -120,6 +126,21 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
             selectedUserList: [],
             isSearchInProgressCounter: 0
         };
+    }
+
+    async fetchNews(): Promise<void> {
+        const view = this;
+        const {props} = view;
+        const {applyGetNewListResponse: applyGetNewListResponseAction} = props;
+
+        const getNewsListResponse = await api.getNewsList(0, pageSize);
+
+        if (getNewsListResponse === null) {
+            console.error('can not get news list');
+            return;
+        }
+
+        applyGetNewListResponseAction(getNewsListResponse, true);
     }
 
     isSubmitActive(): boolean {
@@ -392,6 +413,18 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
         const {isSuccess} = state.snackbar;
 
+        if (isSuccess) {
+            view.fetchNews()
+                .then((): void => console.log('success fetch news after badge assign'))
+                .catch(
+                    (error: Error): Error => {
+                        console.error('Can NOT fetch news after badge assign');
+                        console.error(error);
+                        return error;
+                    }
+                );
+        }
+
         return (
             <Snackbar
                 anchorOrigin={{
@@ -478,9 +511,8 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
 export default connect(
     (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
         locale: state.locale,
-        // auth: state.auth,
+        titleNewsList: state.titleNewsList,
         system: state.system
-        // reduxProp: true
     }),
     reduxAction
 )(withRouter(BadgeForm));

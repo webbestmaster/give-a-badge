@@ -22,6 +22,10 @@ export default combineReducers({
             return newsResponseList;
         }
 
-        return [...newsResponseList, actionData.payload.getNewsListResponse];
+        const {getNewsListResponse} = actionData.payload;
+
+        return actionData.payload.inBegin ?
+            [getNewsListResponse, ...newsResponseList] :
+            [...newsResponseList, getNewsListResponse];
     }
 });

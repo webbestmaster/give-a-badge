@@ -24,7 +24,7 @@ type ReduxPropsType = {|
 |};
 
 type ReduxActionType = {|
-    +applyGetNewListResponse: (getNewsListResponse: GetNewsListType) => ApplyGetNewListResponseType
+    +applyGetNewListResponse: (getNewsListResponse: GetNewsListType, inBegin: boolean) => ApplyGetNewListResponseType
 |};
 
 type PassedPropsType = {
@@ -40,7 +40,7 @@ const reduxAction: ReduxActionType = {
     applyGetNewListResponse
 };
 
-const pageSize = 20;
+export const pageSize = 20;
 
 class TitleCardList extends Component<ReduxPropsType, PassedPropsType, StateType> {
     // eslint-disable-next-line id-match
@@ -62,7 +62,7 @@ class TitleCardList extends Component<ReduxPropsType, PassedPropsType, StateType
             return;
         }
 
-        applyGetNewListResponseAction(getNewsListResponse);
+        applyGetNewListResponseAction(getNewsListResponse, false);
     }
 
     async componentDidUpdate(prevProps: PropsType, prevState: StateType, snapshot?: mixed): Promise<void> {
