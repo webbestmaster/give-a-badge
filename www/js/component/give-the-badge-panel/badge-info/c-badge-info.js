@@ -11,6 +11,9 @@ import {getBadgeCategoryList} from '../../badge-category-list/api';
 import style from './style.scss';
 import type {SystemType} from '../../system/reducer/root';
 import classNames from 'classnames';
+import withRouter from 'react-router-dom/withRouter';
+import routes from '../../app/routes';
+import type {ContextRouterType} from '../../../../type/react-router-dom-v4';
 
 type ReduxPropsType = {|
     +system: SystemType
@@ -28,6 +31,7 @@ type PropsType = $ReadOnly<$Exact<{
         ...$Exact<PassedPropsType>,
         ...$Exact<ReduxPropsType>,
         ...$Exact<ReduxActionType>,
+        ...$Exact<ContextRouterType>,
         +children: Node
     }>>;
 
@@ -72,7 +76,9 @@ class BadgeInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
             ) || null;
 
         if (badgeInfo === null) {
-            console.error('can not find badgeInfo', badgeInfo);
+            console.error('can not find badgeInfo');
+            console.error('move to home page');
+            props.history.push(routes.index.index);
             return null;
         }
 
@@ -142,4 +148,4 @@ export default connect(
         system: state.system
     }),
     reduxAction
-)(BadgeInfo);
+)(withRouter(BadgeInfo));
