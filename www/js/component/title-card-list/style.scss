@@ -7,7 +7,7 @@
     flex-wrap: wrap;
     justify-content: center;
     margin: 0 auto;
-    //max-width: $max-app-width;
+    max-width: 1184px; // 4 badge in row max
     padding: 28px + $header-height 0 50px;
 }
 
