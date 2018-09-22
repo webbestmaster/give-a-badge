@@ -32,7 +32,7 @@ const definePluginParams = {
     // IS_DEVELOPMENT: JSON.stringify(IS_DEVELOPMENT)
 };
 
-const fileRegExp = /\.(png|jpg|jpeg|gif|svg|woff2?)(\?[\d&.=a-z]+)?$/;
+const fileRegExp = /\.(png|jpg|jpeg|gif|svg|woff2?)$/;
 
 const webpackConfig = {
     entry: [
