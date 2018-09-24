@@ -12,6 +12,8 @@ import HalfPopupHeader from '../ui/half-popup/header/c-header';
 import {getBadgeWonServerData} from './api';
 import type {BadgeWonServerDataType} from './api';
 import moment from 'moment';
+import {isString} from '../../lib/is';
+import routes from '../app/routes';
 
 type ReduxPropsType = {
     // +reduxProp: boolean
@@ -58,12 +60,24 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
     async componentDidMount(): Promise<void> {
         const view = this;
+        const {props, state} = view;
 
-        const badgeWonServerData = await getBadgeWonServerData(44);
+        const {badgeId} = props.match.params;
+
+        if (!isString(badgeId)) {
+            console.error('badgeId is not a string', badgeId);
+            console.error('navigate to home', badgeId);
+            props.history.push(routes.index.index);
+            return;
+        }
+
+        const badgeWonServerData = await getBadgeWonServerData(badgeId);
 
         if (badgeWonServerData instanceof Error) {
-            console.error('can not get badge won');
+            console.error('can not get badge won badgeId:', badgeId);
             console.error(badgeWonServerData);
+            console.error('navigate to home', badgeId);
+            props.history.push(routes.index.index);
             return;
         }
 
