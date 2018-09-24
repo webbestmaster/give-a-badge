@@ -9,6 +9,9 @@ import type {GlobalStateType} from '../../app/reducer';
 import type {ContextRouterType} from '../../../type/react-router-dom-v4';
 import HalfPopup from '../ui/half-popup/c-half-popup';
 import HalfPopupHeader from '../ui/half-popup/header/c-header';
+import {getBadgeWonServerData} from './api';
+import type {BadgeWonServerDataType} from './api';
+import moment from 'moment';
 
 type ReduxPropsType = {
     // +reduxProp: boolean
@@ -29,7 +32,8 @@ type PropsType = $ReadOnly<$Exact<{
     }>>;
 
 type StateType = {|
-    +isShowMore: boolean
+    +isShowMore: boolean,
+    +badgeWonServerData: BadgeWonServerDataType | null
     // +state: number
 |};
 
@@ -47,8 +51,23 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const view = this;
 
         view.state = {
-            isShowMore: false
+            isShowMore: false,
+            badgeWonServerData: null
         };
+    }
+
+    async componentDidMount(): Promise<void> {
+        const view = this;
+
+        const badgeWonServerData = await getBadgeWonServerData(44);
+
+        if (badgeWonServerData instanceof Error) {
+            console.error('can not get badge won');
+            console.error(badgeWonServerData);
+            return;
+        }
+
+        view.setState({badgeWonServerData});
     }
 
     toggleIsShowMore() {
@@ -58,16 +77,42 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
         view.setState({isShowMore: !state.isShowMore});
     }
 
+    renderHeader(): Node {
+        const view = this;
+        const {props, state} = view;
+        const {badgeWonServerData} = state;
+
+        if (badgeWonServerData === null) {
+            return null;
+        }
+
+        const {imageUrl, name} = badgeWonServerData.reason;
+
+        return (
+            <HalfPopupHeader>
+                <img src={imageUrl} alt={name}/>
+                <span>{name}</span>
+            </HalfPopupHeader>
+        );
+    }
+
     renderAuthor(): Node {
         const view = this;
         const {props, state} = view;
+        const {badgeWonServerData, isShowMore} = state;
+
+        if (badgeWonServerData === null || isShowMore === true) {
+            return null;
+        }
+
+        const {author, date} = badgeWonServerData;
+        const {imageUrl, name} = author;
 
         return (
             <div>
-                <h1>see the same playout in card</h1>
-                <img src="http://via.placeholder.com/34x34" alt=""/>
-                <h3>author name</h3>
-                <p>badge date</p>
+                <img src={imageUrl} alt=""/>
+                <h3>{name}</h3>
+                <p>{moment(date).format('DD.MM.YYYY')}</p>
             </div>
         );
     }
@@ -75,29 +120,36 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
     renderDescription(): Node {
         const view = this;
         const {props, state} = view;
+        const {badgeWonServerData, isShowMore} = state;
 
-        return (
-            <div>
-                <h3>description</h3>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, magnam, nobis. Consequuntur
-                    dolores enim harum laborum molestiae quae temporibus! Eum facilis quas similique? Aspernatur dolore
-                    expedita nemo, optio quasi temporibus.
-                </p>
-            </div>
-        );
+        if (badgeWonServerData === null || isShowMore === true) {
+            return null;
+        }
+
+        return <p>{badgeWonServerData.comment}</p>;
     }
 
     renderPeopleList(): Node {
         const view = this;
         const {props, state} = view;
 
+        const {badgeWonServerData, isShowMore} = state;
+
+        if (badgeWonServerData === null) {
+            return null;
+        }
+
+        const {toUsers} = badgeWonServerData;
+
         return (
             <div>
-                <h1>people list</h1>
-                {[1, 2, 3].map(
-                    (index: number): Node => {
-                        return <div key={index}>{index}</div>;
+                {toUsers.map(
+                    (userData: {+id: string | number, +imageUrl: string, +name: string}): Node => {
+                        return (
+                            <div key={userData.id}>
+                                <img src={userData.imageUrl} alt={userData.name}/>
+                            </div>
+                        );
                     }
                 )}
 
@@ -106,7 +158,7 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
                     onClick={(): void => view.toggleIsShowMore()}
                     onKeyPress={(): void => view.toggleIsShowMore()}
                 >
-                    show more/less
+                    {isShowMore ? '%show less%' : '%show more%'}
                 </button>
             </div>
         );
@@ -118,10 +170,7 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
         return (
             <HalfPopup>
-                <HalfPopupHeader>
-                    <img src="http://via.placeholder.com/34x34" alt=""/>
-                    <span>badge name and badge image here</span>
-                </HalfPopupHeader>
+                {view.renderHeader()}
                 {view.renderPeopleList()}
                 {view.renderDescription()}
                 {view.renderAuthor()}

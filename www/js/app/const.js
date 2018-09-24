@@ -10,7 +10,7 @@ const appConst = {
         getBadgeCategoryList: '/api/badges/catalog',
         searchUser: '/api/users/search?name={userName}&size=10',
         badgeAssign: '/api/badges/assign',
-        // todo: replace with do-*
+        getBadgeWon: '/api/news/{badgeId}',
         login: '/login',
         logout: '/logout'
     }
