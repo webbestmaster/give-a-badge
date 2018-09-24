@@ -124,7 +124,7 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
         return (
             <div>
-                <img src={imageUrl} alt=""/>
+                <img src={imageUrl} alt={name}/>
                 <h3>{name}</h3>
                 <p>{moment(date).format('DD.MM.YYYY')}</p>
             </div>
