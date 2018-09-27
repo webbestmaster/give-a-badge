@@ -10,6 +10,8 @@ import style from './style.scss';
 import CloseButton from './close-button/c-close-button';
 import type {OnSetIsScrollEnableType} from '../../system/action';
 import {setIsScrollEnable} from '../../system/action';
+import {isString} from '../../../lib/is';
+import classNames from 'classnames';
 
 type ReduxPropsType = {
     // +reduxProp: boolean
@@ -21,6 +23,10 @@ type ReduxActionType = {
 };
 
 type PassedPropsType = {
+    +className?: {|
+        +containerPosition?: string,
+        +container?: string
+    |}
     // +passedProp: string
 };
 
@@ -78,12 +84,17 @@ class HalfPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const view = this;
         const {props, state} = view;
 
+        const containerPositionClassName =
+            props.className && isString(props.className.containerPosition) ? props.className.containerPosition : '';
+        const containerClassName =
+            props.className && isString(props.className.container) ? props.className.container : '';
+
         return (
             <div className={style.half_popup__wrapper}>
                 <div className={style.half_popup__fade}/>
-                <div className={style.half_popup__set_container_position}>
+                <div className={classNames(style.half_popup__set_container_position, containerPositionClassName)}>
                     <CloseButton/>
-                    <div className={style.half_popup__container}>{props.children}</div>
+                    <div className={classNames(style.half_popup__container, containerClassName)}>{props.children}</div>
                 </div>
             </div>
         );

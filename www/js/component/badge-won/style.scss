@@ -1,1 +1,63 @@
-//
+.half_popup__container_position__extra {
+    padding-left: 733px;
+}
+
+.half_popup__container__extra {
+    padding: 0;
+}
+
+.header {
+    display: block;
+}
+
+.header__badge_image {
+    display: block;
+}
+
+.header_badge_name {
+    display: block;
+}
+
+.author_info {
+    display: block;
+}
+
+.author_image {
+    display: block;
+}
+
+.author_name {
+    display: block;
+}
+
+.badge_date {
+    display: block;
+}
+
+.badge_description {
+    display: block;
+}
+
+.people_list {
+    display: block;
+
+    &.people_list__open {
+        display: block;
+    }
+}
+
+.won_badge_face {
+    display: block;
+}
+
+.won_badge_face_image {
+    display: block;
+}
+
+.show_more_less_button {
+    display: block;
+
+    &.show_more_less_button__open {
+        display: block;
+    }
+}
