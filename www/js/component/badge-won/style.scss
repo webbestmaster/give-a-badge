@@ -1,3 +1,9 @@
+@import '../../../css/var';
+@import '../../../css/service';
+
+$winner-background-color: #fbcb60;
+$badge-image-width: 45px;
+
 .half_popup__container_position__extra {
     padding-left: 733px;
 }
@@ -7,15 +13,35 @@
 }
 
 .header {
-    display: block;
+    background-color: $winner-background-color;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-top: 24px;
 }
 
 .header__badge_image {
     display: block;
+    width: $badge-image-width;
+    margin-top: 4px;
+    margin-right: 17px;
+}
+
+.header__badge_text_block {
+    display: block;
+    max-width: 50%;
+    //padding-right: $badge-image-width - 40px;
 }
 
 .header_badge_name {
+    @extend %ellipsis;
+
     display: block;
+    color: #fff;
+    font-weight: bold;
+    font-size: 32px;
+    font-family: gilroy-bold, $main-font-family, sans-serif;
 }
 
 .author_info {

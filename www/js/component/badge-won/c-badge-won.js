@@ -106,7 +106,9 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
         return (
             <h3 className={style.header}>
                 <img className={style.header__badge_image} src={imageUrl} alt={name}/>
-                <span className={style.header_badge_name}>{name}</span>
+                <div className={style.header__badge_text_block}>
+                    <span className={style.header_badge_name}>{name}</span>
+                </div>
             </h3>
         );
     }
