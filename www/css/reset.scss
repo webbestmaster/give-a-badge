@@ -124,11 +124,12 @@ input[type='submit'], input[type='button'], button {
 a,
 select,
 button,
-input[type='button'],
-input[type='file'],
-input[type='reset'],
-input[type='submit'] {
+input {
     cursor: pointer;
+}
+
+input {
+    user-select: auto;
 }
 
 input, select, a img {
