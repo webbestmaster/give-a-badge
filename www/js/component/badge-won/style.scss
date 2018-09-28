@@ -13,19 +13,19 @@ $badge-image-width: 45px;
 }
 
 .header {
+    align-items: center;
     background-color: $winner-background-color;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: center;
     padding-top: 24px;
 }
 
 .header__badge_image {
     display: block;
-    width: $badge-image-width;
-    margin-top: 4px;
     margin-right: 17px;
+    margin-top: 4px;
+    width: $badge-image-width;
 }
 
 .header__badge_text_block {
@@ -37,11 +37,11 @@ $badge-image-width: 45px;
 .header_badge_name {
     @extend %ellipsis;
 
-    display: block;
     color: #fff;
-    font-weight: bold;
-    font-size: 32px;
+    display: block;
     font-family: gilroy-bold, $main-font-family, sans-serif;
+    font-size: 32px;
+    font-weight: bold;
 }
 
 .author_info {
@@ -50,6 +50,7 @@ $badge-image-width: 45px;
 
 .author_image {
     display: block;
+    max-height: 100px;
 }
 
 .author_name {
@@ -66,6 +67,8 @@ $badge-image-width: 45px;
 
 .people_list {
     display: block;
+    min-height: 300px;
+    overflow: hidden;
 
     &.people_list__open {
         display: block;
@@ -78,6 +81,7 @@ $badge-image-width: 45px;
 
 .won_badge_face_image {
     display: block;
+    height: 300px;
 }
 
 .show_more_less_button {
