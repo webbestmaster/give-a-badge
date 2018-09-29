@@ -18,11 +18,12 @@ $badge-image-width: 45px;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    padding-top: 24px;
+    padding: 24px 20px 20px;
 }
 
 .header__badge_image {
     display: block;
+    height: $badge-image-width;
     margin-right: 17px;
     margin-top: 4px;
     width: $badge-image-width;
@@ -40,7 +41,7 @@ $badge-image-width: 45px;
     color: #fff;
     display: block;
     font-family: gilroy-bold, $main-font-family, sans-serif;
-    font-size: 32px;
+    font-size: 30px;
     font-weight: bold;
 }
 
@@ -63,12 +64,16 @@ $badge-image-width: 45px;
 
 .badge_description {
     display: block;
+    font-size: 16px;
+    line-height: 24px;
+    padding: 36px 22px 34px;
 }
 
 .people_list {
+    background-color: $winner-background-color;
     display: block;
-    min-height: 300px;
     overflow: hidden;
+    padding: 10px 5px 10px 16px;
 
     &.people_list__open {
         display: block;
@@ -76,18 +81,54 @@ $badge-image-width: 45px;
 }
 
 .won_badge_face {
-    display: block;
+    float: left;
+    height: 48px;
+    margin: 6px;
+    width: 48px;
 }
 
 .won_badge_face_image {
+    border-radius: 100%;
     display: block;
-    height: 300px;
+    height: 100%;
+    width: 100%;
+}
+
+.show_more_less_button__arrow {
+    color: #fff;
+    display: inline-block;
+    font-size: 30px;
+    left: 9px;
+    line-height: 30px;
+    position: relative;
+    top: 5px;
+    transform: rotateZ(-90deg);
 }
 
 .show_more_less_button {
+    background-image: linear-gradient(to top, rgba(251, 203, 96, 1) 30%, rgba(251, 203, 96, 0));
+    box-sizing: border-box;
+    color: #fff;
     display: block;
+    font-family: gilroy-bold, $main-font-family, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    height: 75px;
+    margin-top: -75px;
+    padding-top: 21px;
+    position: relative;
+    width: 100%;
+    z-index: 1;
 
     &.show_more_less_button__open {
+        background-image: linear-gradient(to top, rgba(251, 203, 96, 1) 10%, rgba(251, 203, 96, 1));
         display: block;
+        height: 50px;
+        margin-top: 0;
+        padding-top: 0;
+
+        .show_more_less_button__arrow {
+            transform: rotateZ(90deg);
+        }
     }
 }

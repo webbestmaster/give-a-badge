@@ -17,6 +17,7 @@ import routes from '../app/routes';
 import style from './style.scss';
 import type {SystemType} from '../system/reducer/root';
 import {triggerResize} from '../ui/helper';
+import Locale from '../locale/c-locale';
 
 type ReduxPropsType = {|
     +system: SystemType
@@ -165,7 +166,14 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
             return null;
         }
 
-        return <p className={style.badge_description}>{badgeWonServerData.comment}</p>;
+        return (
+            <p className={style.badge_description}>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur autem, cumque distinctio doloribus
+                eaque fuga inventore iusto laborum numquam pariatur perferendis porro quam quia reprehenderit sed
+                tempore temporibus velit voluptas.
+                {badgeWonServerData.comment}
+            </p>
+        );
     }
 
     getAvailableAreaHeight(): number {
@@ -177,7 +185,7 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const {header} = node;
 
         if (header === null) {
-            console.error('view.node.header is null');
+            console.log('view.node.header is null');
             return 0;
         }
 
@@ -192,7 +200,7 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const {faceList} = node;
 
         if (faceList === null) {
-            console.error('view.node.faceList is null');
+            console.log('view.node.faceList is null');
             return 0;
         }
 
@@ -200,11 +208,11 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
         faceList.style.height = 'auto';
 
-        const currentNaturalHeght = parseInt(faceList.clientHeight, 10) || 0;
+        const currentNaturalHeight = parseInt(faceList.clientHeight, 10) || 0;
 
         faceList.style.height = currentStyleHeight;
 
-        return currentNaturalHeght;
+        return currentNaturalHeight;
     }
 
     getPeopleListStyle(): {|+height: number | string|} {
@@ -234,6 +242,53 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
         };
     }
 
+    renderShowMoreButton(): Node {
+        const view = this;
+        const {props, state} = view;
+
+        const {badgeWonServerData, isShowMore} = state;
+
+        if (badgeWonServerData === null) {
+            return null;
+        }
+
+        const isNeedToShowButton = view.getNaturalPeopleListHeight() > view.getAvailableAreaHeight();
+
+        if (isNeedToShowButton === false) {
+            return null;
+        }
+
+        if (isShowMore) {
+            return (
+                <button
+                    className={classNames(style.show_more_less_button, style.show_more_less_button__open)}
+                    type="button"
+                    onClick={(): void => view.toggleIsShowMore()}
+                    onKeyPress={(): void => view.toggleIsShowMore()}
+                >
+                    <Locale stringKey="BADGE_WON_LIST__SHOW_LESS"/>
+                    <span className={style.show_more_less_button__arrow}>‹</span>
+                </button>
+            );
+        }
+
+        const {toUsers} = badgeWonServerData;
+
+        return (
+            <button
+                className={style.show_more_less_button}
+                type="button"
+                onClick={(): void => view.toggleIsShowMore()}
+                onKeyPress={(): void => view.toggleIsShowMore()}
+            >
+                <Locale stringKey="BADGE_WON_LIST__SHOW_ALL"/>
+                {': '}
+                {toUsers.length}
+                <span className={style.show_more_less_button__arrow}>‹</span>
+            </button>
+        );
+    }
+
     renderPeopleList(): Node {
         const view = this;
         const {props, state} = view;
@@ -257,6 +312,22 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
                     }}
                     className={classNames(style.people_list, {[style.people_list__open]: isShowMore})}
                 >
+                    {'                                                                    '.split('').map(() => {
+                        return toUsers.map(
+                            (userData: {+id: string | number, +imageUrl: string, +name: string}): Node => {
+                                return (
+                                    <div className={style.won_badge_face} key={userData.id + Math.random()}>
+                                        <img
+                                            className={style.won_badge_face_image}
+                                            src={userData.imageUrl}
+                                            alt={userData.name}
+                                        />
+                                    </div>
+                                );
+                            }
+                        );
+                    })}
+
                     {toUsers.map(
                         (userData: {+id: string | number, +imageUrl: string, +name: string}): Node => {
                             return (
@@ -271,18 +342,7 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
                         }
                     )}
                 </div>
-                {isNeedToShowButton ?
-                    <button
-                        className={classNames(style.show_more_less_button, {
-                            [style.show_more_less_button__open]: isShowMore
-                        })}
-                        type="button"
-                        onClick={(): void => view.toggleIsShowMore()}
-                        onKeyPress={(): void => view.toggleIsShowMore()}
-                    >
-                        {isShowMore ? '%show less%' : '%show more%'}
-                    </button> :
-                    null}
+                {view.renderShowMoreButton()}
             </Fragment>
         );
     }
