@@ -47,22 +47,35 @@ $badge-image-width: 45px;
 
 .author_info {
     display: block;
+    padding: 0 22px 20px;
 }
 
 .author_image {
-    display: block;
-    max-height: 100px;
+    border-radius: 100%;
+    float: left;
+    height: 52px;
+    margin-right: 18px;
+    width: 52px;
+}
+
+.author_info_text {
+    float: left;
+    padding-top: 6px;
 }
 
 .author_name {
+    color: $main-text-color;
     display: block;
+    padding-bottom: 9px;
 }
 
 .badge_date {
+    color: $secondary-text-color;
     display: block;
 }
 
 .badge_description {
+    color: $main-text-color;
     display: block;
     font-size: 16px;
     line-height: 24px;

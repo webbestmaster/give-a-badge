@@ -149,8 +149,10 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
         return (
             <div className={style.author_info}>
                 <img className={style.author_image} src={imageUrl} alt={name}/>
-                <h3 className={style.author_name}>{name}</h3>
-                <p className={style.badge_date}>{moment(date).format('DD.MM.YYYY')}</p>
+                <div className={style.author_info_text}>
+                    <h3 className={style.author_name}>{name}</h3>
+                    <p className={style.badge_date}>{moment(date).format('DD.MM.YYYY')}</p>
+                </div>
             </div>
         );
     }
@@ -312,22 +314,6 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
                     }}
                     className={classNames(style.people_list, {[style.people_list__open]: isShowMore})}
                 >
-                    {'                                                                    '.split('').map(() => {
-                        return toUsers.map(
-                            (userData: {+id: string | number, +imageUrl: string, +name: string}): Node => {
-                                return (
-                                    <div className={style.won_badge_face} key={userData.id + Math.random()}>
-                                        <img
-                                            className={style.won_badge_face_image}
-                                            src={userData.imageUrl}
-                                            alt={userData.name}
-                                        />
-                                    </div>
-                                );
-                            }
-                        );
-                    })}
-
                     {toUsers.map(
                         (userData: {+id: string | number, +imageUrl: string, +name: string}): Node => {
                             return (
