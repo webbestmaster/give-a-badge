@@ -17,7 +17,7 @@ export type UserType = {|
 const defaultUserState: UserType = {
     email: null,
     id: 0,
-    imageUrl: 'http://via.placeholder.com/34x34',
+    imageUrl: '/favicon.ico',
     name: '%username%',
     title: 'shit_codeMaker',
     userPermissions: []

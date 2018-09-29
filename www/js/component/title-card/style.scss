@@ -19,6 +19,9 @@
 }
 
 .badge_icon {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
     border-radius: 50px;
     display: block;
     height: 100px;
@@ -40,6 +43,9 @@
 
 %people-face,
 .people_face {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
     border: 2px solid #fff;
     border-radius: 100%;
     box-sizing: border-box;
@@ -101,6 +107,9 @@
 }
 
 .bottom_face {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
     border-radius: 16px;
     float: left;
     font-family: $main-font-family, sans-serif;

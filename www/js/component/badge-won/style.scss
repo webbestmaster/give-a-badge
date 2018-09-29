@@ -22,6 +22,9 @@ $badge-image-width: 45px;
 }
 
 .header__badge_image {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
     display: block;
     height: $badge-image-width;
     margin-right: 17px;
@@ -51,6 +54,9 @@ $badge-image-width: 45px;
 }
 
 .author_image {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
     border-radius: 100%;
     float: left;
     height: 52px;
@@ -101,6 +107,9 @@ $badge-image-width: 45px;
 }
 
 .won_badge_face_image {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
     border-radius: 100%;
     display: block;
     height: 100%;

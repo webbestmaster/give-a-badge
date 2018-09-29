@@ -69,7 +69,7 @@ class UserInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
                         {auth.user.name}!
                     </span>
                 </h5>
-                <img className={style.user_avatar} src={auth.user.imageUrl} alt=""/>
+                <div className={style.user_avatar} style={{backgroundImage: `url('${auth.user.imageUrl}')`}}/>
             </div>
         );
     }
@@ -87,7 +87,7 @@ class UserInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
                     onClick={async (): Promise<void> => await view.logout()}
                     onKeyPress={async (): Promise<void> => await view.logout()}
                 />
-                <img className={style.user_avatar} src={auth.user.imageUrl} alt=""/>
+                <div className={style.user_avatar} style={{backgroundImage: `url('${auth.user.imageUrl}')`}}/>
             </div>
         );
     }

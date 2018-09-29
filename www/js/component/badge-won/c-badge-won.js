@@ -124,7 +124,12 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
                 }}
                 className={style.header}
             >
-                <img className={style.header__badge_image} src={imageUrl} alt={name}/>
+                <div
+                    className={style.header__badge_image}
+                    style={{
+                        backgroundImage: `url('${imageUrl}')`
+                    }}
+                />
                 <div className={style.header__badge_text_block}>
                     <span className={style.header_badge_name}>{name}</span>
                 </div>
@@ -148,7 +153,12 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
         return (
             <div className={style.author_info}>
-                <img className={style.author_image} src={imageUrl} alt={name}/>
+                <div
+                    className={style.author_image}
+                    style={{
+                        backgroundImage: `url('${imageUrl}')`
+                    }}
+                />
                 <div className={style.author_info_text}>
                     <h3 className={style.author_name}>{name}</h3>
                     <p className={style.badge_date}>{moment(date).format('DD.MM.YYYY')}</p>
@@ -309,10 +319,11 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
                         (userData: {+id: string | number, +imageUrl: string, +name: string}): Node => {
                             return (
                                 <div className={style.won_badge_face} key={userData.id}>
-                                    <img
+                                    <div
                                         className={style.won_badge_face_image}
-                                        src={userData.imageUrl}
-                                        alt={userData.name}
+                                        style={{
+                                            backgroundImage: `url('${userData.imageUrl}')`
+                                        }}
                                     />
                                 </div>
                             );

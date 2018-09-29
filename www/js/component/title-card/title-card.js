@@ -67,11 +67,10 @@ class TitleCard extends Component<ReduxPropsType, PassedPropsType, StateType> {
                     (userInList: NewsUserType, faceIndex: number): Node => {
                         if (!isMoreThenMax || faceIndex < maxVisibleFace - 1) {
                             return (
-                                <img
+                                <div
                                     key={userInList.id}
                                     className={peopleFaceClassName}
-                                    src={userInList.imageUrl}
-                                    alt=""
+                                    style={{backgroundImage: `url('${userInList.imageUrl}')`}}
                                 />
                             );
                         }
@@ -105,7 +104,7 @@ class TitleCard extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
         return (
             <Link to={getBadgeWonPath(newsData.reason.id)} className={style.card}>
-                <img className={style.badge_icon} src={newsData.reason.imageUrl} alt=""/>
+                <div className={style.badge_icon} style={{backgroundImage: `url('${newsData.reason.imageUrl}')`}}/>
 
                 {view.renderFaceList()}
 
@@ -113,7 +112,11 @@ class TitleCard extends Component<ReduxPropsType, PassedPropsType, StateType> {
                     <p className={classnames(helperStyle.line_cap_3, style.review__text)}>{newsData.comment}</p>
                 </div>
                 <div className={classnames(serviceStyle.clear_self, style.bottom_data_wrapper)}>
-                    <img className={style.bottom_face} src={newsData.author.imageUrl} alt=""/>
+                    <div
+                        className={style.bottom_face}
+                        style={{backgroundImage: `url('${newsData.author.imageUrl}')`}}
+                    />
+
                     <p className={style.bottom_date}>{moment(newsData.date).format('DD.MM.YYYY')}</p>
                 </div>
             </Link>
