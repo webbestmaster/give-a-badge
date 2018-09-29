@@ -77,7 +77,10 @@ class BadgeCategoryListItem extends Component<ReduxPropsType, PassedPropsType, S
                                 to={getBadgePath(badgeCategory.id)}
                                 className={style.badge_item}
                             >
-                                <img className={style.badge_image} src={badgeCategory.imageUrl} alt=""/>
+                                <div
+                                    className={style.badge_image}
+                                    style={{backgroundImage: `url('${badgeCategory.imageUrl}')`}}
+                                />
                             </Link>
                         );
                     }

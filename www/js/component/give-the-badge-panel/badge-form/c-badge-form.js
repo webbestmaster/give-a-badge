@@ -374,10 +374,10 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
                                 onKeyPress={(): void => view.removeFromSelectedUserList(foundedUser)}
                                 key={foundedUser.id}
                             >
-                                <img
+                                <div
                                     className={style.selected_user_image}
-                                    src={foundedUser.imageUrl}
-                                    alt={foundedUser.name}
+                                    style={{backgroundImage: `url('${foundedUser.imageUrl}')`}}
+                                    title={foundedUser.name}
                                 />
                             </button>
                         );

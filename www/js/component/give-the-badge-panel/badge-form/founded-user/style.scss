@@ -2,9 +2,13 @@
 @import './../../../../../css/service';
 
 .founded_user_image {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
     border-radius: 100%;
     display: block;
     float: left;
+    height: 50px;
     width: 50px;
 }
 

@@ -104,7 +104,11 @@ class BadgeInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
         return (
             <div className={style.badge_info}>
-                <img className={style.badge_image} src={badgeInfo.imageUrl} alt={badgeInfo.name}/>
+                <div
+                    className={style.badge_image}
+                    style={{backgroundImage: `url('${badgeInfo.imageUrl}')`}}
+                    title={badgeInfo.name}
+                />
                 <div className={style.text_block}>
                     <h3 className={style.badge_header}>{badgeInfo.name}</h3>
                     <p className={style.badge_p}>{badgeInfo.description}</p>
@@ -124,7 +128,11 @@ class BadgeInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
         return (
             <div className={style.badge_info}>
-                <img className={style.badge_image} src={badgeInfo.imageUrl} alt={badgeInfo.name}/>
+                <div
+                    className={style.badge_image}
+                    style={{backgroundImage: `url('${badgeInfo.imageUrl}')`}}
+                    title={badgeInfo.name}
+                />
                 <div className={classNames(style.text_block, style.text_block_mobile)}>
                     <h3 className={style.badge_header}>{badgeInfo.name}</h3>
                 </div>

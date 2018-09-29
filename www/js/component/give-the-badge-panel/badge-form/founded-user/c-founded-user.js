@@ -80,7 +80,11 @@ class FoundedUser extends Component<ReduxPropsType, PassedPropsType, StateType> 
                 {/*
                     <h5>is in selected: {isActive ? 'y' : 'n'}</h5>
                     */}
-                <img className={style.founded_user_image} src={imageUrl} alt={name}/>
+                <div
+                    className={style.founded_user_image}
+                    style={{backgroundImage: `url('${imageUrl}')`}}
+                    title={name}
+                />
                 <div className={style.founded_user_name_wrapper}>
                     <div className={style.founded_user_name}>{name}</div>
                 </div>

@@ -81,8 +81,10 @@
 }
 
 .selected_user_image {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
     border-radius: 50%;
-    display: block;
     height: 100%;
     width: 100%;
 }
