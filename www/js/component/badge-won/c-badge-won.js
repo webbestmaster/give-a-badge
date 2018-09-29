@@ -168,14 +168,7 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
             return null;
         }
 
-        return (
-            <p className={style.badge_description}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur autem, cumque distinctio doloribus
-                eaque fuga inventore iusto laborum numquam pariatur perferendis porro quam quia reprehenderit sed
-                tempore temporibus velit voluptas.
-                {badgeWonServerData.comment}
-            </p>
-        );
+        return <p className={style.badge_description}>{badgeWonServerData.comment}</p>;
     }
 
     getAvailableAreaHeight(): number {
@@ -302,8 +295,6 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
         }
 
         const {toUsers} = badgeWonServerData;
-
-        const isNeedToShowButton = view.getNaturalPeopleListHeight() > view.getAvailableAreaHeight();
 
         return (
             <Fragment>
