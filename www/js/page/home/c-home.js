@@ -6,7 +6,7 @@ import type {Node} from 'react';
 import React, {Component} from 'react';
 // import style from './style.scss';
 import Header from '../../component/header/c-header';
-import TitleCardList from '../../component/title-card-list/title-card-list';
+import TitleCardList from '../../component/title-card-list/c-title-card-list';
 import Route from 'react-router-dom/Route';
 import BadgeCategoryList from '../../component/badge-category-list/c-badge-category-list';
 import GiveTheBadgePanel from '../../component/give-the-badge-panel/c-give-the-badge-panel';

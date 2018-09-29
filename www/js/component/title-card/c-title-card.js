@@ -103,7 +103,7 @@ class TitleCard extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const {newsData} = props;
 
         return (
-            <Link to={getBadgeWonPath(newsData.reason.id)} className={style.card}>
+            <Link to={getBadgeWonPath(newsData.id)} className={style.card}>
                 <div className={style.badge_icon} style={{backgroundImage: `url('${newsData.reason.imageUrl}')`}}/>
 
                 {view.renderFaceList()}

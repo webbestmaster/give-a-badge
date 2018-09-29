@@ -49,8 +49,10 @@ $badge-image-width: 45px;
 }
 
 .author_info {
+    @extend %clear-self;
+
     display: block;
-    padding: 0 22px 20px;
+    padding: 0 22px 23px;
 }
 
 .author_image {

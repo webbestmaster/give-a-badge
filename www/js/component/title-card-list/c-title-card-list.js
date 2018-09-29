@@ -8,7 +8,7 @@ import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../app/reducer';
 import style from './style.scss';
 import type {AuthType} from '../auth/reducer';
-import TitleCard from '../title-card/title-card';
+import TitleCard from '../title-card/c-title-card';
 import type {ApplyGetNewListResponseType} from './action';
 import {applyGetNewListResponse} from './action';
 import type {GetNewsListType, NewsType} from './api';

@@ -24,7 +24,7 @@ import routes from '../../app/routes';
 import type {GetNewsListType} from '../../title-card-list/api';
 import * as api from '../../title-card-list/api';
 import type {TitleNewsListType} from '../../title-card-list/reducer';
-import {pageSize} from '../../title-card-list/title-card-list';
+import {pageSize} from '../../title-card-list/c-title-card-list';
 import type {ApplyGetNewListResponseType} from '../../title-card-list/action';
 import {applyGetNewListResponse} from '../../title-card-list/action';
 
