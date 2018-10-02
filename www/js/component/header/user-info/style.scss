@@ -6,6 +6,8 @@
     float: right;
     padding-right: 2px;
     padding-top: 9px;
+    position: relative;
+    z-index: 1;
 }
 
 .logout_button {

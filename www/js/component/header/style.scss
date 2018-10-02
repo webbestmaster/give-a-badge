@@ -38,15 +38,14 @@ $header-height: 72px;
         background-color: #5291ff;
         border-radius: 100%;
         box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.15);
-        box-sizing: border-box;
         content: '';
         height: 138px;
         left: 50%;
         pointer-events: none;
         position: absolute;
-        transform: translate3d(-50%, -82px, 0);
+        top: -47px;
+        transform: translate3d(-50%, 0, 0);
         transition: all ease-out 0.3s;
-        //background-color: #0c0;
         width: 138px;
         z-index: -1;
     }
@@ -57,7 +56,7 @@ $header-height: 72px;
         &:after {
             border-radius: 0;
             height: 74px;
-            transform: translate3d(-50%, -50%, 0);
+            top: 0;
             width: 100%;
         }
     }
