@@ -70,8 +70,14 @@ class BadgeInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
             return null;
         }
 
+        const allBadgeList = [];
+
+        Object.keys(badgeCategoryList).forEach((key: string) => {
+            allBadgeList.push(...badgeCategoryList[key]);
+        });
+
         const badgeInfo =
-            badgeCategoryList.find(
+            allBadgeList.find(
                 (badgeCategoryInList: BadgeCategoryType): boolean => String(badgeCategoryInList.id) === badgeId
             ) || null;
 

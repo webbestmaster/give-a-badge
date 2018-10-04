@@ -6,15 +6,15 @@ import appConst from '../../app/const';
 import {defaultFetchGetProps} from '../auth/api';
 import {fetchX} from '../../lib/fetch-x';
 
-export type BadgeCategoryType = {|
+export type BadgeCategoryType = {
     +id: number,
     +name: string,
     +description: string,
     +category: string,
     +imageUrl: string
-|};
+};
 
-export type BadgeCategoryListType = Array<BadgeCategoryType>;
+export type BadgeCategoryListType = {[key: string]: Array<BadgeCategoryType>};
 
 export async function getBadgeCategoryList(): Promise<BadgeCategoryListType | null> {
     const getBadgeCategoryListUrl = appConst.api.getBadgeCategoryList;

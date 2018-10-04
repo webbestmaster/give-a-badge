@@ -11,8 +11,8 @@ import HalfPopup from '../ui/half-popup/c-half-popup';
 import HalfPopupHeader from '../ui/half-popup/header/c-header';
 import type {BadgeCategoryListType} from './api';
 import {getBadgeCategoryList} from './api';
-import type {ExtractedCategoryType} from './helper';
-import {extractCategoryList} from './helper';
+// import type {ExtractedCategoryType} from './helper';
+// import {extractCategoryList} from './helper';
 import Locale from '../locale/c-locale';
 import type {ContextRouterType} from '../../../type/react-router-dom-v4';
 
@@ -79,20 +79,22 @@ class BadgeCategoryList extends Component<ReduxPropsType, PassedPropsType, State
     render(): Node {
         const view = this;
         const {props, state} = view;
-
-        const extractedCategoryList = extractCategoryList(state.badgeCategoryList || []);
+        const {badgeCategoryList} = state;
 
         return (
             <HalfPopup>
                 <HalfPopupHeader>
                     <Locale stringKey="CATEGORY_LIST__CATEGORIES"/>
                 </HalfPopupHeader>
-
-                {extractedCategoryList.map(
-                    (extractedCategory: ExtractedCategoryType): Node =>
-                        <BadgeCategoryListItem key={extractedCategory.name} category={extractedCategory}/>
-
-                )}
+                {badgeCategoryList ?
+                    Object.keys(badgeCategoryList).map(
+                        (key: string): Node => {
+                            return (
+                                <BadgeCategoryListItem key={key} name={key} categoryList={badgeCategoryList[key]}/>
+                            );
+                        }
+                    ) :
+                    null}
             </HalfPopup>
         );
     }
