@@ -6,7 +6,7 @@ import type {Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../../app/reducer';
-import type {BadgeCategoryType} from '../../badge-category-list/api';
+import type {BadgeType} from '../../badge-category-list/api';
 import {getBadgeCategoryList} from '../../badge-category-list/api';
 import style from './style.scss';
 import type {SystemType} from '../../system/reducer/root';
@@ -36,7 +36,7 @@ type PropsType = $ReadOnly<$Exact<{
     }>>;
 
 type StateType = {|
-    +badgeInfo: BadgeCategoryType | null
+    +badgeInfo: BadgeType | null
 |};
 
 const reduxAction: ReduxActionType = {
@@ -58,7 +58,7 @@ class BadgeInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
         };
     }
 
-    async fetchBadgeInfo(): Promise<BadgeCategoryType | null> {
+    async fetchBadgeInfo(): Promise<BadgeType | null> {
         const view = this;
         const {props, state} = view;
         const {badgeId} = props;
@@ -78,7 +78,7 @@ class BadgeInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
         const badgeInfo =
             allBadgeList.find(
-                (badgeCategoryInList: BadgeCategoryType): boolean => String(badgeCategoryInList.id) === badgeId
+                (badgeCategoryInList: BadgeType): boolean => String(badgeCategoryInList.id) === badgeId
             ) || null;
 
         if (badgeInfo === null) {

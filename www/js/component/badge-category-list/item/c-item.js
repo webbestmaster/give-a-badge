@@ -8,7 +8,7 @@ import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../../app/reducer';
 import style from './style.scss';
 import HalfPopupSubHeader from '../../ui/half-popup/sub-header/c-sub-header';
-import type {BadgeCategoryType} from '../api';
+import type {BadgeType} from '../api';
 import Link from 'react-router-dom/Link';
 import classNames from 'classnames';
 import serviceStyle from '../../../../css/service.scss';
@@ -24,7 +24,7 @@ type ReduxActionType = {
 
 type PassedPropsType = {|
     +name: string,
-    +categoryList: Array<BadgeCategoryType>
+    +categoryList: Array<BadgeType>
 |};
 
 // eslint-disable-next-line id-match
@@ -57,7 +57,7 @@ class BadgeCategoryListItem extends Component<ReduxPropsType, PassedPropsType, S
         return (
             <div className={style.badge_item_list}>
                 {categoryList.map(
-                    (badgeCategory: BadgeCategoryType): Node => {
+                    (badgeCategory: BadgeType): Node => {
                         return (
                             <Link
                                 key={badgeCategory.id}
