@@ -1,6 +1,9 @@
 //
 
 .close_button__wrapper {
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-name: fade-out;
     background-color: #fff;
     border-radius: 100%;
     box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.3);
@@ -31,5 +34,15 @@
 
     &:after {
         transform: translate3d(-50%, -50%, 0) rotateZ(-45deg);
+    }
+}
+
+@keyframes fade-out {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
     }
 }
