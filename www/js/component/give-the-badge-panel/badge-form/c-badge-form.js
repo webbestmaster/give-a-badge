@@ -243,6 +243,16 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
             return;
         }
 
+        view.fetchNews()
+            .then((): void => console.log('success fetch news after badge assign'))
+            .catch(
+                (error: Error): Error => {
+                    console.error('Can NOT fetch news after badge assign');
+                    console.error(error);
+                    return error;
+                }
+            );
+
         console.log('badge assigned');
         console.log(resultBadgeAssign);
         view.setShowSnackbar(true, true);
@@ -441,18 +451,6 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
         }
 
         const {isSuccess} = state.snackbar;
-
-        if (isSuccess) {
-            view.fetchNews()
-                .then((): void => console.log('success fetch news after badge assign'))
-                .catch(
-                    (error: Error): Error => {
-                        console.error('Can NOT fetch news after badge assign');
-                        console.error(error);
-                        return error;
-                    }
-                );
-        }
 
         return (
             <Snackbar
