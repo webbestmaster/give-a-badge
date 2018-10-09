@@ -69,6 +69,12 @@ type ComponentStoreType = {|
     Snackbar: null | Component
 |};
 
+type NodeType = {|
+    search: {|
+        input: null | HTMLInputElement
+    |}
+|};
+
 const componentStore: ComponentStoreType = {
     Snackbar: null
 };
@@ -107,6 +113,7 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
     // eslint-disable-next-line id-match
     props: PropsType;
     state: StateType;
+    node: NodeType;
 
     constructor(props: PropsType) {
         super(props);
@@ -125,6 +132,12 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
             searchUserList: [],
             selectedUserList: [],
             isSearchInProgressCounter: 0
+        };
+
+        view.node = {
+            search: {
+                input: null
+            }
         };
     }
 
@@ -271,6 +284,21 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
         view.setState(state);
     }
 
+    clearSearchInput() {
+        const view = this;
+        const {props, state, node} = view;
+        const searchInput = node.search.input;
+
+        view.setState({searchString: ''});
+
+        if (searchInput === null) {
+            console.log('searchInput is not null');
+            return;
+        }
+
+        searchInput.value = '';
+    }
+
     removeFromSelectedUserList(user: FoundedUserType) {
         const view = this;
         const {props, state} = view;
@@ -314,9 +342,6 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
             );
         }
 
-        // TODO: ---> hasSearchInputFocus || true, remove true
-        console.warn('---> hasSearchInputFocus || true, remove true');
-
         return (
             <Transition in={hasSearchInputFocus} timeout={searchData.transition.duration}>
                 {(transitionState: TransitionStatus): Node => {
@@ -334,10 +359,13 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
                                     return (
                                         <FoundedUser
                                             className={isInSelectedUserList ? foundedUserStyle.already_selected : ''}
-                                            onClick={(): void => {
-                                                return isInSelectedUserList ?
-                                                    view.removeFromSelectedUserList(foundedUser) :
-                                                    view.addToSelectedUserList(foundedUser);
+                                            onClick={() => {
+                                                if (isInSelectedUserList) {
+                                                    view.removeFromSelectedUserList(foundedUser);
+                                                }
+
+                                                view.addToSelectedUserList(foundedUser);
+                                                view.clearSearchInput();
                                             }}
                                             isActive={!isInSelectedUserList}
                                             foundedUser={foundedUser}
@@ -467,6 +495,9 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
                     }}
                 >
                     <input
+                        ref={(searchInput: HTMLInputElement | null) => {
+                            view.node.search.input = searchInput;
+                        }}
                         className={style.search_input}
                         onFocus={() => {
                             view.setState({hasSearchInputFocus: true});
