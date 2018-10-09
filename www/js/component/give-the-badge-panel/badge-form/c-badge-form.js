@@ -362,6 +362,7 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
                                             onClick={() => {
                                                 if (isInSelectedUserList) {
                                                     view.removeFromSelectedUserList(foundedUser);
+                                                    return;
                                                 }
 
                                                 view.addToSelectedUserList(foundedUser);

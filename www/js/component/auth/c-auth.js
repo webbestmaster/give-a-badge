@@ -68,7 +68,7 @@ class Auth extends Component<ReduxPropsType, PassedPropsType, StateType> {
             return;
         }
 
-        const LoginPopupRequire = await import('./popup/login/c-login');
+        const LoginPopupRequire = await import('./popup/login/c-login-popup');
 
         popupStore.LoginPopup = LoginPopupRequire.default;
 
