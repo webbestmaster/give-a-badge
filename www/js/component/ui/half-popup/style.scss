@@ -13,7 +13,7 @@
 .half_popup__fade {
     @extend %half-popup--wrapper;
 
-    animation-duration: 1s;
+    animation-duration: 0.3s;
     animation-fill-mode: forwards;
     animation-name: fade-fade-out;
     z-index: 0;
@@ -39,7 +39,7 @@
 }
 
 .half_popup__container {
-    animation-duration: 1s;
+    animation-duration: 0.3s;
     animation-fill-mode: forwards;
     animation-name: from-left-to-right;
     background-color: #fff;
