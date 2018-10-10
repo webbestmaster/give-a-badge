@@ -59,9 +59,13 @@
         transform: translate3d(100%, 0, 0);
     }
 
-    100% {
+    99.99% {
         opacity: 1;
         transform: translate3d(0, 0, 0);
+    }
+
+    100% {
+        transform: none;
     }
 }
 
