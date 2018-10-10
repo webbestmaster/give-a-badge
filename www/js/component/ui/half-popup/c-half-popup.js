@@ -12,6 +12,7 @@ import type {OnSetIsScrollEnableType} from '../../system/action';
 import {setIsScrollEnable} from '../../system/action';
 import {isString} from '../../../lib/is';
 import classNames from 'classnames';
+import errorImage from './i/error.svg';
 
 type ReduxPropsType = {
     // +reduxProp: boolean
@@ -42,8 +43,8 @@ type PropsType = $Exact<{
 }>;
 
 type StateType = {
-    +state: number,
-    +disableScrollId: string
+    +disableScrollId: string,
+    +error: Error | null
 };
 
 const reduxAction: ReduxActionType = {
@@ -61,8 +62,8 @@ class HalfPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const view = this;
 
         view.state = {
-            state: 0,
-            disableScrollId: 'half-popup--' + Math.random()
+            disableScrollId: 'half-popup--' + Math.random(),
+            error: null
         };
     }
 
@@ -80,21 +81,45 @@ class HalfPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
         props.setIsScrollEnable(true, state.disableScrollId);
     }
 
-    render(): Node {
+    componentDidCatch(error: Error, info: mixed) {
+        const view = this;
+
+        view.setState({error});
+    }
+
+    renderContent(): Node {
         const view = this;
         const {props, state} = view;
+        const {error} = state;
+
+        const containerClassName =
+            props.className && isString(props.className.container) ? props.className.container : '';
+
+        if (error instanceof Error) {
+            return (
+                <div className={style.half_popup__container}>
+                    <img className={style.error_image} src={errorImage} alt="error"/>
+                    <p className={style.error_text}>{error.message}</p>
+                </div>
+            );
+        }
+
+        return <div className={classNames(style.half_popup__container, containerClassName)}>{props.children}</div>;
+    }
+
+    render(): Node {
+        const view = this;
+        const {props} = view;
 
         const containerPositionClassName =
             props.className && isString(props.className.containerPosition) ? props.className.containerPosition : '';
-        const containerClassName =
-            props.className && isString(props.className.container) ? props.className.container : '';
 
         return (
             <div className={style.half_popup__wrapper}>
                 <div className={style.half_popup__fade}/>
                 <div className={classNames(style.half_popup__set_container_position, containerPositionClassName)}>
                     <CloseButton/>
-                    <div className={classNames(style.half_popup__container, containerClassName)}>{props.children}</div>
+                    {view.renderContent()}
                 </div>
             </div>
         );

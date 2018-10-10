@@ -4,7 +4,6 @@
 
 import appConst from '../../app/const';
 import {defaultFetchGetProps} from '../auth/api';
-import {fetchX} from '../../lib/fetch-x';
 
 export type BadgeType = {
     +id: number,
@@ -16,16 +15,17 @@ export type BadgeType = {
 
 export type BadgeCategoryListType = {[key: string]: Array<BadgeType>};
 
-export async function getBadgeCategoryList(): Promise<BadgeCategoryListType | null> {
+export async function getBadgeCategoryList(): Promise<BadgeCategoryListType | Error> {
     const getBadgeCategoryListUrl = appConst.api.getBadgeCategoryList;
 
-    const response = await fetchX<BadgeCategoryListType>(getBadgeCategoryListUrl, defaultFetchGetProps);
-
-    if (response instanceof Error) {
-        console.error('getBadgeCategoryList: can not get badge category list', getBadgeCategoryListUrl);
-        console.error(response);
-        return null;
-    }
-
-    return response;
+    return window
+        .fetch(getBadgeCategoryListUrl, defaultFetchGetProps)
+        .then((response: Response): Promise<BadgeCategoryListType> => response.json())
+        .catch(
+            (error: Error): Error => {
+                console.log('can not get category list');
+                console.error(error);
+                return error;
+            }
+        );
 }

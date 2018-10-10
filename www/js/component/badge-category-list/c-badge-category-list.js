@@ -60,7 +60,7 @@ class BadgeCategoryList extends Component<ReduxPropsType, PassedPropsType, State
 
         const badgeCategoryList = await getBadgeCategoryList();
 
-        if (badgeCategoryList === null) {
+        if (badgeCategoryList instanceof Error) {
             console.error('can not get badge category list');
             return null;
         }
