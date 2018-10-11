@@ -46,6 +46,7 @@
         }
     },
     "rules": {
+        "jsx-a11y/label-has-for": 0, // deprecated
         "filenames/no-index": 2,
         "import/no-useless-path-segments": 2,
         "no-loops/no-loops": 2,
