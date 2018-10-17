@@ -130,7 +130,7 @@ class LoginPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
                     horizontal: 'center'
                 }}
                 open={snackbarIsOpen}
-                autoHideDuration={6000}
+                autoHideDuration={1e3}
                 onClose={() => {
                     view.setShowSnackbar(false, isSuccess);
                 }}
