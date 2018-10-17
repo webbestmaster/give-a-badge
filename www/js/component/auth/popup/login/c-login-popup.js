@@ -116,7 +116,7 @@ class LoginPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const {props, state} = view;
         const {locale} = props;
         const {snackbar} = state;
-        const {isSuccess, isOpen: snackbarIsOpen} = snackbar;
+        const {isSuccess, isOpen} = snackbar;
 
         const message = isSuccess ?
             getLocalizedString('LOGIN_POPUP__LOGIN__SUCCESS', locale.name) :
@@ -129,8 +129,8 @@ class LoginPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
                     vertical: 'bottom',
                     horizontal: 'center'
                 }}
-                open={snackbarIsOpen}
-                autoHideDuration={1e3}
+                open={isOpen}
+                autoHideDuration={2e3}
                 onClose={() => {
                     view.setShowSnackbar(false, isSuccess);
                 }}
@@ -154,26 +154,27 @@ class LoginPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
                     <DialogTitle id="alert-dialog-slide-title">
                         <Locale stringKey="LOGIN_POPUP__HEADER"/>
                     </DialogTitle>
-                    <TextField
-                        placeholder={getLocalizedString('LOGIN_POPUP__LOGIN_PLACEHOLDER', locale.name)}
-                        required
-                        type="text"
-                        autoComplete="current-password"
-                        inputRef={(login: HTMLInputElement | null) => {
-                            view.node.login = login;
-                        }}
-                    />
-                    <TextField
-                        placeholder={getLocalizedString('LOGIN_POPUP__PASSWORD_PLACEHOLDER', locale.name)}
-                        required
-                        type="password"
-                        autoComplete="current-password"
-                        margin="normal"
-                        inputRef={(password: HTMLInputElement | null) => {
-                            view.node.password = password;
-                        }}
-                    />
-                    <br/>
+                    <fieldset className={style.login_fieldset}>
+                        <TextField
+                            placeholder={getLocalizedString('LOGIN_POPUP__LOGIN_PLACEHOLDER', locale.name)}
+                            required
+                            type="text"
+                            autoComplete="current-password"
+                            inputRef={(login: HTMLInputElement | null) => {
+                                view.node.login = login;
+                            }}
+                        />
+                        <TextField
+                            placeholder={getLocalizedString('LOGIN_POPUP__PASSWORD_PLACEHOLDER', locale.name)}
+                            required
+                            type="password"
+                            autoComplete="current-password"
+                            margin="normal"
+                            inputRef={(password: HTMLInputElement | null) => {
+                                view.node.password = password;
+                            }}
+                        />
+                    </fieldset>
                     <Button margin="normal" variant="contained" color="primary" type="submit">
                         <Locale stringKey="LOGIN_POPUP__LOGIN_BUTTON"/>
                     </Button>

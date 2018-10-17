@@ -431,9 +431,9 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const {props, state} = view;
         const {locale} = props;
         const {Snackbar} = componentStore;
-        const snackbarIsOpen = state.snackbar.isOpen;
+        const {isOpen, isSuccess} = state.snackbar;
 
-        if (snackbarIsOpen) {
+        if (isOpen) {
             view.loadAllComponent()
                 .then((): void => console.log('all component loaded'))
                 .catch(
@@ -450,16 +450,14 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
             return null;
         }
 
-        const {isSuccess} = state.snackbar;
-
         return (
             <Snackbar
                 anchorOrigin={{
                     vertical: 'bottom',
                     horizontal: 'left'
                 }}
-                open={snackbarIsOpen}
-                autoHideDuration={3000}
+                open={isOpen}
+                autoHideDuration={1.5e3}
                 onClose={() => {
                     view.setShowSnackbar(false, false);
 
