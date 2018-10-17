@@ -82,7 +82,7 @@ class BadgeCategoryList extends Component<ReduxPropsType, PassedPropsType, State
         const {badgeCategoryList} = state;
 
         return (
-            <HalfPopup>
+            <HalfPopup closeOnClickBackground>
                 <HalfPopupHeader>
                     <Locale stringKey="CATEGORY_LIST__CATEGORIES"/>
                 </HalfPopupHeader>

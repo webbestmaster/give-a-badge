@@ -13,6 +13,8 @@ import {setIsScrollEnable} from '../../system/action';
 import {isString} from '../../../lib/is';
 import classNames from 'classnames';
 import errorImage from './i/error.svg';
+import type {ContextRouterType} from '../../../../type/react-router-dom-v4';
+import withRouter from 'react-router-dom/withRouter';
 
 type ReduxPropsType = {
     // +reduxProp: boolean
@@ -27,7 +29,8 @@ type PassedPropsType = {
     +className?: {|
         +containerPosition?: string,
         +container?: string
-    |}
+    |},
+    +closeOnClickBackground?: boolean
     // +passedProp: string
 };
 
@@ -39,6 +42,7 @@ type PropsType = $Exact<{
     ...$Exact<ReduxPropsType>,
     // eslint-disable-next-line id-match
     ...$Exact<ReduxActionType>,
+    ...$Exact<ContextRouterType>,
     children: Node | Array<Node>
 }>;
 
@@ -107,6 +111,19 @@ class HalfPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
         return <div className={classNames(style.half_popup__container, containerClassName)}>{props.children}</div>;
     }
 
+    handleOnClickBackground = (evt: SyntheticEvent<HTMLDivElement>) => {
+        // eslint-disable-next-line no-invalid-this
+        const view = this;
+        const {props} = view;
+        const {closeOnClickBackground, history} = props;
+
+        if (evt.currentTarget !== evt.target || closeOnClickBackground !== true) {
+            return;
+        }
+
+        history.goBack();
+    };
+
     render(): Node {
         const view = this;
         const {props} = view;
@@ -114,15 +131,20 @@ class HalfPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const containerPositionClassName =
             props.className && isString(props.className.containerPosition) ? props.className.containerPosition : '';
 
+        /* eslint-disable jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events */
         return (
             <div className={style.half_popup__wrapper}>
                 <div className={style.half_popup__fade}/>
-                <div className={classNames(style.half_popup__set_container_position, containerPositionClassName)}>
+                <div
+                    onClick={view.handleOnClickBackground}
+                    className={classNames(style.half_popup__set_container_position, containerPositionClassName)}
+                >
                     <CloseButton/>
                     {view.renderContent()}
                 </div>
             </div>
         );
+        /* eslint-enable jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events */
     }
 }
 
@@ -131,4 +153,4 @@ export default connect(
         // reduxProp: true
     }),
     reduxAction
-)(HalfPopup);
+)(withRouter(HalfPopup));
