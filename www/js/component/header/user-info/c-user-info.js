@@ -2,6 +2,8 @@
 
 /* global window */
 
+/* eslint-disable react/jsx-no-bind */
+
 /* eslint consistent-this: ["error", "view"] */
 
 import type {Node} from 'react';
