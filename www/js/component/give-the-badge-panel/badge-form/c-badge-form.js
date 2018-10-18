@@ -459,7 +459,7 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
                     horizontal: 'left'
                 }}
                 open={isOpen}
-                autoHideDuration={1.5e3}
+                autoHideDuration={0.5e3}
                 onClose={() => {
                     view.setShowSnackbar(false, false);
 
