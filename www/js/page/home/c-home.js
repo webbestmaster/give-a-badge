@@ -18,10 +18,13 @@ import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../app/reducer';
 import type {SystemType} from '../../component/system/reducer/root';
 import routes from '../../component/app/routes';
+import type {AuthType} from '../../component/auth/reducer';
+import {defaultUserState} from '../../component/auth/reducer';
 // import type {ContextRouterType} from '../../../type/react-router-dom-v4';
 
 type ReduxPropsType = {|
-    +system: SystemType
+    +system: SystemType,
+    +auth: AuthType
 |};
 
 type ReduxActionType = {};
@@ -41,8 +44,14 @@ class Home extends Component<ReduxPropsType, PassedPropsType, StateType> {
     state: StateType;
 
     render(): Array<Node> {
+        const view = this;
+        const {props} = view;
+        const {auth} = props;
+
+        const defaultUserName = defaultUserState.name;
+
         return [
-            <Header key="header"/>,
+            defaultUserName === auth.user.name ? null : <Header key="header"/>,
             <TitleCardList key="title-card-list"/>,
             <Switch key="home-switch">
                 <Route component={BadgeCategoryList} path={routes.index.badgeCategoryList} exact/>
@@ -56,7 +65,8 @@ class Home extends Component<ReduxPropsType, PassedPropsType, StateType> {
 export default withRouter(
     connect(
         (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
-            system: state.system
+            system: state.system,
+            auth: state.auth
         }),
         {}
     )(Home)

@@ -14,7 +14,7 @@ export type UserType = {|
     +userPermissions: Array<string>
 |};
 
-const defaultUserState: UserType = {
+export const defaultUserState: UserType = {
     email: null,
     id: 0,
     imageUrl: '/favicon.ico',
