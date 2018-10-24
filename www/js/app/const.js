@@ -13,6 +13,11 @@ const appConst = {
         getBadgeWon: '/api/news/{badgeId}',
         login: '/login',
         logout: '/logout'
+    },
+    analytic: {
+        google: {
+            trackingId: 'UA-128023030-1'
+        }
     }
 };
 
