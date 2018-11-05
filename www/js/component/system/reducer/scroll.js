@@ -7,12 +7,12 @@ import type {ActionDataType} from '../../../app/reducer-type';
 
 export type ScrollType = {|
     +isEnable: boolean,
-    +disableIdList: Array<string>
+    +disableIdList: Array<string>,
 |};
 
 const defaultScrollState: ScrollType = {
     isEnable: true,
-    disableIdList: []
+    disableIdList: [],
 };
 
 function isScrollEnable(disableIdList: Array<string>): boolean {

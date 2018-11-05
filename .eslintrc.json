@@ -50,7 +50,10 @@
         "babel/new-cap": 1,
         "babel/no-invalid-this": 1,
         "babel/object-curly-spacing": 1,
-        "babel/quotes": [1, "single"],
+        "babel/quotes": [
+            1,
+            "single"
+        ],
         "babel/semi": 1,
         "babel/no-unused-expressions": 1,
         "babel/valid-typeof": 1,
@@ -58,6 +61,7 @@
         "jsx-a11y/label-has-for": 0,
         "filenames/no-index": 2,
         "import/no-useless-path-segments": 2,
+        "import/no-default-export": 2,
         "no-loops/no-loops": 2,
         "optimize-regex/optimize-regex": 1,
         "lodash/prefer-lodash-method": 0,
@@ -71,7 +75,7 @@
         "flowtype/define-flow-type": 1,
         "flowtype/delimiter-dangle": [
             2,
-            "never"
+            "always-multiline"
         ],
         "flowtype/generic-spacing": [
             2,
@@ -79,12 +83,7 @@
         ],
         "flowtype/no-primitive-constructor-types": 2,
         "flowtype/no-types-missing-file-annotation": 2,
-        "flowtype/no-weak-types": [
-            2,
-            {
-                "mixed": false
-            }
-        ],
+        "flowtype/no-weak-types": 2,
         "flowtype/object-type-delimiter": [
             2,
             "comma"
@@ -193,7 +192,13 @@
         "wrap-regex": 0,
         "comma-dangle": [
             1,
-            "never"
+            {
+                "arrays": "always-multiline",
+                "objects": "always-multiline",
+                "imports": "always-multiline",
+                "exports": "always-multiline",
+                "functions": "never"
+            }
         ],
         "no-cond-assign": [
             1,

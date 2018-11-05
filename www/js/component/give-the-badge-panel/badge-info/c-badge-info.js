@@ -16,7 +16,7 @@ import routes from '../../app/routes';
 import type {ContextRouterType} from '../../../../type/react-router-dom-v4';
 
 type ReduxPropsType = {|
-    +system: SystemType
+    +system: SystemType,
 |};
 
 type ReduxActionType = {
@@ -24,19 +24,21 @@ type ReduxActionType = {
 };
 
 type PassedPropsType = {|
-    +badgeId: string
+    +badgeId: string,
 |};
 
-type PropsType = $ReadOnly<$Exact<{
+type PropsType = $ReadOnly<
+    $Exact<{
         ...$Exact<PassedPropsType>,
         ...$Exact<ReduxPropsType>,
         ...$Exact<ReduxActionType>,
         ...$Exact<ContextRouterType>,
-        +children: Node
-    }>>;
+        +children: Node,
+    }>
+>;
 
 type StateType = {|
-    +badgeInfo: BadgeType | null
+    +badgeInfo: BadgeType | null,
 |};
 
 const reduxAction: ReduxActionType = {
@@ -54,7 +56,7 @@ class BadgeInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const view = this;
 
         view.state = {
-            badgeInfo: null
+            badgeInfo: null,
         };
     }
 
@@ -159,7 +161,7 @@ class BadgeInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
 export default connect(
     (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
-        system: state.system
+        system: state.system,
     }),
     reduxAction
 )(withRouter(BadgeInfo));

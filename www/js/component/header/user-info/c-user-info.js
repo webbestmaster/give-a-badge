@@ -19,7 +19,7 @@ import * as authApi from '../../auth/api';
 type ReduxPropsType = {|
     // eslint-disable-next-line id-match
     +system: SystemType,
-    +auth: AuthType
+    +auth: AuthType,
 |};
 
 type PassedPropsType = {|
@@ -27,7 +27,7 @@ type PassedPropsType = {|
 |};
 
 type StateType = {|
-    +state: number
+    +state: number,
 |};
 
 // eslint-disable-next-line id-match
@@ -42,7 +42,7 @@ class UserInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const view = this;
 
         view.state = {
-            state: 0
+            state: 0,
         };
     }
 
@@ -71,7 +71,7 @@ class UserInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
                         {auth.user.name}!
                     </span>
                 </h5>
-                <div className={style.user_avatar} style={{backgroundImage: `url('${auth.user.imageUrl}')`}}/>
+                <div className={style.user_avatar} style={{backgroundImage: `url('${auth.user.imageUrl}')`}} />
             </div>
         );
     }
@@ -89,7 +89,7 @@ class UserInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
                     onClick={async (): Promise<void> => await view.logout()}
                     onKeyPress={async (): Promise<void> => await view.logout()}
                 />
-                <div className={style.user_avatar} style={{backgroundImage: `url('${auth.user.imageUrl}')`}}/>
+                <div className={style.user_avatar} style={{backgroundImage: `url('${auth.user.imageUrl}')`}} />
             </div>
         );
     }
@@ -105,7 +105,7 @@ class UserInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
 export default connect(
     (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
         system: state.system,
-        auth: state.auth
+        auth: state.auth,
     }),
     {}
 )(UserInfo);

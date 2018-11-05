@@ -5,7 +5,7 @@
 import appConst from '../../app/const';
 import type {UserType} from './reducer';
 
-type GetMeResponseType = {|+hasError: true|} | {|+hasError: false, +userData: UserType|};
+type GetMeResponseType = {+hasError: true} | {+hasError: false, +userData: UserType};
 
 export const defaultFetchGetProps = {
     method: 'GET',
@@ -13,18 +13,18 @@ export const defaultFetchGetProps = {
     headers: {
         'Access-Control-Allow-Headers': '*',
         Accept: 'application/json, text/javascript, */*; q=0.01',
-        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
     },
-    mode: 'no-cors'
+    mode: 'no-cors',
 };
 
 export const defaultFetchPostProps = {
     method: 'POST',
     credentials: 'include',
     headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
     },
-    mode: 'cors'
+    mode: 'cors',
 };
 
 export async function getMe(): Promise<GetMeResponseType> {
@@ -37,7 +37,7 @@ export async function getMe(): Promise<GetMeResponseType> {
 
                     return {
                         hasError: false,
-                        userData
+                        userData,
                     };
                 }
 
@@ -54,7 +54,7 @@ export async function getMe(): Promise<GetMeResponseType> {
 }
 
 type LoginMeResponseType = {|
-    +hasErrorLogin: boolean
+    +hasErrorLogin: boolean,
 |};
 
 export async function login(username: string, password: string): Promise<GetMeResponseType> {
@@ -63,7 +63,7 @@ export async function login(username: string, password: string): Promise<GetMeRe
             // here is no mistake, login request should be with defaultFetchGetProps
             ...defaultFetchGetProps,
             method: 'POST',
-            body: `username=${username}&password=${password}`
+            body: `username=${username}&password=${password}`,
         })
         .then(getMe);
 }

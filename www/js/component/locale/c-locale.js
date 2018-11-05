@@ -16,11 +16,11 @@ import type {LangKeyType} from './translation/type';
 type StateType = null;
 
 type ReduxPropsType = {|
-    +locale: LocaleType
+    +locale: LocaleType,
 |};
 
 type PassedPropsType = {|
-    +stringKey: LangKeyType
+    +stringKey: LangKeyType,
 |};
 
 export function getLocalizedString(stringKey: LangKeyType, localeName: LocaleNameType): string {
@@ -55,7 +55,7 @@ class Locale extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
 export default connect(
     (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
-        locale: state.locale
+        locale: state.locale,
     }),
     {
         // setUser

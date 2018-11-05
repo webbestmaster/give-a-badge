@@ -11,7 +11,7 @@ import type {GlobalStateType} from '../../../app/reducer';
 import type {SystemType} from '../../system/reducer/root';
 
 type ReduxPropsType = {|
-    +system: SystemType
+    +system: SystemType,
 |};
 
 type PassedPropsType = {|
@@ -19,7 +19,7 @@ type PassedPropsType = {|
 |};
 
 type StateType = {|
-    isActive: boolean
+    isActive: boolean,
 |};
 
 class Search extends Component<ReduxPropsType, PassedPropsType, StateType> {
@@ -32,7 +32,7 @@ class Search extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const view = this;
 
         view.state = {
-            isActive: false
+            isActive: false,
         };
     }
 
@@ -67,7 +67,7 @@ class Search extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
 export default connect(
     (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
-        system: state.system
+        system: state.system,
     }),
     {}
 )(Search);

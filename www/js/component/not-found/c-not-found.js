@@ -13,11 +13,11 @@ type PassedPropsType = {
 type PropsType = {
     ...PassedPropsType,
     // eslint-disable-next-line id-match
-    ...$Exact<ContextRouterType>
+    ...$Exact<ContextRouterType>,
 };
 
 type StateType = {|
-    +state: number
+    +state: number,
 |};
 
 export default class NotFound extends Component<PropsType, StateType> {
@@ -30,7 +30,7 @@ export default class NotFound extends Component<PropsType, StateType> {
         const view = this;
 
         view.state = {
-            state: 0
+            state: 0,
         };
     }
 

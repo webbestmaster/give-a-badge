@@ -34,6 +34,6 @@ export const enUs: LangDataType = {
     LOGIN_POPUP__LINK_LOST_PASSWORD: 'Lost Password?',
 
     // spec symbols
-    SPACE: ' '
+    SPACE: ' ',
     /* eslint-enable id-match, id-length */
 };

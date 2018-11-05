@@ -18,12 +18,12 @@ import {getBadgeWonPath} from '../app/routes';
 type ReduxPropsType = {};
 
 type PassedPropsType = {|
-    newsData: NewsType
+    newsData: NewsType,
     // +passedProp: string
 |};
 
 type StateType = {|
-    +state: number
+    +state: number,
 |};
 
 // eslint-disable-next-line id-match
@@ -39,7 +39,7 @@ class TitleCard extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const view = this;
 
         view.state = {
-            state: 0
+            state: 0,
         };
     }
 
@@ -50,7 +50,7 @@ class TitleCard extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const userList = newsData.toUsers;
         const isSingleItem = userList.length === 1;
         const peopleFaceClassName = classnames(style.people_face, {
-            [style.people_face__single]: isSingleItem
+            [style.people_face__single]: isSingleItem,
         });
 
         const maxVisibleFace = 6;
@@ -60,7 +60,7 @@ class TitleCard extends Component<ReduxPropsType, PassedPropsType, StateType> {
         return (
             <div
                 className={classnames(serviceStyle.clear_self, style.people_list, {
-                    [style.people_list__single_item]: isSingleItem
+                    [style.people_list__single_item]: isSingleItem,
                 })}
             >
                 {userList.map(
@@ -104,7 +104,7 @@ class TitleCard extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
         return (
             <Link to={getBadgeWonPath(newsData.id)} className={style.card}>
-                <div className={style.badge_icon} style={{backgroundImage: `url('${newsData.reason.imageUrl}')`}}/>
+                <div className={style.badge_icon} style={{backgroundImage: `url('${newsData.reason.imageUrl}')`}} />
 
                 {view.renderFaceList()}
 

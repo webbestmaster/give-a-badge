@@ -7,8 +7,8 @@ export type ApplyGetNewListResponseType = {|
     +type: 'title-card-list__apply-get-new-list-response',
     +payload: {|
         +getNewsListResponse: GetNewsListType,
-        +inBegin: boolean
-    |}
+        +inBegin: boolean,
+    |},
 |};
 
 export function applyGetNewListResponse(
@@ -19,7 +19,7 @@ export function applyGetNewListResponse(
         type: titleCardListConst.action.type.applyGetNewListResponse,
         payload: {
             getNewsListResponse,
-            inBegin
-        }
+            inBegin,
+        },
     };
 }

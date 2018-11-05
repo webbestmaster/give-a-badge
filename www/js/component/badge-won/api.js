@@ -8,20 +8,20 @@ export type BadgeWonServerDataType = {
     +author: {
         +id: string | number,
         +imageUrl: string,
-        +name: string
+        +name: string,
     },
     +comment: string,
     +date: number,
     +reason: {
         +id: string | number,
         +imageUrl: string,
-        +name: string
+        +name: string,
     },
     +toUsers: Array<{
         +id: string | number,
         +imageUrl: string,
-        +name: string
-    }>
+        +name: string,
+    }>,
 };
 
 export async function getBadgeWonServerData(badgeId: string | number): Promise<BadgeWonServerDataType | Error> {

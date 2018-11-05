@@ -22,17 +22,17 @@ export default function App(): Node {
         /* eslint-disable react/jsx-max-depth */
         <ReduxStoreProvider>
             <MuiThemeProvider theme={muiTheme}>
-                <Auth key="auth"/>
+                <Auth key="auth" />
                 <System key="system">
                     <BrowserRouter>
                         <Fragment>
-                            <GoogleAnalytics trackingId={appConst.analytic.google.trackingId} key="google-analytics"/>
+                            <GoogleAnalytics trackingId={appConst.analytic.google.trackingId} key="google-analytics" />
                             <Switch>
-                                <Route component={Home} path={routes.index.index} exact/>
-                                <Route component={Home} path={routes.index.badgeCategoryList} exact/>
-                                <Route component={Home} path={routes.index.giveTheBadge} exact/>
-                                <Route component={Home} path={routes.index.badgeWon} exact/>
-                                <Route component={NotFound}/>
+                                <Route component={Home} path={routes.index.index} exact />
+                                <Route component={Home} path={routes.index.badgeCategoryList} exact />
+                                <Route component={Home} path={routes.index.giveTheBadge} exact />
+                                <Route component={Home} path={routes.index.badgeWon} exact />
+                                <Route component={NotFound} />
                             </Switch>
                         </Fragment>
                     </BrowserRouter>

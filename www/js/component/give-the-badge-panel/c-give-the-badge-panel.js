@@ -26,16 +26,18 @@ type PassedPropsType = {
     // +passedProp: string
 };
 
-type PropsType = $ReadOnly<$Exact<{
+type PropsType = $ReadOnly<
+    $Exact<{
         ...$Exact<PassedPropsType>,
         ...$Exact<ReduxPropsType>,
         ...$Exact<ReduxActionType>,
         ...$Exact<ContextRouterType>,
-        +children: Node
-    }>>;
+        +children: Node,
+    }>
+>;
 
 type StateType = {|
-    +state: number
+    +state: number,
 |};
 
 const reduxAction: ReduxActionType = {
@@ -53,7 +55,7 @@ class GiveTheBadgePanel extends Component<ReduxPropsType, PassedPropsType, State
         const view = this;
 
         view.state = {
-            state: 0
+            state: 0,
         };
     }
 
@@ -80,11 +82,11 @@ class GiveTheBadgePanel extends Component<ReduxPropsType, PassedPropsType, State
         return (
             <HalfPopup>
                 <HalfPopupHeader>
-                    <Locale stringKey="GIVE_THE_BADGE__PEOPLE"/>
+                    <Locale stringKey="GIVE_THE_BADGE__PEOPLE" />
                 </HalfPopupHeader>
 
-                <BadgeInfo badgeId={badgeId}/>
-                <BadgeForm badgeId={badgeId}/>
+                <BadgeInfo badgeId={badgeId} />
+                <BadgeForm badgeId={badgeId} />
             </HalfPopup>
         );
     }

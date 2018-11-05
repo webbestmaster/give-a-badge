@@ -12,13 +12,13 @@ const appConst = {
         badgeAssign: '/api/badges/assign',
         getBadgeWon: '/api/news/{badgeId}',
         login: '/login',
-        logout: '/logout'
+        logout: '/logout',
     },
     analytic: {
         google: {
-            trackingId: 'UA-128023030-1'
-        }
-    }
+            trackingId: 'UA-128023030-1',
+        },
+    },
 };
 
 export default appConst;

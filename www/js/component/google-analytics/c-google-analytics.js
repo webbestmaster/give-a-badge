@@ -12,13 +12,15 @@ import withRouter from 'react-router-dom/withRouter';
 import type {ContextRouterType} from '../../../type/react-router-dom-v4';
 
 type PassedPropsType = {|
-    +trackingId: string
+    +trackingId: string,
 |};
 
-type PropsType = $ReadOnly<$Exact<{
+type PropsType = $ReadOnly<
+    $Exact<{
         ...$Exact<PassedPropsType>,
-        ...$Exact<ContextRouterType>
-    }>>;
+        ...$Exact<ContextRouterType>,
+    }>
+>;
 
 type StateType = void;
 
@@ -32,15 +34,15 @@ class GoogleAnalytics extends Component<PropsType, StateType> {
         const {trackingId} = props;
 
         /* eslint-disable max-params, func-names, flowtype/require-parameter-type, id-length, no-param-reassign, no-unused-expressions, babel/no-unused-expressions, no-sequences */
-        (function (i, s, o, g, r, a, m) {
+        (function(i, s, o, g, r, a, m) {
             i.GoogleAnalyticsObject = r;
-            i[r] =
+            (i[r] =
                 i[r] ||
-                function () {
+                function() {
                     (i[r].q = i[r].q || []).push(arguments);
-                },
-            i[r].l = Number(new Date());
-            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+                }),
+                (i[r].l = Number(new Date()));
+            (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
             a.async = true;
             a.src = g;
             m.parentNode && m.parentNode.insertBefore(a, m);

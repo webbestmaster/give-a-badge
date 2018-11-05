@@ -20,27 +20,29 @@ import {setIsGlobalScrollEnable} from './helper';
 
 type ReduxPropsType = {|
     +system: SystemType,
-    +locale: LocaleType
+    +locale: LocaleType,
 |};
 
 type ReduxActionType = {|
-    +onResize: (width: number, height: number) => OnResizeType
+    +onResize: (width: number, height: number) => OnResizeType,
 |};
 
 const reduxAction: ReduxActionType = {
-    onResize // imported from actions
+    onResize, // imported from actions
 };
 
 type PassedPropsType = {|
     // +passedProp: string
 |};
 
-type PropsType = $ReadOnly<$Exact<{
+type PropsType = $ReadOnly<
+    $Exact<{
         ...$Exact<PassedPropsType>,
         ...$Exact<ReduxPropsType>,
         ...$Exact<ReduxActionType>,
-        +children: Node
-    }>>;
+        +children: Node,
+    }>
+>;
 
 type StateType = null;
 
@@ -101,7 +103,7 @@ class System extends Component<ReduxPropsType, PassedPropsType, StateType> {
             [style.locale__en_us]: localeName === localeNameReference.enUs,
             [style.locale__ru_ru]: localeName === localeNameReference.ruRu,
             [style.locale__zh_ch]: localeName === localeNameReference.zhCN,
-            [style.locale__zh_tw]: localeName === localeNameReference.zhTW
+            [style.locale__zh_tw]: localeName === localeNameReference.zhTW,
         });
     }
 
@@ -116,7 +118,7 @@ class System extends Component<ReduxPropsType, PassedPropsType, StateType> {
 export default connect(
     (state: GlobalStateType): ReduxPropsType => ({
         system: state.system,
-        locale: state.locale
+        locale: state.locale,
     }),
     reduxAction
 )(System);

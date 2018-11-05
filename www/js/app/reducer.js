@@ -18,5 +18,5 @@ export type GlobalStateType = {|
     +titleNewsList: TitleNewsListType,
     +auth: AuthType,
     +system: SystemType,
-    +locale: LocaleType
+    +locale: LocaleType,
 |};

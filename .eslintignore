@@ -1,14 +1,16 @@
 # dist
 /dist
 
+# report
+/flow-coverage
+
 # npm
 node_modules
 
 # flow
 flow-typed/npm
 
-# res
-/_res
+
 
 # example
 

@@ -5,7 +5,7 @@ import React from 'react';
 import style from './style.scss';
 
 type PropsType = {|
-    +children: Node
+    +children: Node,
 |};
 
 export default function HalfPopupSubHeader(props: PropsType): Node {

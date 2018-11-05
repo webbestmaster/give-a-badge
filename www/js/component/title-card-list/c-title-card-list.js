@@ -22,11 +22,11 @@ import Spinner from '../ui/spinner/c-spinner';
 
 type ReduxPropsType = {|
     +auth: AuthType,
-    +titleNewsList: TitleNewsListType
+    +titleNewsList: TitleNewsListType,
 |};
 
 type ReduxActionType = {|
-    +applyGetNewListResponse: (getNewsListResponse: GetNewsListType, inBegin: boolean) => ApplyGetNewListResponseType
+    +applyGetNewListResponse: (getNewsListResponse: GetNewsListType, inBegin: boolean) => ApplyGetNewListResponseType,
 |};
 
 type PassedPropsType = {
@@ -39,7 +39,7 @@ type PropsType = $Exact<{...PassedPropsType, ...ReduxActionType, ...ReduxPropsTy
 type StateType = null;
 
 const reduxAction: ReduxActionType = {
-    applyGetNewListResponse
+    applyGetNewListResponse,
 };
 
 export const pageSize = 20;
@@ -100,13 +100,13 @@ class TitleCardList extends Component<ReduxPropsType, PassedPropsType, StateType
                 dataLength={newsList.length} // This is important field to render the next data
                 next={(): Promise<void> => view.fetchNews()}
                 hasMore={!lastNewsResponse.last}
-                loader={<Spinner/>}
+                loader={<Spinner />}
             >
                 <div className={style.card_list}>
                     {newsList.map(
-                        (newsInList: NewsType): Node =>
-                            <TitleCard key={newsInList.id} newsData={newsInList}/>
-
+                        (newsInList: NewsType): Node => (
+                            <TitleCard key={newsInList.id} newsData={newsInList} />
+                        )
                     )}
                 </div>
             </InfiniteScroll>
@@ -123,7 +123,7 @@ class TitleCardList extends Component<ReduxPropsType, PassedPropsType, StateType
 export default connect(
     (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
         auth: state.auth,
-        titleNewsList: state.titleNewsList
+        titleNewsList: state.titleNewsList,
     }),
     reduxAction
 )(TitleCardList);

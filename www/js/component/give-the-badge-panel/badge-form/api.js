@@ -9,7 +9,7 @@ import {fetchX} from '../../../lib/fetch-x';
 export type FoundedUserType = {
     +id: number,
     +name: string,
-    +imageUrl: string
+    +imageUrl: string,
 };
 
 export type FoundedUserListType = Array<FoundedUserType>;
@@ -35,7 +35,7 @@ export type BadgeAssignInputType = {|
     +badgeId: number,
     +comment: string,
     +tags: Array<string>,
-    +usersIds: Array<number>
+    +usersIds: Array<number>,
 |};
 
 export type BadgeAssignResponseType = mixed;
@@ -46,7 +46,7 @@ export async function badgeAssign(badgeAssigneeInput: BadgeAssignInputType): Pro
     const response = await window
         .fetch(badgeAssignUrl, {
             ...defaultFetchPostProps,
-            body: JSON.stringify(badgeAssigneeInput)
+            body: JSON.stringify(badgeAssigneeInput),
         })
         .catch(
             (error: Error): Error => {

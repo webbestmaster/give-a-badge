@@ -17,11 +17,11 @@ type PassedPropsType = {|
 type PropsType = {
     ...PassedPropsType,
     // eslint-disable-next-line id-match
-    ...$Exact<ContextRouterType>
+    ...$Exact<ContextRouterType>,
 };
 
 type StateType = {|
-    +state: number
+    +state: number,
 |};
 
 class CloseButton extends Component<PropsType, StateType> {
@@ -34,7 +34,7 @@ class CloseButton extends Component<PropsType, StateType> {
         const view = this;
 
         view.state = {
-            state: 0
+            state: 0,
         };
     }
 

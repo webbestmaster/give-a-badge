@@ -18,7 +18,7 @@ import type {SystemType} from '../system/reducer/root';
 import type {ContextRouterType} from '../../../type/react-router-dom-v4';
 
 type ReduxPropsType = {|
-    +system: SystemType
+    +system: SystemType,
 |};
 type PassedPropsType = {};
 type StateType = {};
@@ -55,13 +55,13 @@ class Header extends Component<ReduxPropsType, PassedPropsType, StateType> {
                     <Link
                         to={routes.index.badgeCategoryList}
                         className={classNames(style.give_a_badge, {
-                            [style.give_a_badge__active]: view.isButtonActive()
+                            [style.give_a_badge__active]: view.isButtonActive(),
                         })}
                     >
                         Give
-                        <div/>A Badge
+                        <div />A Badge
                     </Link>
-                    <UserInfo/>
+                    <UserInfo />
                 </div>
             </header>
         );
@@ -88,7 +88,7 @@ class Header extends Component<ReduxPropsType, PassedPropsType, StateType> {
 export default withRouter(
     connect(
         (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
-            system: state.system
+            system: state.system,
         }),
         {}
     )(Header)

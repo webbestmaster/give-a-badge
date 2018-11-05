@@ -33,15 +33,15 @@ import {applyGetNewListResponse} from '../../title-card-list/action';
 type ReduxPropsType = {
     +locale: LocaleType,
     +titleNewsList: TitleNewsListType,
-    +system: SystemType
+    +system: SystemType,
 };
 
 type ReduxActionType = {|
-    +applyGetNewListResponse: (getNewsListResponse: GetNewsListType, inBegin: boolean) => ApplyGetNewListResponseType
+    +applyGetNewListResponse: (getNewsListResponse: GetNewsListType, inBegin: boolean) => ApplyGetNewListResponseType,
 |};
 
 type PassedPropsType = {|
-    +badgeId: string
+    +badgeId: string,
     // +passedProp: string
 |};
 
@@ -50,60 +50,60 @@ type PropsType = $Exact<{
     ...$Exact<ReduxPropsType>,
     ...$Exact<ReduxActionType>,
     ...$Exact<ContextRouterType>,
-    +children: Node
+    +children: Node,
 }>;
 
 type StateType = {|
     +isAllComponentLoaded: boolean,
     +snackbar: {|
         +isOpen: boolean,
-        +isSuccess: boolean
+        +isSuccess: boolean,
     |},
     +searchString: string,
     +descriptionText: string,
     +searchUserList: FoundedUserListType,
     +selectedUserList: FoundedUserListType,
     +hasSearchInputFocus: boolean,
-    +isSearchInProgressCounter: number
+    +isSearchInProgressCounter: number,
 |};
 
 type ComponentStoreType = {|
-    Snackbar: null | Component
+    Snackbar: null | Component,
 |};
 
 type NodeType = {|
     search: {|
-        input: null | HTMLInputElement
-    |}
+        input: null | HTMLInputElement,
+    |},
 |};
 
 const componentStore: ComponentStoreType = {
-    Snackbar: null
+    Snackbar: null,
 };
 
 const reduxAction: ReduxActionType = {
-    applyGetNewListResponse
+    applyGetNewListResponse,
 };
 
 const transitionDuration = 150;
 
 const searchData = {
     transition: {
-        duration: transitionDuration
+        duration: transitionDuration,
     },
     style: {
         initial: {
             transition: `opacity ${transitionDuration}ms ease-in-out`,
-            opacity: 0
+            opacity: 0,
         },
         transition: {
             entering: {opacity: 0, display: 'block'},
             entered: {opacity: 1, display: 'block'},
             exiting: {opacity: 1, display: 'block'},
             exited: {opacity: 0, display: 'none'},
-            unmounted: {display: 'none'}
-        }
-    }
+            unmounted: {display: 'none'},
+        },
+    },
 };
 
 // TODO: return MIN_SEARCH_STRING_LENGTH to 3
@@ -126,20 +126,20 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
             isAllComponentLoaded: false,
             snackbar: {
                 isOpen: false,
-                isSuccess: false
+                isSuccess: false,
             },
             searchString: '',
             descriptionText: '',
             hasSearchInputFocus: false,
             searchUserList: [],
             selectedUserList: [],
-            isSearchInProgressCounter: 0
+            isSearchInProgressCounter: 0,
         };
 
         view.node = {
             search: {
-                input: null
-            }
+                input: null,
+            },
         };
     }
 
@@ -236,7 +236,7 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
             badgeId: parseInt(badgeId, 10),
             comment: descriptionText,
             tags: [],
-            usersIds: selectedUserList.map((foundedUser: FoundedUserType): number => foundedUser.id)
+            usersIds: selectedUserList.map((foundedUser: FoundedUserType): number => foundedUser.id),
         });
 
         if (resultBadgeAssign === null) {
@@ -349,7 +349,7 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
         if (searchUserListLength === 0 && hasSearchInputFocus) {
             return (
                 <div className={style.no_found_people}>
-                    <Locale stringKey="SEARCH_PEOPLE__NO_RESULT"/>
+                    <Locale stringKey="SEARCH_PEOPLE__NO_RESULT" />
                 </div>
             );
         }
@@ -400,7 +400,7 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const {selectedUserList} = state;
 
         if (selectedUserList.length === 0) {
-            return <div key="selected-user-list" className={style.selected_user_list__empty}/>;
+            return <div key="selected-user-list" className={style.selected_user_list__empty} />;
         }
 
         return (
@@ -456,7 +456,7 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
             <Snackbar
                 anchorOrigin={{
                     vertical: 'bottom',
-                    horizontal: 'left'
+                    horizontal: 'left',
                 }}
                 open={isOpen}
                 autoHideDuration={0.5e3}
@@ -468,9 +468,9 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
                     }
                 }}
                 message={
-                    isSuccess ?
-                        getLocalizedString('SNACK_BAR__GIVE_BADGE__SUCCESS', locale.name) :
-                        getLocalizedString('SNACK_BAR__GIVE_BADGE__ERROR', locale.name)
+                    isSuccess
+                        ? getLocalizedString('SNACK_BAR__GIVE_BADGE__SUCCESS', locale.name)
+                        : getLocalizedString('SNACK_BAR__GIVE_BADGE__ERROR', locale.name)
                 }
             />
         );
@@ -483,7 +483,7 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
         return (
             <div
                 className={classNames(style.badge_form_wrapper, {
-                    [style.badge_form_wrapper__mobile]: props.system.screen.isMobile
+                    [style.badge_form_wrapper__mobile]: props.system.screen.isMobile,
                 })}
             >
                 <form
@@ -528,7 +528,7 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
                         className={classNames(style.submit_button, {[serviceStyle.disabled]: !view.isSubmitActive()})}
                         type="submit"
                     >
-                        <Locale stringKey="SEARCH_PEOPLE__SUBMIT_BUTTON"/>
+                        <Locale stringKey="SEARCH_PEOPLE__SUBMIT_BUTTON" />
                     </button>
                 </form>
 
@@ -542,7 +542,7 @@ export default connect(
     (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
         locale: state.locale,
         titleNewsList: state.titleNewsList,
-        system: state.system
+        system: state.system,
     }),
     reduxAction
 )(withRouter(BadgeForm));

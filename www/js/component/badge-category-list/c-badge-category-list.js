@@ -27,12 +27,12 @@ type PropsType = $ReadOnly<{
     ...$Exact<ReduxPropsType>,
     ...$Exact<ReduxActionType>,
     ...$Exact<PassedPropsType>,
-    +children?: Array<Node>
+    +children?: Array<Node>,
 }>;
 
 type StateType = {|
     +state: number,
-    +badgeCategoryList: ?BadgeCategoryListType
+    +badgeCategoryList: ?BadgeCategoryListType,
 |};
 
 const reduxAction: ReduxActionType = {
@@ -51,7 +51,7 @@ class BadgeCategoryList extends Component<ReduxPropsType, PassedPropsType, State
 
         view.state = {
             state: 0,
-            badgeCategoryList: null
+            badgeCategoryList: null,
         };
     }
 
@@ -84,17 +84,17 @@ class BadgeCategoryList extends Component<ReduxPropsType, PassedPropsType, State
         return (
             <HalfPopup closeOnClickBackground>
                 <HalfPopupHeader>
-                    <Locale stringKey="CATEGORY_LIST__CATEGORIES"/>
+                    <Locale stringKey="CATEGORY_LIST__CATEGORIES" />
                 </HalfPopupHeader>
-                {badgeCategoryList ?
-                    Object.keys(badgeCategoryList).map(
-                        (key: string): Node => {
-                            return (
-                                <BadgeCategoryListItem key={key} name={key} categoryList={badgeCategoryList[key]}/>
-                            );
-                        }
-                    ) :
-                    null}
+                {badgeCategoryList
+                    ? Object.keys(badgeCategoryList).map(
+                          (key: string): Node => {
+                              return (
+                                  <BadgeCategoryListItem key={key} name={key} categoryList={badgeCategoryList[key]} />
+                              );
+                          }
+                      )
+                    : null}
             </HalfPopup>
         );
     }

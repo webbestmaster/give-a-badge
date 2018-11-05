@@ -22,7 +22,7 @@ import {triggerResize} from '../ui/helper';
 import Locale from '../locale/c-locale';
 
 type ReduxPropsType = {|
-    +system: SystemType
+    +system: SystemType,
 |};
 
 type ReduxActionType = {
@@ -31,23 +31,25 @@ type ReduxActionType = {
 
 type PassedPropsType = {};
 
-type PropsType = $ReadOnly<$Exact<{
+type PropsType = $ReadOnly<
+    $Exact<{
         ...$Exact<PassedPropsType>,
         ...$Exact<ReduxPropsType>,
         ...$Exact<ReduxActionType>,
         ...$Exact<ContextRouterType>,
-        +children: Node
-    }>>;
+        +children: Node,
+    }>
+>;
 
 type StateType = {|
     +isShowMore: boolean,
-    +badgeWonServerData: BadgeWonServerDataType | null
+    +badgeWonServerData: BadgeWonServerDataType | null,
     // +state: number
 |};
 
 type NodeType = {|
     header: HTMLElement | null,
-    faceList: HTMLElement | null
+    faceList: HTMLElement | null,
 |};
 
 const reduxAction: ReduxActionType = {
@@ -66,12 +68,12 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
         view.state = {
             isShowMore: false,
-            badgeWonServerData: null
+            badgeWonServerData: null,
         };
 
         view.node = {
             header: null,
-            faceList: null
+            faceList: null,
         };
     }
 
@@ -129,7 +131,7 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
                 <div
                     className={style.header__badge_image}
                     style={{
-                        backgroundImage: `url('${imageUrl}')`
+                        backgroundImage: `url('${imageUrl}')`,
                     }}
                 />
                 <div className={style.header__badge_text_block}>
@@ -146,7 +148,7 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
         const isNeedToShowButton = view.getNaturalPeopleListHeight() > view.getAvailableAreaHeight();
 
-        if (badgeWonServerData === null || isShowMore === true && isNeedToShowButton === true) {
+        if (badgeWonServerData === null || (isShowMore === true && isNeedToShowButton === true)) {
             return null;
         }
 
@@ -158,7 +160,7 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
                 <div
                     className={style.author_image}
                     style={{
-                        backgroundImage: `url('${imageUrl}')`
+                        backgroundImage: `url('${imageUrl}')`,
                     }}
                 />
                 <div className={style.author_info_text}>
@@ -176,7 +178,7 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
         const isNeedToShowButton = view.getNaturalPeopleListHeight() > view.getAvailableAreaHeight();
 
-        if (badgeWonServerData === null || isShowMore === true && isNeedToShowButton === true) {
+        if (badgeWonServerData === null || (isShowMore === true && isNeedToShowButton === true)) {
             return null;
         }
 
@@ -234,18 +236,18 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
         if (isNeedToShowButton === false) {
             return {
-                height: 'auto'
+                height: 'auto',
             };
         }
 
         if (isShowMore) {
             return {
-                height: availableAreaHeight
+                height: availableAreaHeight,
             };
         }
 
         return {
-            height: availableAreaHeight / 2
+            height: availableAreaHeight / 2,
         };
     }
 
@@ -273,7 +275,7 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
                     onClick={(): void => view.toggleIsShowMore()}
                     onKeyPress={(): void => view.toggleIsShowMore()}
                 >
-                    <Locale stringKey="BADGE_WON_LIST__SHOW_LESS"/>
+                    <Locale stringKey="BADGE_WON_LIST__SHOW_LESS" />
                     <span className={style.show_more_less_button__arrow}>‹</span>
                 </button>
             );
@@ -288,7 +290,7 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
                 onClick={(): void => view.toggleIsShowMore()}
                 onKeyPress={(): void => view.toggleIsShowMore()}
             >
-                <Locale stringKey="BADGE_WON_LIST__SHOW_ALL"/>
+                <Locale stringKey="BADGE_WON_LIST__SHOW_ALL" />
                 {': '}
                 {toUsers.length}
                 <span className={style.show_more_less_button__arrow}>‹</span>
@@ -324,7 +326,7 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
                                     <div
                                         className={style.won_badge_face_image}
                                         style={{
-                                            backgroundImage: `url('${userData.imageUrl}')`
+                                            backgroundImage: `url('${userData.imageUrl}')`,
                                         }}
                                     />
                                 </div>
@@ -345,7 +347,7 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
             <HalfPopup
                 className={{
                     containerPosition: style.half_popup__container_position__extra,
-                    container: style.half_popup__container__extra
+                    container: style.half_popup__container__extra,
                 }}
             >
                 {view.renderHeader()}
@@ -359,7 +361,7 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
 export default connect(
     (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
-        system: state.system
+        system: state.system,
     }),
     reduxAction
 )(BadgeWon);

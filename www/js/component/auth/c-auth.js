@@ -16,33 +16,33 @@ import type {GlobalStateType} from '../../app/reducer';
 import * as api from './api';
 
 type ReduxPropsType = {|
-    +auth: AuthType
+    +auth: AuthType,
 |};
 
 type ReduxActionType = {|
     +setUser: (userState: UserType) => SetUserType,
-    +openLoginPopup: () => SetPopupStateType
+    +openLoginPopup: () => SetPopupStateType,
 |};
 
 type PassedPropsType = {||};
 
 const reduxAction: ReduxActionType = {
     setUser,
-    openLoginPopup
+    openLoginPopup,
 };
 
 type StateType = {|
-    +isAllPopupLoaded: boolean
+    +isAllPopupLoaded: boolean,
 |};
 
 type PropsType = $Exact<{...PassedPropsType, ...ReduxPropsType, ...ReduxActionType}>;
 
 type PopupStoreType = {|
-    LoginPopup: null | Component
+    LoginPopup: null | Component,
 |};
 
 const popupStore: PopupStoreType = {
-    LoginPopup: null
+    LoginPopup: null,
 };
 
 class Auth extends Component<ReduxPropsType, PassedPropsType, StateType> {
@@ -56,7 +56,7 @@ class Auth extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const view = this;
 
         view.state = {
-            isAllPopupLoaded: false
+            isAllPopupLoaded: false,
         };
     }
 
@@ -110,7 +110,7 @@ class Auth extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const {LoginPopup} = popupStore;
 
         if (LoginPopup !== null) {
-            componentList.push(<LoginPopup key="login-popup"/>);
+            componentList.push(<LoginPopup key="login-popup" />);
         }
 
         return componentList;
@@ -119,7 +119,7 @@ class Auth extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
 export default connect(
     (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
-        auth: state.auth
+        auth: state.auth,
     }),
     reduxAction
 )(Auth);

@@ -6,8 +6,8 @@ export type OnResizeType = {|
     +type: 'system__resize',
     +payload: {|
         +width: number,
-        +height: number
-    |}
+        +height: number,
+    |},
 |};
 
 export function onResize(width: number, height: number): OnResizeType {
@@ -15,8 +15,8 @@ export function onResize(width: number, height: number): OnResizeType {
         type: systemConst.action.type.resize,
         payload: {
             width,
-            height
-        }
+            height,
+        },
     };
 }
 
@@ -24,8 +24,8 @@ export type OnSetIsScrollEnableType = {|
     +type: 'system__set-is-scroll-enable',
     +payload: {|
         +isEnable: boolean,
-        +disableId: string
-    |}
+        +disableId: string,
+    |},
 |};
 
 export function setIsScrollEnable(isEnable: boolean, disableId: string): OnSetIsScrollEnableType {
@@ -33,7 +33,7 @@ export function setIsScrollEnable(isEnable: boolean, disableId: string): OnSetIs
         type: systemConst.action.type.isScrollEnable,
         payload: {
             isEnable,
-            disableId
-        }
+            disableId,
+        },
     };
 }

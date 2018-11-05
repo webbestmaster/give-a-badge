@@ -21,16 +21,16 @@ type ReduxPropsType = {
 };
 
 type ReduxActionType = {
-    setIsScrollEnable: (isEnable: boolean, disableId: string) => OnSetIsScrollEnableType
+    setIsScrollEnable: (isEnable: boolean, disableId: string) => OnSetIsScrollEnableType,
     // +setSmth: (smth: string) => string
 };
 
 type PassedPropsType = {
     +className?: {|
         +containerPosition?: string,
-        +container?: string
+        +container?: string,
     |},
-    +closeOnClickBackground?: boolean
+    +closeOnClickBackground?: boolean,
     // +passedProp: string
 };
 
@@ -43,16 +43,16 @@ type PropsType = $Exact<{
     // eslint-disable-next-line id-match
     ...$Exact<ReduxActionType>,
     ...$Exact<ContextRouterType>,
-    children: Node | Array<Node>
+    children: Node | Array<Node>,
 }>;
 
 type StateType = {
     +disableScrollId: string,
-    +error: Error | null
+    +error: Error | null,
 };
 
 const reduxAction: ReduxActionType = {
-    setIsScrollEnable
+    setIsScrollEnable,
 };
 
 class HalfPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
@@ -67,7 +67,7 @@ class HalfPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
         view.state = {
             disableScrollId: 'half-popup--' + Math.random(),
-            error: null
+            error: null,
         };
     }
 
@@ -102,7 +102,7 @@ class HalfPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
         if (error instanceof Error) {
             return (
                 <div className={style.half_popup__container}>
-                    <img className={style.error_image} src={errorImage} alt="error"/>
+                    <img className={style.error_image} src={errorImage} alt="error" />
                     <p className={style.error_text}>{error.message}</p>
                 </div>
             );
@@ -134,12 +134,12 @@ class HalfPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
         /* eslint-disable jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events */
         return (
             <div className={style.half_popup__wrapper}>
-                <div className={style.half_popup__fade}/>
+                <div className={style.half_popup__fade} />
                 <div
                     onClick={view.handleOnClickBackground}
                     className={classNames(style.half_popup__set_container_position, containerPositionClassName)}
                 >
-                    <CloseButton/>
+                    <CloseButton />
                     {view.renderContent()}
                 </div>
             </div>

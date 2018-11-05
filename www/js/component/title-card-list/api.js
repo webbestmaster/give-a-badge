@@ -9,7 +9,7 @@ export type NewsTypeType = 'BADGE_ASSIGNMENT';
 export type NewsUserType = {|
     +id: number,
     +name: string,
-    +imageUrl: string
+    +imageUrl: string,
 |};
 
 export type NewsType = {|
@@ -22,11 +22,11 @@ export type NewsType = {|
     +reason: {|
         +id: number,
         +imageUrl: string,
-        +name: string
+        +name: string,
     |},
     +totalToUsers: number,
     +toUsers: Array<NewsUserType>,
-    +tags: []
+    +tags: [],
 |};
 
 export type GetNewsListType = {|
@@ -42,10 +42,10 @@ export type GetNewsListType = {|
         +direction: 'DESC' | 'ASC',
         +ignoreCase: boolean,
         +property: string,
-        +nullHandling: 'NATIVE'
+        +nullHandling: 'NATIVE',
     |}>,
     +totalPages: number,
-    +totalElements: number
+    +totalElements: number,
 |};
 
 export async function getNewsList(pageIndex: number, pageSize: number): Promise<GetNewsListType | null> {

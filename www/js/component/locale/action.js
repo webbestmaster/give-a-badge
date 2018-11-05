@@ -8,8 +8,8 @@ import {localeConst} from './const';
 export type SetLocaleType = {|
     +type: 'locale__set-locale',
     +payload: {|
-        +localeName: LocaleNameType
-    |}
+        +localeName: LocaleNameType,
+    |},
 |};
 
 export function setLocale(localeName: LocaleNameType): SetLocaleType {
@@ -19,7 +19,7 @@ export function setLocale(localeName: LocaleNameType): SetLocaleType {
     return {
         type: localeConst.action.type.setLocale,
         payload: {
-            localeName
-        }
+            localeName,
+        },
     };
 }

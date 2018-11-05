@@ -24,19 +24,21 @@ import {defaultUserState} from '../../component/auth/reducer';
 
 type ReduxPropsType = {|
     +system: SystemType,
-    +auth: AuthType
+    +auth: AuthType,
 |};
 
 type ReduxActionType = {};
 type PassedPropsType = {};
 type StateType = null;
 
-type PropsType = $ReadOnly<$Exact<{
+type PropsType = $ReadOnly<
+    $Exact<{
         ...$Exact<PassedPropsType>,
         ...$Exact<ReduxPropsType>,
         ...$Exact<ReduxActionType>,
-        +children: Node
-    }>>;
+        +children: Node,
+    }>
+>;
 
 // eslint-disable-next-line react/prefer-stateless-function
 class Home extends Component<ReduxPropsType, PassedPropsType, StateType> {
@@ -51,13 +53,13 @@ class Home extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const defaultUserName = defaultUserState.name;
 
         return [
-            defaultUserName === auth.user.name ? null : <Header key="header"/>,
-            <TitleCardList key="title-card-list"/>,
+            defaultUserName === auth.user.name ? null : <Header key="header" />,
+            <TitleCardList key="title-card-list" />,
             <Switch key="home-switch">
-                <Route component={BadgeCategoryList} path={routes.index.badgeCategoryList} exact/>
-                <Route component={GiveTheBadgePanel} path={routes.index.giveTheBadge} exact/>
-                <Route component={BadgeWon} path={routes.index.badgeWon} exact/>
-            </Switch>
+                <Route component={BadgeCategoryList} path={routes.index.badgeCategoryList} exact />
+                <Route component={GiveTheBadgePanel} path={routes.index.giveTheBadge} exact />
+                <Route component={BadgeWon} path={routes.index.badgeWon} exact />
+            </Switch>,
         ];
     }
 }
@@ -66,7 +68,7 @@ export default withRouter(
     connect(
         (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
             system: state.system,
-            auth: state.auth
+            auth: state.auth,
         }),
         {}
     )(Home)

@@ -32,7 +32,7 @@ export type LangDataType = {|
     +LOGIN_POPUP__LINK_LOST_PASSWORD: string,
 
     // spec symbols
-    +SPACE: ' '
+    +SPACE: ' ',
     /* eslint-enable id-match */
 |};
 

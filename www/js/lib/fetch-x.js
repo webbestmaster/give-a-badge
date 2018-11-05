@@ -11,8 +11,8 @@ type OptionsType = {|
     +headers?: {|
         +'Access-Control-Allow-Headers'?: '*',
         +Accept?: 'application/json, text/javascript, */*; q=0.01',
-        +'Content-Type'?: 'application/x-www-form-urlencoded; charset=UTF-8'
-    |}
+        +'Content-Type'?: 'application/x-www-form-urlencoded; charset=UTF-8',
+    |},
 |};
 
 export function fetchX<ExpectedResponseType>(

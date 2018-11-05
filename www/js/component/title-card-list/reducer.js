@@ -6,7 +6,7 @@ import type {ActionDataType} from '../../app/reducer-type';
 import type {GetNewsListType} from './api';
 
 export type TitleNewsListType = {|
-    +newsResponseList: Array<GetNewsListType>
+    +newsResponseList: Array<GetNewsListType>,
 |};
 
 export default combineReducers({
@@ -24,8 +24,8 @@ export default combineReducers({
 
         const {getNewsListResponse} = actionData.payload;
 
-        return actionData.payload.inBegin ?
-            [getNewsListResponse, ...newsResponseList] :
-            [...newsResponseList, getNewsListResponse];
-    }
+        return actionData.payload.inBegin
+            ? [getNewsListResponse, ...newsResponseList]
+            : [...newsResponseList, getNewsListResponse];
+    },
 });

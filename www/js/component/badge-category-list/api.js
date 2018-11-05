@@ -10,7 +10,7 @@ export type BadgeType = {
     +name: string,
     +description: string,
     +category: string,
-    +imageUrl: string
+    +imageUrl: string,
 };
 
 export type BadgeCategoryListType = {[key: string]: Array<BadgeType>};

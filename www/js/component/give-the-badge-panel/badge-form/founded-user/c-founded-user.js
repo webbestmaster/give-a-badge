@@ -25,15 +25,17 @@ type PassedPropsType = {|
     +foundedUser: FoundedUserType,
     +onClick: () => void,
     +isActive: boolean,
-    +className?: string
+    +className?: string,
 |};
 
-type PropsType = $ReadOnly<$Exact<{
+type PropsType = $ReadOnly<
+    $Exact<{
         ...$Exact<PassedPropsType>,
         ...$Exact<ReduxPropsType>,
         ...$Exact<ReduxActionType>,
-        +children: Node
-    }>>;
+        +children: Node,
+    }>
+>;
 
 type StateType = {
     // +state: number

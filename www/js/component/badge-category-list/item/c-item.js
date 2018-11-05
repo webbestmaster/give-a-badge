@@ -24,7 +24,7 @@ type ReduxActionType = {
 
 type PassedPropsType = {|
     +name: string,
-    +categoryList: Array<BadgeType>
+    +categoryList: Array<BadgeType>,
 |};
 
 // eslint-disable-next-line id-match
@@ -35,7 +35,7 @@ type PropsType = $Exact<{
     ...$Exact<ReduxPropsType>,
     // eslint-disable-next-line id-match
     ...$Exact<ReduxActionType>,
-    +children?: Node
+    +children?: Node,
 }>;
 
 type StateType = null;

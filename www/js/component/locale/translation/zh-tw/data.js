@@ -34,6 +34,6 @@ export const zhTw: LangDataType = {
     LOGIN_POPUP__LINK_LOST_PASSWORD: '遺失密碼？',
 
     // spec symbols
-    SPACE: ' '
+    SPACE: ' ',
     /* eslint-enable id-match, id-length */
 };

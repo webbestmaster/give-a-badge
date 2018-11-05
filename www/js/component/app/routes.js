@@ -13,8 +13,8 @@ const routes = {
         index: '/',
         badgeCategoryList: '/badge-category-list',
         giveTheBadge: getBadgePath(':badgeId'),
-        badgeWon: getBadgeWonPath(':badgeId')
-    }
+        badgeWon: getBadgeWonPath(':badgeId'),
+    },
 };
 
 export default routes;

@@ -11,7 +11,7 @@ export default class Spinner extends Component<void, void> {
         return (
             <div className={style.spinner_wrapper}>
                 <div className={style.spinner}>
-                    <CircularProgress size={50}/>
+                    <CircularProgress size={50} />
                 </div>
             </div>
         );

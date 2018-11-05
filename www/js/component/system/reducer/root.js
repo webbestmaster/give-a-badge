@@ -8,10 +8,10 @@ import scroll, {type ScrollType} from './scroll';
 
 export default combineReducers({
     screen,
-    scroll
+    scroll,
 });
 
 export type SystemType = {|
     +screen: ScreenType,
-    +scroll: ScrollType
+    +scroll: ScrollType,
 |};

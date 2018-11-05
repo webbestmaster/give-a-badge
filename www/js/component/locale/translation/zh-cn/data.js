@@ -34,6 +34,6 @@ export const zhCn: LangDataType = {
     LOGIN_POPUP__LINK_LOST_PASSWORD: '丢失密码？',
 
     // spec symbols
-    SPACE: ' '
+    SPACE: ' ',
     /* eslint-enable id-match, id-length */
 };

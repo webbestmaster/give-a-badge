@@ -6,12 +6,12 @@ import {authConst} from './const';
 import type {ActionDataType} from '../../app/reducer-type';
 
 export type UserType = {|
-    +email: null,
+    +email: ?string,
     +id: number,
     +imageUrl: string,
     +name: string,
     +title: string,
-    +userPermissions: Array<string>
+    +userPermissions: Array<string>,
 |};
 
 export const defaultUserState: UserType = {
@@ -20,24 +20,24 @@ export const defaultUserState: UserType = {
     imageUrl: '/favicon.ico',
     name: '%username%',
     title: 'shit_codeMaker',
-    userPermissions: []
+    userPermissions: [],
 };
 
 export type PopupNameType = 'login';
 
 export type PopupMapStateType = {|
-    +login: PopupStateType
+    +login: PopupStateType,
 |};
 
 const defaultPopupMapState: PopupMapStateType = {
     [authConst.popupName.login]: {
-        isOpen: false
-    }
+        isOpen: false,
+    },
 };
 
 export type AuthType = {|
     +user: UserType,
-    +popup: PopupMapStateType
+    +popup: PopupMapStateType,
 |};
 
 export default combineReducers({
@@ -66,5 +66,5 @@ export default combineReducers({
         const newState = {...popupMapState[popupName], ...state};
 
         return {...popupMapState, [popupName]: newState};
-    }
+    },
 });
