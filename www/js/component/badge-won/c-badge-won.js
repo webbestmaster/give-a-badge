@@ -4,22 +4,22 @@
 
 /* eslint consistent-this: ["error", "view"] */
 
-import type {Node} from 'react';
+import type {ComponentType, Node} from 'react';
 import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import classNames from 'classnames';
 import type {GlobalStateType} from '../../app/reducer';
 import type {ContextRouterType} from '../../../type/react-router-dom-v4';
-import HalfPopup from '../ui/half-popup/c-half-popup';
+import {HalfPopup} from '../ui/half-popup/c-half-popup';
 import type {BadgeWonServerDataType} from './api';
 import {getBadgeWonServerData} from './api';
 import moment from 'moment';
 import {isString} from '../../lib/is';
-import routes from '../app/routes';
+import {routes} from '../app/routes';
 import style from './style.scss';
 import type {SystemType} from '../system/reducer/root';
 import {triggerResize} from '../ui/helper';
-import Locale from '../locale/c-locale';
+import {Locale} from '../locale/c-locale';
 
 type ReduxPropsType = {|
     +system: SystemType,
@@ -31,15 +31,13 @@ type ReduxActionType = {
 
 type PassedPropsType = {};
 
-type PropsType = $ReadOnly<
-    $Exact<{
+type PropsType = $ReadOnly<$Exact<{
         ...$Exact<PassedPropsType>,
         ...$Exact<ReduxPropsType>,
         ...$Exact<ReduxActionType>,
         ...$Exact<ContextRouterType>,
         +children: Node,
-    }>
->;
+    }>>;
 
 type StateType = {|
     +isShowMore: boolean,
@@ -148,7 +146,7 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
         const isNeedToShowButton = view.getNaturalPeopleListHeight() > view.getAvailableAreaHeight();
 
-        if (badgeWonServerData === null || (isShowMore === true && isNeedToShowButton === true)) {
+        if (badgeWonServerData === null || isShowMore === true && isNeedToShowButton === true) {
             return null;
         }
 
@@ -178,7 +176,7 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
         const isNeedToShowButton = view.getNaturalPeopleListHeight() > view.getAvailableAreaHeight();
 
-        if (badgeWonServerData === null || (isShowMore === true && isNeedToShowButton === true)) {
+        if (badgeWonServerData === null || isShowMore === true && isNeedToShowButton === true) {
             return null;
         }
 
@@ -275,7 +273,7 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
                     onClick={(): void => view.toggleIsShowMore()}
                     onKeyPress={(): void => view.toggleIsShowMore()}
                 >
-                    <Locale stringKey="BADGE_WON_LIST__SHOW_LESS" />
+                    <Locale stringKey="BADGE_WON_LIST__SHOW_LESS"/>
                     <span className={style.show_more_less_button__arrow}>‹</span>
                 </button>
             );
@@ -290,7 +288,7 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
                 onClick={(): void => view.toggleIsShowMore()}
                 onKeyPress={(): void => view.toggleIsShowMore()}
             >
-                <Locale stringKey="BADGE_WON_LIST__SHOW_ALL" />
+                <Locale stringKey="BADGE_WON_LIST__SHOW_ALL"/>
                 {': '}
                 {toUsers.length}
                 <span className={style.show_more_less_button__arrow}>‹</span>
@@ -359,9 +357,11 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
     }
 }
 
-export default connect(
+const ConnectedComponent = connect<ComponentType<BadgeWon>, PassedPropsType, ReduxPropsType, ReduxActionType>(
     (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
         system: state.system,
     }),
     reduxAction
 )(BadgeWon);
+
+export {ConnectedComponent as BadgeWon};

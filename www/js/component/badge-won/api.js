@@ -2,7 +2,7 @@
 
 /* global window */
 
-import appConst from '../../app/const';
+import {appConst} from '../../app/const';
 
 export type BadgeWonServerDataType = {
     +author: {

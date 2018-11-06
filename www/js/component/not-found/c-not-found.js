@@ -20,7 +20,7 @@ type StateType = {|
     +state: number,
 |};
 
-export default class NotFound extends Component<PropsType, StateType> {
+export class NotFound extends Component<PropsType, StateType> {
     props: PropsType;
     state: StateType;
 

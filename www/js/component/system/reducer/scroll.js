@@ -20,7 +20,7 @@ function isScrollEnable(disableIdList: Array<string>): boolean {
 }
 
 // eslint-disable-next-line complexity
-export default (scrollState: ScrollType = defaultScrollState, actionData: ActionDataType): ScrollType => {
+export function scroll(scrollState: ScrollType = defaultScrollState, actionData: ActionDataType): ScrollType {
     if (actionData.type !== systemConst.action.type.isScrollEnable) {
         return scrollState;
     }
@@ -54,4 +54,4 @@ export default (scrollState: ScrollType = defaultScrollState, actionData: Action
     disableIdList.push(disableId);
 
     return {...scrollState, isEnable: false};
-};
+}

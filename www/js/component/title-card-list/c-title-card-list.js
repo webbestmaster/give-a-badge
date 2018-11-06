@@ -4,13 +4,13 @@
 
 /* eslint consistent-this: ["error", "view"] */
 
-import type {Node} from 'react';
+import type {ComponentType, Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../app/reducer';
 import style from './style.scss';
 import type {AuthType} from '../auth/reducer';
-import TitleCard from '../title-card/c-title-card';
+import {TitleCard} from '../title-card/c-title-card';
 import type {ApplyGetNewListResponseType} from './action';
 import {applyGetNewListResponse} from './action';
 import type {GetNewsListType, NewsType} from './api';
@@ -18,7 +18,7 @@ import * as api from './api';
 import type {TitleNewsListType} from './reducer';
 import {extractNewsList} from './helper';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import Spinner from '../ui/spinner/c-spinner';
+import {Spinner} from '../ui/spinner/c-spinner';
 
 type ReduxPropsType = {|
     +auth: AuthType,
@@ -100,13 +100,13 @@ class TitleCardList extends Component<ReduxPropsType, PassedPropsType, StateType
                 dataLength={newsList.length} // This is important field to render the next data
                 next={(): Promise<void> => view.fetchNews()}
                 hasMore={!lastNewsResponse.last}
-                loader={<Spinner />}
+                loader={<Spinner/>}
             >
                 <div className={style.card_list}>
                     {newsList.map(
-                        (newsInList: NewsType): Node => (
-                            <TitleCard key={newsInList.id} newsData={newsInList} />
-                        )
+                        (newsInList: NewsType): Node =>
+                            <TitleCard key={newsInList.id} newsData={newsInList}/>
+
                     )}
                 </div>
             </InfiniteScroll>
@@ -120,10 +120,12 @@ class TitleCardList extends Component<ReduxPropsType, PassedPropsType, StateType
     }
 }
 
-export default connect(
+const ConnectedComponent = connect<ComponentType<TitleCardList>, PassedPropsType, ReduxPropsType, ReduxActionType>(
     (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
         auth: state.auth,
         titleNewsList: state.titleNewsList,
     }),
     reduxAction
 )(TitleCardList);
+
+export {ConnectedComponent as TitleCardList};

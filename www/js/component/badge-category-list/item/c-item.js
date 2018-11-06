@@ -2,12 +2,12 @@
 
 /* eslint consistent-this: ["error", "view"] */
 
-import type {Node} from 'react';
+import type {ComponentType, Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../../app/reducer';
 import style from './style.scss';
-import HalfPopupSubHeader from '../../ui/half-popup/sub-header/c-sub-header';
+import {HalfPopupSubHeader} from '../../ui/half-popup/sub-header/c-sub-header';
 import type {BadgeType} from '../api';
 import Link from 'react-router-dom/Link';
 import classNames from 'classnames';
@@ -90,9 +90,16 @@ class BadgeCategoryListItem extends Component<ReduxPropsType, PassedPropsType, S
     }
 }
 
-export default connect(
+const ConnectedComponent = connect<
+    ComponentType<BadgeCategoryListItem>,
+    PassedPropsType,
+    ReduxPropsType,
+    ReduxActionType
+>(
     (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
         // reduxProp: true
     }),
     reduxAction
 )(BadgeCategoryListItem);
+
+export {ConnectedComponent as BadgeCategoryListItem};

@@ -40,7 +40,12 @@ export type AuthType = {|
     +popup: PopupMapStateType,
 |};
 
-export default combineReducers({
+type ReduceMapType = {|
+    +user: (userState: UserType, actionData: ActionDataType) => UserType,
+    +popup: (popupMapState: PopupMapStateType, actionData: ActionDataType) => PopupMapStateType,
+|};
+
+const auth = combineReducers<ReduceMapType, AuthType>({
     user: (userState: UserType = defaultUserState, actionData: ActionDataType): UserType => {
         if (actionData.type !== authConst.action.type.setUserState) {
             return userState;
@@ -68,3 +73,5 @@ export default combineReducers({
         return {...popupMapState, [popupName]: newState};
     },
 });
+
+export {auth};

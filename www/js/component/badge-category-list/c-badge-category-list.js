@@ -2,18 +2,18 @@
 
 /* eslint consistent-this: ["error", "view"] */
 
-import type {Node} from 'react';
+import type {ComponentType, Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../app/reducer';
-import BadgeCategoryListItem from './item/c-item';
-import HalfPopup from '../ui/half-popup/c-half-popup';
-import HalfPopupHeader from '../ui/half-popup/header/c-header';
+import {BadgeCategoryListItem} from './item/c-item';
+import {HalfPopup} from '../ui/half-popup/c-half-popup';
+import {HalfPopupHeader} from '../ui/half-popup/header/c-header';
 import type {BadgeCategoryListType} from './api';
 import {getBadgeCategoryList} from './api';
 // import type {ExtractedCategoryType} from './helper';
 // import {extractCategoryList} from './helper';
-import Locale from '../locale/c-locale';
+import {Locale} from '../locale/c-locale';
 import type {ContextRouterType} from '../../../type/react-router-dom-v4';
 
 type ReduxPropsType = {};
@@ -84,25 +84,27 @@ class BadgeCategoryList extends Component<ReduxPropsType, PassedPropsType, State
         return (
             <HalfPopup closeOnClickBackground>
                 <HalfPopupHeader>
-                    <Locale stringKey="CATEGORY_LIST__CATEGORIES" />
+                    <Locale stringKey="CATEGORY_LIST__CATEGORIES"/>
                 </HalfPopupHeader>
-                {badgeCategoryList
-                    ? Object.keys(badgeCategoryList).map(
-                          (key: string): Node => {
-                              return (
-                                  <BadgeCategoryListItem key={key} name={key} categoryList={badgeCategoryList[key]} />
-                              );
-                          }
-                      )
-                    : null}
+                {badgeCategoryList ?
+                    Object.keys(badgeCategoryList).map(
+                        (key: string): Node => {
+                            return (
+                                <BadgeCategoryListItem key={key} name={key} categoryList={badgeCategoryList[key]}/>
+                            );
+                        }
+                    ) :
+                    null}
             </HalfPopup>
         );
     }
 }
 
-export default connect(
+const ConnectedComponent = connect<ComponentType<BadgeCategoryList>, PassedPropsType, ReduxPropsType, ReduxActionType>(
     (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
         // reduxProp: true
     }),
     reduxAction
 )(BadgeCategoryList);
+
+export {ConnectedComponent as BadgeCategoryList};

@@ -21,4 +21,4 @@ const appConst = {
     },
 };
 
-export default appConst;
+export {appConst};

@@ -2,7 +2,7 @@
 
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 
-export default createMuiTheme({
+const muiTheme = createMuiTheme({
     typography: {
         useNextVariants: true,
     },
@@ -17,3 +17,5 @@ export default createMuiTheme({
         },
     },
 });
+
+export {muiTheme};

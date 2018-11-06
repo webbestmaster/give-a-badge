@@ -4,16 +4,16 @@
 
 /* eslint consistent-this: ["error", "view"] */
 
-import type {Node} from 'react';
+import type {ComponentType, Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import classNames from 'classnames';
 import type {GlobalStateType} from '../../../app/reducer';
-import Locale, {getLocalizedString} from '../../locale/c-locale';
+import {Locale, getLocalizedString} from '../../locale/c-locale';
 import type {LocaleType} from '../../locale/reducer';
 import type {FoundedUserListType, FoundedUserType} from './api';
 import {badgeAssign, searchUser} from './api';
-import FoundedUser from './founded-user/c-founded-user';
+import {FoundedUser} from './founded-user/c-founded-user';
 import Transition from 'react-transition-group/Transition';
 import type {TransitionStatus} from 'react-transition-group';
 import style from './style.scss';
@@ -22,7 +22,7 @@ import serviceStyle from '../../../../css/service.scss';
 import type {SystemType} from '../../system/reducer/root';
 import withRouter from 'react-router-dom/withRouter';
 import type {ContextRouterType} from '../../../../type/react-router-dom-v4';
-import routes from '../../app/routes';
+import {routes} from '../../app/routes';
 import type {GetNewsListType} from '../../title-card-list/api';
 import * as api from '../../title-card-list/api';
 import type {TitleNewsListType} from '../../title-card-list/reducer';
@@ -349,7 +349,7 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
         if (searchUserListLength === 0 && hasSearchInputFocus) {
             return (
                 <div className={style.no_found_people}>
-                    <Locale stringKey="SEARCH_PEOPLE__NO_RESULT" />
+                    <Locale stringKey="SEARCH_PEOPLE__NO_RESULT"/>
                 </div>
             );
         }
@@ -400,7 +400,7 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const {selectedUserList} = state;
 
         if (selectedUserList.length === 0) {
-            return <div key="selected-user-list" className={style.selected_user_list__empty} />;
+            return <div key="selected-user-list" className={style.selected_user_list__empty}/>;
         }
 
         return (
@@ -468,9 +468,9 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
                     }
                 }}
                 message={
-                    isSuccess
-                        ? getLocalizedString('SNACK_BAR__GIVE_BADGE__SUCCESS', locale.name)
-                        : getLocalizedString('SNACK_BAR__GIVE_BADGE__ERROR', locale.name)
+                    isSuccess ?
+                        getLocalizedString('SNACK_BAR__GIVE_BADGE__SUCCESS', locale.name) :
+                        getLocalizedString('SNACK_BAR__GIVE_BADGE__ERROR', locale.name)
                 }
             />
         );
@@ -528,7 +528,7 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
                         className={classNames(style.submit_button, {[serviceStyle.disabled]: !view.isSubmitActive()})}
                         type="submit"
                     >
-                        <Locale stringKey="SEARCH_PEOPLE__SUBMIT_BUTTON" />
+                        <Locale stringKey="SEARCH_PEOPLE__SUBMIT_BUTTON"/>
                     </button>
                 </form>
 
@@ -538,7 +538,7 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
     }
 }
 
-export default connect(
+const ConnectedComponent = connect<ComponentType<BadgeForm>, PassedPropsType, ReduxPropsType, ReduxActionType>(
     (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
         locale: state.locale,
         titleNewsList: state.titleNewsList,
@@ -546,3 +546,5 @@ export default connect(
     }),
     reduxAction
 )(withRouter(BadgeForm));
+
+export {ConnectedComponent as BadgeForm};

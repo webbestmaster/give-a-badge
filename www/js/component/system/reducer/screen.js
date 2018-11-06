@@ -81,7 +81,7 @@ const {clientWidth, clientHeight} = window.document.documentElement;
 
 const defaultScreenState = getScreenState(clientWidth, clientHeight);
 
-export default (screenState: ScreenType = defaultScreenState, actionData: ActionDataType): ScreenType => {
+export function screen(screenState: ScreenType = defaultScreenState, actionData: ActionDataType): ScreenType {
     if (actionData.type !== systemConst.action.type.resize) {
         return screenState;
     }
@@ -97,4 +97,4 @@ export default (screenState: ScreenType = defaultScreenState, actionData: Action
     }
 
     return getScreenState(width, height);
-};
+}

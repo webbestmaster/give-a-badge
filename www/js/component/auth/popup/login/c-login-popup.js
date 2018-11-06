@@ -4,7 +4,7 @@
 
 /* eslint consistent-this: ["error", "view"] */
 
-import type {Node} from 'react';
+import type {ComponentType, Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../../../app/reducer';
@@ -19,13 +19,8 @@ import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import * as api from '../../api';
 import style from './style.scss';
-import Locale, {getLocalizedString} from '../../../locale/c-locale';
+import {Locale, getLocalizedString} from '../../../locale/c-locale';
 import type {LocaleType} from '../../../locale/reducer';
-// import Paper from '@material-ui/core/Paper';
-// import Typography from '@material-ui/core/Typography';
-// import Locale from '../../../locale';
-
-// import style from './style.scss';
 
 type ReduxPropsType = {|
     auth: AuthType,
@@ -120,9 +115,9 @@ class LoginPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const {snackbar} = state;
         const {isSuccess, isOpen} = snackbar;
 
-        const message = isSuccess
-            ? getLocalizedString('LOGIN_POPUP__LOGIN__SUCCESS', locale.name)
-            : getLocalizedString('LOGIN_POPUP__LOGIN__ERROR', locale.name);
+        const message = isSuccess ?
+            getLocalizedString('LOGIN_POPUP__LOGIN__SUCCESS', locale.name) :
+            getLocalizedString('LOGIN_POPUP__LOGIN__ERROR', locale.name);
 
         return (
             <Snackbar
@@ -154,7 +149,7 @@ class LoginPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
                     onSubmit={async (evt: SyntheticEvent<EventTarget>): Promise<void> => await view.onFormSubmit(evt)}
                 >
                     <DialogTitle id="alert-dialog-slide-title">
-                        <Locale stringKey="LOGIN_POPUP__HEADER" />
+                        <Locale stringKey="LOGIN_POPUP__HEADER"/>
                     </DialogTitle>
                     <fieldset className={style.login_fieldset}>
                         <TextField
@@ -178,7 +173,7 @@ class LoginPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
                         />
                     </fieldset>
                     <Button margin="normal" variant="contained" color="primary" type="submit">
-                        <Locale stringKey="LOGIN_POPUP__LOGIN_BUTTON" />
+                        <Locale stringKey="LOGIN_POPUP__LOGIN_BUTTON"/>
                     </Button>
                 </form>
             </Dialog>,
@@ -187,10 +182,12 @@ class LoginPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
     }
 }
 
-export default connect(
+const ConnectedComponent = connect<ComponentType<LoginPopup>, PassedPropsType, ReduxPropsType, ReduxActionType>(
     (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
         auth: state.auth,
         locale: state.locale,
     }),
     reduxAction
 )(LoginPopup);
+
+export {ConnectedComponent as LoginPopup};

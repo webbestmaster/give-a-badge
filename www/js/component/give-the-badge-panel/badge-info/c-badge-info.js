@@ -2,7 +2,7 @@
 
 /* eslint consistent-this: ["error", "view"] */
 
-import type {Node} from 'react';
+import type {ComponentType, Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../../app/reducer';
@@ -12,7 +12,7 @@ import style from './style.scss';
 import type {SystemType} from '../../system/reducer/root';
 import classNames from 'classnames';
 import withRouter from 'react-router-dom/withRouter';
-import routes from '../../app/routes';
+import {routes} from '../../app/routes';
 import type {ContextRouterType} from '../../../../type/react-router-dom-v4';
 
 type ReduxPropsType = {|
@@ -27,15 +27,13 @@ type PassedPropsType = {|
     +badgeId: string,
 |};
 
-type PropsType = $ReadOnly<
-    $Exact<{
+type PropsType = $ReadOnly<$Exact<{
         ...$Exact<PassedPropsType>,
         ...$Exact<ReduxPropsType>,
         ...$Exact<ReduxActionType>,
         ...$Exact<ContextRouterType>,
         +children: Node,
-    }>
->;
+    }>>;
 
 type StateType = {|
     +badgeInfo: BadgeType | null,
@@ -159,9 +157,11 @@ class BadgeInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
     }
 }
 
-export default connect(
+const ConnectedComponent = connect<ComponentType<BadgeInfo>, PassedPropsType, ReduxPropsType, ReduxActionType>(
     (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
         system: state.system,
     }),
     reduxAction
 )(withRouter(BadgeInfo));
+
+export {ConnectedComponent as BadgeInfo};

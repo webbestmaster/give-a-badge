@@ -2,12 +2,12 @@
 
 /* eslint consistent-this: ["error", "view"] */
 
-import type {Node} from 'react';
+import type {ComponentType, Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../../app/reducer';
 import style from './style.scss';
-import CloseButton from './close-button/c-close-button';
+import {CloseButton} from './close-button/c-close-button';
 import type {OnSetIsScrollEnableType} from '../../system/action';
 import {setIsScrollEnable} from '../../system/action';
 import {isString} from '../../../lib/is';
@@ -102,7 +102,7 @@ class HalfPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
         if (error instanceof Error) {
             return (
                 <div className={style.half_popup__container}>
-                    <img className={style.error_image} src={errorImage} alt="error" />
+                    <img className={style.error_image} src={errorImage} alt="error"/>
                     <p className={style.error_text}>{error.message}</p>
                 </div>
             );
@@ -134,12 +134,12 @@ class HalfPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
         /* eslint-disable jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events */
         return (
             <div className={style.half_popup__wrapper}>
-                <div className={style.half_popup__fade} />
+                <div className={style.half_popup__fade}/>
                 <div
                     onClick={view.handleOnClickBackground}
                     className={classNames(style.half_popup__set_container_position, containerPositionClassName)}
                 >
-                    <CloseButton />
+                    <CloseButton/>
                     {view.renderContent()}
                 </div>
             </div>
@@ -148,9 +148,11 @@ class HalfPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
     }
 }
 
-export default connect(
+const ConnectedComponent = connect<ComponentType<HalfPopup>, PassedPropsType, ReduxPropsType, ReduxActionType>(
     (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
         // reduxProp: true
     }),
     reduxAction
 )(withRouter(HalfPopup));
+
+export {ConnectedComponent as HalfPopup};

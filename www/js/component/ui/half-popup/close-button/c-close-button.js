@@ -59,4 +59,6 @@ class CloseButton extends Component<PropsType, StateType> {
     }
 }
 
-export default withRouter(CloseButton);
+const ConnectedComponent = withRouter(CloseButton);
+
+export {ConnectedComponent as CloseButton};

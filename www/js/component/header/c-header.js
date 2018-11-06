@@ -10,10 +10,10 @@ import style from './style.scss';
 import serviceStyle from '../../../css/service.scss';
 import withRouter from 'react-router-dom/withRouter';
 import Link from 'react-router-dom/Link';
-import routes from '../app/routes';
+import {routes} from '../app/routes';
 import classNames from 'classnames';
 // import Search from './search';
-import UserInfo from './user-info/c-user-info';
+import {UserInfo} from './user-info/c-user-info';
 import type {SystemType} from '../system/reducer/root';
 import type {ContextRouterType} from '../../../type/react-router-dom-v4';
 
@@ -59,9 +59,9 @@ class Header extends Component<ReduxPropsType, PassedPropsType, StateType> {
                         })}
                     >
                         Give
-                        <div />A Badge
+                        <div/>A Badge
                     </Link>
-                    <UserInfo />
+                    <UserInfo/>
                 </div>
             </header>
         );
@@ -85,7 +85,7 @@ class Header extends Component<ReduxPropsType, PassedPropsType, StateType> {
     }
 }
 
-export default withRouter(
+const ConnectedComponent = withRouter(
     connect(
         (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
             system: state.system,
@@ -93,3 +93,5 @@ export default withRouter(
         {}
     )(Header)
 );
+
+export {ConnectedComponent as Header};

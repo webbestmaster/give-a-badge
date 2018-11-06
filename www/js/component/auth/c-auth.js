@@ -4,16 +4,14 @@
 
 /* eslint consistent-this: ["error", "view"] */
 
-import type {Node} from 'react';
+import type {Node, ComponentType} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import type {SetPopupStateType, SetUserType} from './action';
 import {openLoginPopup, setUser} from './action';
 import type {AuthType, UserType} from './reducer';
 import type {GlobalStateType} from '../../app/reducer';
-// import LoginPopup from './popup/login';
-// import {isBoolean} from '../../lib/is';
-import * as api from './api';
+import {getMe} from './api';
 
 type ReduxPropsType = {|
     +auth: AuthType,
@@ -68,9 +66,9 @@ class Auth extends Component<ReduxPropsType, PassedPropsType, StateType> {
             return;
         }
 
-        const LoginPopupRequire = await import('./popup/login/c-login-popup');
+        const {LoginPopup} = await import('./popup/login/c-login-popup');
 
-        popupStore.LoginPopup = LoginPopupRequire.default;
+        popupStore.LoginPopup = LoginPopup;
 
         view.setState({isAllPopupLoaded: true});
     }
@@ -80,7 +78,7 @@ class Auth extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const {props} = view;
         const {setUser: setUserAction, openLoginPopup: openLoginPopupAction} = props;
 
-        const getMeResult = await api.getMe();
+        const getMeResult = await getMe();
 
         if (getMeResult.hasError === true) {
             await view.loadAllPopup();
@@ -110,16 +108,18 @@ class Auth extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const {LoginPopup} = popupStore;
 
         if (LoginPopup !== null) {
-            componentList.push(<LoginPopup key="login-popup" />);
+            componentList.push(<LoginPopup key="login-popup"/>);
         }
 
         return componentList;
     }
 }
 
-export default connect(
-    (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
+const ConnectedComponent = connect<ComponentType<Auth>, PassedPropsType, ReduxPropsType, ReduxActionType>(
+    (state: GlobalStateType): ReduxPropsType => ({
         auth: state.auth,
     }),
     reduxAction
 )(Auth);
+
+export {ConnectedComponent as Auth};

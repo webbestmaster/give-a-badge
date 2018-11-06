@@ -6,7 +6,7 @@
 
 /* eslint consistent-this: ["error", "view"] */
 
-import type {Node} from 'react';
+import type {ComponentType, Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../../app/reducer';
@@ -21,6 +21,8 @@ type ReduxPropsType = {|
     +system: SystemType,
     +auth: AuthType,
 |};
+
+type ReduxActionType = {};
 
 type PassedPropsType = {|
     // passedProp: string
@@ -71,7 +73,7 @@ class UserInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
                         {auth.user.name}!
                     </span>
                 </h5>
-                <div className={style.user_avatar} style={{backgroundImage: `url('${auth.user.imageUrl}')`}} />
+                <div className={style.user_avatar} style={{backgroundImage: `url('${auth.user.imageUrl}')`}}/>
             </div>
         );
     }
@@ -89,7 +91,7 @@ class UserInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
                     onClick={async (): Promise<void> => await view.logout()}
                     onKeyPress={async (): Promise<void> => await view.logout()}
                 />
-                <div className={style.user_avatar} style={{backgroundImage: `url('${auth.user.imageUrl}')`}} />
+                <div className={style.user_avatar} style={{backgroundImage: `url('${auth.user.imageUrl}')`}}/>
             </div>
         );
     }
@@ -102,10 +104,12 @@ class UserInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
     }
 }
 
-export default connect(
+const ConnectedComponent = connect<ComponentType<UserInfo>, PassedPropsType, ReduxPropsType, ReduxActionType>(
     (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
         system: state.system,
         auth: state.auth,
     }),
     {}
 )(UserInfo);
+
+export {ConnectedComponent as UserInfo};

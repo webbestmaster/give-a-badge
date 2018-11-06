@@ -2,14 +2,14 @@
 
 type SocketIoOptionsType = {|
     transports: ['websocket'],
-    'force new connection': true
+    'force new connection': true,
 |};
 
 type SocketCallbackFunctionType = (message?: string) => void;
 
 type SocketType = {|
     id: string,
-    on(event: string, callbackFunction: SocketCallbackFunctionType): void
+    on(event: string, callbackFunction: SocketCallbackFunctionType): void,
 |};
 
 declare module 'socket.io-client' {

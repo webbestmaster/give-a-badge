@@ -5,19 +5,19 @@
 import type {Node} from 'react';
 import React, {Component} from 'react';
 // import style from './style.scss';
-import Header from '../../component/header/c-header';
-import TitleCardList from '../../component/title-card-list/c-title-card-list';
+import {Header} from '../../component/header/c-header';
+import {TitleCardList} from '../../component/title-card-list/c-title-card-list';
 import Route from 'react-router-dom/Route';
-import BadgeCategoryList from '../../component/badge-category-list/c-badge-category-list';
-import GiveTheBadgePanel from '../../component/give-the-badge-panel/c-give-the-badge-panel';
-import BadgeWon from '../../component/badge-won/c-badge-won';
+import {BadgeCategoryList} from '../../component/badge-category-list/c-badge-category-list';
+import {GiveTheBadgePanel} from '../../component/give-the-badge-panel/c-give-the-badge-panel';
+import {BadgeWon} from '../../component/badge-won/c-badge-won';
 import Switch from 'react-router-dom/Switch';
 // import BrowserRouter from 'react-router-dom/BrowserRouter';
 import withRouter from 'react-router-dom/withRouter';
 import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../app/reducer';
 import type {SystemType} from '../../component/system/reducer/root';
-import routes from '../../component/app/routes';
+import {routes} from '../../component/app/routes';
 import type {AuthType} from '../../component/auth/reducer';
 import {defaultUserState} from '../../component/auth/reducer';
 // import type {ContextRouterType} from '../../../type/react-router-dom-v4';
@@ -31,14 +31,12 @@ type ReduxActionType = {};
 type PassedPropsType = {};
 type StateType = null;
 
-type PropsType = $ReadOnly<
-    $Exact<{
+type PropsType = $ReadOnly<$Exact<{
         ...$Exact<PassedPropsType>,
         ...$Exact<ReduxPropsType>,
         ...$Exact<ReduxActionType>,
         +children: Node,
-    }>
->;
+    }>>;
 
 // eslint-disable-next-line react/prefer-stateless-function
 class Home extends Component<ReduxPropsType, PassedPropsType, StateType> {
@@ -53,18 +51,18 @@ class Home extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const defaultUserName = defaultUserState.name;
 
         return [
-            defaultUserName === auth.user.name ? null : <Header key="header" />,
-            <TitleCardList key="title-card-list" />,
+            defaultUserName === auth.user.name ? null : <Header key="header"/>,
+            <TitleCardList key="title-card-list"/>,
             <Switch key="home-switch">
-                <Route component={BadgeCategoryList} path={routes.index.badgeCategoryList} exact />
-                <Route component={GiveTheBadgePanel} path={routes.index.giveTheBadge} exact />
-                <Route component={BadgeWon} path={routes.index.badgeWon} exact />
+                <Route component={BadgeCategoryList} path={routes.index.badgeCategoryList} exact/>
+                <Route component={GiveTheBadgePanel} path={routes.index.giveTheBadge} exact/>
+                <Route component={BadgeWon} path={routes.index.badgeWon} exact/>
             </Switch>,
         ];
     }
 }
 
-export default withRouter(
+const ConnectedComponent = withRouter(
     connect(
         (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
             system: state.system,
@@ -73,3 +71,5 @@ export default withRouter(
         {}
     )(Home)
 );
+
+export {ConnectedComponent as Home};

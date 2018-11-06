@@ -9,7 +9,11 @@ export type TitleNewsListType = {|
     +newsResponseList: Array<GetNewsListType>,
 |};
 
-export default combineReducers({
+type ReduceMapType = {|
+    +newsResponseList: (newsResponseList: Array<GetNewsListType>, actionData: ActionDataType) => Array<GetNewsListType>,
+|};
+
+const titleNewsList = combineReducers<ReduceMapType, TitleNewsListType>({
     newsResponseList: (
         newsResponseList: Array<GetNewsListType> = [],
         actionData: ActionDataType
@@ -24,8 +28,10 @@ export default combineReducers({
 
         const {getNewsListResponse} = actionData.payload;
 
-        return actionData.payload.inBegin
-            ? [getNewsListResponse, ...newsResponseList]
-            : [...newsResponseList, getNewsListResponse];
+        return actionData.payload.inBegin ?
+            [getNewsListResponse, ...newsResponseList] :
+            [...newsResponseList, getNewsListResponse];
     },
 });
+
+export {titleNewsList};

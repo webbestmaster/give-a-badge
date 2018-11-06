@@ -2,7 +2,7 @@
 
 /* eslint consistent-this: ["error", "view"] */
 
-import type {Node} from 'react';
+import type {ComponentType, Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../app/reducer';
@@ -104,7 +104,7 @@ class TitleCard extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
         return (
             <Link to={getBadgeWonPath(newsData.id)} className={style.card}>
-                <div className={style.badge_icon} style={{backgroundImage: `url('${newsData.reason.imageUrl}')`}} />
+                <div className={style.badge_icon} style={{backgroundImage: `url('${newsData.reason.imageUrl}')`}}/>
 
                 {view.renderFaceList()}
 
@@ -124,7 +124,9 @@ class TitleCard extends Component<ReduxPropsType, PassedPropsType, StateType> {
     }
 }
 
-export default connect(
+const ConnectedComponent = connect<ComponentType<TitleCard>, PassedPropsType, ReduxPropsType, {}>(
     (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({}),
     {}
 )(TitleCard);
+
+export {ConnectedComponent as TitleCard};

@@ -4,7 +4,7 @@
 
 /* eslint consistent-this: ["error", "view"] */
 
-import type {Node} from 'react';
+import type {ComponentType, Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import classNames from 'classnames';
@@ -28,14 +28,12 @@ type PassedPropsType = {|
     +className?: string,
 |};
 
-type PropsType = $ReadOnly<
-    $Exact<{
+type PropsType = $ReadOnly<$Exact<{
         ...$Exact<PassedPropsType>,
         ...$Exact<ReduxPropsType>,
         ...$Exact<ReduxActionType>,
         +children: Node,
-    }>
->;
+    }>>;
 
 type StateType = {
     // +state: number
@@ -97,9 +95,11 @@ class FoundedUser extends Component<ReduxPropsType, PassedPropsType, StateType> 
     }
 }
 
-export default connect(
+const ConnectedComponent = connect<ComponentType<FoundedUser>, PassedPropsType, ReduxPropsType, ReduxActionType>(
     (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
         // reduxProp: true
     }),
     reduxAction
 )(FoundedUser);
+
+export {ConnectedComponent as FoundedUser};
