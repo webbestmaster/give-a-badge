@@ -97,6 +97,18 @@ class TitleCard extends Component<ReduxPropsType, PassedPropsType, StateType> {
         );
     }
 
+    renderAuthor(): Node {
+        const view = this;
+        const {props, state} = view;
+        const {newsData} = props;
+
+        if (newsData.author === null) {
+            return null;
+        }
+
+        return <div className={style.bottom_face} style={{backgroundImage: `url('${newsData.author.imageUrl}')`}}/>;
+    }
+
     render(): Node {
         const view = this;
         const {props, state} = view;
@@ -112,11 +124,7 @@ class TitleCard extends Component<ReduxPropsType, PassedPropsType, StateType> {
                     <p className={classnames(helperStyle.line_cap_3, style.review__text)}>{newsData.comment}</p>
                 </div>
                 <div className={classnames(serviceStyle.clear_self, style.bottom_data_wrapper)}>
-                    <div
-                        className={style.bottom_face}
-                        style={{backgroundImage: `url('${newsData.author.imageUrl}')`}}
-                    />
-
+                    {view.renderAuthor()}
                     <p className={style.bottom_date}>{moment(newsData.date).format('DD.MM.YYYY')}</p>
                 </div>
             </Link>

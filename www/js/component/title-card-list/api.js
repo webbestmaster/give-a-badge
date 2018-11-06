@@ -5,7 +5,7 @@
 import {appConst} from '../../app/const';
 import {defaultFetchGetProps} from '../auth/api';
 
-export type NewsTypeType = 'BADGE_ASSIGNMENT';
+export type NewsTypeType = 'BADGE_ASSIGNMENT' | 'CAMPAIGN_RESULTS';
 export type NewsUserType = {|
     +id: number,
     +name: string,
@@ -13,11 +13,11 @@ export type NewsUserType = {|
 |};
 
 export type NewsType = {|
-    +author: NewsUserType,
-    +comment: string,
-    +id: number,
+    +author: NewsUserType | null,
     +date: number,
+    +comment: string,
     +entityId: number,
+    +id: number,
     +newsType: NewsTypeType,
     +reason: {|
         +id: number,
@@ -29,7 +29,7 @@ export type NewsType = {|
     +tags: [],
 |};
 
-export type GetNewsListType = {|
+export type GetNewsListType = {
     +content: Array<NewsType>,
     +first: boolean,
     +last: boolean,
@@ -46,7 +46,7 @@ export type GetNewsListType = {|
     |}>,
     +totalPages: number,
     +totalElements: number,
-|};
+};
 
 export async function getNewsList(pageIndex: number, pageSize: number): Promise<GetNewsListType | null> {
     const getNewUrl = appConst.api.getNews
