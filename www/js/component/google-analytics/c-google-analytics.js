@@ -65,12 +65,14 @@ class GoogleAnalytics extends Component<PropsType, StateType> {
             // just example for custom events
             if (location.pathname.includes('give-the-badge')) {
                 console.log(
-                    'GA: custom event:',
-                    '[send',
+                    '---> GA: custom event:',
+                    '[',
+                    'send',
                     'event',
                     'Event Category Name',
                     'Event Action Name',
-                    'Event Label Name]'
+                    'Event Label Name',
+                    ']'
                 );
                 // window.ga('send', 'event', 'Event Category Name', 'Event Action Name', 'Event Label Name');
             }

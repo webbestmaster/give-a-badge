@@ -9,6 +9,7 @@ import React, {Component} from 'react';
 import type {ContextRouterType} from '../../../../../type/react-router-dom-v4';
 import withRouter from 'react-router-dom/withRouter';
 import style from './style.scss';
+import {routes} from '../../../app/routes';
 
 type PassedPropsType = {|
     // +passedProp: string
@@ -42,7 +43,13 @@ class CloseButton extends Component<PropsType, StateType> {
         const view = this;
         const {props} = view;
 
-        props.history.goBack();
+        // move user to home page if user arrived from direct lint
+        if (props.history.length > 2) {
+            props.history.goBack();
+            return;
+        }
+
+        props.history.push(routes.index.index);
     }
 
     render(): Node {
