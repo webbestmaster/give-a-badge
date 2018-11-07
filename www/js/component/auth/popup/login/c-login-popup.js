@@ -19,7 +19,7 @@ import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import * as api from '../../api';
 import style from './style.scss';
-import {Locale, getLocalizedString} from '../../../locale/c-locale';
+import {getLocalizedString, Locale} from '../../../locale/c-locale';
 import type {LocaleType} from '../../../locale/reducer';
 
 type ReduxPropsType = {|

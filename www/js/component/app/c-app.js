@@ -32,6 +32,7 @@ export function App(): Node {
                                 <Route component={Home} path={routes.index.badgeCategoryList} exact/>
                                 <Route component={Home} path={routes.index.giveTheBadge} exact/>
                                 <Route component={Home} path={routes.index.badgeWon} exact/>
+                                <Route component={Home} path={routes.index.statistic} exact/>
                                 <Route component={NotFound}/>
                             </Switch>
                         </Fragment>

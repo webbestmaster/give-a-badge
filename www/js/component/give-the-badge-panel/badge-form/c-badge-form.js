@@ -9,7 +9,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import classNames from 'classnames';
 import type {GlobalStateType} from '../../../app/reducer';
-import {Locale, getLocalizedString} from '../../locale/c-locale';
+import {getLocalizedString, Locale} from '../../locale/c-locale';
 import type {LocaleType} from '../../locale/reducer';
 import type {FoundedUserListType, FoundedUserType} from './api';
 import {badgeAssign, searchUser} from './api';

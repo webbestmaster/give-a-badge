@@ -12,7 +12,6 @@ import {BadgeCategoryList} from '../../component/badge-category-list/c-badge-cat
 import {GiveTheBadgePanel} from '../../component/give-the-badge-panel/c-give-the-badge-panel';
 import {BadgeWon} from '../../component/badge-won/c-badge-won';
 import Switch from 'react-router-dom/Switch';
-// import BrowserRouter from 'react-router-dom/BrowserRouter';
 import withRouter from 'react-router-dom/withRouter';
 import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../app/reducer';
@@ -20,7 +19,7 @@ import type {SystemType} from '../../component/system/reducer/root';
 import {routes} from '../../component/app/routes';
 import type {AuthType} from '../../component/auth/reducer';
 import {defaultUserState} from '../../component/auth/reducer';
-// import type {ContextRouterType} from '../../../type/react-router-dom-v4';
+import {Statistic} from '../../component/statistic/c-statistic';
 
 type ReduxPropsType = {|
     +system: SystemType,
@@ -57,6 +56,7 @@ class Home extends Component<ReduxPropsType, PassedPropsType, StateType> {
                 <Route component={BadgeCategoryList} path={routes.index.badgeCategoryList} exact/>
                 <Route component={GiveTheBadgePanel} path={routes.index.giveTheBadge} exact/>
                 <Route component={BadgeWon} path={routes.index.badgeWon} exact/>
+                <Route component={Statistic} path={routes.index.statistic} exact/>
             </Switch>,
         ];
     }

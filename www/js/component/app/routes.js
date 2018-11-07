@@ -14,6 +14,7 @@ const routes = {
         badgeCategoryList: '/badge-category-list',
         giveTheBadge: getBadgePath(':badgeId'),
         badgeWon: getBadgeWonPath(':badgeId'),
+        statistic: '/statistic',
     },
 };
 
