@@ -1,7 +1,5 @@
 // @flow
 
-/* eslint-disable react/jsx-no-bind */
-
 /* eslint consistent-this: ["error", "view"] */
 
 import type {Node} from 'react';
@@ -52,14 +50,20 @@ class CloseButton extends Component<PropsType, StateType> {
         props.history.push(routes.index.index);
     }
 
+    handleOnClick = () => {
+        const view = this;
+
+        view.onClick();
+    };
+
     render(): Node {
         const view = this;
 
         return (
             <button
                 type="button"
-                onKeyPress={(): void => view.onClick()}
-                onClick={(): void => view.onClick()}
+                onKeyPress={view.handleOnClick}
+                onClick={view.handleOnClick}
                 className={style.close_button__wrapper}
             />
         );

@@ -2,8 +2,6 @@
 
 /* global window */
 
-/* eslint-disable react/jsx-no-bind */
-
 /* eslint consistent-this: ["error", "view"] */
 
 import type {ComponentType, Node} from 'react';
@@ -50,8 +48,17 @@ class UserInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
     async logout(): Promise<void> {
         await authApi.logout();
+
         window.location.reload();
     }
+
+    handleLogOut = () => {
+        (async (): Promise<void> => {
+            const view = this;
+
+            await view.logout();
+        })();
+    };
 
     renderDesktop(): Node {
         const view = this;
@@ -63,8 +70,8 @@ class UserInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
                 <button
                     type="button"
                     className={style.logout_button}
-                    onClick={async (): Promise<void> => await view.logout()}
-                    onKeyPress={async (): Promise<void> => await view.logout()}
+                    onClick={view.handleLogOut}
+                    onKeyPress={view.handleLogOut}
                 />
                 <h5 className={style.user_name}>
                     <span className={serviceStyle.ellipsis}>
@@ -88,8 +95,8 @@ class UserInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
                 <button
                     type="button"
                     className={style.logout_button}
-                    onClick={async (): Promise<void> => await view.logout()}
-                    onKeyPress={async (): Promise<void> => await view.logout()}
+                    onClick={view.handleLogOut}
+                    onKeyPress={view.handleLogOut}
                 />
                 <div className={style.user_avatar} style={{backgroundImage: `url('${auth.user.imageUrl}')`}}/>
             </div>

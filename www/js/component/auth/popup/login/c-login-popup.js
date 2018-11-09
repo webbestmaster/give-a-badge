@@ -1,7 +1,5 @@
 // @flow
 
-/* eslint-disable react/jsx-no-bind */
-
 /* eslint consistent-this: ["error", "view"] */
 
 import type {ComponentType, Node} from 'react';
@@ -108,6 +106,15 @@ class LoginPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
         view.setState({snackbar: {...state.snackbar, isOpen, isSuccess}});
     }
 
+    handleOnSnackBarClick = () => {
+        const view = this;
+        const {state} = view;
+        const {snackbar} = state;
+        const {isSuccess} = snackbar;
+
+        view.setShowSnackbar(false, isSuccess);
+    };
+
     renderSnackBar(): Node {
         const view = this;
         const {props, state} = view;
@@ -128,26 +135,41 @@ class LoginPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
                 }}
                 open={isOpen}
                 autoHideDuration={2e3}
-                onClose={() => {
-                    view.setShowSnackbar(false, isSuccess);
-                }}
+                onClose={view.handleOnSnackBarClick}
                 message={message}
             />
         );
     }
 
+    handleFormSubmit = (evt: SyntheticEvent<EventTarget>) => {
+        (async (): Promise<void> => {
+            const view = this;
+
+            await view.onFormSubmit(evt);
+        })();
+    };
+
+    defineLoginInput = (login: HTMLInputElement | null) => {
+        const view = this;
+
+        view.node.login = login;
+    };
+
+    definePasswordInput = (password: HTMLInputElement | null) => {
+        const view = this;
+
+        view.node.password = password;
+    };
+
     render(): Node {
         const view = this;
-        const {props, state} = view;
+        const {props} = view;
         const {auth, locale} = props;
         const {isOpen} = auth.popup[authConst.popupName.login];
 
         return [
             <Dialog key="dialog" open={isOpen} keepMounted>
-                <form
-                    className={style.form}
-                    onSubmit={async (evt: SyntheticEvent<EventTarget>): Promise<void> => await view.onFormSubmit(evt)}
-                >
+                <form className={style.form} onSubmit={view.handleFormSubmit}>
                     <DialogTitle id="alert-dialog-slide-title">
                         <Locale stringKey="LOGIN_POPUP__HEADER"/>
                     </DialogTitle>
@@ -157,9 +179,7 @@ class LoginPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
                             required
                             type="text"
                             autoComplete="current-password"
-                            inputRef={(login: HTMLInputElement | null) => {
-                                view.node.login = login;
-                            }}
+                            inputRef={view.defineLoginInput}
                         />
                         <TextField
                             placeholder={getLocalizedString('LOGIN_POPUP__PASSWORD_PLACEHOLDER', locale.name)}
@@ -167,9 +187,7 @@ class LoginPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
                             type="password"
                             autoComplete="current-password"
                             margin="normal"
-                            inputRef={(password: HTMLInputElement | null) => {
-                                view.node.password = password;
-                            }}
+                            inputRef={view.definePasswordInput}
                         />
                     </fieldset>
                     <Button margin="normal" variant="contained" color="primary" type="submit">

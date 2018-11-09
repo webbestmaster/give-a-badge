@@ -1,7 +1,5 @@
 // @flow
 
-/* eslint-disable react/jsx-no-bind */
-
 /* eslint consistent-this: ["error", "view"] */
 
 import type {ComponentType, Node} from 'react';
@@ -38,17 +36,24 @@ class Search extends Component<ReduxPropsType, PassedPropsType, StateType> {
         };
     }
 
+    handleInputFocus = () => {
+        const view = this;
+
+        view.setState({isActive: true});
+    };
+
+    handleInputBlur = () => {
+        const view = this;
+
+        view.setState({isActive: false});
+    };
+
     renderDesktop(): Node {
         const view = this;
 
         return (
             <div>
-                <input
-                    key="input"
-                    onFocus={(): void => view.setState({isActive: true})}
-                    onBlur={(): void => view.setState({isActive: false})}
-                    type="text"
-                />
+                <input key="input" onFocus={view.handleInputFocus} onBlur={view.handleInputBlur} type="text"/>
             </div>
         );
     }
