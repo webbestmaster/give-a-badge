@@ -14,10 +14,12 @@ import style from './style.scss';
 import {BadgeList} from './badge-list/c-badge-list';
 import {HistogramList} from './histogram-list/c-histogram-list';
 import {CommentList} from './comment-list/c-comment-list';
+import {getCampaignStatistic} from './api';
+import type {CampaignStatisticDataListType} from './api';
 
-type ReduxPropsType = {|
-    +reduxProp: boolean,
-|};
+type ReduxPropsType = {
+    // +reduxProp: boolean,
+};
 
 type ReduxActionType = {};
 
@@ -30,11 +32,16 @@ type PropsType = $ReadOnly<$Exact<{
         ...$Exact<ReduxPropsType>,
         ...$Exact<ReduxActionType>,
         ...$Exact<ContextRouterType>,
+        +match: {
+            +params: {
+                +campaignId: string,
+            },
+        },
         +children: Node,
     }>>;
 
 type StateType = {|
-    +state: number,
+    +campaignStatisticDataList: CampaignStatisticDataListType,
 |};
 
 class CampaignStatistic extends Component<ReduxPropsType, PassedPropsType, StateType> {
@@ -47,8 +54,30 @@ class CampaignStatistic extends Component<ReduxPropsType, PassedPropsType, State
         const view = this;
 
         view.state = {
-            state: 0,
+            campaignStatisticDataList: [],
         };
+    }
+
+    async fetchCampaignStatistic(): Promise<void> {
+        const view = this;
+        const {props} = view;
+
+        const campaignStatisticDataList = await getCampaignStatistic(props.match.params.campaignId);
+
+        if (campaignStatisticDataList instanceof Error) {
+            console.error('can not get statistic for campaign: ', props.match.params.campaignId);
+            return;
+        }
+
+        view.setState({campaignStatisticDataList});
+    }
+
+    componentDidMount() {
+        const view = this;
+
+        (async (): Promise<void> => {
+            await view.fetchCampaignStatistic();
+        })();
     }
 
     render(): Node {
@@ -60,6 +89,8 @@ class CampaignStatistic extends Component<ReduxPropsType, PassedPropsType, State
                 <HalfPopupHeader>
                     <Locale stringKey="CAMPAIGN__STATISTIC"/>
                 </HalfPopupHeader>
+
+                <div>{JSON.stringify(state.campaignStatisticDataList)}</div>
 
                 <div className={style.statistic_wrapper}>
                     <div className={style.badge_list__wrapper}>
@@ -78,9 +109,7 @@ class CampaignStatistic extends Component<ReduxPropsType, PassedPropsType, State
 }
 
 const ConnectedComponent = connect<ComponentType<CampaignStatistic>, PassedPropsType, ReduxPropsType, ReduxActionType>(
-    (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
-        reduxProp: true,
-    }),
+    (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({}),
     reduxAction
 )(CampaignStatistic);
 

@@ -109,7 +109,7 @@ class TitleCard extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const {newsData} = props;
 
         if (newsData.newsType === newsInfo.type.campaignResults) {
-            return getBadgeCampaignPath(newsData.id);
+            return getBadgeCampaignPath(newsData.entityId);
         }
 
         return getBadgeWonPath(newsData.id);

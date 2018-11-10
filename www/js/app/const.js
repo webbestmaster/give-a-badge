@@ -11,6 +11,7 @@ const appConst = {
         searchUser: '/api/users/search?name={userName}&size=10',
         badgeAssign: '/api/badges/assign',
         getBadgeWon: '/api/news/{badgeId}',
+        getCampaignStatistic: '/api/news/campaign/{campaignId}',
         login: '/login',
         logout: '/logout',
     },
