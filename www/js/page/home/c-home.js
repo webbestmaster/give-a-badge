@@ -19,7 +19,7 @@ import type {SystemType} from '../../component/system/reducer/root';
 import {routes} from '../../component/app/routes';
 import type {AuthType} from '../../component/auth/reducer';
 import {defaultUserState} from '../../component/auth/reducer';
-import {Statistic} from '../../component/statistic/c-statistic';
+import {CampaignStatistic} from '../../component/statistic/c-statistic';
 
 type ReduxPropsType = {|
     +system: SystemType,
@@ -56,7 +56,7 @@ class Home extends Component<ReduxPropsType, PassedPropsType, StateType> {
                 <Route component={BadgeCategoryList} path={routes.index.badgeCategoryList} exact/>
                 <Route component={GiveTheBadgePanel} path={routes.index.giveTheBadge} exact/>
                 <Route component={BadgeWon} path={routes.index.badgeWon} exact/>
-                <Route component={Statistic} path={routes.index.statistic} exact/>
+                <Route component={CampaignStatistic} path={routes.index.statistic} exact/>
             </Switch>,
         ];
     }

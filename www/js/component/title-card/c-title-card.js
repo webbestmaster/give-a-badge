@@ -9,17 +9,17 @@ import type {GlobalStateType} from '../../app/reducer';
 import serviceStyle from '../../../css/service.scss';
 import helperStyle from '../../../css/helper.scss';
 import style from './style.scss';
-import classnames from 'classnames';
+import classNames from 'classnames';
 import moment from 'moment';
 import type {NewsType, NewsUserType} from '../title-card-list/api';
 import Link from 'react-router-dom/Link';
-import {getBadgeWonPath} from '../app/routes';
+import {getBadgeCampaignPath, getBadgeWonPath} from '../app/routes';
+import {newsInfo} from '../title-card-list/api';
 
 type ReduxPropsType = {};
 
 type PassedPropsType = {|
     newsData: NewsType,
-    // +passedProp: string
 |};
 
 type StateType = {|
@@ -49,7 +49,7 @@ class TitleCard extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const {newsData} = props;
         const userList = newsData.toUsers;
         const isSingleItem = userList.length === 1;
-        const peopleFaceClassName = classnames(style.people_face, {
+        const peopleFaceClassName = classNames(style.people_face, {
             [style.people_face__single]: isSingleItem,
         });
 
@@ -59,7 +59,7 @@ class TitleCard extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
         return (
             <div
-                className={classnames(serviceStyle.clear_self, style.people_list, {
+                className={classNames(serviceStyle.clear_self, style.people_list, {
                     [style.people_list__single_item]: isSingleItem,
                 })}
             >
@@ -87,12 +87,6 @@ class TitleCard extends Component<ReduxPropsType, PassedPropsType, StateType> {
                         return null;
                     }
                 )}
-                {/*
-                    <p className={style.people_face_counter}>
-                        and 252 people
-                         <Locale stringKey="SPACE"/>
-                    </p>
-                */}
             </div>
         );
     }
@@ -109,21 +103,33 @@ class TitleCard extends Component<ReduxPropsType, PassedPropsType, StateType> {
         return <div className={style.bottom_face} style={{backgroundImage: `url('${newsData.author.imageUrl}')`}}/>;
     }
 
+    getLinkPath(): string {
+        const view = this;
+        const {props} = view;
+        const {newsData} = props;
+
+        if (newsData.newsType === newsInfo.type.campaignResults) {
+            return getBadgeCampaignPath(newsData.id);
+        }
+
+        return getBadgeWonPath(newsData.id);
+    }
+
     render(): Node {
         const view = this;
-        const {props, state} = view;
+        const {props} = view;
         const {newsData} = props;
 
         return (
-            <Link to={getBadgeWonPath(newsData.id)} className={style.card}>
+            <Link to={view.getLinkPath()} className={style.card}>
                 <div className={style.badge_icon} style={{backgroundImage: `url('${newsData.reason.imageUrl}')`}}/>
 
                 {view.renderFaceList()}
 
                 <div className={style.review}>
-                    <p className={classnames(helperStyle.line_cap_3, style.review__text)}>{newsData.comment}</p>
+                    <p className={classNames(helperStyle.line_cap_3, style.review__text)}>{newsData.comment}</p>
                 </div>
-                <div className={classnames(serviceStyle.clear_self, style.bottom_data_wrapper)}>
+                <div className={classNames(serviceStyle.clear_self, style.bottom_data_wrapper)}>
                     {view.renderAuthor()}
                     <p className={style.bottom_date}>{moment(newsData.date).format('DD.MM.YYYY')}</p>
                 </div>

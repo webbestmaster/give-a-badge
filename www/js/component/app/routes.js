@@ -8,13 +8,17 @@ export function getBadgeWonPath(badgeId: number | string): string {
     return `/badge-won/${badgeId}`;
 }
 
+export function getBadgeCampaignPath(badgeId: number | string): string {
+    return `/campaign-statistic/${badgeId}`;
+}
+
 const routes = {
     index: {
         index: '/',
         badgeCategoryList: '/badge-category-list',
         giveTheBadge: getBadgePath(':badgeId'),
         badgeWon: getBadgeWonPath(':badgeId'),
-        statistic: '/statistic',
+        statistic: getBadgeCampaignPath(':campaign'),
     },
 };
 

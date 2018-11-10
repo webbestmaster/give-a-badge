@@ -18,7 +18,7 @@ export const zhCn: LangDataType = {
     CATEGORY_LIST__CATEGORIES: 'Categories',
     GIVE_THE_BADGE__PEOPLE: 'People',
 
-    STATISTIC_LIST__STATISTIC: 'Statistic',
+    CAMPAIGN__STATISTIC: 'Statistic',
 
     BADGE_WON_LIST__SHOW_LESS: 'Show less',
     BADGE_WON_LIST__SHOW_ALL: 'Show all',

@@ -5,6 +5,13 @@
 import {appConst} from '../../app/const';
 import {defaultFetchGetProps} from '../auth/api';
 
+export const newsInfo = {
+    type: {
+        badgeAssignment: 'BADGE_ASSIGNMENT',
+        campaignResults: 'CAMPAIGN_RESULTS',
+    },
+};
+
 export type NewsTypeType = 'BADGE_ASSIGNMENT' | 'CAMPAIGN_RESULTS';
 export type NewsUserType = {|
     +id: number,

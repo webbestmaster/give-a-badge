@@ -33,7 +33,7 @@ type StateType = {|
     +state: number,
 |};
 
-class Statistic extends Component<ReduxPropsType, PassedPropsType, StateType> {
+class CampaignStatistic extends Component<ReduxPropsType, PassedPropsType, StateType> {
     props: PropsType;
     state: StateType;
 
@@ -54,20 +54,20 @@ class Statistic extends Component<ReduxPropsType, PassedPropsType, StateType> {
         return (
             <HalfPopup closeOnClickBackground>
                 <HalfPopupHeader>
-                    <Locale stringKey="STATISTIC_LIST__STATISTIC"/>
+                    <Locale stringKey="CAMPAIGN__STATISTIC"/>
                 </HalfPopupHeader>
 
-                <h1>Statistic is here</h1>
+                <h1>Campaign Statistic is here</h1>
             </HalfPopup>
         );
     }
 }
 
-const ConnectedComponent = connect<ComponentType<Statistic>, PassedPropsType, ReduxPropsType, ReduxActionType>(
+const ConnectedComponent = connect<ComponentType<CampaignStatistic>, PassedPropsType, ReduxPropsType, ReduxActionType>(
     (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
         reduxProp: true,
     }),
     reduxAction
-)(Statistic);
+)(CampaignStatistic);
 
-export {ConnectedComponent as Statistic};
+export {ConnectedComponent as CampaignStatistic};
