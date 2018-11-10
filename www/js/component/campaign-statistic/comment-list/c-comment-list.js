@@ -8,14 +8,14 @@ import React, {Component, Fragment} from 'react';
 import style from './style.scss';
 
 type PassedPropsType = {|
-    +passedProp: string,
+    // +passedProp: string,
 |};
 
-type PropsType = $ReadOnly<$Exact<{
-        ...$Exact<PassedPropsType>,
-        // ...$Exact<ContextRouterType>
-        +children: Node,
-    }>>;
+type PropsType = $Exact<{
+    ...$Exact<PassedPropsType>,
+    // ...$Exact<ContextRouterType>
+    +children: Node,
+}>;
 
 type StateType = {|
     +state: number,

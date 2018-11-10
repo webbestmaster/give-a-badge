@@ -30,12 +30,12 @@ type ReduxActionType = {};
 type PassedPropsType = {};
 type StateType = null;
 
-type PropsType = $ReadOnly<$Exact<{
-        ...$Exact<PassedPropsType>,
-        ...$Exact<ReduxPropsType>,
-        ...$Exact<ReduxActionType>,
-        +children: Node,
-    }>>;
+type PropsType = $Exact<{
+    ...$Exact<PassedPropsType>,
+    ...$Exact<ReduxPropsType>,
+    ...$Exact<ReduxActionType>,
+    +children: Node,
+}>;
 
 // eslint-disable-next-line react/prefer-stateless-function
 class Home extends Component<ReduxPropsType, PassedPropsType, StateType> {

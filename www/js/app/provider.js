@@ -8,9 +8,9 @@ import {applyMiddleware, combineReducers, createStore} from 'redux';
 import {composeWithDevTools} from 'redux-devtools-extension/developmentOnly';
 import * as reducers from './reducer';
 
-type PassedPropsType = $ReadOnly<$Exact<{
-        +children: Node,
-    }>>;
+type PassedPropsType = $Exact<{
+    +children: Node,
+}>;
 
 const reducer = combineReducers({
     ...reducers,

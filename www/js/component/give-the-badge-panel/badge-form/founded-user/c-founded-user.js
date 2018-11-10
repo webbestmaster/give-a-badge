@@ -28,12 +28,12 @@ type PassedPropsType = {|
     +className?: string,
 |};
 
-type PropsType = $ReadOnly<$Exact<{
-        ...$Exact<PassedPropsType>,
-        ...$Exact<ReduxPropsType>,
-        ...$Exact<ReduxActionType>,
-        +children: Node,
-    }>>;
+type PropsType = $Exact<{
+    ...$Exact<PassedPropsType>,
+    ...$Exact<ReduxPropsType>,
+    ...$Exact<ReduxActionType>,
+    +children: Node,
+}>;
 
 type StateType = {
     // +state: number

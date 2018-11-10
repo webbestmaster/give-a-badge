@@ -22,13 +22,13 @@ type ReduxActionType = {};
 
 type PassedPropsType = {};
 
-type PropsType = $ReadOnly<{
+type PropsType = {
     ...$Exact<ContextRouterType>,
     ...$Exact<ReduxPropsType>,
     ...$Exact<ReduxActionType>,
     ...$Exact<PassedPropsType>,
     +children?: Array<Node>,
-}>;
+};
 
 type StateType = {|
     +state: number,

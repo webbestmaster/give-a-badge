@@ -11,11 +11,11 @@ type PassedPropsType = {|
     // +passedProp: string
 |};
 
-type PropsType = $ReadOnly<$Exact<{
-        ...$Exact<PassedPropsType>,
-        // ...$Exact<ContextRouterType>
-        // +children: Node
-    }>>;
+type PropsType = $Exact<{
+    ...$Exact<PassedPropsType>,
+    // ...$Exact<ContextRouterType>
+    // +children: Node
+}>;
 
 type StateType = {|
     +state: number,

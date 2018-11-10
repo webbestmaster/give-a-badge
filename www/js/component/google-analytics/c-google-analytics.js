@@ -15,10 +15,10 @@ type PassedPropsType = {|
     +trackingId: string,
 |};
 
-type PropsType = $ReadOnly<$Exact<{
-        ...$Exact<PassedPropsType>,
-        ...$Exact<ContextRouterType>,
-    }>>;
+type PropsType = $Exact<{
+    ...$Exact<PassedPropsType>,
+    ...$Exact<ContextRouterType>,
+}>;
 
 type StateType = void;
 

@@ -31,13 +31,13 @@ type ReduxActionType = {
 
 type PassedPropsType = {};
 
-type PropsType = $ReadOnly<$Exact<{
-        ...$Exact<PassedPropsType>,
-        ...$Exact<ReduxPropsType>,
-        ...$Exact<ReduxActionType>,
-        ...$Exact<ContextRouterType>,
-        +children: Node,
-    }>>;
+type PropsType = $Exact<{
+    ...$Exact<PassedPropsType>,
+    ...$Exact<ReduxPropsType>,
+    ...$Exact<ReduxActionType>,
+    ...$Exact<ContextRouterType>,
+    +children: Node,
+}>;
 
 type StateType = {|
     +isShowMore: boolean,

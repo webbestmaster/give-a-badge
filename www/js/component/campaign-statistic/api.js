@@ -4,7 +4,7 @@
 
 import {appConst} from '../../app/const';
 
-type DataType = {|
+export type DataType = {|
     +id: number | string,
     +imageUrl: string,
     +name: string,

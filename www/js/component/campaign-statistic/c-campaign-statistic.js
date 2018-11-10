@@ -15,7 +15,7 @@ import {BadgeList} from './badge-list/c-badge-list';
 import {HistogramList} from './histogram-list/c-histogram-list';
 import {CommentList} from './comment-list/c-comment-list';
 import {getCampaignStatistic} from './api';
-import type {CampaignStatisticDataListType} from './api';
+import type {CampaignStatisticDataListType, CampaignStatisticDataType, DataType} from './api';
 
 type ReduxPropsType = {
     // +reduxProp: boolean,
@@ -27,18 +27,18 @@ const reduxAction: ReduxActionType = {};
 
 type PassedPropsType = {};
 
-type PropsType = $ReadOnly<$Exact<{
-        ...$Exact<PassedPropsType>,
-        ...$Exact<ReduxPropsType>,
-        ...$Exact<ReduxActionType>,
-        ...$Exact<ContextRouterType>,
-        +match: {
-            +params: {
-                +campaignId: string,
-            },
+type PropsType = $Exact<{
+    ...$Exact<PassedPropsType>,
+    ...$Exact<ReduxPropsType>,
+    ...$Exact<ReduxActionType>,
+    ...$Exact<ContextRouterType>,
+    +match: {
+        +params: {
+            +campaignId: string,
         },
-        +children: Node,
-    }>>;
+    },
+    +children: Node,
+}>;
 
 type StateType = {|
     +campaignStatisticDataList: CampaignStatisticDataListType,
@@ -80,9 +80,22 @@ class CampaignStatistic extends Component<ReduxPropsType, PassedPropsType, State
         })();
     }
 
+    getBadgeList(): Array<DataType> {
+        const view = this;
+        const {state} = view;
+        const {campaignStatisticDataList} = state;
+
+        return campaignStatisticDataList.map(
+            (campaignStatisticData: CampaignStatisticDataType): DataType => {
+                return campaignStatisticData.badge;
+            }
+        );
+    }
+
     render(): Node {
         const view = this;
-        const {props, state} = view;
+        const {state} = view;
+        const {campaignStatisticDataList} = state;
 
         return (
             <HalfPopup closeOnClickBackground>
@@ -90,11 +103,11 @@ class CampaignStatistic extends Component<ReduxPropsType, PassedPropsType, State
                     <Locale stringKey="CAMPAIGN__STATISTIC"/>
                 </HalfPopupHeader>
 
-                <div>{JSON.stringify(state.campaignStatisticDataList)}</div>
+                <div>{JSON.stringify(campaignStatisticDataList)}</div>
 
                 <div className={style.statistic_wrapper}>
                     <div className={style.badge_list__wrapper}>
-                        <BadgeList/>
+                        <BadgeList badgeList={view.getBadgeList()}/>
                     </div>
                     <div className={style.histogram_list__wrapper}>
                         <HistogramList/>

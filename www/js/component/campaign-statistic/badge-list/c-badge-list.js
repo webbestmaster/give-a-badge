@@ -6,19 +6,18 @@ import type {Node} from 'react';
 import React, {Component, Fragment} from 'react';
 // import type {ContextRouterType} from '../../type/react-router-dom-v4';
 import style from './style.scss';
+import type {DataType} from '../api';
 
 type PassedPropsType = {|
-    // +passedProp: string
+    +badgeList: Array<DataType>,
 |};
 
-type PropsType = $ReadOnly<$Exact<{
-        ...$Exact<PassedPropsType>,
-        // ...$Exact<ContextRouterType>
-        // +children: Node
-    }>>;
+type PropsType = $Exact<{
+    ...PassedPropsType,
+}>;
 
 type StateType = {|
-    +state: number,
+    +selectedBadgeId: number | string,
 |};
 
 export class BadgeList extends Component<PropsType, StateType> {
@@ -31,7 +30,7 @@ export class BadgeList extends Component<PropsType, StateType> {
         const view = this;
 
         view.state = {
-            state: 0,
+            selectedBadgeId: 0,
         };
     }
 
