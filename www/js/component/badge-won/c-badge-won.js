@@ -1,7 +1,5 @@
 // @flow
 
-/* eslint-disable react/jsx-no-bind */
-
 /* eslint consistent-this: ["error", "view"] */
 
 import type {ComponentType, Node} from 'react';
@@ -46,8 +44,8 @@ type StateType = {|
 |};
 
 type NodeType = {|
-    header: HTMLElement | null,
-    faceList: HTMLElement | null,
+    header: {current: HTMLHeadingElement | null},
+    faceList: {current: HTMLDivElement | null},
 |};
 
 const reduxAction: ReduxActionType = {
@@ -70,8 +68,8 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
         };
 
         view.node = {
-            header: null,
-            faceList: null,
+            header: React.createRef(),
+            faceList: React.createRef(),
         };
     }
 
@@ -120,12 +118,7 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const {imageUrl, name} = badgeWonServerData.reason;
 
         return (
-            <h3
-                ref={(header: HTMLElement | null) => {
-                    view.node.header = header;
-                }}
-                className={style.header}
-            >
+            <h3 ref={view.node.header} className={style.header}>
                 <div
                     className={style.header__badge_image}
                     style={{
@@ -191,33 +184,34 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const topMarginMobile = 32;
         const {header} = node;
 
-        if (header === null) {
+        if (header.current === null) {
             console.log('view.node.header is null');
             return 0;
         }
 
         const topMargin = screen.isDesktop ? topMarginDesktop : topMarginMobile;
 
-        return screen.height - topMargin - header.clientHeight;
+        return screen.height - topMargin - header.current.clientHeight;
     }
 
     getNaturalPeopleListHeight(): number {
         const view = this;
         const {node} = view;
         const {faceList} = node;
+        const faceListNode = faceList.current;
 
-        if (faceList === null) {
+        if (faceListNode === null) {
             console.log('view.node.faceList is null');
             return 0;
         }
 
-        const currentStyleHeight = faceList.style.height || 'auto';
+        const currentStyleHeight = faceListNode.style.height || 'auto';
 
-        faceList.style.height = 'auto';
+        faceListNode.style.height = 'auto';
 
-        const currentNaturalHeight = parseInt(faceList.clientHeight, 10) || 0;
+        const currentNaturalHeight = parseInt(faceListNode.clientHeight, 10) || 0;
 
-        faceList.style.height = currentStyleHeight;
+        faceListNode.style.height = currentStyleHeight;
 
         return currentNaturalHeight;
     }
@@ -249,6 +243,12 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
         };
     }
 
+    handleShowMore = () => {
+        const view = this;
+
+        view.toggleIsShowMore();
+    };
+
     renderShowMoreButton(): Node {
         const view = this;
         const {props, state} = view;
@@ -270,8 +270,8 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
                 <button
                     className={classNames(style.show_more_less_button, style.show_more_less_button__open)}
                     type="button"
-                    onClick={(): void => view.toggleIsShowMore()}
-                    onKeyPress={(): void => view.toggleIsShowMore()}
+                    onClick={view.handleShowMore}
+                    onKeyPress={view.handleShowMore}
                 >
                     <Locale stringKey="BADGE_WON_LIST__SHOW_LESS"/>
                     <span className={style.show_more_less_button__arrow}>‹</span>
@@ -285,8 +285,8 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
             <button
                 className={style.show_more_less_button}
                 type="button"
-                onClick={(): void => view.toggleIsShowMore()}
-                onKeyPress={(): void => view.toggleIsShowMore()}
+                onClick={view.handleShowMore}
+                onKeyPress={view.handleShowMore}
             >
                 <Locale stringKey="BADGE_WON_LIST__SHOW_ALL"/>
                 {': '}
@@ -312,9 +312,7 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
             <Fragment>
                 <div
                     style={view.getPeopleListStyle()}
-                    ref={(faceList: HTMLElement | null) => {
-                        view.node.faceList = faceList;
-                    }}
+                    ref={view.node.faceList}
                     className={classNames(style.people_list, {[style.people_list__open]: isShowMore})}
                 >
                     {toUsers.map(
