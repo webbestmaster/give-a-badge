@@ -36,6 +36,12 @@ export class HistogramList extends Component<PropsType, StateType> {
     }
 
     render(): Node {
-        return <div>Histogram</div>;
+        return (
+            <div>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est eveniet in perspiciatis reprehenderit
+                sint. Aliquam deserunt dolores eos, impedit in libero necessitatibus numquam officia quidem saepe. Ex
+                iure quaerat vel?
+            </div>
+        );
     }
 }

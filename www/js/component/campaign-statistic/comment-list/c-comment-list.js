@@ -38,8 +38,9 @@ export class CommentList extends Component<PropsType, StateType> {
     render(): Node {
         return (
             <div>
-                {'\u00A0 - &nbsp;'}
-                {'\u2026 - ...'}
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad assumenda dolorum eligendi molestiae
+                possimus quia quod veniam veritatis voluptatem? A autem ea itaque molestiae pariatur porro possimus
+                reprehenderit tenetur voluptatem?
             </div>
         );
     }

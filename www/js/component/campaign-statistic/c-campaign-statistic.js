@@ -16,6 +16,7 @@ import {HistogramList} from './histogram-list/c-histogram-list';
 import {CommentList} from './comment-list/c-comment-list';
 import {getCampaignStatistic} from './api';
 import type {CampaignStatisticDataListType, CampaignStatisticDataType, DataType} from './api';
+import {Scroll} from '../ui/scroll/c-scroll';
 
 type ReduxPropsType = {
     // +reduxProp: boolean,
@@ -92,6 +93,38 @@ class CampaignStatistic extends Component<ReduxPropsType, PassedPropsType, State
         );
     }
 
+    renderBadgeList(): Node {
+        const view = this;
+
+        return (
+            <div className={style.badge_list__wrapper}>
+                <Scroll>
+                    <BadgeList badgeList={view.getBadgeList()}/>
+                </Scroll>
+            </div>
+        );
+    }
+
+    renderHistogramList(): Node {
+        return (
+            <div className={style.histogram_list__wrapper}>
+                <Scroll slideWidth={1000} direction="horizontal">
+                    <HistogramList/>
+                </Scroll>
+            </div>
+        );
+    }
+
+    renderCommentList(): Node {
+        return (
+            <div className={style.comment_list__wrapper}>
+                <Scroll slideWidth={1000} direction="horizontal">
+                    <CommentList/>
+                </Scroll>
+            </div>
+        );
+    }
+
     render(): Node {
         const view = this;
         const {state} = view;
@@ -106,16 +139,10 @@ class CampaignStatistic extends Component<ReduxPropsType, PassedPropsType, State
                 <div>{JSON.stringify(campaignStatisticDataList)}</div>
 
                 <div className={style.statistic_wrapper}>
-                    <div className={style.badge_list__wrapper}>
-                        <BadgeList badgeList={view.getBadgeList()}/>
-                    </div>
-                    <div className={style.histogram_list__wrapper}>
-                        <HistogramList/>
-                    </div>
+                    {view.renderBadgeList()}
+                    {view.renderHistogramList()}
                 </div>
-                <div className={style.comment_list__wrapper}>
-                    <CommentList/>
-                </div>
+                {view.renderCommentList()}
             </HalfPopup>
         );
     }
