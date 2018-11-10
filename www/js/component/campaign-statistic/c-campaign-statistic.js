@@ -81,25 +81,15 @@ class CampaignStatistic extends Component<ReduxPropsType, PassedPropsType, State
         })();
     }
 
-    getBadgeList(): Array<DataType> {
+    renderBadgeList(): Node {
         const view = this;
         const {state} = view;
         const {campaignStatisticDataList} = state;
 
-        return campaignStatisticDataList.map(
-            (campaignStatisticData: CampaignStatisticDataType): DataType => {
-                return campaignStatisticData.badge;
-            }
-        );
-    }
-
-    renderBadgeList(): Node {
-        const view = this;
-
         return (
             <div className={style.badge_list__wrapper}>
                 <Scroll>
-                    <BadgeList badgeList={view.getBadgeList()}/>
+                    <BadgeList campaignStatisticDataList={campaignStatisticDataList}/>
                 </Scroll>
             </div>
         );

@@ -6,11 +6,11 @@ import type {Node} from 'react';
 import React, {Component, Fragment} from 'react';
 // import type {ContextRouterType} from '../../type/react-router-dom-v4';
 import style from './style.scss';
-import type {DataType} from '../api';
+import type {CampaignStatisticDataListType, CampaignStatisticDataType, DataType} from '../api';
 import classNames from 'classnames';
 
 type PassedPropsType = {|
-    +badgeList: Array<DataType>,
+    +campaignStatisticDataList: CampaignStatisticDataListType,
 |};
 
 type PropsType = $Exact<{
@@ -35,6 +35,18 @@ export class BadgeList extends Component<PropsType, StateType> {
         };
     }
 
+    getBadgeList(): Array<DataType> {
+        const view = this;
+        const {props} = view;
+        const {campaignStatisticDataList} = props;
+
+        return campaignStatisticDataList.map(
+            (campaignStatisticData: CampaignStatisticDataType): DataType => {
+                return campaignStatisticData.badge;
+            }
+        );
+    }
+
     renderBadge = (badgeData: DataType, index: number): Node => {
         const view = this;
         const {state, props} = view;
@@ -56,8 +68,7 @@ export class BadgeList extends Component<PropsType, StateType> {
 
     render(): Node {
         const view = this;
-        const {state, props} = view;
 
-        return <div className={style.badge_list}>{props.badgeList.map(view.renderBadge)}</div>;
+        return <div className={style.badge_list}>{view.getBadgeList().map(view.renderBadge)}</div>;
     }
 }
