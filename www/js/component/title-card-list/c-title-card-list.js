@@ -1,7 +1,5 @@
 // @flow
 
-/* eslint-disable react/jsx-no-bind */
-
 /* eslint consistent-this: ["error", "view"] */
 
 import type {ComponentType, Node} from 'react';
@@ -80,6 +78,14 @@ class TitleCardList extends Component<ReduxPropsType, PassedPropsType, StateType
         }
     }
 
+    infiniteScrollNext = () => {
+        (async (): Promise<void> => {
+            const view = this;
+
+            await view.fetchNews();
+        })();
+    };
+
     renderCardList(): Node {
         const view = this;
         const {props} = view;
@@ -98,7 +104,7 @@ class TitleCardList extends Component<ReduxPropsType, PassedPropsType, StateType
         return (
             <InfiniteScroll
                 dataLength={newsList.length} // This is important field to render the next data
-                next={(): Promise<void> => view.fetchNews()}
+                next={view.infiniteScrollNext}
                 hasMore={!lastNewsResponse.last}
                 loader={<Spinner/>}
             >
