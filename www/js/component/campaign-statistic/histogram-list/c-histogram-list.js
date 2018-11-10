@@ -6,16 +6,14 @@ import type {Node} from 'react';
 import React, {Component, Fragment} from 'react';
 // import type {ContextRouterType} from '../../type/react-router-dom-v4';
 import style from './style.scss';
+import type {CampaignStatisticDataListType, DataType} from '../api';
+import {Scroll} from '../../ui/scroll/c-scroll';
 
 type PassedPropsType = {|
-    // +passedProp: string
+    +campaignStatisticDataList: CampaignStatisticDataListType,
 |};
 
-type PropsType = $Exact<{
-    ...$Exact<PassedPropsType>,
-    // ...$Exact<ContextRouterType>
-    // +children: Node
-}>;
+type PropsType = PassedPropsType;
 
 type StateType = {|
     +state: number,
@@ -35,13 +33,32 @@ export class HistogramList extends Component<PropsType, StateType> {
         };
     }
 
-    render(): Node {
+    renderItem = (itemData: mixed): Node => {
         return (
-            <div>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est eveniet in perspiciatis reprehenderit
-                sint. Aliquam deserunt dolores eos, impedit in libero necessitatibus numquam officia quidem saepe. Ex
-                iure quaerat vel?
-            </div>
+            <button className={style.histogram_item_wrapper} type="button">
+                <div className={style.histogram_item} key={Math.random()}>
+                    <div className={style.histogram_column}/>
+                    <div className={style.histogram_face_wrapper}>
+                        {/* <div className={style.face_histogram_lines}/>*/}
+                        <img className={style.histogram_face_image} src="https://loremflickr.com/108/108" alt=""/>
+                    </div>
+                </div>
+            </button>
+        );
+    };
+
+    getItemList(): Array<mixed> {
+        return new Array(20).fill(null);
+    }
+
+    render(): Node {
+        const view = this;
+        const itemList = view.getItemList();
+
+        return (
+            <Scroll slideWidth={itemList.length * 75} direction="horizontal">
+                <div className={style.histogram_list_wrapper}>{itemList.map(view.renderItem)}</div>
+            </Scroll>
         );
     }
 }

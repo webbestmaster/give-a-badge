@@ -1,1 +1,70 @@
-//
+.histogram_list_wrapper {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+.histogram_item_wrapper {
+    display: block;
+    height: 100%;
+    width: 76px;
+}
+
+.histogram_item {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: flex-end;
+}
+
+.histogram_column {
+    background-color: #ccc;
+    box-sizing: border-box;
+    min-height: 20px;
+    width: 38px;
+}
+
+/*
+.face_histogram_lines {
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    height: 82px;
+    left: 0;
+    position: absolute;
+    top: 2px;
+    width: 100%;
+    z-index: 1;
+}
+*/
+
+.histogram_face_wrapper {
+    box-sizing: border-box;
+    display: block;
+    height: 106px;
+    padding-top: 15px;
+    position: relative;
+    width: 100%;
+    z-index: 0;
+
+    /*
+    &:before {
+        background-color: #fff;
+        content: '';
+        height: 88px;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: -1;
+    }
+    */
+}
+
+.histogram_face_image {
+    border-radius: 50%;
+    display: block;
+    height: 54px;
+    margin: 0 auto;
+    width: 54px;
+}

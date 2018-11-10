@@ -8,6 +8,7 @@ import React, {Component, Fragment} from 'react';
 import style from './style.scss';
 import type {CampaignStatisticDataListType, CampaignStatisticDataType, DataType} from '../api';
 import classNames from 'classnames';
+import {Scroll} from '../../ui/scroll/c-scroll';
 
 type PassedPropsType = {|
     +campaignStatisticDataList: CampaignStatisticDataListType,
@@ -69,6 +70,10 @@ export class BadgeList extends Component<PropsType, StateType> {
     render(): Node {
         const view = this;
 
-        return <div className={style.badge_list}>{view.getBadgeList().map(view.renderBadge)}</div>;
+        return (
+            <Scroll>
+                <div className={style.badge_list}>{view.getBadgeList().map(view.renderBadge)}</div>
+            </Scroll>
+        );
     }
 }

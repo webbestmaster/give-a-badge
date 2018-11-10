@@ -88,19 +88,19 @@ class CampaignStatistic extends Component<ReduxPropsType, PassedPropsType, State
 
         return (
             <div className={style.badge_list__wrapper}>
-                <Scroll>
-                    <BadgeList campaignStatisticDataList={campaignStatisticDataList}/>
-                </Scroll>
+                <BadgeList campaignStatisticDataList={campaignStatisticDataList}/>
             </div>
         );
     }
 
     renderHistogramList(): Node {
+        const view = this;
+        const {state} = view;
+        const {campaignStatisticDataList} = state;
+
         return (
             <div className={style.histogram_list__wrapper}>
-                <Scroll slideWidth={1000} direction="horizontal">
-                    <HistogramList/>
-                </Scroll>
+                <HistogramList campaignStatisticDataList={campaignStatisticDataList}/>
             </div>
         );
     }
@@ -108,9 +108,7 @@ class CampaignStatistic extends Component<ReduxPropsType, PassedPropsType, State
     renderCommentList(): Node {
         return (
             <div className={style.comment_list__wrapper}>
-                <Scroll slideWidth={1000} direction="horizontal">
-                    <CommentList/>
-                </Scroll>
+                <CommentList/>
             </div>
         );
     }
@@ -131,6 +129,7 @@ class CampaignStatistic extends Component<ReduxPropsType, PassedPropsType, State
                 <div className={style.statistic_wrapper}>
                     {view.renderBadgeList()}
                     {view.renderHistogramList()}
+                    <div className={style.statistic_wrapper_background}/>
                 </div>
                 {view.renderCommentList()}
             </HalfPopup>
