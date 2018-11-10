@@ -10,12 +10,17 @@ import Swiper from 'swiper';
 import classNames from 'classnames';
 import style from './style.scss';
 
+const direction = {
+    horizontal: 'horizontal',
+    vertical: 'vertical',
+};
+
 type StateType = void;
 
 type PropsType = {|
     +className?: string,
     +direction?: 'horizontal' | 'vertical',
-    +slideWidth?: number,
+    +slideWidth?: number, // for 'horizontal' only
     +children: Node | Array<Node>,
 |};
 
@@ -106,13 +111,18 @@ export class Scroll extends Component<StateType, PropsType> {
     renderSwiper(): Node {
         const view = this;
         const {props} = view;
-
+        const isHorizontal = props.direction === direction.horizontal;
         const width = typeof props.slideWidth === 'number' ? props.slideWidth : 'auto';
 
         return (
             <div className={classNames('swiper-container', style.swiper_container)} ref={view.node.wrapper}>
                 <div className={classNames('swiper-wrapper', style.swiper_wrapper)}>
-                    <div style={{width}} className={classNames('swiper-slide', style.swiper_slide)}>
+                    <div
+                        style={{width}}
+                        className={classNames('swiper-slide', style.swiper_slide, {
+                            [style.swiper_slide__horizontal]: isHorizontal,
+                        })}
+                    >
                         {props.children}
                     </div>
                 </div>
