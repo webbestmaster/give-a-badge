@@ -1,7 +1,5 @@
 // @flow
 
-/* eslint-disable react/jsx-no-bind */
-
 /* eslint consistent-this: ["error", "view"] */
 
 import type {ComponentType, Node} from 'react';
@@ -58,10 +56,19 @@ class FoundedUser extends Component<ReduxPropsType, PassedPropsType, StateType> 
         };
     }
 
+    handleClick = (evt: SyntheticEvent<EventTarget>) => {
+        const view = this;
+        const {props} = view;
+        const {onClick} = props;
+
+        evt.preventDefault();
+        onClick();
+    };
+
     render(): Node {
         const view = this;
-        const {props, state} = view;
-        const {foundedUser, onClick, isActive} = props;
+        const {props} = view;
+        const {foundedUser} = props;
         const {name, imageUrl} = foundedUser;
         const additionalClassName = isString(props.className) ? props.className : '';
 
@@ -70,23 +77,11 @@ class FoundedUser extends Component<ReduxPropsType, PassedPropsType, StateType> 
             <a
                 href="/#/add-user-in-result"
                 className={classNames(style.founded_user_wrapper, additionalClassName)}
-                onClick={(evt: SyntheticEvent<EventTarget>) => {
-                    evt.preventDefault();
-                    onClick();
-                }}
-                onKeyPress={(evt: SyntheticEvent<EventTarget>) => {
-                    evt.preventDefault();
-                    onClick();
-                }}
+                onClick={view.handleClick}
+                onKeyPress={view.handleClick}
+                title={name}
             >
-                {/*
-                    <h5>is in selected: {isActive ? 'y' : 'n'}</h5>
-                    */}
-                <div
-                    className={style.founded_user_image}
-                    style={{backgroundImage: `url('${imageUrl}')`}}
-                    title={name}
-                />
+                <div className={style.founded_user_image} style={{backgroundImage: `url('${imageUrl}')`}}/>
                 <div className={style.founded_user_name_wrapper}>
                     <div className={style.founded_user_name}>{name}</div>
                 </div>
