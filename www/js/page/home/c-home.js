@@ -19,7 +19,7 @@ import type {SystemType} from '../../component/system/reducer/root';
 import {routes} from '../../component/app/routes';
 import type {AuthType} from '../../component/auth/reducer';
 import {defaultUserState} from '../../component/auth/reducer';
-import {CampaignStatistic} from '../../component/statistic/c-statistic';
+import {CampaignStatistic} from '../../component/campaign-statistic/c-campaign-statistic';
 
 type ReduxPropsType = {|
     +system: SystemType,
