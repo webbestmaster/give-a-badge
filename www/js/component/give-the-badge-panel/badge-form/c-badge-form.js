@@ -1,7 +1,5 @@
 // @flow
 
-/* eslint-disable react/jsx-no-bind */
-
 /* eslint consistent-this: ["error", "view"] */
 
 import type {ComponentType, Node} from 'react';
@@ -73,7 +71,7 @@ type ComponentStoreType = {|
 
 type NodeType = {|
     search: {|
-        input: null | HTMLInputElement,
+        input: {current: null | HTMLInputElement},
     |},
 |};
 
@@ -138,7 +136,7 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
         view.node = {
             search: {
-                input: null,
+                input: React.createRef(),
             },
         };
     }
@@ -299,12 +297,12 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
     clearSearchInput() {
         const view = this;
         const {props, state, node} = view;
-        const searchInput = node.search.input;
+        const searchInput = node.search.input.current;
 
         view.setState({searchString: ''});
 
         if (searchInput === null) {
-            console.log('searchInput is not null');
+            console.log('searchInput is null');
             return;
         }
 
@@ -328,6 +326,20 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
         selectedUserList.splice(userIndex, 1);
 
         view.setState(state);
+    }
+
+    createHandleOnClickUser(isInSelectedUserList: boolean, foundedUser: FoundedUserType): () => void {
+        const view = this;
+
+        return () => {
+            if (isInSelectedUserList) {
+                view.removeFromSelectedUserList(foundedUser);
+                return;
+            }
+
+            view.addToSelectedUserList(foundedUser);
+            view.clearSearchInput();
+        };
     }
 
     // eslint-disable-next-line sonarjs/cognitive-complexity, complexity
@@ -362,7 +374,6 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
                             className={classNames(style.founded_user_list)}
                             style={{...searchData.style.initial, ...searchData.style.transition[transitionState]}}
                         >
-                            {/* <div>founded people result, input has focus: {hasSearchInputFocus ? 'y' : 'n'}</div>*/}
                             {searchUserList.map(
                                 (foundedUser: FoundedUserType): Node => {
                                     const foundedUserId = foundedUser.id;
@@ -371,15 +382,7 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
                                     return (
                                         <FoundedUser
                                             className={isInSelectedUserList ? foundedUserStyle.already_selected : ''}
-                                            onClick={() => {
-                                                if (isInSelectedUserList) {
-                                                    view.removeFromSelectedUserList(foundedUser);
-                                                    return;
-                                                }
-
-                                                view.addToSelectedUserList(foundedUser);
-                                                view.clearSearchInput();
-                                            }}
+                                            onClick={view.createHandleOnClickUser(isInSelectedUserList, foundedUser)}
                                             isActive={!isInSelectedUserList}
                                             foundedUser={foundedUser}
                                             key={foundedUserId}
@@ -393,6 +396,14 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
             </Transition>
         );
     }
+
+    createHandlerForRemoveFromSelectedUserList = (foundedUser: FoundedUserType): (() => void) => {
+        return () => {
+            const view = this;
+
+            view.removeFromSelectedUserList(foundedUser);
+        };
+    };
 
     renderSelectedUserList(): Node {
         const view = this;
@@ -411,8 +422,8 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
                             <button
                                 className={style.selected_user_wrapper}
                                 type="button"
-                                onClick={(): void => view.removeFromSelectedUserList(foundedUser)}
-                                onKeyPress={(): void => view.removeFromSelectedUserList(foundedUser)}
+                                onClick={view.createHandlerForRemoveFromSelectedUserList(foundedUser)}
+                                onKeyPress={view.createHandlerForRemoveFromSelectedUserList(foundedUser)}
                                 key={foundedUser.id}
                             >
                                 <div
@@ -426,6 +437,19 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
                 )}
             </div>
         );
+    }
+
+    createHandleOnCloseSnackBar(isSuccess: boolean): () => void {
+        const view = this;
+        const {props} = view;
+
+        return () => {
+            view.setShowSnackbar(false, false);
+
+            if (isSuccess) {
+                props.history.push(routes.index.index);
+            }
+        };
     }
 
     renderSnackBar(): Node {
@@ -460,13 +484,7 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
                 }}
                 open={isOpen}
                 autoHideDuration={0.5e3}
-                onClose={() => {
-                    view.setShowSnackbar(false, false);
-
-                    if (isSuccess) {
-                        props.history.push(routes.index.index);
-                    }
-                }}
+                onClose={view.createHandleOnCloseSnackBar(isSuccess)}
                 message={
                     isSuccess ?
                         getLocalizedString('SNACK_BAR__GIVE_BADGE__SUCCESS', locale.name) :
@@ -475,6 +493,41 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
             />
         );
     }
+
+    handleSubmitForm = (evt: SyntheticEvent<HTMLFormElement>) => {
+        evt.preventDefault();
+        (async (): Promise<void> => {
+            const view = this;
+
+            await view.submitForm();
+        })();
+    };
+
+    handleSearchInputOnFocus = () => {
+        const view = this;
+
+        view.setState({hasSearchInputFocus: true});
+    };
+
+    handleSearchInputOnBlur = () => {
+        const view = this;
+
+        view.setState({hasSearchInputFocus: false});
+    };
+
+    handleSearchInputOnInput = (evt: SyntheticEvent<HTMLInputElement>) => {
+        (async (): Promise<void> => {
+            const view = this;
+
+            await view.updateSearch(evt.currentTarget.value);
+        })();
+    };
+
+    handleTextAreaOnInput = (evt: SyntheticEvent<HTMLInputElement>) => {
+        const view = this;
+
+        view.updateDescription(evt.currentTarget.value);
+    };
 
     render(): Node {
         const view = this;
@@ -488,25 +541,14 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
             >
                 <form
                     className={classNames(style.badge_form, {[serviceStyle.disabled]: state.snackbar.isSuccess})}
-                    onSubmit={async (evt: SyntheticEvent<HTMLFormElement>): Promise<void> => {
-                        evt.preventDefault();
-                        await view.submitForm();
-                    }}
+                    onSubmit={view.handleSubmitForm}
                 >
                     <input
-                        ref={(searchInput: HTMLInputElement | null) => {
-                            view.node.search.input = searchInput;
-                        }}
+                        ref={view.node.search.input}
                         className={style.search_input}
-                        onFocus={() => {
-                            view.setState({hasSearchInputFocus: true});
-                        }}
-                        onBlur={() => {
-                            view.setState({hasSearchInputFocus: false});
-                        }}
-                        onInput={async (evt: SyntheticEvent<HTMLInputElement>): Promise<void> => {
-                            await view.updateSearch(evt.currentTarget.value);
-                        }}
+                        onFocus={view.handleSearchInputOnFocus}
+                        onBlur={view.handleSearchInputOnBlur}
+                        onInput={view.handleSearchInputOnInput}
                         type="text"
                         placeholder={getLocalizedString('SEARCH_PEOPLE__INPUT_PLACEHOLDER', props.locale.name)}
                     />
@@ -516,9 +558,7 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
                     <textarea
                         className={style.badge_description}
-                        onInput={(evt: SyntheticEvent<HTMLInputElement>) => {
-                            view.updateDescription(evt.currentTarget.value);
-                        }}
+                        onInput={view.handleTextAreaOnInput}
                         cols="30"
                         rows="10"
                         placeholder={getLocalizedString('SEARCH_PEOPLE__TEXT_AREA_PLACEHOLDER', props.locale.name)}
