@@ -2,12 +2,20 @@
     display: flex;
     flex-direction: row;
     height: 100%;
+    padding: 0 38px;
 }
 
 .histogram_item_wrapper {
     display: block;
     height: 100%;
     width: 76px;
+
+    // active and hover for test only
+    &:active,
+    &:hover,
+    &.histogram_item_wrapper__active {
+        background-color: #fff;
+    }
 }
 
 .histogram_item {
@@ -25,19 +33,6 @@
     width: 38px;
 }
 
-/*
-.face_histogram_lines {
-    border-bottom: 1px solid #ccc;
-    border-top: 1px solid #ccc;
-    height: 82px;
-    left: 0;
-    position: absolute;
-    top: 2px;
-    width: 100%;
-    z-index: 1;
-}
-*/
-
 .histogram_face_wrapper {
     box-sizing: border-box;
     display: block;
@@ -46,19 +41,6 @@
     position: relative;
     width: 100%;
     z-index: 0;
-
-    /*
-    &:before {
-        background-color: #fff;
-        content: '';
-        height: 88px;
-        left: 0;
-        position: absolute;
-        top: 0;
-        width: 100%;
-        z-index: -1;
-    }
-    */
 }
 
 .histogram_face_image {

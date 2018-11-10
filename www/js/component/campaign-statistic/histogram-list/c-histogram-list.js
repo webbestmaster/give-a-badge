@@ -39,7 +39,6 @@ export class HistogramList extends Component<PropsType, StateType> {
                 <div className={style.histogram_item} key={Math.random()}>
                     <div className={style.histogram_column}/>
                     <div className={style.histogram_face_wrapper}>
-                        {/* <div className={style.face_histogram_lines}/>*/}
                         <img className={style.histogram_face_image} src="https://loremflickr.com/108/108" alt=""/>
                     </div>
                 </div>
