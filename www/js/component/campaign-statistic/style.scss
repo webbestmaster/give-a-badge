@@ -1,1 +1,22 @@
-//
+.statistic_wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+.badge_list__wrapper {
+    background-color: #c00;
+    flex-grow: 0;
+    min-height: 100px;
+    width: 200px;
+}
+
+.histogram_list__wrapper {
+    background-color: #0c0;
+    flex-grow: 1;
+    min-height: 100px;
+}
+
+.comment_list__wrapper {
+    background-color: #00c;
+    min-height: 100px;
+}

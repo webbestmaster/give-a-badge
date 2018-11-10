@@ -10,6 +10,10 @@ import type {ContextRouterType} from '../../../type/react-router-dom-v4';
 import {HalfPopup} from '../ui/half-popup/c-half-popup';
 import {HalfPopupHeader} from '../ui/half-popup/header/c-header';
 import {Locale} from '../locale/c-locale';
+import style from './style.scss';
+import {BadgeList} from './badge-list/c-badge-list';
+import {HistogramList} from './histogram-list/c-histogram-list';
+import {CommentList} from './comment-list/c-comment-list';
 
 type ReduxPropsType = {|
     +reduxProp: boolean,
@@ -57,7 +61,17 @@ class CampaignStatistic extends Component<ReduxPropsType, PassedPropsType, State
                     <Locale stringKey="CAMPAIGN__STATISTIC"/>
                 </HalfPopupHeader>
 
-                <h1>Campaign Statistic is here</h1>
+                <div className={style.statistic_wrapper}>
+                    <div className={style.badge_list__wrapper}>
+                        <BadgeList/>
+                    </div>
+                    <div className={style.histogram_list__wrapper}>
+                        <HistogramList/>
+                    </div>
+                </div>
+                <div className={style.comment_list__wrapper}>
+                    <CommentList/>
+                </div>
             </HalfPopup>
         );
     }
