@@ -8,9 +8,10 @@ import React, {Component, Fragment} from 'react';
 import style from './style.scss';
 import {Scroll} from '../../ui/scroll/c-scroll';
 import {Locale} from '../../locale/c-locale';
+import type {CampaignStatisticDataListType} from '../api';
 
 type PassedPropsType = {|
-    // +passedProp: string,
+    +campaignStatisticDataList: CampaignStatisticDataListType,
 |};
 
 type PropsType = $Exact<{
@@ -48,7 +49,18 @@ export class CommentList extends Component<PropsType, StateType> {
                         <div>
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad assumenda dolorum eligendi
                             molestiae possimus quia quod veniam veritatis voluptatem? A autem ea itaque molestiae
-                            pariatur porro possimus reprehenderit tenetur voluptatem?
+                            pariatur porro possimus reprehenderit tenetur voluptatem? Lorem ipsum dolor sit amet,
+                            consectetur adipisicing elit. Ad assumenda dolorum eligendi molestiae possimus quia quod
+                            veniam veritatis voluptatem? A autem ea itaque molestiae pariatur porro possimus
+                            reprehenderit tenetur voluptatem? Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Ad assumenda dolorum eligendi molestiae possimus quia quod veniam veritatis voluptatem? A
+                            autem ea itaque molestiae pariatur porro possimus reprehenderit tenetur voluptatem? Lorem
+                            ipsum dolor sit amet, consectetur adipisicing elit. Ad assumenda dolorum eligendi molestiae
+                            possimus quia quod veniam veritatis voluptatem? A autem ea itaque molestiae pariatur porro
+                            possimus reprehenderit tenetur voluptatem? Lorem ipsum dolor sit amet, consectetur
+                            adipisicing elit. Ad assumenda dolorum eligendi molestiae possimus quia quod veniam
+                            veritatis voluptatem? A autem ea itaque molestiae pariatur porro possimus reprehenderit
+                            tenetur voluptatem?
                         </div>
                     </Scroll>
                 </div>

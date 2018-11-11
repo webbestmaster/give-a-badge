@@ -106,25 +106,25 @@ class CampaignStatistic extends Component<ReduxPropsType, PassedPropsType, State
     }
 
     renderCommentList(): Node {
+        const view = this;
+        const {state} = view;
+        const {campaignStatisticDataList} = state;
+
         return (
             <div className={style.comment_list__wrapper}>
-                <CommentList/>
+                <CommentList campaignStatisticDataList={campaignStatisticDataList}/>
             </div>
         );
     }
 
     render(): Node {
         const view = this;
-        const {state} = view;
-        const {campaignStatisticDataList} = state;
 
         return (
             <HalfPopup closeOnClickBackground>
                 <HalfPopupHeader>
                     <Locale stringKey="CAMPAIGN__STATISTIC"/>
                 </HalfPopupHeader>
-
-                <div>{JSON.stringify(campaignStatisticDataList)}</div>
 
                 <div className={style.statistic_wrapper}>
                     {view.renderBadgeList()}

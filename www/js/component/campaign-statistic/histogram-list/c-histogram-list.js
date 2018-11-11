@@ -35,8 +35,8 @@ export class HistogramList extends Component<PropsType, StateType> {
 
     renderItem = (itemData: mixed): Node => {
         return (
-            <button className={style.histogram_item_wrapper} type="button">
-                <div className={style.histogram_item} key={Math.random()}>
+            <button className={style.histogram_item_wrapper} type="button" key={Math.random()}>
+                <div className={style.histogram_item}>
                     <div className={style.histogram_column}/>
                     <div className={style.histogram_face_wrapper}>
                         <img className={style.histogram_face_image} src="https://loremflickr.com/108/108" alt=""/>
