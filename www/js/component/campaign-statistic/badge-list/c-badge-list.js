@@ -2,27 +2,39 @@
 
 /* eslint consistent-this: ["error", "view"] */
 
-import type {Node} from 'react';
-import React, {Component, Fragment} from 'react';
-// import type {ContextRouterType} from '../../type/react-router-dom-v4';
+import type {ComponentType, Node} from 'react';
+import React, {Component} from 'react';
 import style from './style.scss';
 import type {CampaignStatisticDataListType, CampaignStatisticDataType, DataType} from '../api';
 import classNames from 'classnames';
-import {Scroll} from '../../ui/scroll/c-scroll';
+import {direction, Scroll} from '../../ui/scroll/c-scroll';
+import {connect} from 'react-redux';
+import type {GlobalStateType} from '../../../app/reducer';
+import type {SystemType} from '../../system/reducer/root';
+
+type ReduxPropsType = {|
+    +system: SystemType,
+|};
 
 type PassedPropsType = {|
     +campaignStatisticDataList: CampaignStatisticDataListType,
 |};
 
+type ReduxActionType = {};
+
+const reduxAction: ReduxActionType = {};
+
 type PropsType = $Exact<{
+    ...ReduxActionType,
     ...PassedPropsType,
+    ...ReduxPropsType,
 }>;
 
 type StateType = {|
     +selectedBadgeIdList: Array<string | number>,
 |};
 
-export class BadgeList extends Component<PropsType, StateType> {
+class BadgeList extends Component<PropsType, StateType> {
     props: PropsType;
     state: StateType;
 
@@ -54,10 +66,6 @@ export class BadgeList extends Component<PropsType, StateType> {
 
             badgeList.push(badge);
         });
-
-        if (badgeList.length > 0) {
-            view.activateBadge(badgeList[0].id);
-        }
 
         return badgeList;
     }
@@ -130,21 +138,52 @@ export class BadgeList extends Component<PropsType, StateType> {
                 onClick={handleOnClick}
                 onKeyPress={handleOnClick}
                 className={classNames(style.badge_tem, {
-                    [style.badge_tem__selected]: selectedBadgeIdList.includes(badgeData.id),
+                    [style.badge_item__selected]: selectedBadgeIdList.includes(badgeData.id),
+                    [style.badge_item__mobile]: props.system.screen.isMobile,
                 })}
             >
-                <img className={style.badge_tem_image} src={badgeData.imageUrl} alt={badgeData.name}/>
+                <img className={style.badge_item_image} src={badgeData.imageUrl} alt={badgeData.name}/>
             </button>
         );
     };
 
+    componentDidUpdate() {
+        const view = this;
+        const {props, state} = view;
+        const {selectedBadgeIdList} = state;
+
+        if (selectedBadgeIdList.length === 0 && props.campaignStatisticDataList.length > 0) {
+            view.activateBadge(view.getBadgeList()[0].id);
+        }
+    }
+
     render(): Node {
         const view = this;
+        const {props} = view;
+
+        const badgeList = view.getBadgeList();
+
+        if (props.system.screen.isMobile) {
+            return (
+                <Scroll key="mobile-swiper" direction={direction.horizontal}>
+                    <div className={style.badge_list__mobile}>{badgeList.map(view.renderBadge)}</div>
+                </Scroll>
+            );
+        }
 
         return (
-            <Scroll>
-                <div className={style.badge_list}>{view.getBadgeList().map(view.renderBadge)}</div>
+            <Scroll key="desctop-swiper">
+                <div className={style.badge_list}>{badgeList.map(view.renderBadge)}</div>
             </Scroll>
         );
     }
 }
+
+const ConnectedComponent = connect<ComponentType<BadgeList>, PassedPropsType, ReduxPropsType, ReduxActionType>(
+    (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
+        system: state.system,
+    }),
+    reduxAction
+)(BadgeList);
+
+export {ConnectedComponent as BadgeList};

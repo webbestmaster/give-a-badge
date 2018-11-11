@@ -10,7 +10,7 @@ import Swiper from 'swiper';
 import classNames from 'classnames';
 import style from './style.scss';
 
-const direction = {
+export const direction = {
     horizontal: 'horizontal',
     vertical: 'vertical',
 };
@@ -38,8 +38,8 @@ export class Scroll extends Component<StateType, PropsType> {
     node: NodeType;
     attr: AttrType;
 
-    constructor() {
-        super();
+    constructor(props: PropsType) {
+        super(props);
 
         const view = this;
 

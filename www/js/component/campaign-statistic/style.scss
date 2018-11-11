@@ -8,6 +8,11 @@ $section-bg-color: #f8f8f8;
     position: relative;
 }
 
+.statistic_wrapper__mobile {
+    flex-direction: column;
+    height: 558px;
+}
+
 .statistic_wrapper_background {
     background-color: #fff;
     bottom: 18px;
@@ -35,8 +40,12 @@ $section-bg-color: #f8f8f8;
     width: 94px;
 }
 
+.badge_list__wrapper__mobile {
+    height: 94px;
+    width: 100%;
+}
+
 .histogram_list__wrapper {
-    //background-color: #0c0;
     display: flex;
     flex-grow: 1;
     min-height: 100px;

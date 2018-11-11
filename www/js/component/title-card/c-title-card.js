@@ -12,9 +12,9 @@ import style from './style.scss';
 import classNames from 'classnames';
 import moment from 'moment';
 import type {NewsType, NewsUserType} from '../title-card-list/api';
+import {newsInfo} from '../title-card-list/api';
 import Link from 'react-router-dom/Link';
 import {getBadgeCampaignPath, getBadgeWonPath} from '../app/routes';
-import {newsInfo} from '../title-card-list/api';
 
 type ReduxPropsType = {};
 

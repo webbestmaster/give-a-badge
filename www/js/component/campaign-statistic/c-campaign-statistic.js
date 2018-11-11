@@ -14,13 +14,14 @@ import style from './style.scss';
 import {BadgeList} from './badge-list/c-badge-list';
 import {HistogramList} from './histogram-list/c-histogram-list';
 import {CommentList} from './comment-list/c-comment-list';
+import type {CampaignStatisticDataListType} from './api';
 import {getCampaignStatistic} from './api';
-import type {CampaignStatisticDataListType, CampaignStatisticDataType, DataType} from './api';
-import {Scroll} from '../ui/scroll/c-scroll';
+import type {SystemType} from '../system/reducer/root';
+import classNames from 'classnames';
 
-type ReduxPropsType = {
-    // +reduxProp: boolean,
-};
+type ReduxPropsType = {|
+    +system: SystemType,
+|};
 
 type ReduxActionType = {};
 
@@ -83,11 +84,15 @@ class CampaignStatistic extends Component<ReduxPropsType, PassedPropsType, State
 
     renderBadgeList(): Node {
         const view = this;
-        const {state} = view;
+        const {state, props} = view;
         const {campaignStatisticDataList} = state;
 
         return (
-            <div className={style.badge_list__wrapper}>
+            <div
+                className={classNames(style.badge_list__wrapper, {
+                    [style.badge_list__wrapper__mobile]: props.system.screen.isMobile,
+                })}
+            >
                 <BadgeList campaignStatisticDataList={campaignStatisticDataList}/>
             </div>
         );
@@ -119,6 +124,7 @@ class CampaignStatistic extends Component<ReduxPropsType, PassedPropsType, State
 
     render(): Node {
         const view = this;
+        const {props} = view;
 
         return (
             <HalfPopup closeOnClickBackground>
@@ -126,7 +132,11 @@ class CampaignStatistic extends Component<ReduxPropsType, PassedPropsType, State
                     <Locale stringKey="CAMPAIGN__STATISTIC"/>
                 </HalfPopupHeader>
 
-                <div className={style.statistic_wrapper}>
+                <div
+                    className={classNames(style.statistic_wrapper, {
+                        [style.statistic_wrapper__mobile]: props.system.screen.isMobile,
+                    })}
+                >
                     {view.renderBadgeList()}
                     {view.renderHistogramList()}
                     <div className={style.statistic_wrapper_background}/>
@@ -138,7 +148,9 @@ class CampaignStatistic extends Component<ReduxPropsType, PassedPropsType, State
 }
 
 const ConnectedComponent = connect<ComponentType<CampaignStatistic>, PassedPropsType, ReduxPropsType, ReduxActionType>(
-    (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({}),
+    (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
+        system: state.system,
+    }),
     reduxAction
 )(CampaignStatistic);
 

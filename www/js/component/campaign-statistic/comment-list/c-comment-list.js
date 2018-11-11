@@ -3,13 +3,11 @@
 /* eslint consistent-this: ["error", "view"] */
 
 import type {Node} from 'react';
-import React, {Component, Fragment} from 'react';
-// import type {ContextRouterType} from '../../type/react-router-dom-v4';
+import React, {Component} from 'react';
 import style from './style.scss';
 import {Scroll} from '../../ui/scroll/c-scroll';
 import {Locale} from '../../locale/c-locale';
 import type {CampaignStatisticDataListType, CampaignStatisticDataType, DataType} from '../api';
-import classNames from 'classnames';
 
 type PassedPropsType = {|
     +campaignStatisticDataList: CampaignStatisticDataListType,

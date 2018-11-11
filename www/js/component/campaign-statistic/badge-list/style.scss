@@ -3,18 +3,28 @@
     padding: 10px 0 20px;
 }
 
+.badge_list__mobile {
+    height: 100%;
+    padding: 0;
+}
+
 .badge_tem {
     display: block;
     height: 128px;
     opacity: 0.5;
     width: 100%;
 
-    &.badge_tem__selected {
+    &.badge_item__selected {
         opacity: 1;
     }
 }
 
-.badge_tem_image {
+.badge_item__mobile {
+    height: 100%;
+    width: 128px;
+}
+
+.badge_item_image {
     border-radius: 50%;
     display: block;
     height: 78px;
