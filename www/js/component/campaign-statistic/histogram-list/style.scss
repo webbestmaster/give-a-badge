@@ -14,7 +14,11 @@
     &:active,
     &:hover,
     &.histogram_item_wrapper__active {
-        background-color: #fff;
+        //background-color: #fff;
+        background-image: url('./i/active-face.png');
+        background-position: 1px 366px;
+        background-repeat: no-repeat;
+        background-size: 68px auto;
     }
 }
 
@@ -29,8 +33,13 @@
 .histogram_column {
     background-color: #ccc;
     box-sizing: border-box;
+    margin-bottom: 6px;
     min-height: 20px;
     width: 38px;
+
+    &:hover {
+        background-color: #fc0;
+    }
 }
 
 .histogram_face_wrapper {
