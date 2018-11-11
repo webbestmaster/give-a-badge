@@ -5,13 +5,24 @@
 import type {Node} from 'react';
 import React, {Component} from 'react';
 import style from './style.scss';
-import type {CampaignStatisticDataListType} from '../api';
+import type {CampaignStatisticDataListType, DataType} from '../api';
 import {Scroll} from '../../ui/scroll/c-scroll';
+import {extractUserList} from './helper';
 
 type PassedPropsType = {|
     +campaignStatisticDataList: CampaignStatisticDataListType,
     +selectedBadgeIdList: Array<number | string>,
 |};
+
+type ColumnDataType = {
+    +user: DataType,
+    +badgeList: Array<{
+        id: string | number,
+        name: string,
+        imageUrl: string,
+        count: number,
+    }>,
+};
 
 type PropsType = PassedPropsType;
 
@@ -29,21 +40,36 @@ export class HistogramList extends Component<PropsType, StateType> {
         view.state = {};
     }
 
-    renderItem = (itemData: mixed): Node => {
+    renderItem = (columnData: ColumnDataType): Node => {
         return (
-            <button className={style.histogram_item_wrapper} type="button" key={Math.random()}>
+            <button className={style.histogram_item_wrapper} type="button" key={columnData.user.id}>
                 <div className={style.histogram_item}>
                     <div className={style.histogram_column}/>
                     <div className={style.histogram_face_wrapper}>
-                        <img className={style.histogram_face_image} src="https://loremflickr.com/108/108" alt=""/>
+                        <img
+                            className={style.histogram_face_image}
+                            src={columnData.user.imageUrl}
+                            alt={columnData.user.name}
+                        />
                     </div>
                 </div>
             </button>
         );
     };
 
-    getItemList(): Array<mixed> {
-        return new Array(20).fill(null);
+    getItemList(): Array<ColumnDataType> {
+        const view = this;
+        const {state, props} = view;
+        const {campaignStatisticDataList} = props;
+
+        return extractUserList(campaignStatisticDataList).map(
+            (userData: DataType): ColumnDataType => {
+                return {
+                    user: userData,
+                    badgeList: [],
+                };
+            }
+        );
     }
 
     render(): Node {
