@@ -55,7 +55,8 @@ export class HistogramList extends Component<PropsType, StateType> {
         const itemList = view.getItemList();
 
         return (
-            <Scroll slideWidth={itemList.length * 75} direction="horizontal">
+            // 76 - column height, 38 * 2 - left and right padding
+            <Scroll slideWidth={itemList.length * 76 + 38 * 2} direction="horizontal">
                 <div className={style.histogram_list_wrapper}>{itemList.map(view.renderItem)}</div>
             </Scroll>
         );

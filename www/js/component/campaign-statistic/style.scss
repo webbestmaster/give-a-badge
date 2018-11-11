@@ -1,5 +1,7 @@
+$section-bg-color: #f8f8f8;
+
 .statistic_wrapper {
-    background-color: #f8f8f8;
+    background-color: $section-bg-color;
     display: flex;
     flex-direction: row;
     height: 464px;
@@ -43,7 +45,7 @@
 }
 
 .comment_list__wrapper {
-    background-color: #0cc;
+    background-color: $section-bg-color;
     display: flex;
-    min-height: 100px;
+    min-height: 205px;
 }

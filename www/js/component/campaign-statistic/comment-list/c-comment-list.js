@@ -52,8 +52,15 @@ export class CommentList extends Component<PropsType, StateType> {
 
     renderComment = (badgeData: DataType, index: number): Node => {
         return (
-            <div title={badgeData.name} key={`${index}/${badgeData.id}`} className={classNames(style.comment_item)}>
-                comment
+            <div title={badgeData.name} key={`${index}/${badgeData.id}`} className={style.comment_item}>
+                <img className={style.comment_item_face} src="https://loremflickr.com/108/108" alt=""/>
+                <div className={style.comment_item_text_cloud}>
+                    <p className={style.comment_item_text}>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A alias blanditiis, eos est fuga id
+                        magnam mollitia nam natus nulla, odit possimus quisquam reiciendis sed soluta sunt vitae? Ad,
+                        neque!
+                    </p>
+                </div>
             </div>
         );
     };
@@ -69,7 +76,8 @@ export class CommentList extends Component<PropsType, StateType> {
                     <Locale stringKey="CAMPAIGN__STATISTIC__COMMENT"/>
                 </h3>
                 <div className={style.comment_list_scroll}>
-                    <Scroll slideWidth={commentList.length * 465} direction="horizontal">
+                    {/* 465 comment width, 17 * 2 - left and right padding */}
+                    <Scroll slideWidth={commentList.length * 465 + 17 * 2} direction="horizontal">
                         <div className={style.comment_list_wrapper}>{commentList.map(view.renderComment)}</div>
                     </Scroll>
                 </div>

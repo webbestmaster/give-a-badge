@@ -2,23 +2,22 @@
     display: flex;
     flex-direction: row;
     height: 100%;
-    padding: 0 38px;
+    padding: 0 38px; // see <Scroll slideWidth={itemList.length * 76 + 38 * 2} direction="horizontal">
 }
 
 .histogram_item_wrapper {
     display: block;
     height: 100%;
-    width: 76px;
+    width: 76px; // see <Scroll slideWidth={itemList.length * 76 + 38 * 2} direction="horizontal">
 
     // active and hover for test only
     &:active,
     &:hover,
     &.histogram_item_wrapper__active {
-        //background-color: #fff;
         background-image: url('./i/active-face.png');
-        background-position: 1px 366px;
+        background-position: 2px 364px;
         background-repeat: no-repeat;
-        background-size: 68px auto;
+        background-size: 72px auto;
     }
 }
 

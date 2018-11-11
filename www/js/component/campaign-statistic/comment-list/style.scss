@@ -15,14 +15,55 @@
     display: flex;
     flex-grow: 1;
     height: 100%;
-}
-
-.comment_item {
-    display: block;
-    width: 465px;
+    padding-top: 5px;
 }
 
 .comment_list_wrapper {
     display: flex;
     flex-direction: row;
+    padding: 10px 17px 0; // <Scroll slideWidth={commentList.length * 465 + 17 * 2} direction="horizontal">
+}
+
+.comment_item {
+    display: flex;
+    flex-direction: row;
+    width: 465px; // <Scroll slideWidth={commentList.length * 465 + 17 * 2} direction="horizontal">
+}
+
+.comment_item_text_cloud {
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    display: block;
+    padding: 10px 16px 19px 19px;
+    position: relative;
+    width: 340px;
+    z-index: 1;
+
+    &:after {
+        border: 11px solid #fff;
+        box-shadow: -3px 3px 6px rgba(0, 0, 0, 0.1);
+        content: '';
+        height: 0;
+        left: -10px;
+        position: absolute;
+        top: 22px;
+        transform: rotateZ(45deg);
+        width: 0;
+        z-index: -2;
+    }
+}
+
+.comment_item_text {
+    color: #999;
+    font-size: 12px;
+    line-height: 1.25;
+}
+
+.comment_item_face {
+    border-radius: 50%;
+    display: block;
+    height: 54px;
+    margin-right: 32px;
+    width: 54px;
 }

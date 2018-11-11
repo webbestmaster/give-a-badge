@@ -132,21 +132,6 @@ class CampaignStatistic extends Component<ReduxPropsType, PassedPropsType, State
                     <div className={style.statistic_wrapper_background}/>
                 </div>
                 {view.renderCommentList()}
-
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
             </HalfPopup>
         );
     }
