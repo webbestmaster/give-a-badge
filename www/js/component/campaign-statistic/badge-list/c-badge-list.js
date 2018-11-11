@@ -18,6 +18,7 @@ type ReduxPropsType = {|
 
 type PassedPropsType = {|
     +campaignStatisticDataList: CampaignStatisticDataListType,
+    +onChangeBadgeList: (selectedBadgeIdList: Array<number | string>) => void,
 |};
 
 type ReduxActionType = {};
@@ -70,6 +71,14 @@ class BadgeList extends Component<PropsType, StateType> {
         return badgeList;
     }
 
+    onChangeBadgeList = () => {
+        const view = this;
+        const {state, props} = view;
+        const {selectedBadgeIdList} = state;
+
+        props.onChangeBadgeList(selectedBadgeIdList);
+    };
+
     activateBadge(badgeId: string | number) {
         const view = this;
         const {state, props} = view;
@@ -80,7 +89,7 @@ class BadgeList extends Component<PropsType, StateType> {
             return;
         }
 
-        view.setState({selectedBadgeIdList: [...selectedBadgeIdList, badgeId]});
+        view.setState({selectedBadgeIdList: [...selectedBadgeIdList, badgeId]}, view.onChangeBadgeList);
     }
 
     deactivateBadge(badgeId: string | number) {
@@ -100,7 +109,7 @@ class BadgeList extends Component<PropsType, StateType> {
 
         selectedBadgeIdList.splice(selectedBadgeIdList.indexOf(badgeId), 1);
 
-        view.setState({selectedBadgeIdList: [...selectedBadgeIdList]});
+        view.setState({selectedBadgeIdList: [...selectedBadgeIdList]}, view.onChangeBadgeList);
     }
 
     toggleBadgeActive(badgeId: string | number) {

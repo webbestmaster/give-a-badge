@@ -82,6 +82,10 @@ class CampaignStatistic extends Component<ReduxPropsType, PassedPropsType, State
         })();
     }
 
+    handleChangeBadgeList = (selectedBadgeIdList: Array<number | string>) => {
+        console.log(selectedBadgeIdList);
+    };
+
     renderBadgeList(): Node {
         const view = this;
         const {state, props} = view;
@@ -93,7 +97,10 @@ class CampaignStatistic extends Component<ReduxPropsType, PassedPropsType, State
                     [style.badge_list__wrapper__mobile]: props.system.screen.isMobile,
                 })}
             >
-                <BadgeList campaignStatisticDataList={campaignStatisticDataList}/>
+                <BadgeList
+                    campaignStatisticDataList={campaignStatisticDataList}
+                    onChangeBadgeList={view.handleChangeBadgeList}
+                />
             </div>
         );
     }
