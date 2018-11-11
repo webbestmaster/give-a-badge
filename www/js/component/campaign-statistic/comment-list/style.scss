@@ -1,1 +1,18 @@
-//
+.comment_list {
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.comment_list__header {
+    display: block;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding-left: 12px;
+}
+
+.comment_list_scroll {
+    display: flex;
+    flex-grow: 1;
+    height: 100%;
+}

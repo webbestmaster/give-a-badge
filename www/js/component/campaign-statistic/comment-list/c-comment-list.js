@@ -7,6 +7,7 @@ import React, {Component, Fragment} from 'react';
 // import type {ContextRouterType} from '../../type/react-router-dom-v4';
 import style from './style.scss';
 import {Scroll} from '../../ui/scroll/c-scroll';
+import {Locale} from '../../locale/c-locale';
 
 type PassedPropsType = {|
     // +passedProp: string,
@@ -38,13 +39,20 @@ export class CommentList extends Component<PropsType, StateType> {
 
     render(): Node {
         return (
-            <Scroll slideWidth={1000} direction="horizontal">
-                <div>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad assumenda dolorum eligendi molestiae
-                    possimus quia quod veniam veritatis voluptatem? A autem ea itaque molestiae pariatur porro possimus
-                    reprehenderit tenetur voluptatem?
+            <div className={style.comment_list}>
+                <h3 className={style.comment_list__header}>
+                    <Locale stringKey="CAMPAIGN__STATISTIC__COMMENT"/>
+                </h3>
+                <div className={style.comment_list_scroll}>
+                    <Scroll slideWidth={1000} direction="horizontal">
+                        <div>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad assumenda dolorum eligendi
+                            molestiae possimus quia quod veniam veritatis voluptatem? A autem ea itaque molestiae
+                            pariatur porro possimus reprehenderit tenetur voluptatem?
+                        </div>
+                    </Scroll>
                 </div>
-            </Scroll>
+            </div>
         );
     }
 }

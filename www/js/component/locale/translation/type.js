@@ -17,6 +17,7 @@ export type LangDataType = {|
     +GIVE_THE_BADGE__PEOPLE: string,
 
     +CAMPAIGN__STATISTIC: string,
+    +CAMPAIGN__STATISTIC__COMMENT: string,
 
     +BADGE_WON_LIST__SHOW_LESS: string,
     +BADGE_WON_LIST__SHOW_ALL: string,
