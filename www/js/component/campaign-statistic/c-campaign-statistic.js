@@ -44,6 +44,7 @@ type PropsType = $Exact<{
 
 type StateType = {|
     +campaignStatisticDataList: CampaignStatisticDataListType,
+    +selectedBadgeIdList: Array<string | number>,
 |};
 
 class CampaignStatistic extends Component<ReduxPropsType, PassedPropsType, StateType> {
@@ -56,6 +57,7 @@ class CampaignStatistic extends Component<ReduxPropsType, PassedPropsType, State
         const view = this;
 
         view.state = {
+            selectedBadgeIdList: [],
             campaignStatisticDataList: [],
         };
     }
@@ -83,7 +85,9 @@ class CampaignStatistic extends Component<ReduxPropsType, PassedPropsType, State
     }
 
     handleChangeBadgeList = (selectedBadgeIdList: Array<number | string>) => {
-        console.log(selectedBadgeIdList);
+        const view = this;
+
+        view.setState({selectedBadgeIdList});
     };
 
     renderBadgeList(): Node {
@@ -108,11 +112,14 @@ class CampaignStatistic extends Component<ReduxPropsType, PassedPropsType, State
     renderHistogramList(): Node {
         const view = this;
         const {state} = view;
-        const {campaignStatisticDataList} = state;
+        const {campaignStatisticDataList, selectedBadgeIdList} = state;
 
         return (
             <div className={style.histogram_list__wrapper}>
-                <HistogramList campaignStatisticDataList={campaignStatisticDataList}/>
+                <HistogramList
+                    campaignStatisticDataList={campaignStatisticDataList}
+                    selectedBadgeIdList={selectedBadgeIdList}
+                />
             </div>
         );
     }

@@ -10,13 +10,12 @@ import {Scroll} from '../../ui/scroll/c-scroll';
 
 type PassedPropsType = {|
     +campaignStatisticDataList: CampaignStatisticDataListType,
+    +selectedBadgeIdList: Array<number | string>,
 |};
 
 type PropsType = PassedPropsType;
 
-type StateType = {|
-    +state: number,
-|};
+type StateType = {};
 
 export class HistogramList extends Component<PropsType, StateType> {
     props: PropsType;
@@ -27,9 +26,7 @@ export class HistogramList extends Component<PropsType, StateType> {
 
         const view = this;
 
-        view.state = {
-            state: 0,
-        };
+        view.state = {};
     }
 
     renderItem = (itemData: mixed): Node => {
