@@ -56,7 +56,13 @@ export class CommentList extends Component<PropsType, StateType> {
                     <p className={style.comment_item_text}>
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. A alias blanditiis, eos est fuga id
                         magnam mollitia nam natus nulla, odit possimus quisquam reiciendis sed soluta sunt vitae? Ad,
-                        neque!
+                        neque! Lorem ipsum dolor sit amet, consectetur adipisicing elit. A alias blanditiis, eos est
+                        fuga id magnam mollitia nam natus nulla, odit possimus quisquam reiciendis sed soluta sunt
+                        vitae? Ad, neque! Lorem ipsum dolor sit amet, consectetur adipisicing elit. A alias blanditiis,
+                        eos est fuga id magnam mollitia nam natus nulla, odit possimus quisquam reiciendis sed soluta
+                        sunt vitae? Ad, neque! Lorem ipsum dolor sit amet, consectetur adipisicing elit. A alias
+                        blanditiis, eos est fuga id magnam mollitia nam natus nulla, odit possimus quisquam reiciendis
+                        sed soluta sunt vitae? Ad, neque!
                     </p>
                 </div>
             </div>
