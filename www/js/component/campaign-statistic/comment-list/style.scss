@@ -16,3 +16,13 @@
     flex-grow: 1;
     height: 100%;
 }
+
+.comment_item {
+    display: block;
+    width: 465px;
+}
+
+.comment_list_wrapper {
+    display: flex;
+    flex-direction: row;
+}
