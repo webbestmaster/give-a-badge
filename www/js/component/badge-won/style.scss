@@ -25,6 +25,7 @@ $badge-image-width: 45px;
     background-position: center center;
     background-repeat: no-repeat;
     background-size: contain;
+    border-radius: 50%;
     display: block;
     height: $badge-image-width;
     margin-right: 17px;
@@ -35,7 +36,6 @@ $badge-image-width: 45px;
 .header__badge_text_block {
     display: block;
     max-width: 50%;
-    //padding-right: $badge-image-width - 40px;
 }
 
 .header_badge_name {

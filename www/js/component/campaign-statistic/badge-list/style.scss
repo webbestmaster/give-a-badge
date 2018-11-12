@@ -4,6 +4,8 @@
 }
 
 .badge_list__mobile {
+    display: flex;
+    flex-direction: row;
     height: 100%;
     padding: 0;
 }
