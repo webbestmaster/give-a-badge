@@ -64,7 +64,9 @@ export function getBadgeListOfUser(
         });
     });
 
-    return badgeListOfUser;
+    return badgeListOfUser.sort(
+        (badgeA: BadgeOfUserType, badgeB: BadgeOfUserType): number => parseInt(badgeB.id, 10) - parseInt(badgeA.id, 10)
+    );
 }
 
 export function getBadgeListSum(badgeListOfUser: Array<BadgeOfUserType>): number {

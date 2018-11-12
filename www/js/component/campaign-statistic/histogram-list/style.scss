@@ -33,12 +33,32 @@
     background-color: #ccc;
     box-sizing: border-box;
     margin-bottom: 6px;
-    min-height: 20px;
+    min-height: 2px;
     width: 38px;
 
     &:hover {
         background-color: #fc0;
     }
+}
+
+.histogram_column_part {
+    align-items: center;
+    border-bottom: 1px solid #f8f8f8;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    &:last-child {
+        border-bottom: 1px solid transparent;
+    }
+}
+
+.histogram_column_part_image {
+    border-radius: 50%;
+    display: block;
+    max-height: 80%;
+    max-width: 80%;
 }
 
 .histogram_face_wrapper {
@@ -52,6 +72,9 @@
 }
 
 .histogram_face_image {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
     border-radius: 50%;
     display: block;
     height: 54px;

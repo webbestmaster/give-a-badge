@@ -9,6 +9,7 @@ import type {CampaignStatisticDataListType, DataType} from '../api';
 import {Scroll} from '../../ui/scroll/c-scroll';
 import {extractUserList, getBadgeListOfUser, getBadgeListSum} from './helper';
 import type {BadgeOfUserType} from './helper';
+import {histogramListConst} from './histogram-list-const';
 
 type PassedPropsType = {|
     +campaignStatisticDataList: CampaignStatisticDataListType,
@@ -36,17 +37,29 @@ export class HistogramList extends Component<PropsType, StateType> {
         view.state = {};
     }
 
+    renderColumnPart = (badgeOfUser: BadgeOfUserType): Node => {
+        const view = this;
+        const maxRating = view.getMaxRating();
+        const height = badgeOfUser.count / maxRating * histogramListConst.column.height.max;
+
+        return (
+            <div title={badgeOfUser.name} key={badgeOfUser.id} style={{height}} className={style.histogram_column_part}>
+                <img src={badgeOfUser.imageUrl} className={style.histogram_column_part_image} alt={badgeOfUser.name}/>
+            </div>
+        );
+    };
+
     renderItem = (columnData: ColumnDataType): Node => {
+        const view = this;
+
         return (
             <button className={style.histogram_item_wrapper} type="button" key={columnData.user.id}>
                 <div className={style.histogram_item}>
-                    {getBadgeListSum(columnData.badgeList)}
-                    <div className={style.histogram_column}/>
+                    <div className={style.histogram_column}>{columnData.badgeList.map(view.renderColumnPart)}</div>
                     <div className={style.histogram_face_wrapper}>
-                        <img
+                        <div
                             className={style.histogram_face_image}
-                            src={columnData.user.imageUrl}
-                            alt={columnData.user.name}
+                            style={{backgroundImage: `url(${columnData.user.imageUrl})`}}
                         />
                     </div>
                 </div>
@@ -67,6 +80,13 @@ export class HistogramList extends Component<PropsType, StateType> {
                 };
             }
         );
+    }
+
+    getMaxRating(): number {
+        const view = this;
+        const itemList = view.getItemList();
+
+        return Math.max(...itemList.map((columnData: ColumnDataType): number => getBadgeListSum(columnData.badgeList)));
     }
 
     render(): Node {

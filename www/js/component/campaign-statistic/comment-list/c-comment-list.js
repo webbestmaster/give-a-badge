@@ -51,7 +51,10 @@ export class CommentList extends Component<PropsType, StateType> {
     renderComment = (badgeData: DataType, index: number): Node => {
         return (
             <div title={badgeData.name} key={`${index}/${badgeData.id}`} className={style.comment_item}>
-                <img className={style.comment_item_face} src="https://loremflickr.com/108/108" alt=""/>
+                <div
+                    className={style.comment_item_face}
+                    style={{backgroundImage: `url(${'https://loremflickr.com/108/108'})`}}
+                />
                 <div className={style.comment_item_text_cloud}>
                     <p className={style.comment_item_text}>
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. A alias blanditiis, eos est fuga id

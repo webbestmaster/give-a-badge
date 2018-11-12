@@ -11,6 +11,7 @@ import {direction, Scroll} from '../../ui/scroll/c-scroll';
 import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../../app/reducer';
 import type {SystemType} from '../../system/reducer/root';
+import type {BadgeOfUserType} from '../histogram-list/helper';
 
 type ReduxPropsType = {|
     +system: SystemType,
@@ -68,7 +69,9 @@ class BadgeList extends Component<PropsType, StateType> {
             badgeList.push(badge);
         });
 
-        return badgeList;
+        return badgeList.sort(
+            (badgeA: DataType, badgeB: DataType): number => parseInt(badgeB.id, 10) - parseInt(badgeA.id, 10)
+        );
     }
 
     onChangeBadgeList = () => {
