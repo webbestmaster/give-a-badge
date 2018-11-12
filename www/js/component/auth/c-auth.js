@@ -12,6 +12,8 @@ import {openLoginPopup, setUser} from './action';
 import type {AuthType, UserType} from './reducer';
 import type {GlobalStateType} from '../../app/reducer';
 import {getMe} from './api';
+import {LoadComponent} from '../../lib/c-load-component';
+import {authConst} from './const';
 
 type ReduxPropsType = {|
     +auth: AuthType,
@@ -29,19 +31,9 @@ const reduxAction: ReduxActionType = {
     openLoginPopup,
 };
 
-type StateType = {|
-    +isAllPopupLoaded: boolean,
-|};
+type StateType = {};
 
 type PropsType = $Exact<{...PassedPropsType, ...ReduxPropsType, ...ReduxActionType}>;
-
-type PopupStoreType = {|
-    LoginPopup: null | Component,
-|};
-
-const popupStore: PopupStoreType = {
-    LoginPopup: null,
-};
 
 class Auth extends Component<ReduxPropsType, PassedPropsType, StateType> {
     // eslint-disable-next-line id-match
@@ -53,24 +45,7 @@ class Auth extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
         const view = this;
 
-        view.state = {
-            isAllPopupLoaded: false,
-        };
-    }
-
-    async loadAllPopup(): Promise<void> {
-        const view = this;
-        const {state} = view;
-
-        if (state.isAllPopupLoaded) {
-            return;
-        }
-
-        const {LoginPopup} = await import('./popup/login/c-login-popup');
-
-        popupStore.LoginPopup = LoginPopup;
-
-        view.setState({isAllPopupLoaded: true});
+        view.state = {};
     }
 
     async loginCheck(): Promise<void> {
@@ -81,7 +56,6 @@ class Auth extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const getMeResult = await getMe();
 
         if (getMeResult.hasError === true) {
-            await view.loadAllPopup();
             openLoginPopupAction();
             return;
         }
@@ -95,23 +69,19 @@ class Auth extends Component<ReduxPropsType, PassedPropsType, StateType> {
         await view.loginCheck();
     }
 
+    loadLoginPopup = async (): Promise<Node> => {
+        const {LoginPopup} = await import(/* webpackChunkName: 'login-popup' */ './popup/login/c-login-popup');
+
+        return <LoginPopup/>;
+    };
+
     render(): Array<Node> {
         const view = this;
-        const {state} = view;
+        const {props} = view;
+        const {auth} = props;
+        const {isOpen: isLoginPopupOpen} = auth.popup[authConst.popupName.login];
 
-        if (state.isAllPopupLoaded === false) {
-            return [null];
-        }
-
-        const componentList = [];
-
-        const {LoginPopup} = popupStore;
-
-        if (LoginPopup !== null) {
-            componentList.push(<LoginPopup key="login-popup"/>);
-        }
-
-        return componentList;
+        return [isLoginPopupOpen ? <LoadComponent key="login-popup" load={view.loadLoginPopup}/> : null];
     }
 }
 
