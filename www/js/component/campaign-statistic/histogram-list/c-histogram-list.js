@@ -7,7 +7,8 @@ import React, {Component} from 'react';
 import style from './style.scss';
 import type {CampaignStatisticDataListType, DataType} from '../api';
 import {Scroll} from '../../ui/scroll/c-scroll';
-import {extractUserList} from './helper';
+import {extractUserList, getBadgeListOfUser, getBadgeListSum} from './helper';
+import type {BadgeOfUserType} from './helper';
 
 type PassedPropsType = {|
     +campaignStatisticDataList: CampaignStatisticDataListType,
@@ -16,12 +17,7 @@ type PassedPropsType = {|
 
 type ColumnDataType = {
     +user: DataType,
-    +badgeList: Array<{
-        id: string | number,
-        name: string,
-        imageUrl: string,
-        count: number,
-    }>,
+    +badgeList: Array<BadgeOfUserType>,
 };
 
 type PropsType = PassedPropsType;
@@ -44,6 +40,7 @@ export class HistogramList extends Component<PropsType, StateType> {
         return (
             <button className={style.histogram_item_wrapper} type="button" key={columnData.user.id}>
                 <div className={style.histogram_item}>
+                    {getBadgeListSum(columnData.badgeList)}
                     <div className={style.histogram_column}/>
                     <div className={style.histogram_face_wrapper}>
                         <img
@@ -60,13 +57,13 @@ export class HistogramList extends Component<PropsType, StateType> {
     getItemList(): Array<ColumnDataType> {
         const view = this;
         const {state, props} = view;
-        const {campaignStatisticDataList} = props;
+        const {campaignStatisticDataList, selectedBadgeIdList} = props;
 
         return extractUserList(campaignStatisticDataList).map(
             (userData: DataType): ColumnDataType => {
                 return {
                     user: userData,
-                    badgeList: [],
+                    badgeList: getBadgeListOfUser(campaignStatisticDataList, userData, selectedBadgeIdList),
                 };
             }
         );

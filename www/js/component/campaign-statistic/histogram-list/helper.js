@@ -20,3 +20,59 @@ export function extractUserList(campaignStatisticDataList: CampaignStatisticData
 
     return userList;
 }
+
+export type BadgeOfUserType = {|
+    +id: string | number,
+    +name: string,
+    +imageUrl: string,
+    count: number,
+|};
+
+export function getBadgeListOfUser(
+    campaignStatisticDataList: CampaignStatisticDataListType,
+    userData: DataType,
+    selectedBadgeIdList: Array<number | string>
+): Array<BadgeOfUserType> {
+    const badgeListOfUser = [];
+
+    campaignStatisticDataList.forEach((campaignStatisticData: CampaignStatisticDataType) => {
+        campaignStatisticData.toUsers.forEach((userDataInList: DataType) => {
+            if (userDataInList.id !== userData.id) {
+                return;
+            }
+
+            const {badge} = campaignStatisticData;
+
+            if (!selectedBadgeIdList.includes(badge.id)) {
+                return;
+            }
+
+            const badgeInList = badgeListOfUser.find(
+                (badgeOfUserInList: BadgeOfUserType): boolean => badge.id === badgeOfUserInList.id
+            ) || {
+                id: badge.id,
+                name: badge.name,
+                imageUrl: badge.imageUrl,
+                count: 0,
+            };
+
+            if (badgeInList.count === 0) {
+                badgeListOfUser.push(badgeInList);
+            }
+
+            badgeInList.count += 1;
+        });
+    });
+
+    return badgeListOfUser;
+}
+
+export function getBadgeListSum(badgeListOfUser: Array<BadgeOfUserType>): number {
+    let sum = 0;
+
+    badgeListOfUser.forEach((badgeOfUser: BadgeOfUserType) => {
+        sum += badgeOfUser.count;
+    });
+
+    return sum;
+}
