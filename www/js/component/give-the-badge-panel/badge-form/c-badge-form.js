@@ -27,6 +27,7 @@ import type {TitleNewsListType} from '../../title-card-list/reducer';
 import {pageSize} from '../../title-card-list/c-title-card-list';
 import type {ApplyGetNewListResponseType} from '../../title-card-list/action';
 import {applyGetNewListResponse} from '../../title-card-list/action';
+import {LoadComponent} from '../../../lib/c-load-component';
 
 type ReduxPropsType = {
     +locale: LocaleType,
@@ -52,7 +53,6 @@ type PropsType = $Exact<{
 }>;
 
 type StateType = {|
-    +isAllComponentLoaded: boolean,
     +snackbar: {|
         +isOpen: boolean,
         +isSuccess: boolean,
@@ -65,19 +65,11 @@ type StateType = {|
     +isSearchInProgressCounter: number,
 |};
 
-type ComponentStoreType = {|
-    Snackbar: null | Component,
-|};
-
 type NodeType = {|
     search: {|
         input: {current: null | HTMLInputElement},
     |},
 |};
-
-const componentStore: ComponentStoreType = {
-    Snackbar: null,
-};
 
 const reduxAction: ReduxActionType = {
     applyGetNewListResponse,
@@ -121,7 +113,6 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const view = this;
 
         view.state = {
-            isAllComponentLoaded: false,
             snackbar: {
                 isOpen: false,
                 isSuccess: false,
@@ -163,21 +154,6 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const minDescriptionSize = 2;
 
         return Boolean(descriptionText.trim().length >= minDescriptionSize && selectedUserList.length > 0);
-    }
-
-    async loadAllComponent(): Promise<void> {
-        const view = this;
-        const {state} = view;
-
-        if (state.isAllComponentLoaded) {
-            return;
-        }
-
-        const SnackbarRequire = await import('@material-ui/core/Snackbar');
-
-        componentStore.Snackbar = SnackbarRequire.default;
-
-        view.setState({isAllComponentLoaded: true});
     }
 
     async updateSearch(inputSearchString: string): Promise<void> {
@@ -452,29 +428,12 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
         };
     }
 
-    renderSnackBar(): Node {
+    loadToRenderSnackBar = async (): Promise<Node> => {
+        const Snackbar = (await import('@material-ui/core/Snackbar')).default;
         const view = this;
         const {props, state} = view;
         const {locale} = props;
-        const {Snackbar} = componentStore;
         const {isOpen, isSuccess} = state.snackbar;
-
-        if (isOpen) {
-            view.loadAllComponent()
-                .then((): void => console.log('all component loaded'))
-                .catch(
-                    (error: Error): Error => {
-                        console.error('error  with load component');
-                        console.error(error);
-
-                        return error;
-                    }
-                );
-        }
-
-        if (Snackbar === null) {
-            return null;
-        }
 
         return (
             <Snackbar
@@ -492,15 +451,27 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
                 }
             />
         );
+    };
+
+    renderSnackBar(): Node {
+        const view = this;
+        const {state} = view;
+        const {isOpen, isSuccess} = state.snackbar;
+
+        return (
+            <LoadComponent
+                key={`isOpen:${String(isOpen)};isSuccess:${String(isSuccess)};`}
+                load={view.loadToRenderSnackBar}
+            />
+        );
     }
 
-    handleSubmitForm = (evt: SyntheticEvent<HTMLFormElement>) => {
-        evt.preventDefault();
-        (async (): Promise<void> => {
-            const view = this;
+    handleSubmitForm = async (evt: SyntheticEvent<HTMLFormElement>): Promise<void> => {
+        const view = this;
 
-            await view.submitForm();
-        })();
+        evt.preventDefault();
+
+        await view.submitForm();
     };
 
     handleSearchInputOnFocus = () => {
@@ -515,12 +486,10 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
         view.setState({hasSearchInputFocus: false});
     };
 
-    handleSearchInputOnInput = (evt: SyntheticEvent<HTMLInputElement>) => {
-        (async (): Promise<void> => {
-            const view = this;
+    handleSearchInputOnInput = async (evt: SyntheticEvent<HTMLInputElement>): Promise<void> => {
+        const view = this;
 
-            await view.updateSearch(evt.currentTarget.value);
-        })();
+        await view.updateSearch(evt.currentTarget.value);
     };
 
     handleTextAreaOnInput = (evt: SyntheticEvent<HTMLInputElement>) => {
