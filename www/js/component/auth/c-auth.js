@@ -70,7 +70,7 @@ class Auth extends Component<ReduxPropsType, PassedPropsType, StateType> {
     }
 
     loadLoginPopup = async (): Promise<Node> => {
-        const {LoginPopup} = await import(/* webpackChunkName: 'login-popup' */ './popup/login/c-login-popup');
+        const {LoginPopup} = await import('./popup/login/c-login-popup');
 
         return <LoginPopup/>;
     };

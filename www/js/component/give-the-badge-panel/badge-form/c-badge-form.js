@@ -173,7 +173,7 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
             return;
         }
 
-        const SnackbarRequire = await import(/* webpackChunkName: 'snack-bar' */ '@material-ui/core/Snackbar');
+        const SnackbarRequire = await import('@material-ui/core/Snackbar');
 
         componentStore.Snackbar = SnackbarRequire.default;
 
