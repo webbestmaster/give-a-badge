@@ -4,7 +4,6 @@
 
 import type {Node} from 'react';
 import React, {Component} from 'react';
-// import style from './style.scss';
 import {Header} from '../../component/header/c-header';
 import {TitleCardList} from '../../component/title-card-list/c-title-card-list';
 import Route from 'react-router-dom/Route';
@@ -19,7 +18,7 @@ import type {SystemType} from '../../component/system/reducer/root';
 import {routes} from '../../component/app/routes';
 import type {AuthType} from '../../component/auth/reducer';
 import {defaultUserState} from '../../component/auth/reducer';
-import {CampaignStatistic} from '../../component/campaign-statistic/c-campaign-statistic';
+import {LoadComponent} from '../../lib/c-load-component';
 
 type ReduxPropsType = {|
     +system: SystemType,
@@ -42,6 +41,16 @@ class Home extends Component<ReduxPropsType, PassedPropsType, StateType> {
     props: PropsType;
     state: StateType;
 
+    static async loadCampaignStatisticComponent(): Promise<Node> {
+        const {CampaignStatistic} = await import('../../component/campaign-statistic/c-campaign-statistic');
+
+        return <CampaignStatistic/>;
+    }
+
+    static campaignStatistic(): Node {
+        return <LoadComponent load={Home.loadCampaignStatisticComponent}/>;
+    }
+
     render(): Array<Node> {
         const view = this;
         const {props} = view;
@@ -56,7 +65,7 @@ class Home extends Component<ReduxPropsType, PassedPropsType, StateType> {
                 <Route component={BadgeCategoryList} path={routes.index.badgeCategoryList} exact/>
                 <Route component={GiveTheBadgePanel} path={routes.index.giveTheBadge} exact/>
                 <Route component={BadgeWon} path={routes.index.badgeWon} exact/>
-                <Route component={CampaignStatistic} path={routes.index.statistic} exact/>
+                <Route component={Home.campaignStatistic} path={routes.index.statistic} exact/>
             </Switch>,
         ];
     }

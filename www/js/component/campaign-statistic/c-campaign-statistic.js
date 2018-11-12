@@ -18,6 +18,7 @@ import type {CampaignStatisticDataListType} from './api';
 import {getCampaignStatistic} from './api';
 import type {SystemType} from '../system/reducer/root';
 import classNames from 'classnames';
+import withRouter from 'react-router-dom/withRouter';
 
 type ReduxPropsType = {|
     +system: SystemType,
@@ -166,6 +167,6 @@ const ConnectedComponent = connect<ComponentType<CampaignStatistic>, PassedProps
         system: state.system,
     }),
     reduxAction
-)(CampaignStatistic);
+)(withRouter(CampaignStatistic));
 
 export {ConnectedComponent as CampaignStatistic};
