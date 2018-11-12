@@ -165,7 +165,10 @@ class BadgeList extends Component<PropsType, StateType> {
         const {selectedBadgeIdList} = state;
 
         if (selectedBadgeIdList.length === 0 && props.campaignStatisticDataList.length > 0) {
-            view.activateBadge(view.getBadgeList()[0].id);
+            view.setState(
+                {selectedBadgeIdList: view.getBadgeList().map((badge: DataType): number | string => badge.id)},
+                view.onChangeBadgeList
+            );
         }
     }
 
