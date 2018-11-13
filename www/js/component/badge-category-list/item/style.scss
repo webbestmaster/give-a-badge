@@ -24,6 +24,7 @@
 .badge_item {
     float: left;
     margin: 0 27px 27px 0;
+    position: relative;
     text-decoration: none;
 
     &:hover {
@@ -42,4 +43,16 @@
     height: 100px;
     margin-bottom: 7px;
     width: 100px;
+}
+
+.badge_left {
+    background-color: #c00;
+    border-radius: 100px;
+    bottom: 20px;
+    color: #fff;
+    display: block;
+    font-size: 12px;
+    padding: 10px;
+    position: absolute;
+    right: 20px;
 }

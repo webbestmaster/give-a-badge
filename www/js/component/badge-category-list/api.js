@@ -10,6 +10,7 @@ export type BadgeType = {
     +name: string,
     +description: string,
     +category: string,
+    +countLeft: number | null,
     +imageUrl: string,
 };
 

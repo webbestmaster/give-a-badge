@@ -70,12 +70,21 @@ class BadgeCategoryListItem extends Component<ReduxPropsType, PassedPropsType, S
                                     style={{backgroundImage: `url('${badgeCategory.imageUrl}')`}}
                                 />
                                 <h5 className={style.badge_name}>{badgeCategory.name}</h5>
+                                {BadgeCategoryListItem.renderItemLeft(badgeCategory)}
                             </Link>
                         );
                     }
                 )}
             </div>
         );
+    }
+
+    static renderItemLeft(badgeCategory: BadgeType): Node {
+        if (badgeCategory.countLeft === null) {
+            return null;
+        }
+
+        return <span className={style.badge_left}>{badgeCategory.countLeft}</span>;
     }
 
     render(): Node {
