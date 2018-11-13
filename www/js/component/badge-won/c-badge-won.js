@@ -11,13 +11,13 @@ import type {ContextRouterType} from '../../../type/react-router-dom-v4';
 import {HalfPopup} from '../ui/half-popup/c-half-popup';
 import type {BadgeWonServerDataType} from './api';
 import {getBadgeWonServerData} from './api';
-import moment from 'moment';
 import {isString} from '../../lib/is';
 import {routes} from '../app/routes';
 import style from './style.scss';
 import type {SystemType} from '../system/reducer/root';
 import {triggerResize} from '../ui/helper';
 import {Locale} from '../locale/c-locale';
+import {formatTimeDMY} from '../../lib/time';
 
 type ReduxPropsType = {|
     +system: SystemType,
@@ -156,7 +156,7 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
                 />
                 <div className={style.author_info_text}>
                     <h3 className={style.author_name}>{name}</h3>
-                    <p className={style.badge_date}>{moment(date).format('DD.MM.YYYY')}</p>
+                    <p className={style.badge_date}>{formatTimeDMY(date)}</p>
                 </div>
             </div>
         );

@@ -10,11 +10,11 @@ import serviceStyle from '../../../css/service.scss';
 import helperStyle from '../../../css/helper.scss';
 import style from './style.scss';
 import classNames from 'classnames';
-import moment from 'moment';
 import type {NewsType, NewsUserType} from '../title-card-list/api';
 import {newsInfo} from '../title-card-list/api';
 import Link from 'react-router-dom/Link';
 import {getBadgeCampaignPath, getBadgeWonPath} from '../app/routes';
+import {formatTimeDMY} from '../../lib/time';
 
 type ReduxPropsType = {};
 
@@ -131,7 +131,7 @@ class TitleCard extends Component<ReduxPropsType, PassedPropsType, StateType> {
                 </div>
                 <div className={classNames(serviceStyle.clear_self, style.bottom_data_wrapper)}>
                     {view.renderAuthor()}
-                    <p className={style.bottom_date}>{moment(newsData.date).format('DD.MM.YYYY')}</p>
+                    <p className={style.bottom_date}>{formatTimeDMY(newsData.date)}</p>
                 </div>
             </Link>
         );
