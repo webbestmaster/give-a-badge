@@ -18,7 +18,7 @@ export function extractUserList(campaignStatisticDataList: CampaignStatisticData
         });
     });
 
-    return userList;
+    return userList.sort((userA: DataType, userB: DataType): number => parseInt(userA.id, 10) - parseInt(userB.id, 10));
 }
 
 export type BadgeOfUserType = {|
