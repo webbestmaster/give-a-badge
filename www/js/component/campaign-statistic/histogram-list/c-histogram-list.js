@@ -2,7 +2,7 @@
 
 /* eslint consistent-this: ["error", "view"] */
 
-import type {Node} from 'react';
+import type {ComponentType, Node} from 'react';
 import React, {Component} from 'react';
 import style from './style.scss';
 import type {CampaignStatisticDataListType, DataType} from '../api';
@@ -10,6 +10,19 @@ import {Scroll} from '../../ui/scroll/c-scroll';
 import {extractUserList, getBadgeListOfUser, getBadgeListSum} from './helper';
 import type {BadgeOfUserType} from './helper';
 import {histogramListConst} from './histogram-list-const';
+import {connect} from 'react-redux';
+import type {GlobalStateType} from '../../../app/reducer';
+import type {AuthType} from '../../auth/reducer';
+import classNames from 'classnames';
+import {defaultUserState} from '../../auth/reducer';
+
+type ReduxPropsType = {|
+    +auth: AuthType,
+|};
+
+type ReduxActionType = {};
+
+const reduxAction: ReduxActionType = {};
 
 type PassedPropsType = {|
     +campaignStatisticDataList: CampaignStatisticDataListType,
@@ -21,11 +34,17 @@ type ColumnDataType = {
     +badgeList: Array<BadgeOfUserType>,
 };
 
-type PropsType = PassedPropsType;
+type PropsType = {|
+    ...$Exact<PassedPropsType>,
+    ...$Exact<ReduxPropsType>,
+    ...$Exact<ReduxActionType>,
+|};
 
-type StateType = {};
+type StateType = {|
+    +activeUserId: string | number,
+|};
 
-export class HistogramList extends Component<PropsType, StateType> {
+class HistogramList extends Component<PropsType, StateType> {
     props: PropsType;
     state: StateType;
 
@@ -34,7 +53,18 @@ export class HistogramList extends Component<PropsType, StateType> {
 
         const view = this;
 
-        view.state = {};
+        view.state = {
+            activeUserId: defaultUserState.id,
+        };
+    }
+
+    componentDidUpdate() {
+        const view = this;
+        const {state, props} = view;
+
+        if (state.activeUserId === defaultUserState.id && props.auth.user.id !== defaultUserState.id) {
+            view.setActiveUserId(props.auth.user.id);
+        }
     }
 
     renderColumnPart = (badgeOfUser: BadgeOfUserType): Node => {
@@ -49,11 +79,35 @@ export class HistogramList extends Component<PropsType, StateType> {
         );
     };
 
-    renderItem = (columnData: ColumnDataType): Node => {
+    setActiveUserId(userId: string | number) {
         const view = this;
 
+        view.setState({activeUserId: userId});
+    }
+
+    createHandlerOnHistogramItemClick = (userId: string | number): (() => void) => {
+        return () => {
+            const view = this;
+
+            view.setActiveUserId(userId);
+        };
+    };
+
+    renderItem = (columnData: ColumnDataType): Node => {
+        const view = this;
+        const {state} = view;
+
+        const isActiveColumn = state.activeUserId === columnData.user.id;
+
         return (
-            <button className={style.histogram_item_wrapper} type="button" key={columnData.user.id}>
+            <button
+                onClick={view.createHandlerOnHistogramItemClick(columnData.user.id)}
+                className={classNames(style.histogram_item_wrapper, {
+                    [style.histogram_item_wrapper__active]: isActiveColumn,
+                })}
+                type="button"
+                key={columnData.user.id}
+            >
                 <div className={style.histogram_item}>
                     <div className={style.histogram_column}>{columnData.badgeList.map(view.renderColumnPart)}</div>
                     <div className={style.histogram_face_wrapper}>
@@ -101,3 +155,12 @@ export class HistogramList extends Component<PropsType, StateType> {
         );
     }
 }
+
+const ConnectedComponent = connect<ComponentType<HistogramList>, PassedPropsType, ReduxPropsType, ReduxActionType>(
+    (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
+        auth: state.auth,
+    }),
+    reduxAction
+)(HistogramList);
+
+export {ConnectedComponent as HistogramList};

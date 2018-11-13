@@ -10,9 +10,6 @@
     height: 100%;
     width: 76px; // see <Scroll slideWidth={itemList.length * 76 + 38 * 2} direction="horizontal">
 
-    // active and hover for test only
-    &:active,
-    &:hover,
     &.histogram_item_wrapper__active {
         background-image: url('./i/active-face.png');
         background-position: 2px 364px;
@@ -37,6 +34,12 @@
     width: 38px;
 
     &:hover {
+        background-color: #fc0;
+    }
+}
+
+.histogram_item_wrapper__active {
+    .histogram_column {
         background-color: #fc0;
     }
 }
