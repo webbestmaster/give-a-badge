@@ -24,11 +24,11 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@material-ui/core": "^3.4.0",
+    "@material-ui/core": "^3.5.1",
     "classnames": "^2.2.6",
     "moment": "^2.22.2",
-    "react": "^16.6.1",
-    "react-dom": "^16.6.1",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
     "react-infinite-scroll-component": "^4.2.0",
     "react-redux": "^5.1.1",
     "react-router-dom": "^4.3.1",
