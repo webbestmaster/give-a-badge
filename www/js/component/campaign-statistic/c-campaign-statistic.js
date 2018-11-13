@@ -19,8 +19,8 @@ import {getCampaignStatistic} from './api';
 import type {SystemType} from '../system/reducer/root';
 import classNames from 'classnames';
 import withRouter from 'react-router-dom/withRouter';
-import {defaultUserState} from '../auth/reducer';
 import type {AuthType} from '../auth/reducer';
+import {defaultUserState} from '../auth/reducer';
 
 type ReduxPropsType = {|
     +system: SystemType,
@@ -155,11 +155,15 @@ class CampaignStatistic extends Component<ReduxPropsType, PassedPropsType, State
     renderCommentList(): Node {
         const view = this;
         const {state} = view;
-        const {campaignStatisticDataList} = state;
+        const {campaignStatisticDataList, histogramListActiveUserId, selectedBadgeIdList} = state;
 
         return (
             <div className={style.comment_list__wrapper}>
-                <CommentList campaignStatisticDataList={campaignStatisticDataList}/>
+                <CommentList
+                    histogramListActiveUserId={histogramListActiveUserId}
+                    campaignStatisticDataList={campaignStatisticDataList}
+                    activeBadgeIdList={selectedBadgeIdList}
+                />
             </div>
         );
     }

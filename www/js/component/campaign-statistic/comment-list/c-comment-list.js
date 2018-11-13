@@ -5,12 +5,14 @@
 import type {Node} from 'react';
 import React, {Component} from 'react';
 import style from './style.scss';
-import {Scroll} from '../../ui/scroll/c-scroll';
 import {Locale} from '../../locale/c-locale';
-import type {CampaignStatisticDataListType, CampaignStatisticDataType, DataType} from '../api';
+import type {CampaignStatisticDataListType, CampaignStatisticDataType} from '../api';
+import {getCommentListAboutUser} from './helper';
 
 type PassedPropsType = {|
     +campaignStatisticDataList: CampaignStatisticDataListType,
+    +histogramListActiveUserId: number | string,
+    +activeBadgeIdList: Array<string | number>,
 |};
 
 type PropsType = $Exact<{
@@ -36,37 +38,23 @@ export class CommentList extends Component<PropsType, StateType> {
         };
     }
 
-    getCommentList(): Array<DataType> {
+    getCommentList(): CampaignStatisticDataListType {
         const view = this;
         const {props} = view;
-        const {campaignStatisticDataList} = props;
+        const {campaignStatisticDataList, histogramListActiveUserId, activeBadgeIdList} = props;
 
-        return campaignStatisticDataList.map(
-            (campaignStatisticData: CampaignStatisticDataType): DataType => {
-                return campaignStatisticData.badge;
-            }
-        );
+        return getCommentListAboutUser(campaignStatisticDataList, histogramListActiveUserId, activeBadgeIdList);
     }
 
-    renderComment = (badgeData: DataType, index: number): Node => {
+    renderComment = (campaignStatisticData: CampaignStatisticDataType): Node => {
         return (
-            <div title={badgeData.name} key={`${index}/${badgeData.id}`} className={style.comment_item}>
+            <div className={style.comment_item} key={campaignStatisticData.date}>
                 <div
                     className={style.comment_item_face}
-                    style={{backgroundImage: `url(${'https://loremflickr.com/108/108'})`}}
+                    style={{backgroundImage: `url(${campaignStatisticData.assigner.imageUrl})`}}
                 />
                 <div className={style.comment_item_text_cloud}>
-                    <p className={style.comment_item_text}>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A alias blanditiis, eos est fuga id
-                        magnam mollitia nam natus nulla, odit possimus quisquam reiciendis sed soluta sunt vitae? Ad,
-                        neque! Lorem ipsum dolor sit amet, consectetur adipisicing elit. A alias blanditiis, eos est
-                        fuga id magnam mollitia nam natus nulla, odit possimus quisquam reiciendis sed soluta sunt
-                        vitae? Ad, neque! Lorem ipsum dolor sit amet, consectetur adipisicing elit. A alias blanditiis,
-                        eos est fuga id magnam mollitia nam natus nulla, odit possimus quisquam reiciendis sed soluta
-                        sunt vitae? Ad, neque! Lorem ipsum dolor sit amet, consectetur adipisicing elit. A alias
-                        blanditiis, eos est fuga id magnam mollitia nam natus nulla, odit possimus quisquam reiciendis
-                        sed soluta sunt vitae? Ad, neque!
-                    </p>
+                    <p className={style.comment_item_text}>{campaignStatisticData.comment}</p>
                 </div>
             </div>
         );

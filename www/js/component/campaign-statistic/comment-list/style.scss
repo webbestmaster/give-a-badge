@@ -41,9 +41,10 @@
     box-sizing: border-box;
     display: block;
     max-width: 600px;
+    min-height: 65px;
+    min-width: 200px;
     padding: 10px 16px 19px 19px;
     position: relative;
-    //width: 340px;
     z-index: 1;
 
     &:after {

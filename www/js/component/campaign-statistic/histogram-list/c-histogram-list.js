@@ -7,14 +7,14 @@ import React, {Component} from 'react';
 import style from './style.scss';
 import type {CampaignStatisticDataListType, DataType} from '../api';
 import {Scroll} from '../../ui/scroll/c-scroll';
-import {extractUserList, getBadgeListOfUser, getBadgeListSum} from './helper';
 import type {BadgeOfUserType} from './helper';
+import {extractUserList, getBadgeListOfUser, getBadgeListSum} from './helper';
 import {histogramListConst} from './histogram-list-const';
 import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../../app/reducer';
 import type {AuthType} from '../../auth/reducer';
-import classNames from 'classnames';
 import {defaultUserState} from '../../auth/reducer';
+import classNames from 'classnames';
 
 type ReduxPropsType = {|
     +auth: AuthType,

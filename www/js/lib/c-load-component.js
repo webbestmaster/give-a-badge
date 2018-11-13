@@ -3,7 +3,7 @@
 /* eslint consistent-this: ["error", "view"] */
 
 import type {Node} from 'react';
-import React, {Component, Fragment} from 'react';
+import React, {Component} from 'react';
 // import type {ContextRouterType} from '../../type/react-router-dom-v4';
 // import style from './style.scss';
 

@@ -11,7 +11,6 @@ import {direction, Scroll} from '../../ui/scroll/c-scroll';
 import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../../app/reducer';
 import type {SystemType} from '../../system/reducer/root';
-import type {BadgeOfUserType} from '../histogram-list/helper';
 
 type ReduxPropsType = {|
     +system: SystemType,
