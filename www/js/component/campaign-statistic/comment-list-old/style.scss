@@ -13,26 +13,23 @@
     padding-left: 12px;
 }
 
-/*
 .comment_list_scroll {
     display: flex;
     flex-grow: 1;
     height: 100%;
     padding-top: 5px;
 }
-*/
 
 .comment_list_wrapper {
-    //display: flex;
-    //flex-direction: row;
-    padding: 10px 17px 50px; // <Scroll slideWidth={commentList.length * 465 + 17 * 2} direction="horizontal">
+    display: flex;
+    flex-direction: row;
+    padding: 10px 17px 0; // <Scroll slideWidth={commentList.length * 465 + 17 * 2} direction="horizontal">
 }
 
 .comment_item {
     display: flex;
     flex-direction: row;
-    padding-bottom: 18px;
-    //width: 465px; // <Scroll slideWidth={commentList.length * 465 + 17 * 2} direction="horizontal">
+    width: 465px; // <Scroll slideWidth={commentList.length * 465 + 17 * 2} direction="horizontal">
 }
 
 .comment_item_text_cloud {
@@ -40,10 +37,9 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     box-sizing: border-box;
     display: block;
-    max-width: 600px;
     padding: 10px 16px 19px 19px;
     position: relative;
-    //width: 340px;
+    width: 340px;
     z-index: 1;
 
     &:after {
@@ -61,12 +57,12 @@
 }
 
 .comment_item_text {
-    //@include line-cap(8);
+    @include line-cap(8);
 
     color: #999;
-    font-size: 14px;
+    font-size: 12px;
     line-height: 1.25;
-    //max-height: 120px;
+    max-height: 120px;
 }
 
 .comment_item_face {
@@ -77,7 +73,5 @@
     display: block;
     height: 54px;
     margin-right: 32px;
-    min-width: 54px;
     width: 54px;
-    //flex-grow: 1;
 }

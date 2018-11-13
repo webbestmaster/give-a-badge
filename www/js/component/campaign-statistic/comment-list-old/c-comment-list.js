@@ -82,7 +82,12 @@ export class CommentList extends Component<PropsType, StateType> {
                 <h3 className={style.comment_list__header}>
                     <Locale stringKey="CAMPAIGN__STATISTIC__COMMENT"/>
                 </h3>
-                <div className={style.comment_list_wrapper}>{commentList.map(view.renderComment)}</div>
+                <div className={style.comment_list_scroll}>
+                    {/* 465 comment width, 17 * 2 - left and right padding */}
+                    <Scroll slideWidth={commentList.length * 465 + 17 * 2} direction="horizontal">
+                        <div className={style.comment_list_wrapper}>{commentList.map(view.renderComment)}</div>
+                    </Scroll>
+                </div>
             </div>
         );
     }
