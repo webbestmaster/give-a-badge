@@ -34,3 +34,9 @@
     pointer-events: none;
     width: 78px;
 }
+
+.badge_item__selected {
+    .badge_item_image {
+        box-shadow: 0 6px 5px rgba(0, 0, 0, 0.2);
+    }
+}
