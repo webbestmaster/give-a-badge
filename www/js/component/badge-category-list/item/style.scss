@@ -14,8 +14,8 @@
 
 .badge_name {
     @extend %ellipsis;
-    color: $main-text-color;
 
+    color: $main-text-color;
     display: block;
     font-size: 16px;
     text-align: center;
