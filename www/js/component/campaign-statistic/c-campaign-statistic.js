@@ -19,9 +19,12 @@ import {getCampaignStatistic} from './api';
 import type {SystemType} from '../system/reducer/root';
 import classNames from 'classnames';
 import withRouter from 'react-router-dom/withRouter';
+import {defaultUserState} from '../auth/reducer';
+import type {AuthType} from '../auth/reducer';
 
 type ReduxPropsType = {|
     +system: SystemType,
+    +auth: AuthType,
 |};
 
 type ReduxActionType = {};
@@ -46,6 +49,7 @@ type PropsType = $Exact<{
 type StateType = {|
     +campaignStatisticDataList: CampaignStatisticDataListType,
     +selectedBadgeIdList: Array<string | number>,
+    +histogramListActiveUserId: string | number,
 |};
 
 class CampaignStatistic extends Component<ReduxPropsType, PassedPropsType, StateType> {
@@ -60,6 +64,7 @@ class CampaignStatistic extends Component<ReduxPropsType, PassedPropsType, State
         view.state = {
             selectedBadgeIdList: [],
             campaignStatisticDataList: [],
+            histogramListActiveUserId: defaultUserState.id,
         };
     }
 
@@ -83,6 +88,21 @@ class CampaignStatistic extends Component<ReduxPropsType, PassedPropsType, State
         (async (): Promise<void> => {
             await view.fetchCampaignStatistic();
         })();
+    }
+
+    componentDidUpdate() {
+        const view = this;
+        const {state, props} = view;
+
+        if (state.histogramListActiveUserId === defaultUserState.id && props.auth.user.id !== defaultUserState.id) {
+            view.setHistogramListActiveUserId(props.auth.user.id);
+        }
+    }
+
+    setHistogramListActiveUserId(userId: string | number) {
+        const view = this;
+
+        view.setState({histogramListActiveUserId: userId});
     }
 
     handleChangeBadgeList = (selectedBadgeIdList: Array<number | string>) => {
@@ -111,7 +131,9 @@ class CampaignStatistic extends Component<ReduxPropsType, PassedPropsType, State
     }
 
     handleOnChangeHistogramListActiveUser = (activeUserId: string | number) => {
-        console.log('handleOnChangeHistogramListActiveUser', activeUserId);
+        const view = this;
+
+        view.setHistogramListActiveUserId(activeUserId);
     };
 
     renderHistogramList(): Node {
@@ -170,6 +192,7 @@ class CampaignStatistic extends Component<ReduxPropsType, PassedPropsType, State
 const ConnectedComponent = connect<ComponentType<CampaignStatistic>, PassedPropsType, ReduxPropsType, ReduxActionType>(
     (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
         system: state.system,
+        auth: state.auth,
     }),
     reduxAction
 )(withRouter(CampaignStatistic));
