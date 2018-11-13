@@ -27,6 +27,7 @@ const reduxAction: ReduxActionType = {};
 type PassedPropsType = {|
     +campaignStatisticDataList: CampaignStatisticDataListType,
     +selectedBadgeIdList: Array<number | string>,
+    +onChangeActiveUser: (activeUserId: string | number) => void,
 |};
 
 type ColumnDataType = {
@@ -81,8 +82,11 @@ class HistogramList extends Component<PropsType, StateType> {
 
     setActiveUserId(userId: string | number) {
         const view = this;
+        const {props} = view;
 
-        view.setState({activeUserId: userId});
+        view.setState({activeUserId: userId}, () => {
+            props.onChangeActiveUser(userId);
+        });
     }
 
     createHandlerOnHistogramItemClick = (userId: string | number): (() => void) => {

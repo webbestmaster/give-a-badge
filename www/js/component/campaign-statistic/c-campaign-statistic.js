@@ -110,6 +110,10 @@ class CampaignStatistic extends Component<ReduxPropsType, PassedPropsType, State
         );
     }
 
+    handleOnChangeHistogramListActiveUser = (activeUserId: string | number) => {
+        console.log('handleOnChangeHistogramListActiveUser', activeUserId);
+    };
+
     renderHistogramList(): Node {
         const view = this;
         const {state} = view;
@@ -120,6 +124,7 @@ class CampaignStatistic extends Component<ReduxPropsType, PassedPropsType, State
                 <HistogramList
                     campaignStatisticDataList={campaignStatisticDataList}
                     selectedBadgeIdList={selectedBadgeIdList}
+                    onChangeActiveUser={view.handleOnChangeHistogramListActiveUser}
                 />
             </div>
         );
