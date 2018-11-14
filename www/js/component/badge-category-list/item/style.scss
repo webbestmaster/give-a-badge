@@ -46,13 +46,18 @@
 }
 
 .badge_left {
-    background-color: #c00;
+    background-color: #f33;
     border-radius: 100px;
-    bottom: 20px;
+    bottom: 25px;
+    box-sizing: border-box;
     color: #fff;
     display: block;
-    font-size: 12px;
-    padding: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    height: 26px;
+    padding-top: 5px;
     position: absolute;
-    right: 20px;
+    right: 0;
+    text-align: center;
+    width: 26px;
 }
