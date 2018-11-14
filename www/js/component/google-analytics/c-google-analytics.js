@@ -75,6 +75,7 @@ class GoogleAnalytics extends Component<PropsType, StateType> {
                     ']'
                 );
                 // window.ga('send', 'event', 'Event Category Name', 'Event Action Name', 'Event Label Name');
+                // window.ga('send', 'event', 'Badge List Load', fetchNewsKListResult.last === true ? 'Finish' : 'Part');
             }
         });
     }

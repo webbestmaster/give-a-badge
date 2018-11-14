@@ -2,6 +2,8 @@
 
 /* eslint consistent-this: ["error", "view"] */
 
+/* global window */
+
 import type {ComponentType, Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
@@ -89,11 +91,12 @@ class TitleCardList extends Component<ReduxPropsType, PassedPropsType, StateType
             return;
         }
 
-        if (fetchNewsKListResult.last === true) {
-            console.log('GA ---> finish scroll');
-        } else {
-            console.log('GA ---> load more');
+        if (!window.ga) {
+            console.error('google analytics is not define');
+            return;
         }
+
+        window.ga('send', 'event', 'Badge List Load', fetchNewsKListResult.last === true ? 'Finish' : 'Part');
     };
 
     renderCardList(): Node {
