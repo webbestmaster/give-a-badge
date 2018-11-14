@@ -6,15 +6,17 @@
 }
 
 .histogram_item_wrapper {
+    background-position: 2px 364px;
+    background-repeat: no-repeat;
+    background-size: 72px auto;
     display: block;
     height: 100%;
     width: 76px; // see <Scroll slideWidth={itemList.length * 76 + 38 * 2} direction="horizontal">
+    //&.histogram_item_wrapper__active {
+    //}
 
-    &.histogram_item_wrapper__active {
+    &.histogram_item_wrapper__show_face_select_mask {
         background-image: url('./i/active-face.png');
-        background-position: 2px 364px;
-        background-repeat: no-repeat;
-        background-size: 72px auto;
     }
 }
 

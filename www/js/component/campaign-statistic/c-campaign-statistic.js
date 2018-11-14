@@ -52,6 +52,8 @@ type StateType = {|
     +histogramListActiveUserId: string | number,
 |};
 
+export const noHistogramListActiveUserId = -1;
+
 class CampaignStatistic extends Component<ReduxPropsType, PassedPropsType, StateType> {
     props: PropsType;
     state: StateType;
@@ -64,7 +66,7 @@ class CampaignStatistic extends Component<ReduxPropsType, PassedPropsType, State
         view.state = {
             selectedBadgeIdList: [],
             campaignStatisticDataList: [],
-            histogramListActiveUserId: defaultUserState.id,
+            histogramListActiveUserId: noHistogramListActiveUserId,
         };
     }
 
@@ -88,15 +90,6 @@ class CampaignStatistic extends Component<ReduxPropsType, PassedPropsType, State
         (async (): Promise<void> => {
             await view.fetchCampaignStatistic();
         })();
-    }
-
-    componentDidUpdate() {
-        const view = this;
-        const {state, props} = view;
-
-        if (state.histogramListActiveUserId === defaultUserState.id && props.auth.user.id !== defaultUserState.id) {
-            view.setHistogramListActiveUserId(props.auth.user.id);
-        }
     }
 
     setHistogramListActiveUserId(userId: string | number) {

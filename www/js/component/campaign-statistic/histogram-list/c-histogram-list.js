@@ -15,10 +15,11 @@ import type {GlobalStateType} from '../../../app/reducer';
 import type {AuthType} from '../../auth/reducer';
 import {defaultUserState} from '../../auth/reducer';
 import classNames from 'classnames';
+import {noHistogramListActiveUserId} from '../c-campaign-statistic';
 
-type ReduxPropsType = {|
-    +auth: AuthType,
-|};
+type ReduxPropsType = {
+    // +auth: AuthType,
+};
 
 type ReduxActionType = {};
 
@@ -55,17 +56,8 @@ class HistogramList extends Component<PropsType, StateType> {
         const view = this;
 
         view.state = {
-            activeUserId: defaultUserState.id,
+            activeUserId: noHistogramListActiveUserId,
         };
-    }
-
-    componentDidUpdate() {
-        const view = this;
-        const {state, props} = view;
-
-        if (state.activeUserId === defaultUserState.id && props.auth.user.id !== defaultUserState.id) {
-            view.setActiveUserId(props.auth.user.id);
-        }
     }
 
     renderColumnPart = (badgeOfUser: BadgeOfUserType): Node => {
@@ -100,14 +92,17 @@ class HistogramList extends Component<PropsType, StateType> {
     renderItem = (columnData: ColumnDataType): Node => {
         const view = this;
         const {state} = view;
+        const {activeUserId} = state;
 
-        const isActiveColumn = state.activeUserId === columnData.user.id;
+        const isActiveColumn = activeUserId === columnData.user.id;
+        const hasSelectedUser = activeUserId !== noHistogramListActiveUserId;
 
         return (
             <button
                 onClick={view.createHandlerOnHistogramItemClick(columnData.user.id)}
                 className={classNames(style.histogram_item_wrapper, {
-                    [style.histogram_item_wrapper__active]: isActiveColumn,
+                    [style.histogram_item_wrapper__active]: isActiveColumn || !hasSelectedUser,
+                    [style.histogram_item_wrapper__show_face_select_mask]: isActiveColumn && hasSelectedUser,
                 })}
                 type="button"
                 key={columnData.user.id}
@@ -162,7 +157,7 @@ class HistogramList extends Component<PropsType, StateType> {
 
 const ConnectedComponent = connect<ComponentType<HistogramList>, PassedPropsType, ReduxPropsType, ReduxActionType>(
     (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
-        auth: state.auth,
+        // auth: state.auth,
     }),
     reduxAction
 )(HistogramList);
