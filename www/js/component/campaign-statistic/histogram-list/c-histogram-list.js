@@ -12,8 +12,6 @@ import {extractUserList, getBadgeListOfUser, getBadgeListSum} from './helper';
 import {histogramListConst} from './histogram-list-const';
 import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../../app/reducer';
-import type {AuthType} from '../../auth/reducer';
-import {defaultUserState} from '../../auth/reducer';
 import classNames from 'classnames';
 import {noHistogramListActiveUserId} from '../c-campaign-statistic';
 

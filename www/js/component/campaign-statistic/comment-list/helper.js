@@ -1,6 +1,7 @@
 // @flow
 
 import type {CampaignStatisticDataListType, CampaignStatisticDataType, DataType} from '../api';
+import {noHistogramListActiveUserId} from '../c-campaign-statistic';
 
 export function getCommentListAboutUser(
     campaignStatisticDataList: CampaignStatisticDataListType,
@@ -14,7 +15,9 @@ export function getCommentListAboutUser(
 
     const filteredByUserIdCampaignDataList = filteredByBadgeIdCampaignDataList.filter(
         (campaignStatisticData: CampaignStatisticDataType): boolean =>
-            campaignStatisticData.toUsers.some((userData: DataType): boolean => userData.id === userId)
+            campaignStatisticData.toUsers.some(
+                (userData: DataType): boolean => [userData.id, noHistogramListActiveUserId].includes(userId)
+            )
     );
 
     return filteredByUserIdCampaignDataList.sort(

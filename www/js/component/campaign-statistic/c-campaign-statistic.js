@@ -20,7 +20,6 @@ import type {SystemType} from '../system/reducer/root';
 import classNames from 'classnames';
 import withRouter from 'react-router-dom/withRouter';
 import type {AuthType} from '../auth/reducer';
-import {defaultUserState} from '../auth/reducer';
 
 type ReduxPropsType = {|
     +system: SystemType,
