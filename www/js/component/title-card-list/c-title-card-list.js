@@ -47,7 +47,7 @@ class TitleCardList extends Component<ReduxPropsType, PassedPropsType, StateType
     props: PropsType;
     state: StateType;
 
-    async fetchNews(): Promise<void> {
+    async fetchNews(): Promise<null | GetNewsListType> {
         const view = this;
         const {props} = view;
         const {auth, applyGetNewListResponse: applyGetNewListResponseAction, titleNewsList} = props;
@@ -59,10 +59,12 @@ class TitleCardList extends Component<ReduxPropsType, PassedPropsType, StateType
 
         if (getNewsListResponse === null) {
             console.error('can not get news list');
-            return;
+            return null;
         }
 
         applyGetNewListResponseAction(getNewsListResponse, false);
+
+        return getNewsListResponse;
     }
 
     async componentDidUpdate(prevProps: PropsType, prevState: StateType, snapshot?: mixed): Promise<void> {
@@ -82,7 +84,17 @@ class TitleCardList extends Component<ReduxPropsType, PassedPropsType, StateType
         (async (): Promise<void> => {
             const view = this;
 
-            await view.fetchNews();
+            const fetchNewsKListResult = await view.fetchNews();
+
+            if (fetchNewsKListResult === null) {
+                return;
+            }
+
+            if (fetchNewsKListResult.last === true) {
+                console.log('GA ---> finish scroll');
+            } else {
+                console.log('GA ---> load more');
+            }
         })();
     };
 
