@@ -3,7 +3,7 @@
 /* eslint consistent-this: ["error", "view"] */
 
 import type {ComponentType, Node} from 'react';
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../../app/reducer';
 import type {BadgeType} from '../../badge-category-list/api';
@@ -14,6 +14,7 @@ import classNames from 'classnames';
 import withRouter from 'react-router-dom/withRouter';
 import {routes} from '../../app/routes';
 import type {ContextRouterType} from '../../../../type/react-router-dom-v4';
+import {Locale} from '../../locale/c-locale';
 
 type ReduxPropsType = {|
     +system: SystemType,
@@ -99,6 +100,43 @@ class BadgeInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
         await view.fetchBadgeInfo();
     }
 
+    renderBadgeLeft(): Node {
+        const view = this;
+        const {props, state} = view;
+        const {badgeInfo} = state;
+
+        if (badgeInfo === null || badgeInfo.countLeft === null) {
+            return null;
+        }
+
+        return (
+            <h5 className={style.badge_left}>
+                <Locale stringKey="GIVE_THE_BADGE__BADGE_LEFT" valueMap={{left: badgeInfo.countLeft}}/>
+            </h5>
+        );
+    }
+
+    renderBadgeImage(): Node {
+        const view = this;
+        const {props, state} = view;
+        const {badgeInfo} = state;
+
+        if (badgeInfo === null) {
+            return null;
+        }
+
+        return (
+            <Fragment>
+                <div
+                    className={style.badge_image}
+                    style={{backgroundImage: `url('${badgeInfo.imageUrl}')`}}
+                    title={badgeInfo.name}
+                />
+                {view.renderBadgeLeft()}
+            </Fragment>
+        );
+    }
+
     renderDesktop(): Node {
         const view = this;
         const {props, state} = view;
@@ -110,11 +148,7 @@ class BadgeInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
         return (
             <div className={style.badge_info}>
-                <div
-                    className={style.badge_image}
-                    style={{backgroundImage: `url('${badgeInfo.imageUrl}')`}}
-                    title={badgeInfo.name}
-                />
+                <div className={style.badge_image__wrapper}>{view.renderBadgeImage()}</div>
                 <div className={style.text_block}>
                     <h3 className={style.badge_header}>{badgeInfo.name}</h3>
                     <p className={style.badge_p}>{badgeInfo.description}</p>
