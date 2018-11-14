@@ -52,12 +52,10 @@ class UserInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
         window.location.reload();
     }
 
-    handleLogOut = () => {
-        (async (): Promise<void> => {
-            const view = this;
+    handleLogOut = async (): Promise<void> => {
+        const view = this;
 
-            await view.logout();
-        })();
+        await view.logout();
     };
 
     renderDesktop(): Node {

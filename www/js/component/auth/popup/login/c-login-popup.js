@@ -141,12 +141,10 @@ class LoginPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
         );
     }
 
-    handleFormSubmit = (evt: SyntheticEvent<EventTarget>) => {
-        (async (): Promise<void> => {
-            const view = this;
+    handleFormSubmit = async (evt: SyntheticEvent<EventTarget>): Promise<void> => {
+        const view = this;
 
-            await view.onFormSubmit(evt);
-        })();
+        await view.onFormSubmit(evt);
     };
 
     defineLoginInput = (login: HTMLInputElement | null) => {

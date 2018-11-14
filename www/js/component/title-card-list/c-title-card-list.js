@@ -80,22 +80,20 @@ class TitleCardList extends Component<ReduxPropsType, PassedPropsType, StateType
         }
     }
 
-    infiniteScrollNext = () => {
-        (async (): Promise<void> => {
-            const view = this;
+    infiniteScrollNext = async (): Promise<void> => {
+        const view = this;
 
-            const fetchNewsKListResult = await view.fetchNews();
+        const fetchNewsKListResult = await view.fetchNews();
 
-            if (fetchNewsKListResult === null) {
-                return;
-            }
+        if (fetchNewsKListResult === null) {
+            return;
+        }
 
-            if (fetchNewsKListResult.last === true) {
-                console.log('GA ---> finish scroll');
-            } else {
-                console.log('GA ---> load more');
-            }
-        })();
+        if (fetchNewsKListResult.last === true) {
+            console.log('GA ---> finish scroll');
+        } else {
+            console.log('GA ---> load more');
+        }
     };
 
     renderCardList(): Node {
