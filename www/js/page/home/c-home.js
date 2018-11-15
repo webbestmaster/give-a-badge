@@ -19,6 +19,7 @@ import {routes} from '../../component/app/routes';
 import type {AuthType} from '../../component/auth/reducer';
 import {defaultUserState} from '../../component/auth/reducer';
 import {LoadComponent} from '../../lib/c-load-component';
+import {Spinner} from '../../component/ui/spinner/c-spinner';
 
 type ReduxPropsType = {|
     +system: SystemType,
@@ -48,7 +49,11 @@ class Home extends Component<ReduxPropsType, PassedPropsType, StateType> {
     }
 
     static campaignStatistic(): Node {
-        return <LoadComponent load={Home.loadCampaignStatisticComponent}/>;
+        return (
+            <LoadComponent load={Home.loadCampaignStatisticComponent}>
+                <Spinner isFullSize/>
+            </LoadComponent>
+        );
     }
 
     render(): Array<Node> {
