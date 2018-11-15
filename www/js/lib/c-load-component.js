@@ -4,8 +4,6 @@
 
 import type {Node} from 'react';
 import React, {Component} from 'react';
-// import type {ContextRouterType} from '../../type/react-router-dom-v4';
-// import style from './style.scss';
 
 type PassedPropsType = {|
     +load: () => Promise<Node | Array<Node>>,
@@ -13,8 +11,7 @@ type PassedPropsType = {|
 
 type PropsType = {|
     ...PassedPropsType,
-    // ...$Exact<ContextRouterType>
-    // +children: Node,
+    +children?: Node | Array<Node>,
 |};
 
 type StateType = {|
@@ -60,8 +57,16 @@ export class LoadComponent extends Component<PropsType, StateType> {
 
     render(): Node | Array<Node> {
         const view = this;
-        const {state} = view;
+        const {state, props} = view;
 
-        return state.component;
+        if (state.component !== null) {
+            return state.component;
+        }
+
+        if (typeof props.children !== 'undefined') {
+            return props.children;
+        }
+
+        return null;
     }
 }

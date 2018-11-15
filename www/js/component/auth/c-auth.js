@@ -14,6 +14,7 @@ import type {GlobalStateType} from '../../app/reducer';
 import {getMe} from './api';
 import {LoadComponent} from '../../lib/c-load-component';
 import {authConst} from './const';
+import {Spinner} from '../ui/spinner/c-spinner';
 
 type ReduxPropsType = {|
     +auth: AuthType,
@@ -75,13 +76,27 @@ class Auth extends Component<ReduxPropsType, PassedPropsType, StateType> {
         return <LoginPopup/>;
     };
 
-    render(): Array<Node> {
+    renderLoginPopup(): Node {
         const view = this;
         const {props} = view;
         const {auth} = props;
         const {isOpen: isLoginPopupOpen} = auth.popup[authConst.popupName.login];
 
-        return [isLoginPopupOpen ? <LoadComponent key="login-popup" load={view.loadLoginPopup}/> : null];
+        if (isLoginPopupOpen === false) {
+            return null;
+        }
+
+        return (
+            <LoadComponent key="login-popup" load={view.loadLoginPopup}>
+                <Spinner isFullSize/>
+            </LoadComponent>
+        );
+    }
+
+    render(): Array<Node> {
+        const view = this;
+
+        return [view.renderLoginPopup()];
     }
 }
 

@@ -4,6 +4,12 @@
     position: relative;
 }
 
+.spinner_wrapper__full_size {
+    height: 100%;
+    position: absolute;
+    width: 100%;
+}
+
 .spinner {
     height: 50px;
     left: 50%;

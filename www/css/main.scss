@@ -34,3 +34,12 @@ body {
     line-height: $main-line-height;
     overflow-y: scroll;
 }
+
+html,
+body {
+    height: 100%;
+}
+
+:global .app-wrapper {
+    min-height: 100%;
+}
