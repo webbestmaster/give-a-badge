@@ -1,9 +1,9 @@
 // @flow
 /* global window, IS_PRODUCTION */
 
-const {hostname, origin} = window.location;
+// const {hostname, origin} = window.location;
 
-const appConst = {
+export const appConst = {
     api: {
         getMe: '/api/users/current',
         getNews: '/api/news?page={pageIndex}&size={pageSize}',
@@ -22,4 +22,63 @@ const appConst = {
     },
 };
 
-export {appConst};
+const headerPropertyName = {
+    accept: 'Accept',
+    contentType: 'Content-Type',
+};
+
+const jsonHeaders = {
+    [headerPropertyName.accept]: 'application/json, text/plain, */*',
+    [headerPropertyName.contentType]: 'application/json; charset=UTF-8',
+};
+
+const formHeaders = {
+    [headerPropertyName.accept]: jsonHeaders[headerPropertyName.accept],
+    [headerPropertyName.contentType]: 'application/x-www-form-urlencoded; charset=UTF-8',
+};
+
+export const serverApi = {
+    request: {
+        paramMap: {
+            get: {
+                method: 'GET',
+                credentials: 'include',
+                headers: {
+                    [headerPropertyName.accept]: jsonHeaders[headerPropertyName.accept],
+                    [headerPropertyName.contentType]: 'application/x-www-form-urlencoded; charset=UTF-8',
+                },
+                mode: 'no-cors',
+            },
+
+            postForm: {
+                method: 'POST',
+                credentials: 'include',
+                headers: formHeaders,
+                mode: 'no-cors',
+            },
+            postJSON: {
+                method: 'POST',
+                credentials: 'include',
+                headers: jsonHeaders,
+                mode: 'cors',
+            },
+
+            putForm: {
+                method: 'PUT',
+                credentials: 'include',
+                headers: formHeaders,
+            },
+            putJSON: {
+                method: 'PUT',
+                credentials: 'include',
+                headers: jsonHeaders,
+            },
+
+            'delete': {
+                method: 'DELETE',
+                credentials: 'include',
+                headers: jsonHeaders,
+            },
+        },
+    },
+};

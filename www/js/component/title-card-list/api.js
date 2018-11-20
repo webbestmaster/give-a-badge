@@ -2,8 +2,7 @@
 
 /* global window */
 
-import {appConst} from '../../app/const';
-import {defaultFetchGetProps} from '../auth/api';
+import {appConst, serverApi} from '../../app/const';
 
 export const newsInfo = {
     type: {
@@ -60,7 +59,7 @@ export async function getNewsList(pageIndex: number, pageSize: number): Promise<
         .replace('{pageIndex}', String(pageIndex))
         .replace('{pageSize}', String(pageSize));
 
-    const response: Response = await window.fetch(getNewUrl, defaultFetchGetProps);
+    const response: Response = await window.fetch(getNewUrl, serverApi.request.paramMap.get);
 
     if (response.ok) {
         return await response.json();

@@ -2,8 +2,7 @@
 
 /* global window, fetch */
 
-import {appConst} from '../../../app/const';
-import {defaultFetchGetProps, defaultFetchPostProps} from '../../auth/api';
+import {appConst, serverApi} from '../../../app/const';
 import {fetchX} from '../../../lib/fetch-x';
 
 export type FoundedUserType = {
@@ -19,7 +18,7 @@ export async function searchUser(query: string): Promise<FoundedUserListType | n
 
     const response = await fetchX<FoundedUserListType>(
         searchUserUrl.replace('{userName}', query),
-        defaultFetchGetProps
+        serverApi.request.paramMap.get
     );
 
     if (response instanceof Error) {
@@ -45,7 +44,7 @@ export async function badgeAssign(badgeAssigneeInput: BadgeAssignInputType): Pro
 
     const response = await window
         .fetch(badgeAssignUrl, {
-            ...defaultFetchPostProps,
+            ...serverApi.request.paramMap.postJSON,
             body: JSON.stringify(badgeAssigneeInput),
         })
         .catch(

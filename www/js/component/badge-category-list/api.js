@@ -2,8 +2,7 @@
 
 /* global window */
 
-import {appConst} from '../../app/const';
-import {defaultFetchGetProps} from '../auth/api';
+import {appConst, serverApi} from '../../app/const';
 
 export type BadgeType = {
     +id: number,
@@ -20,7 +19,7 @@ export async function getBadgeCategoryList(): Promise<BadgeCategoryListType | Er
     const getBadgeCategoryListUrl = appConst.api.getBadgeCategoryList;
 
     return window
-        .fetch(getBadgeCategoryListUrl, defaultFetchGetProps)
+        .fetch(getBadgeCategoryListUrl, serverApi.request.paramMap.get)
         .then((response: Response): Promise<BadgeCategoryListType> => response.json())
         .catch(
             (error: Error): Error => {

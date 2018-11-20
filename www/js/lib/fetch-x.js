@@ -7,10 +7,10 @@ type OptionsType = {|
     +credentials?: 'include',
     +method?: 'GET' | 'POST',
     +body?: FormData,
-    +mode?: 'no-cors',
+    +mode?: 'cors' | 'no-cors',
     +headers?: {|
         +'Access-Control-Allow-Headers'?: '*',
-        +Accept?: 'application/json, text/javascript, */*; q=0.01',
+        +Accept?: 'application/json, text/plain, */*',
         +'Content-Type'?: 'application/x-www-form-urlencoded; charset=UTF-8',
     |},
 |};
