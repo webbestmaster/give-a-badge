@@ -48,17 +48,20 @@ export const serverApi = {
                     [headerPropertyName.accept]: jsonHeaders[headerPropertyName.accept],
                     [headerPropertyName.contentType]: 'application/x-www-form-urlencoded; charset=UTF-8',
                 },
+                mode: 'no-cors',
             },
 
             postForm: {
                 method: 'POST',
                 credentials: 'include',
                 headers: formHeaders,
+                mode: 'no-cors',
             },
             postJSON: {
                 method: 'POST',
                 credentials: 'include',
                 headers: jsonHeaders,
+                mode: 'no-cors',
             },
 
             putForm: {
