@@ -82,8 +82,11 @@ class HistogramList extends Component<PropsType, StateType> {
     createHandlerOnHistogramItemClick = (userId: string | number): (() => void) => {
         return () => {
             const view = this;
+            const {state} = view;
+            const {activeUserId} = state;
+            const newActiveUserId = userId === activeUserId ? noHistogramListActiveUserId : userId;
 
-            view.setActiveUserId(userId);
+            view.setActiveUserId(newActiveUserId);
         };
     };
 

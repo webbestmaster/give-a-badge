@@ -274,8 +274,9 @@ const webpackConfig = {
                     '/login-page',
                     '/logout',
                 ],
-                target: 'https://badge.by',
+                // target: 'https://badge.by',
                 // target: 'http://206.81.28.99',
+                target: 'http://172.21.96.250',
                 changeOrigin: true, // for this option only: see documentations here https://github.com/chimurai/http-proxy-middleware#http-proxy-middleware-options
             },
         ],
