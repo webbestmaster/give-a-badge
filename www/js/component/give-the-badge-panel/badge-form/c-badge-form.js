@@ -402,6 +402,7 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
                                 onKeyPress={view.createHandlerForRemoveFromSelectedUserList(foundedUser)}
                                 key={foundedUser.id}
                             >
+                                <div className={style.remove_face_icon}/>
                                 <div
                                     className={style.selected_user_image}
                                     style={{backgroundImage: `url('${foundedUser.imageUrl}')`}}
