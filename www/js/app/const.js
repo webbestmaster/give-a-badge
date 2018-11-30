@@ -29,7 +29,7 @@ const headerPropertyName = {
 };
 
 const jsonHeaders = {
-    [headerPropertyName.accept]: 'application/json, text/plain, */*',
+    [headerPropertyName.accept]: 'application/json, */*',
     [headerPropertyName.contentType]: 'application/json; charset=UTF-8',
 };
 
@@ -61,7 +61,6 @@ export const serverApi = {
                 method: 'POST',
                 credentials: 'include',
                 headers: jsonHeaders,
-                mode: 'no-cors',
             },
 
             putForm: {

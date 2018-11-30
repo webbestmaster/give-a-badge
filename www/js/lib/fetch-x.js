@@ -10,7 +10,7 @@ type OptionsType = {|
     +mode?: 'cors' | 'no-cors',
     +headers?: {|
         +'Access-Control-Allow-Headers'?: '*',
-        +Accept?: 'application/json, text/plain, */*',
+        +Accept?: 'application/json, */*',
         +'Content-Type'?: 'application/x-www-form-urlencoded; charset=UTF-8',
     |},
 |};
