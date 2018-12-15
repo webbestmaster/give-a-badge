@@ -1,4 +1,3 @@
-/*
 // flow-typed signature: 3de6f9e229e49c421d1da9c7962c56b2
 // flow-typed version: 8c150a1c24/lodash_v4.x.x/flow_>=v0.63.x
 
@@ -613,7 +612,7 @@ declare module 'lodash' {
         ): Object;
         at(object?: ?Object, ...paths: Array<string>): Array<any>;
         at(object?: ?Object, paths: Array<string>): Array<any>;
-        create<T>(prototype: T, properties: Object): $Supertype<T>;
+        create<T>(prototype: T, properties: Object): T;
         create(prototype: any, properties: void | null): {};
         defaults(object?: ?Object, ...sources?: Array<Object>): Object;
         defaultsDeep(object?: ?Object, ...sources?: Array<Object>): Object;
@@ -1355,9 +1354,9 @@ declare module 'lodash/fp' {
             orders: $ReadOnlyArray<'asc' | 'desc'> | string
         ) => (collection: $ReadOnlyArray<T> | {[id: any]: T}) => Array<T>) &
             ((
-                orders: $ReadOnlyArray<'asc' | 'desc'> | string,
-                collection: $ReadOnlyArray<T> | {[id: any]: T}
-            ) => Array<T>);
+            orders: $ReadOnlyArray<'asc' | 'desc'> | string,
+            collection: $ReadOnlyArray<T> | {[id: any]: T}
+        ) => Array<T>);
         orderBy<T>(
             iteratees: $ReadOnlyArray<Iteratee<T> | OIteratee<*>> | string,
             orders: $ReadOnlyArray<'asc' | 'desc'> | string
@@ -1699,7 +1698,7 @@ declare module 'lodash/fp' {
         props(paths: Array<string>, object: Object): Array<any>;
         paths(paths: Array<string>): (object: Object) => Array<any>;
         paths(paths: Array<string>, object: Object): Array<any>;
-        create<T>(prototype: T): $Supertype<T>;
+        create<T>(prototype: T): T;
         defaults(source: Object): (object: Object) => Object;
         defaults(source: Object, object: Object): Object;
         defaultsAll(objects: Array<Object>): Object;
@@ -4820,4 +4819,3 @@ declare module 'lodash/fp/toPath' {
 declare module 'lodash/fp/uniqueId' {
     declare module.exports: $PropertyType<$Exports<'lodash/fp'>, 'uniqueId'>;
 }
-*/
