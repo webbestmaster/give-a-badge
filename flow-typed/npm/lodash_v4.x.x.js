@@ -1,3 +1,4 @@
+/*
 // flow-typed signature: 3de6f9e229e49c421d1da9c7962c56b2
 // flow-typed version: 8c150a1c24/lodash_v4.x.x/flow_>=v0.63.x
 
@@ -4819,3 +4820,4 @@ declare module 'lodash/fp/toPath' {
 declare module 'lodash/fp/uniqueId' {
     declare module.exports: $PropertyType<$Exports<'lodash/fp'>, 'uniqueId'>;
 }
+*/
