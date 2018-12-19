@@ -7,7 +7,7 @@ import {appConst, serverApi} from '../../app/const';
 export type BadgeType = {
     +id: number,
     +name: string,
-    +description: string,
+    +description: string | null,
     +category: string,
     +countLeft: number | null,
     +imageUrl: string,
