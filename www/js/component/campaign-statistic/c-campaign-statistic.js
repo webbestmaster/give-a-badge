@@ -69,26 +69,24 @@ class CampaignStatistic extends Component<ReduxPropsType, PassedPropsType, State
         };
     }
 
-    async fetchCampaignStatistic(): Promise<void> {
+    async fetchCampaignStatistic() {
         const view = this;
         const {props} = view;
 
         const campaignStatisticDataList = await getCampaignStatistic(props.match.params.campaignId);
 
         if (campaignStatisticDataList instanceof Error) {
-            console.error('can not get statistic for campaign: ', props.match.params.campaignId);
+            console.error('can not get statistic for campaign:', props.match.params.campaignId);
             return;
         }
 
         view.setState({campaignStatisticDataList});
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         const view = this;
 
-        (async (): Promise<void> => {
-            await view.fetchCampaignStatistic();
-        })();
+        await view.fetchCampaignStatistic();
     }
 
     setHistogramListActiveUserId(userId: string | number) {

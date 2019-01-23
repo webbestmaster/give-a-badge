@@ -69,7 +69,7 @@ class TitleCardList extends Component<ReduxPropsType, PassedPropsType, StateType
         return getNewsListResponse;
     }
 
-    async componentDidUpdate(prevProps: PropsType, prevState: StateType, snapshot?: mixed): Promise<void> {
+    async componentDidUpdate(prevProps: PropsType, prevState: StateType, snapshot?: mixed) {
         const view = this;
         const {props} = view;
         const {auth} = props;
@@ -82,7 +82,7 @@ class TitleCardList extends Component<ReduxPropsType, PassedPropsType, StateType
         }
     }
 
-    infiniteScrollNext = async (): Promise<void> => {
+    infiniteScrollNext = async () => {
         const view = this;
 
         const fetchNewsKListResult = await view.fetchNews();

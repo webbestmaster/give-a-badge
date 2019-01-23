@@ -1,7 +1,7 @@
 // @flow
 
 import type {Node} from 'react';
-import React, {Fragment} from 'react';
+import React from 'react';
 import Route from 'react-router-dom/Route';
 import Switch from 'react-router-dom/Switch';
 import {muiTheme} from '../ui/mui-theme/mui-theme';
@@ -25,7 +25,7 @@ export function App(): Node {
                 <Auth key="auth"/>
                 <System key="system">
                     <BrowserRouter>
-                        <Fragment>
+                        <>
                             <GoogleAnalytics trackingId={appConst.analytic.google.trackingId} key="google-analytics"/>
                             <Switch>
                                 <Route component={Home} path={routes.index.index} exact/>
@@ -35,7 +35,7 @@ export function App(): Node {
                                 <Route component={Home} path={routes.index.statistic} exact/>
                                 <Route component={NotFound}/>
                             </Switch>
-                        </Fragment>
+                        </>
                     </BrowserRouter>
                 </System>
             </MuiThemeProvider>

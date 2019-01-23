@@ -70,7 +70,7 @@ class BadgeCategoryList extends Component<ReduxPropsType, PassedPropsType, State
         return badgeCategoryList;
     }
 
-    async componentDidMount(): Promise<void> {
+    async componentDidMount() {
         const view = this;
 
         await view.fetchBadgeCategoryList();

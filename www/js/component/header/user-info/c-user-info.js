@@ -46,13 +46,13 @@ class UserInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
         };
     }
 
-    async logout(): Promise<void> {
+    async logout() {
         await authApi.logout();
 
         window.location.reload();
     }
 
-    handleLogOut = async (): Promise<void> => {
+    handleLogOut = async () => {
         const view = this;
 
         await view.logout();

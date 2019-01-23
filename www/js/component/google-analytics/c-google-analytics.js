@@ -31,7 +31,7 @@ class GoogleAnalytics extends Component<PropsType, StateType> {
         const {props} = view;
         const {trackingId} = props;
 
-        /* eslint-disable max-params, func-names, flowtype/require-parameter-type, id-length, no-param-reassign, no-unused-expressions, babel/no-unused-expressions, no-sequences */
+        /* eslint-disable max-params, func-names, flowtype/require-parameter-type, id-length, no-param-reassign, no-unused-expressions, babel/no-unused-expressions, no-sequences, unicorn/prefer-query-selector */
         (function (i, s, o, g, r, a, m) {
             i.GoogleAnalyticsObject = r;
             i[r] =
@@ -45,7 +45,7 @@ class GoogleAnalytics extends Component<PropsType, StateType> {
             a.src = g;
             m.parentNode && m.parentNode.insertBefore(a, m);
         })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-        /* eslint-enable max-params, func-names, flowtype/require-parameter-type, id-length, no-param-reassign, no-unused-expressions, babel/no-unused-expressions, no-sequences */
+        /* eslint-enable max-params, func-names, flowtype/require-parameter-type, id-length, no-param-reassign, no-unused-expressions, babel/no-unused-expressions, no-sequences, unicorn/prefer-query-selector */
 
         window.ga('create', trackingId, 'auto');
         window.ga('send', 'pageview');

@@ -78,7 +78,7 @@ class LoginPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
         };
     }
 
-    async onFormSubmit(evt: SyntheticEvent<EventTarget>): Promise<void> {
+    async onFormSubmit(evt: SyntheticEvent<EventTarget>) {
         evt.preventDefault();
         const view = this;
         const {node, props} = view;
@@ -141,7 +141,7 @@ class LoginPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
         );
     }
 
-    handleFormSubmit = async (evt: SyntheticEvent<EventTarget>): Promise<void> => {
+    handleFormSubmit = async (evt: SyntheticEvent<EventTarget>) => {
         const view = this;
 
         await view.onFormSubmit(evt);

@@ -3,7 +3,7 @@
 /* eslint consistent-this: ["error", "view"] */
 
 import type {ComponentType, Node} from 'react';
-import React, {Component, Fragment} from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import classNames from 'classnames';
 import type {GlobalStateType} from '../../app/reducer';
@@ -73,7 +73,7 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
         };
     }
 
-    async componentDidMount(): Promise<void> {
+    async componentDidMount() {
         const view = this;
         const {props, state} = view;
 
@@ -309,7 +309,7 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const {toUsers} = badgeWonServerData;
 
         return (
-            <Fragment>
+            <>
                 <div
                     style={view.getPeopleListStyle()}
                     ref={view.node.faceList}
@@ -331,7 +331,7 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
                     )}
                 </div>
                 {view.renderShowMoreButton()}
-            </Fragment>
+            </>
         );
     }
 

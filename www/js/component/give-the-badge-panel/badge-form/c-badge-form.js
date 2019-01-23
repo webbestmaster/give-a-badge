@@ -132,7 +132,7 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
         };
     }
 
-    async fetchNews(): Promise<void> {
+    async fetchNews() {
         const view = this;
         const {props} = view;
         const {applyGetNewListResponse: applyGetNewListResponseAction} = props;
@@ -156,7 +156,7 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
         return Boolean(descriptionText.trim().length >= minDescriptionSize && selectedUserList.length > 0);
     }
 
-    async updateSearch(inputSearchString: string): Promise<void> {
+    async updateSearch(inputSearchString: string) {
         const view = this;
 
         view.setState({searchString: inputSearchString});
@@ -197,7 +197,7 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
         view.setState({descriptionText});
     }
 
-    async submitForm(): Promise<void> {
+    async submitForm() {
         const view = this;
         const {props, state} = view;
         const {selectedUserList, descriptionText} = state;
@@ -467,7 +467,7 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
         );
     }
 
-    handleSubmitForm = async (evt: SyntheticEvent<HTMLFormElement>): Promise<void> => {
+    handleSubmitForm = async (evt: SyntheticEvent<HTMLFormElement>) => {
         const view = this;
 
         evt.preventDefault();
@@ -487,7 +487,7 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
         view.setState({hasSearchInputFocus: false});
     };
 
-    handleSearchInputOnInput = async (evt: SyntheticEvent<HTMLInputElement>): Promise<void> => {
+    handleSearchInputOnInput = async (evt: SyntheticEvent<HTMLInputElement>) => {
         const view = this;
 
         await view.updateSearch(evt.currentTarget.value);

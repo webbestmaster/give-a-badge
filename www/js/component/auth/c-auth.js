@@ -49,7 +49,7 @@ class Auth extends Component<ReduxPropsType, PassedPropsType, StateType> {
         view.state = {};
     }
 
-    async loginCheck(): Promise<void> {
+    async loginCheck() {
         const view = this;
         const {props} = view;
         const {setUser: setUserAction, openLoginPopup: openLoginPopupAction} = props;
@@ -64,7 +64,7 @@ class Auth extends Component<ReduxPropsType, PassedPropsType, StateType> {
         setUserAction(getMeResult.userData);
     }
 
-    async componentDidMount(): Promise<void> {
+    async componentDidMount() {
         const view = this;
 
         await view.loginCheck();

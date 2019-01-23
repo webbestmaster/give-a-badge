@@ -3,7 +3,7 @@
 /* eslint consistent-this: ["error", "view"] */
 
 import type {ComponentType, Node} from 'react';
-import React, {Component, Fragment} from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../../app/reducer';
 import type {BadgeType} from '../../badge-category-list/api';
@@ -94,7 +94,7 @@ class BadgeInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
         return badgeInfo;
     }
 
-    async componentDidMount(): Promise<void> {
+    async componentDidMount() {
         const view = this;
 
         await view.fetchBadgeInfo();
@@ -126,14 +126,14 @@ class BadgeInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
         }
 
         return (
-            <Fragment>
+            <>
                 <div
                     className={style.badge_image}
                     style={{backgroundImage: `url('${badgeInfo.imageUrl}')`}}
                     title={badgeInfo.name}
                 />
                 {view.renderBadgeLeft()}
-            </Fragment>
+            </>
         );
     }
 
