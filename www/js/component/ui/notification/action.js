@@ -4,6 +4,7 @@
 
 import type {Node} from 'react';
 import React from 'react';
+import type {SnackBarTypeType} from './snack-bar/c-snack-bar';
 import {SnackBar} from './snack-bar/c-snack-bar';
 
 export const defaultShowEventName = `show-snackbar-event ${Math.random()}`;
@@ -12,17 +13,20 @@ export type SnackBarOptionsType = {|
     +timer?: number,
     +isModal?: boolean,
     +id?: string,
+    +type?: SnackBarTypeType,
 |};
 
 const defaultOptions: SnackBarOptionsType = {
     timer: 6e3,
     isModal: false,
+    type: null,
 };
 
 export type ShowSnackBarDetailType = {|
     +timer: number,
     +isModal: boolean,
     +id: string,
+    +type: SnackBarTypeType,
     +isShow: true,
     +content: Node,
     +handleOnHide: () => void,
@@ -41,12 +45,14 @@ export type SnackBarDetailType = ShowSnackBarDetailType | HideSnackBarDetailType
 
 export function showSnackBar(content: Node, options: SnackBarOptionsType, customEventName: string): Promise<void> {
     return new Promise((resolve: () => void) => {
+        const snackBarType = options.hasOwnProperty('type') ? options.type : null;
+
         const detail: ShowSnackBarDetailType = {
             ...defaultOptions,
             ...options,
             isShow: true,
             id: options.hasOwnProperty('id') ? options.id : JSON.stringify(content),
-            content: <SnackBar>{content}</SnackBar>,
+            content: <SnackBar type={snackBarType}>{content}</SnackBar>,
             handleOnHide: (): void => resolve(),
         };
 

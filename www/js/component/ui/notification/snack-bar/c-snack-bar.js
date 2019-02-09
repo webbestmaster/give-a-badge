@@ -6,8 +6,10 @@ import type {Node} from 'react';
 import React, {Component} from 'react';
 import style from './snack-bar.style.scss';
 
+export type SnackBarTypeType = 'error' | 'info' | 'success' | 'warning' | null;
+
 type PassedPropsType = {|
-    +type?: 'error' | 'info' | 'success' | 'warning',
+    +type: SnackBarTypeType,
 |};
 
 type PropsType = {

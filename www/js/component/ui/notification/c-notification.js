@@ -5,7 +5,7 @@
 /* global window, setTimeout */
 
 import type {Node} from 'react';
-import React, {Component, Fragment} from 'react';
+import React, {Component} from 'react';
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
@@ -204,17 +204,17 @@ export class Notification extends Component<PropsType, StateType> {
         );
     }
 
-    render(): Node {
+    render(): Array<Node> {
         const view = this;
         const {state} = view;
         const {list, refreshKey} = state;
 
-        return (
-            <Fragment key={refreshKey}>
-                <TransitionGroup>{view.renderScreenDisable()}</TransitionGroup>
-                <TransitionGroup className={style.list_wrapper}>{list.map(view.renderListItem)}</TransitionGroup>
-            </Fragment>
-        );
+        return [
+            <TransitionGroup key={`${refreshKey}-fade`}>{view.renderScreenDisable()}</TransitionGroup>,
+            <TransitionGroup key={`${refreshKey}-content`} className={style.list_wrapper}>
+                {list.map(view.renderListItem)}
+            </TransitionGroup>,
+        ];
     }
 }
 
