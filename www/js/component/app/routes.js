@@ -13,6 +13,7 @@ export function getBadgeCampaignPath(badgeId: number | string): string {
 }
 
 const routes = {
+    login: '/login',
     index: {
         index: '/',
         badgeCategoryList: '/badge-category-list',

@@ -13,9 +13,10 @@ import {GoogleAnalytics} from '../google-analytics/c-google-analytics';
 import {Home} from '../../page/home/c-home';
 import {routes} from './routes';
 import BrowserRouter from 'react-router-dom/BrowserRouter';
-import {NotFound} from '../not-found/c-not-found';
 import {ReduxStoreProvider} from '../../app/provider';
 import {appConst} from '../../app/const';
+import {userIsAuthenticated, userIsNotAuthenticated} from '../auth/auth-helper';
+import {Login} from '../../page/login/c-login';
 
 export function App(): Node {
     return (
@@ -28,12 +29,8 @@ export function App(): Node {
                         <>
                             <GoogleAnalytics trackingId={appConst.analytic.google.trackingId} key="google-analytics"/>
                             <Switch>
-                                <Route component={Home} path={routes.index.index} exact/>
-                                <Route component={Home} path={routes.index.badgeCategoryList} exact/>
-                                <Route component={Home} path={routes.index.giveTheBadge} exact/>
-                                <Route component={Home} path={routes.index.badgeWon} exact/>
-                                <Route component={Home} path={routes.index.statistic} exact/>
-                                <Route component={NotFound}/>
+                                <Route component={userIsNotAuthenticated(Login)} path={routes.login} exact/>
+                                <Route component={userIsAuthenticated(Home)}/>
                             </Switch>
                         </>
                     </BrowserRouter>

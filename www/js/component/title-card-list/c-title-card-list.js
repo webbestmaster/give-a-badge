@@ -69,18 +69,28 @@ class TitleCardList extends Component<ReduxPropsType, PassedPropsType, StateType
         return getNewsListResponse;
     }
 
+    componentDidMount() {
+        const view = this;
+
+        console.log('componentDidMount');
+
+        view.fetchNews();
+    }
+
+    /*
     async componentDidUpdate(prevProps: PropsType, prevState: StateType, snapshot?: mixed) {
         const view = this;
         const {props} = view;
         const {auth} = props;
         const prevAuth = prevProps.auth;
 
-        if (auth.user.id !== prevAuth.user.id) {
+        if (auth.user.email !== prevAuth.user.email) {
             console.log('login detected, fetch news');
             await view.fetchNews();
             return;
         }
     }
+*/
 
     infiniteScrollNext = async () => {
         const view = this;

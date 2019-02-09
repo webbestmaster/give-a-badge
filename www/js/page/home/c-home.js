@@ -14,17 +14,15 @@ import Switch from 'react-router-dom/Switch';
 import withRouter from 'react-router-dom/withRouter';
 import {connect} from 'react-redux';
 import type {GlobalStateType} from '../../app/reducer';
-import type {SystemType} from '../../component/system/reducer/root';
 import {routes} from '../../component/app/routes';
-import type {AuthType} from '../../component/auth/reducer';
-import {defaultUserState} from '../../component/auth/reducer';
 import {LoadComponent} from '../../lib/c-load-component';
 import {Spinner} from '../../component/ui/spinner/c-spinner';
+import {NotFound} from '../../component/not-found/c-not-found';
 
-type ReduxPropsType = {|
-    +system: SystemType,
-    +auth: AuthType,
-|};
+type ReduxPropsType = {
+    // +system: SystemType,
+    // +auth: AuthType,
+};
 
 type ReduxActionType = {};
 type PassedPropsType = {};
@@ -56,31 +54,28 @@ class Home extends Component<ReduxPropsType, PassedPropsType, StateType> {
         );
     }
 
-    render(): Array<Node> {
-        const view = this;
-        const {props} = view;
-        const {auth} = props;
-
-        const defaultUserName = defaultUserState.name;
-
-        return [
-            defaultUserName === auth.user.name ? null : <Header key="header"/>,
-            <TitleCardList key="title-card-list"/>,
-            <Switch key="home-switch">
-                <Route component={BadgeCategoryList} path={routes.index.badgeCategoryList} exact/>
-                <Route component={GiveTheBadgePanel} path={routes.index.giveTheBadge} exact/>
-                <Route component={BadgeWon} path={routes.index.badgeWon} exact/>
-                <Route component={Home.campaignStatistic} path={routes.index.statistic} exact/>
-            </Switch>,
-        ];
+    render(): Node {
+        return (
+            <>
+                <Header key="header"/>
+                <TitleCardList key="title-card-list"/>
+                <Switch key="home-switch">
+                    <Route component={BadgeCategoryList} path={routes.index.badgeCategoryList} exact/>
+                    <Route component={GiveTheBadgePanel} path={routes.index.giveTheBadge} exact/>
+                    <Route component={BadgeWon} path={routes.index.badgeWon} exact/>
+                    <Route component={Home.campaignStatistic} path={routes.index.statistic} exact/>
+                    <Route component={NotFound}/>
+                </Switch>
+            </>
+        );
     }
 }
 
 const ConnectedComponent = withRouter(
     connect(
         (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
-            system: state.system,
-            auth: state.auth,
+            // system: state.system,
+            // auth: state.auth,
         }),
         {}
     )(Home)
