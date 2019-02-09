@@ -72,8 +72,6 @@ class TitleCardList extends Component<ReduxPropsType, PassedPropsType, StateType
     componentDidMount() {
         const view = this;
 
-        console.log('componentDidMount');
-
         view.fetchNews();
     }
 

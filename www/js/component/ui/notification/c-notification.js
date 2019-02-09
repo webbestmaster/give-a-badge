@@ -1,14 +1,30 @@
 // @flow
 
+/* eslint consistent-this: ["error", "view"] */
+
 /* global window, setTimeout */
+
+import type {Node} from 'react';
 import React, {Component, Fragment} from 'react';
-import PropTypes from 'prop-types';
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-import {defaultShowEventName} from './action';
 import style from './notification.style.scss';
 import {SnackBarWrapper} from './snack-bar-wrapper/c-snack-bar-wrapper';
+import type {ShowSnackBarDetailType, SnackBarDetailType} from './action';
+
+type PassedPropsType = {|
+    +eventName: string,
+|};
+
+type PropsType = {|
+    ...PassedPropsType,
+|};
+
+type StateType = {|
+    +list: Array<ShowSnackBarDetailType>,
+    +refreshKey: number,
+|};
 
 const fadeTimeOut = 500;
 
@@ -18,39 +34,58 @@ const fadeClassNames = {
     exit: style.fade__exit,
 };
 
-export class Notification extends Component {
-    constructor(props) {
+export class Notification extends Component<PropsType, StateType> {
+    props: PropsType;
+    state: StateType;
+
+    constructor(props: PropsType) {
         super(props);
 
-        this.state = {
+        const view = this;
+
+        view.state = {
             list: [],
             refreshKey: 0,
         };
     }
 
     clean() {
-        const {refreshKey} = this.state;
+        const view = this;
+        const {state} = view;
+        const {refreshKey} = state;
 
         // eslint-disable-next-line react/no-set-state
-        this.setState({
+        view.setState({
             refreshKey: refreshKey + 1,
             list: [],
         });
     }
 
-    handleEvent = ({detail}) => {
+    handleEvent = (evt: {detail: SnackBarDetailType}) => {
+        const view = this;
+
+        const {detail} = evt;
+
         if (detail.isHideAll === true) {
-            return this.clean();
+            view.clean();
+            return;
         }
 
-        return detail.isShow ? this.addSnackBar(detail) : this.removeSnackBar(detail.id);
+        if (detail.isShow === true) {
+            view.addSnackBar(detail);
+        } else {
+            view.removeSnackBar(detail.id);
+        }
     };
 
-    addSnackBar = detail => {
-        const {state} = this;
+    addSnackBar = (detail: ShowSnackBarDetailType) => {
+        const view = this;
+        const {state} = view;
         const {list} = state;
 
-        const isAlreadyExists = Boolean(list.find(snackBarData => snackBarData.id === detail.id));
+        const isAlreadyExists = Boolean(
+            list.find((snackBarData: ShowSnackBarDetailType): boolean => snackBarData.id === detail.id)
+        );
 
         if (isAlreadyExists) {
             console.log('Notification ---> Item already exists!');
@@ -61,16 +96,18 @@ export class Notification extends Component {
         list.push(detail);
 
         // eslint-disable-next-line react/no-set-state
-        this.setState({list});
+        view.setState({list});
 
-        setTimeout(() => this.removeSnackBar(detail.id), detail.timer);
+        setTimeout((): void => view.removeSnackBar(detail.id), detail.timer);
     };
 
-    removeSnackBar = snackBarId => {
-        const {state} = this;
+    removeSnackBar = (snackBarId: string | number) => {
+        const view = this;
+        const {state} = view;
         const {list} = state;
 
-        const snackBar = list.find(snackBarData => snackBarData.id === snackBarId) || null;
+        const snackBar =
+            list.find((snackBarData: ShowSnackBarDetailType): boolean => snackBarData.id === snackBarId) || null;
 
         if (snackBar === null) {
             console.log('Notification ---> Item is NOT exists!');
@@ -81,30 +118,62 @@ export class Notification extends Component {
         list.splice(list.indexOf(snackBar), 1);
 
         // eslint-disable-next-line react/no-set-state
-        this.setState({list});
+        view.setState({list});
     };
 
     bindEventListener() {
-        const {props} = this;
+        const view = this;
+        const {props} = view;
 
-        window.addEventListener(props.eventName || defaultShowEventName, this.handleEvent, false);
+        window.addEventListener(props.eventName, view.handleEvent, false);
     }
 
     removeEventListener() {
-        const {props} = this;
+        const view = this;
+        const {props} = view;
 
-        window.removeEventListener(props.eventName || defaultShowEventName, this.handleEvent, false);
+        window.removeEventListener(props.eventName, view.handleEvent, false);
     }
 
     componentDidMount() {
-        this.bindEventListener();
+        const view = this;
+
+        view.bindEventListener();
     }
 
     componentWillUnmount() {
-        this.removeEventListener();
+        const view = this;
+
+        view.removeEventListener();
     }
 
-    renderListItem = itemData => {
+    createRemoveShackBarHandler(itemData: ShowSnackBarDetailType): () => void {
+        const view = this;
+
+        return (): void => view.removeSnackBar(itemData.id);
+    }
+
+    renderListItemContent(itemData: ShowSnackBarDetailType): Node {
+        const view = this;
+
+        return (
+            <>
+                {itemData.content}
+                <IconButton
+                    onClick={view.createRemoveShackBarHandler(itemData)}
+                    key="close"
+                    color="inherit"
+                    className={style.close_button}
+                >
+                    <CloseIcon className={style.close_icon}/>
+                </IconButton>
+            </>
+        );
+    }
+
+    renderListItem = (itemData: ShowSnackBarDetailType): Node => {
+        const view = this;
+
         return (
             <CSSTransition
                 onExited={itemData.handleOnHide}
@@ -112,27 +181,17 @@ export class Notification extends Component {
                 timeout={fadeTimeOut}
                 classNames={fadeClassNames}
             >
-                <SnackBarWrapper>
-                    <>
-                        {itemData.content}
-                        <IconButton
-                            onClick={() => this.removeSnackBar(itemData.id)}
-                            key="close"
-                            color="inherit"
-                            className={style.close_button}
-                        >
-                            <CloseIcon className={style.close_icon}/>
-                        </IconButton>
-                    </>
-                </SnackBarWrapper>
+                <SnackBarWrapper>{view.renderListItemContent(itemData)}</SnackBarWrapper>
             </CSSTransition>
         );
     };
 
-    renderScreenDisable() {
-        const {list} = this.state;
+    renderScreenDisable(): Node {
+        const view = this;
+        const {state} = view;
+        const {list} = state;
 
-        const hasModelSnackBar = list.some(itemData => itemData.isModal);
+        const hasModelSnackBar = list.some((itemData: ShowSnackBarDetailType): boolean => itemData.isModal);
 
         if (hasModelSnackBar === false) {
             return null;
@@ -145,13 +204,15 @@ export class Notification extends Component {
         );
     }
 
-    render() {
-        const {list, refreshKey} = this.state;
+    render(): Node {
+        const view = this;
+        const {state} = view;
+        const {list, refreshKey} = state;
 
         return (
             <Fragment key={refreshKey}>
-                <TransitionGroup>{this.renderScreenDisable()}</TransitionGroup>
-                <TransitionGroup className={style.list_wrapper}>{list.map(this.renderListItem)}</TransitionGroup>
+                <TransitionGroup>{view.renderScreenDisable()}</TransitionGroup>
+                <TransitionGroup className={style.list_wrapper}>{list.map(view.renderListItem)}</TransitionGroup>
             </Fragment>
         );
     }

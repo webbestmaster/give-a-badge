@@ -2,12 +2,12 @@
 
 /* eslint consistent-this: ["error", "view"] */
 
-import React, {Component} from 'react';
 import type {Node} from 'react';
+import React, {Component} from 'react';
 import style from './snack-bar.style.scss';
 
 type PassedPropsType = {|
-    +type: 'error' | 'info' | 'success' | 'warning' | null,
+    +type?: 'error' | 'info' | 'success' | 'warning',
 |};
 
 type PropsType = {
@@ -18,6 +18,9 @@ type PropsType = {
 type StateType = void;
 
 export class SnackBar extends Component<PropsType, StateType> {
+    props: PropsType;
+    state: StateType;
+
     // eslint-disable-next-line complexity
     renderIcon(): Node {
         const view = this;
@@ -47,10 +50,6 @@ export class SnackBar extends Component<PropsType, StateType> {
         const {props} = view;
         const {children, type} = props;
         const className = type ? `${style.snack_bar} ${style[type]}` : style.snack_bar;
-
-        console.log('11111111');
-        console.log('11111111');
-        console.log('11111111');
 
         return (
             <div className={className}>
