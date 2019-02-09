@@ -18,6 +18,7 @@ import {routes} from '../../component/app/routes';
 import {LoadComponent} from '../../lib/c-load-component';
 import {Spinner} from '../../component/ui/spinner/c-spinner';
 import {NotFound} from '../../component/not-found/c-not-found';
+import {defaultShowEventName, showSnackBar} from '../../component/ui/notification/action';
 
 type ReduxPropsType = {
     // +system: SystemType,
@@ -54,12 +55,17 @@ class Home extends Component<ReduxPropsType, PassedPropsType, StateType> {
         );
     }
 
+    componentDidMount() {
+        setTimeout((): mixed => showSnackBar('Queue of snack bars, item - 1', {}, defaultShowEventName), 1e3);
+    }
+
     render(): Node {
         return (
             <>
                 <Header key="header"/>
                 <TitleCardList key="title-card-list"/>
                 <Switch key="home-switch">
+                    <Route component={() => null} path={routes.index.index} exact/>
                     <Route component={BadgeCategoryList} path={routes.index.badgeCategoryList} exact/>
                     <Route component={GiveTheBadgePanel} path={routes.index.giveTheBadge} exact/>
                     <Route component={BadgeWon} path={routes.index.badgeWon} exact/>

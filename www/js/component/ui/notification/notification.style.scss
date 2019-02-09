@@ -1,0 +1,44 @@
+$fade-time-out: 500;
+$layer-index: 100000;
+
+.screen_disable {
+    background-color: rgba(255, 255, 255, 0.5);
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: $layer-index;
+}
+
+.list_wrapper {
+    bottom: 12px;
+    left: 50%;
+    position: fixed;
+    transform: translate3d(-50%, 0, 0);
+    z-index: $layer-index;
+
+    .close_button {
+        display: block;
+        margin-left: -52px;
+        margin-right: 4px;
+    }
+
+    .close_icon {
+        color: #fff;
+    }
+}
+
+.fade__enter {
+    opacity: 0;
+}
+
+.fade__enter__active {
+    opacity: 1;
+    transition: opacity #{$fade-time-out}ms ease-in;
+}
+
+.fade__exit {
+    opacity: 0;
+    transition: opacity #{$fade-time-out}ms ease-in;
+}

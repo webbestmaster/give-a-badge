@@ -17,12 +17,15 @@ import {ReduxStoreProvider} from '../../app/provider';
 import {appConst} from '../../app/const';
 import {userIsAuthenticated, userIsNotAuthenticated} from '../auth/auth-helper';
 import {Login} from '../../page/login/c-login';
+import {Notification} from '../ui/notification/c-notification';
+import {defaultShowEventName} from '../ui/notification/action';
 
 export function App(): Node {
     return (
         /* eslint-disable react/jsx-max-depth */
         <ReduxStoreProvider>
             <MuiThemeProvider theme={muiTheme}>
+                <Notification eventName={defaultShowEventName}/>
                 <Auth key="auth"/>
                 <System key="system">
                     <BrowserRouter>
