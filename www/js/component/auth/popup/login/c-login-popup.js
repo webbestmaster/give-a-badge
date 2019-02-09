@@ -14,7 +14,6 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-// import Snackbar from '@material-ui/core/Snackbar';
 import * as api from '../../api';
 import style from './style.scss';
 import {getLocalizedString, Locale} from '../../../locale/c-locale';
