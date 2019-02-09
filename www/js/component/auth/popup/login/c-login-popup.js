@@ -14,11 +14,12 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import Snackbar from '@material-ui/core/Snackbar';
+// import Snackbar from '@material-ui/core/Snackbar';
 import * as api from '../../api';
 import style from './style.scss';
 import {getLocalizedString, Locale} from '../../../locale/c-locale';
 import type {LocaleType} from '../../../locale/reducer';
+import {defaultShowEventName, shackBarErrorHandler, showSnackBar} from '../../../ui/notification/action';
 
 type ReduxPropsType = {|
     auth: AuthType,
@@ -50,8 +51,8 @@ const reduxAction: ReduxActionType = {
 };
 
 type NodeType = {|
-    login: HTMLInputElement | null,
-    password: HTMLInputElement | null,
+    login: {current: null | HTMLInputElement},
+    password: {current: null | HTMLInputElement},
 |};
 
 class LoginPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
@@ -73,8 +74,8 @@ class LoginPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
         };
 
         view.node = {
-            login: null,
-            password: null,
+            login: React.createRef(),
+            password: React.createRef(),
         };
     }
 
@@ -82,63 +83,26 @@ class LoginPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
         evt.preventDefault();
         const view = this;
         const {node, props} = view;
-        const {setUser: setUserAction, closeLoginPopup: closeLoginPopupAction} = props;
+        const {setUser: setUserAction, closeLoginPopup: closeLoginPopupAction, locale} = props;
 
-        const loginValue = node.login === null ? '' : node.login.value;
-        const passwordValue = node.password === null ? '' : node.password.value;
+        const loginValue = node.login.current === null ? '' : node.login.current.value;
+        const passwordValue = node.password.current === null ? '' : node.password.current.value;
         const meData = await api.login(loginValue, passwordValue);
 
         if (meData.hasError) {
             console.error(`can not login with login: ${loginValue} and password: ${passwordValue}`);
-            view.setShowSnackbar(true, false);
+            showSnackBar(<Locale stringKey="LOGIN_POPUP__LOGIN__ERROR"/>, {}, defaultShowEventName).catch(
+                shackBarErrorHandler
+            );
             return;
         }
 
-        view.setShowSnackbar(true, true);
+        showSnackBar(<Locale stringKey="LOGIN_POPUP__LOGIN__SUCCESS"/>, {}, defaultShowEventName).catch(
+            shackBarErrorHandler
+        );
+
         setUserAction(meData.userData);
         closeLoginPopupAction();
-    }
-
-    setShowSnackbar(isOpen: boolean, isSuccess: boolean) {
-        const view = this;
-        const {state} = view;
-
-        view.setState({snackbar: {...state.snackbar, isOpen, isSuccess}});
-    }
-
-    handleOnSnackBarClick = () => {
-        const view = this;
-        const {state} = view;
-        const {snackbar} = state;
-        const {isSuccess} = snackbar;
-
-        view.setShowSnackbar(false, isSuccess);
-    };
-
-    renderSnackBar(): Node {
-        const view = this;
-        const {props, state} = view;
-        const {locale} = props;
-        const {snackbar} = state;
-        const {isSuccess, isOpen} = snackbar;
-
-        const message = isSuccess ?
-            getLocalizedString('LOGIN_POPUP__LOGIN__SUCCESS', locale.name) :
-            getLocalizedString('LOGIN_POPUP__LOGIN__ERROR', locale.name);
-
-        return (
-            <Snackbar
-                key="snackbar"
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'center',
-                }}
-                open={isOpen}
-                autoHideDuration={2e3}
-                onClose={view.handleOnSnackBarClick}
-                message={message}
-            />
-        );
     }
 
     handleFormSubmit = async (evt: SyntheticEvent<EventTarget>) => {
@@ -147,25 +111,13 @@ class LoginPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
         await view.onFormSubmit(evt);
     };
 
-    defineLoginInput = (login: HTMLInputElement | null) => {
-        const view = this;
-
-        view.node.login = login;
-    };
-
-    definePasswordInput = (password: HTMLInputElement | null) => {
-        const view = this;
-
-        view.node.password = password;
-    };
-
     render(): Node {
         const view = this;
         const {props} = view;
         const {auth, locale} = props;
         const {isOpen} = auth.popup[authConst.popupName.login];
 
-        return [
+        return (
             <Dialog key="dialog" open={isOpen} keepMounted>
                 <form className={style.form} onSubmit={view.handleFormSubmit}>
                     <DialogTitle id="alert-dialog-slide-title">
@@ -177,7 +129,7 @@ class LoginPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
                             required
                             type="text"
                             autoComplete="current-password"
-                            inputRef={view.defineLoginInput}
+                            inputRef={view.node.login}
                         />
                         <TextField
                             placeholder={getLocalizedString('LOGIN_POPUP__PASSWORD_PLACEHOLDER', locale.name)}
@@ -185,16 +137,15 @@ class LoginPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
                             type="password"
                             autoComplete="current-password"
                             margin="normal"
-                            inputRef={view.definePasswordInput}
+                            inputRef={view.node.password}
                         />
                     </fieldset>
                     <Button margin="normal" variant="contained" color="primary" type="submit">
                         <Locale stringKey="LOGIN_POPUP__LOGIN_BUTTON"/>
                     </Button>
                 </form>
-            </Dialog>,
-            view.renderSnackBar(),
-        ];
+            </Dialog>
+        );
     }
 }
 

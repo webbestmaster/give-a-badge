@@ -82,3 +82,9 @@ export function hideAllSnackBars(customEventName: string) {
 
     window.dispatchEvent(customEvent);
 }
+
+export function shackBarErrorHandler(error: Error): Error {
+    console.error('ERROR WITH SNACK BAR');
+    console.error(error);
+    return error;
+}

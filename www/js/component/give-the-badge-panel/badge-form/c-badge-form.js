@@ -27,7 +27,7 @@ import type {TitleNewsListType} from '../../title-card-list/reducer';
 import {pageSize} from '../../title-card-list/c-title-card-list';
 import type {ApplyGetNewListResponseType} from '../../title-card-list/action';
 import {applyGetNewListResponse} from '../../title-card-list/action';
-import {LoadComponent} from '../../../lib/c-load-component';
+import {defaultShowEventName, hideAllSnackBars, shackBarErrorHandler, showSnackBar} from '../../ui/notification/action';
 
 type ReduxPropsType = {
     +locale: LocaleType,
@@ -53,10 +53,10 @@ type PropsType = $Exact<{
 }>;
 
 type StateType = {|
-    +snackbar: {|
-        +isOpen: boolean,
-        +isSuccess: boolean,
-    |},
+    // +snackbar: {|
+    //     +isOpen: boolean,
+    //     +isSuccess: boolean,
+    // |},
     +searchString: string,
     +descriptionText: string,
     +searchUserList: FoundedUserListType,
@@ -113,10 +113,10 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const view = this;
 
         view.state = {
-            snackbar: {
-                isOpen: false,
-                isSuccess: false,
-            },
+            // snackbar: {
+            //     isOpen: false,
+            //     isSuccess: false
+            // },
             searchString: '',
             descriptionText: '',
             hasSearchInputFocus: false,
@@ -236,14 +236,31 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
     setShowSnackbar(isOpen: boolean, isSuccess: boolean) {
         const view = this;
-        const {state} = view;
+        const {props} = view;
 
-        view.setState({snackbar: {...state.snackbar, isOpen, isSuccess}});
+        hideAllSnackBars(defaultShowEventName);
+
+        if (isOpen === false) {
+            return;
+        }
+
+        if (isSuccess === false) {
+            showSnackBar(
+                <Locale stringKey="SNACK_BAR__GIVE_BADGE__ERROR"/>,
+                {isModal: true},
+                defaultShowEventName
+            ).catch(shackBarErrorHandler);
+            return;
+        }
+
+        showSnackBar(<Locale stringKey="SNACK_BAR__GIVE_BADGE__SUCCESS"/>, {isModal: true}, defaultShowEventName)
+            .then((): mixed => props.history.push(routes.index.index))
+            .catch(shackBarErrorHandler);
     }
 
     getFromSelectedUserById(userId: number): FoundedUserType | null {
         const view = this;
-        const {props, state} = view;
+        const {state} = view;
         const {selectedUserList} = state;
 
         return selectedUserList.find((userInList: FoundedUserType): boolean => userInList.id === userId) || null;
@@ -272,7 +289,7 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
     clearSearchInput() {
         const view = this;
-        const {props, state, node} = view;
+        const {node} = view;
         const searchInput = node.search.input.current;
 
         view.setState({searchString: ''});
@@ -287,7 +304,7 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
     removeFromSelectedUserList(user: FoundedUserType) {
         const view = this;
-        const {props, state} = view;
+        const {state} = view;
         const {selectedUserList} = state;
 
         const userInList = view.getFromSelectedUserById(user.id);
@@ -416,63 +433,14 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
         );
     }
 
-    createHandleOnCloseSnackBar(isSuccess: boolean): () => void {
-        const view = this;
-        const {props} = view;
-
-        return () => {
-            view.setShowSnackbar(false, false);
-
-            if (isSuccess) {
-                props.history.push(routes.index.index);
-            }
-        };
-    }
-
-    loadToRenderSnackBar = async (): Promise<Node> => {
-        const Snackbar = (await import('@material-ui/core/Snackbar')).default;
-        const view = this;
-        const {props, state} = view;
-        const {locale} = props;
-        const {isOpen, isSuccess} = state.snackbar;
-
-        return (
-            <Snackbar
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left',
-                }}
-                open={isOpen}
-                autoHideDuration={0.5e3}
-                onClose={view.createHandleOnCloseSnackBar(isSuccess)}
-                message={
-                    isSuccess ?
-                        getLocalizedString('SNACK_BAR__GIVE_BADGE__SUCCESS', locale.name) :
-                        getLocalizedString('SNACK_BAR__GIVE_BADGE__ERROR', locale.name)
-                }
-            />
-        );
-    };
-
-    renderSnackBar(): Node {
-        const view = this;
-        const {state} = view;
-        const {isOpen, isSuccess} = state.snackbar;
-
-        return (
-            <LoadComponent
-                key={`isOpen:${String(isOpen)};isSuccess:${String(isSuccess)};`}
-                load={view.loadToRenderSnackBar}
-            />
-        );
-    }
-
     handleSubmitForm = async (evt: SyntheticEvent<HTMLFormElement>) => {
         const view = this;
 
         evt.preventDefault();
 
-        await view.submitForm();
+        if (view.isSubmitActive()) {
+            await view.submitForm();
+        }
     };
 
     handleSearchInputOnFocus = () => {
@@ -509,10 +477,7 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
                     [style.badge_form_wrapper__mobile]: props.system.screen.isMobile,
                 })}
             >
-                <form
-                    className={classNames(style.badge_form, {[serviceStyle.disabled]: state.snackbar.isSuccess})}
-                    onSubmit={view.handleSubmitForm}
-                >
+                <form className={style.badge_form} onSubmit={view.handleSubmitForm}>
                     <input
                         ref={view.node.search.input}
                         className={style.search_input}
@@ -541,8 +506,6 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
                         <Locale stringKey="SEARCH_PEOPLE__SUBMIT_BUTTON"/>
                     </button>
                 </form>
-
-                {view.renderSnackBar()}
             </div>
         );
     }

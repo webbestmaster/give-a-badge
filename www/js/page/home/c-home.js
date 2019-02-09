@@ -18,7 +18,6 @@ import {routes} from '../../component/app/routes';
 import {LoadComponent} from '../../lib/c-load-component';
 import {Spinner} from '../../component/ui/spinner/c-spinner';
 import {NotFound} from '../../component/not-found/c-not-found';
-import {defaultShowEventName, showSnackBar} from '../../component/ui/notification/action';
 
 type ReduxPropsType = {
     // +system: SystemType,
@@ -55,10 +54,7 @@ class Home extends Component<ReduxPropsType, PassedPropsType, StateType> {
         );
     }
 
-    componentDidMount() {
-        setTimeout((): mixed => showSnackBar('Queue of snack bars, item - 1', {}, defaultShowEventName), 1e3);
-    }
-
+    // need to show TitleCardList on index page
     static index(): null {
         return null;
     }

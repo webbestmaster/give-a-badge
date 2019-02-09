@@ -11,7 +11,7 @@ export const zhTw: LangDataType = {
     LOGIN_POPUP__PASSWORD_PLACEHOLDER: 'Password',
     LOGIN_POPUP__LOGIN_BUTTON: 'Login',
     LOGIN_POPUP__LOGIN__SUCCESS: '✔ Welcome to the app!',
-    LOGIN_POPUP__LOGIN__ERROR: '❌ Something wrong! Can not login...',
+    LOGIN_POPUP__LOGIN__ERROR: '❌ Wrong login or password!',
     SNACK_BAR__GIVE_BADGE__SUCCESS: '✔ Success!',
     SNACK_BAR__GIVE_BADGE__ERROR: '❌ Error!',
 
