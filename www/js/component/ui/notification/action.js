@@ -17,7 +17,7 @@ export type SnackBarOptionsType = {|
 |};
 
 const defaultOptions: SnackBarOptionsType = {
-    timer: 6e3,
+    timer: 4e3,
     isModal: false,
     type: null,
 };

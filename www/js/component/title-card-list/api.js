@@ -35,6 +35,16 @@ export type NewsType = {|
     +tags: [],
 |};
 
+export type NewsAchtungType = {|
+    +actionRequired: 'ASSIGN_BADGE' | 'LOOK_AT_CAMPAIGN_RESULTS',
+    +comment: string,
+    +entityId: number,
+    +id: number | null,
+    +imageUrl: string,
+    +name: string | null,
+    +toUsers: Array<NewsUserType> | null,
+|};
+
 export type GetNewsListType = {
     +content: Array<NewsType>,
     +first: boolean,
@@ -54,8 +64,27 @@ export type GetNewsListType = {
     +totalElements: number,
 };
 
+export type GetNewsAchtungListType = {
+    ...GetNewsListType,
+    +content: Array<NewsAchtungType>,
+};
+
 export async function getNewsList(pageIndex: number, pageSize: number): Promise<GetNewsListType | null> {
     const getNewUrl = appConst.api.getNews
+        .replace('{pageIndex}', String(pageIndex))
+        .replace('{pageSize}', String(pageSize));
+
+    const response: Response = await window.fetch(getNewUrl, serverApi.request.paramMap.get);
+
+    if (response.ok) {
+        return await response.json();
+    }
+
+    return null;
+}
+
+export async function getNewsAchtungList(pageIndex: number, pageSize: number): Promise<GetNewsAchtungListType | null> {
+    const getNewUrl = appConst.api.getNewsAchtung
         .replace('{pageIndex}', String(pageIndex))
         .replace('{pageSize}', String(pageSize));
 

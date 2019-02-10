@@ -107,6 +107,10 @@ class TitleCardList extends Component<ReduxPropsType, PassedPropsType, StateType
         window.ga('send', 'event', 'Badge List Load', fetchNewsKListResult.last === true ? 'Finish' : 'Part');
     };
 
+    static renderTitleCard(news: NewsType): Node {
+        return <TitleCard key={news.id} newsData={news}/>;
+    }
+
     renderCardList(): Node {
         const view = this;
         const {props} = view;
@@ -129,13 +133,7 @@ class TitleCardList extends Component<ReduxPropsType, PassedPropsType, StateType
                 hasMore={!lastNewsResponse.last}
                 loader={<Spinner/>}
             >
-                <div className={style.card_list}>
-                    {newsList.map(
-                        (newsInList: NewsType): Node =>
-                            <TitleCard key={newsInList.id} newsData={newsInList}/>
-
-                    )}
-                </div>
+                <div className={style.card_list}>{newsList.map(TitleCardList.renderTitleCard)}</div>
             </InfiniteScroll>
         );
     }

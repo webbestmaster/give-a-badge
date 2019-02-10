@@ -8,6 +8,7 @@ export const appConst = {
     api: {
         getMe: '/api/users/current',
         getNews: '/api/news?page={pageIndex}&size={pageSize}',
+        getNewsAchtung: '/api/news/achtung?page={pageIndex}&size={pageSize}',
         getBadgeCategoryList: '/api/badges/catalog',
         searchUser: '/api/users/search?name={userName}&size=10',
         badgeAssign: '/api/badges/assign',

@@ -23,3 +23,16 @@ export function applyGetNewListResponse(
         },
     };
 }
+
+export function applyGetNewAchtungListResponse(
+    getNewsListResponse: GetNewsListType,
+    inBegin: boolean
+): ApplyGetNewListResponseType {
+    return {
+        type: titleCardListConst.action.type.applyGetNewListResponse,
+        payload: {
+            getNewsListResponse,
+            inBegin,
+        },
+    };
+}
