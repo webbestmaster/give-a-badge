@@ -12,7 +12,8 @@ all=warn
 
 [options]
 #all=true
-include_warnings=true
+# make "include_warnings=true" after remove all maerial-ui
+include_warnings=false
 suppress_comment=\\(.\\|\n\\)*\\$FlowFixMe
 module.use_strict=true
 munge_underscores=true
