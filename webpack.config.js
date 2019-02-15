@@ -274,7 +274,8 @@ const webpackConfig = {
                 ],
                 // target: 'https://badge.by',
                 // target: 'http://206.81.28.99',
-                target: 'http://172.21.96.250',
+                // target: 'http://172.21.96.250',
+                target: 'https://badges.mara.local',
                 changeOrigin: true, // for this option only: see documentations here https://github.com/chimurai/http-proxy-middleware#http-proxy-middleware-options
             },
         ],
