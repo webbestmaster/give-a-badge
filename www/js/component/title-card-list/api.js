@@ -65,8 +65,22 @@ export type GetNewsListType = {
 };
 
 export type GetNewsAchtungListType = {
-    ...GetNewsListType,
     +content: Array<NewsAchtungType>,
+    +first: boolean,
+    +last: boolean,
+    +number: number,
+    +numberOfElements: number,
+    +size: number,
+    +sort: Array<{|
+        +ascending: boolean,
+        +descending: boolean,
+        +direction: 'DESC' | 'ASC',
+        +ignoreCase: boolean,
+        +property: string,
+        +nullHandling: 'NATIVE',
+    |}>,
+    +totalPages: number,
+    +totalElements: number,
 };
 
 export async function getNewsList(pageIndex: number, pageSize: number): Promise<GetNewsListType | null> {

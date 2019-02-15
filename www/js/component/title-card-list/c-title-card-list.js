@@ -11,9 +11,9 @@ import type {GlobalStateType} from '../../app/reducer';
 import style from './style.scss';
 import type {AuthType} from '../auth/reducer';
 import {TitleCard} from '../title-card/c-title-card';
-import type {ApplyGetNewListResponseType} from './action';
-import {applyGetNewListResponse} from './action';
-import type {GetNewsListType, NewsType} from './api';
+import type {ApplyGetNewAchtungListResponseType, ApplyGetNewListResponseType} from './action';
+import {applyGetNewListResponse, applyGetNewAchtungListResponse} from './action';
+import type {GetNewsAchtungListType, GetNewsListType, NewsType} from './api';
 import * as api from './api';
 import type {TitleNewsListType} from './reducer';
 import {extractNewsList} from './helper';
@@ -27,6 +27,10 @@ type ReduxPropsType = {|
 
 type ReduxActionType = {|
     +applyGetNewListResponse: (getNewsListResponse: GetNewsListType, inBegin: boolean) => ApplyGetNewListResponseType,
+    +applyGetNewAchtungListResponse: (
+        getNewsAchtungListResponse: GetNewsAchtungListType,
+        inBegin: boolean
+    ) => ApplyGetNewAchtungListResponseType,
 |};
 
 type PassedPropsType = {
@@ -40,6 +44,7 @@ type StateType = null;
 
 const reduxAction: ReduxActionType = {
     applyGetNewListResponse,
+    applyGetNewAchtungListResponse,
 };
 
 export const pageSize = 20;
@@ -69,10 +74,31 @@ class TitleCardList extends Component<ReduxPropsType, PassedPropsType, StateType
         return getNewsListResponse;
     }
 
+    async fetchNewsAchtung(): Promise<null | GetNewsAchtungListType> {
+        const view = this;
+        const {props} = view;
+        const {auth, applyGetNewAchtungListResponse: applyGetNewAchtungListResponseAction, titleNewsList} = props;
+        const {newsAchtungResponseList} = titleNewsList;
+
+        const pageIndex = newsAchtungResponseList.length;
+
+        const getNewsAchtungListResponse = await api.getNewsAchtungList(pageIndex, pageSize);
+
+        if (getNewsAchtungListResponse === null) {
+            console.error('can not get news achtung list');
+            return null;
+        }
+
+        applyGetNewAchtungListResponseAction(getNewsAchtungListResponse, false);
+
+        return getNewsAchtungListResponse;
+    }
+
     componentDidMount() {
         const view = this;
 
         view.fetchNews();
+        view.fetchNewsAchtung();
     }
 
     /*

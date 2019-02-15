@@ -1,6 +1,6 @@
 // @flow
 
-import type {GetNewsListType} from './api';
+import type {GetNewsListType, GetNewsAchtungListType} from './api';
 import {titleCardListConst} from './const';
 
 export type ApplyGetNewListResponseType = {|
@@ -24,14 +24,22 @@ export function applyGetNewListResponse(
     };
 }
 
+export type ApplyGetNewAchtungListResponseType = {|
+    +type: 'title-card-list__apply-get-new-achtung-list-response',
+    +payload: {|
+        +getNewsAchtungListResponse: GetNewsAchtungListType,
+        +inBegin: boolean,
+    |},
+|};
+
 export function applyGetNewAchtungListResponse(
-    getNewsListResponse: GetNewsListType,
+    getNewsAchtungListResponse: GetNewsAchtungListType,
     inBegin: boolean
-): ApplyGetNewListResponseType {
+): ApplyGetNewAchtungListResponseType {
     return {
-        type: titleCardListConst.action.type.applyGetNewListResponse,
+        type: titleCardListConst.action.type.applyGetNewAchtungListResponse,
         payload: {
-            getNewsListResponse,
+            getNewsAchtungListResponse,
             inBegin,
         },
     };
