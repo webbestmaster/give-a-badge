@@ -6,6 +6,7 @@ import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 import {applyMiddleware, combineReducers, createStore} from 'redux';
 import {composeWithDevTools} from 'redux-devtools-extension/developmentOnly';
+
 import * as reducers from './reducer';
 
 type PassedPropsType = $Exact<{

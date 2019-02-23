@@ -5,6 +5,7 @@
 import type {ComponentType, Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+
 import type {GlobalStateType} from '../../../app/reducer';
 import type {SystemType} from '../../system/reducer/root';
 
@@ -23,10 +24,6 @@ type StateType = {|
 |};
 
 class Search extends Component<ReduxPropsType, PassedPropsType, StateType> {
-    // eslint-disable-next-line id-match
-    props: $Exact<{...ReduxPropsType, ...PassedPropsType}>;
-    state: StateType;
-
     constructor() {
         super();
         const view = this;
@@ -35,6 +32,9 @@ class Search extends Component<ReduxPropsType, PassedPropsType, StateType> {
             isActive: false,
         };
     }
+
+    state: StateType;
+    props: $Exact<{...ReduxPropsType, ...PassedPropsType}>;
 
     handleInputFocus = () => {
         const view = this;
@@ -53,7 +53,7 @@ class Search extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
         return (
             <div>
-                <input key="input" onFocus={view.handleInputFocus} onBlur={view.handleInputBlur} type="text"/>
+                <input key="input" onBlur={view.handleInputBlur} onFocus={view.handleInputFocus} type="text"/>
             </div>
         );
     }

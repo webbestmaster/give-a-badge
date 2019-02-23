@@ -9,6 +9,7 @@ import React, {Component} from 'react';
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
+
 import style from './notification.style.scss';
 import {SnackBarWrapper} from './snack-bar-wrapper/c-snack-bar-wrapper';
 import type {ShowSnackBarDetailType, SnackBarDetailType} from './action';
@@ -35,9 +36,6 @@ const fadeClassNames = {
 };
 
 export class Notification extends Component<PropsType, StateType> {
-    props: PropsType;
-    state: StateType;
-
     constructor(props: PropsType) {
         super(props);
 
@@ -48,6 +46,22 @@ export class Notification extends Component<PropsType, StateType> {
             refreshKey: 0,
         };
     }
+
+    state: StateType;
+
+    componentDidMount() {
+        const view = this;
+
+        view.bindEventListener();
+    }
+
+    componentWillUnmount() {
+        const view = this;
+
+        view.removeEventListener();
+    }
+
+    props: PropsType;
 
     clean() {
         const view = this;
@@ -135,18 +149,6 @@ export class Notification extends Component<PropsType, StateType> {
         window.removeEventListener(props.eventName, view.handleEvent, false);
     }
 
-    componentDidMount() {
-        const view = this;
-
-        view.bindEventListener();
-    }
-
-    componentWillUnmount() {
-        const view = this;
-
-        view.removeEventListener();
-    }
-
     createRemoveShackBarHandler(itemData: ShowSnackBarDetailType): () => void {
         const view = this;
 
@@ -160,10 +162,10 @@ export class Notification extends Component<PropsType, StateType> {
             <>
                 {itemData.content}
                 <IconButton
-                    onClick={view.createRemoveShackBarHandler(itemData)}
-                    key="close"
-                    color="inherit"
                     className={style.close_button}
+                    color="inherit"
+                    key="close"
+                    onClick={view.createRemoveShackBarHandler(itemData)}
                 >
                     <CloseIcon className={style.close_icon}/>
                 </IconButton>
@@ -176,10 +178,10 @@ export class Notification extends Component<PropsType, StateType> {
 
         return (
             <CSSTransition
-                onExited={itemData.handleOnHide}
-                key={itemData.id}
-                timeout={fadeTimeOut}
                 classNames={fadeClassNames}
+                key={itemData.id}
+                onExited={itemData.handleOnHide}
+                timeout={fadeTimeOut}
             >
                 <SnackBarWrapper>{view.renderListItemContent(itemData)}</SnackBarWrapper>
             </CSSTransition>
@@ -198,7 +200,7 @@ export class Notification extends Component<PropsType, StateType> {
         }
 
         return (
-            <CSSTransition key="screen-disable" timeout={fadeTimeOut} classNames={fadeClassNames}>
+            <CSSTransition classNames={fadeClassNames} key="screen-disable" timeout={fadeTimeOut}>
                 <div className={style.screen_disable}/>
             </CSSTransition>
         );
@@ -211,7 +213,7 @@ export class Notification extends Component<PropsType, StateType> {
 
         return [
             <TransitionGroup key={`${refreshKey}-fade`}>{view.renderScreenDisable()}</TransitionGroup>,
-            <TransitionGroup key={`${refreshKey}-content`} className={style.list_wrapper}>
+            <TransitionGroup className={style.list_wrapper} key={`${refreshKey}-content`}>
                 {list.map(view.renderListItem)}
             </TransitionGroup>,
         ];

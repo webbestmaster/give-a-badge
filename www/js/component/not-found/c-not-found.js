@@ -4,6 +4,7 @@
 
 import type {Node} from 'react';
 import React, {Component} from 'react';
+
 import type {ContextRouterType} from '../../../type/react-router-dom-v4';
 
 type PassedPropsType = {
@@ -21,9 +22,6 @@ type StateType = {|
 |};
 
 export class NotFound extends Component<PropsType, StateType> {
-    props: PropsType;
-    state: StateType;
-
     constructor(props: PropsType) {
         super(props);
 
@@ -33,6 +31,9 @@ export class NotFound extends Component<PropsType, StateType> {
             state: 0,
         };
     }
+
+    state: StateType;
+    props: PropsType;
 
     render(): Node {
         return (

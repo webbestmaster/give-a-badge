@@ -7,14 +7,16 @@
 import type {ComponentType, Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+
+import type {GlobalStateType} from '../../app/reducer';
+import {LoadComponent} from '../../lib/c-load-component';
+import {Spinner} from '../ui/spinner/c-spinner';
+
 import type {SetPopupStateType, SetUserType} from './action';
 import {openLoginPopup, setUser} from './action';
 import type {AuthType, UserType} from './reducer';
-import type {GlobalStateType} from '../../app/reducer';
 import {getMe} from './api';
-import {LoadComponent} from '../../lib/c-load-component';
 import {authConst} from './const';
-import {Spinner} from '../ui/spinner/c-spinner';
 
 type ReduxPropsType = {|
     +auth: AuthType,
@@ -37,10 +39,6 @@ type StateType = {};
 type PropsType = $Exact<{...PassedPropsType, ...ReduxPropsType, ...ReduxActionType}>;
 
 class Auth extends Component<ReduxPropsType, PassedPropsType, StateType> {
-    // eslint-disable-next-line id-match
-    props: PropsType;
-    state: StateType;
-
     constructor(props: PropsType) {
         super(props);
 
@@ -48,6 +46,16 @@ class Auth extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
         view.state = {};
     }
+
+    state: StateType;
+
+    async componentDidMount() {
+        const view = this;
+
+        await view.loginCheck();
+    }
+
+    props: PropsType;
 
     async loginCheck() {
         const view = this;
@@ -62,12 +70,6 @@ class Auth extends Component<ReduxPropsType, PassedPropsType, StateType> {
         }
 
         setUserAction(getMeResult.userData);
-    }
-
-    async componentDidMount() {
-        const view = this;
-
-        await view.loginCheck();
     }
 
     loadLoginPopup = async (): Promise<Node> => {

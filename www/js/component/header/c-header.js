@@ -5,17 +5,18 @@
 import type {Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import type {GlobalStateType} from '../../app/reducer';
-import style from './style.scss';
-import serviceStyle from '../../../css/service.scss';
 import withRouter from 'react-router-dom/withRouter';
 import Link from 'react-router-dom/Link';
-import {routes} from '../app/routes';
 import classNames from 'classnames';
-// import Search from './search';
-import {UserInfo} from './user-info/c-user-info';
+
+import {routes} from '../app/routes';
+import serviceStyle from '../../../css/service.scss';
+import type {GlobalStateType} from '../../app/reducer';
 import type {SystemType} from '../system/reducer/root';
 import type {ContextRouterType} from '../../../type/react-router-dom-v4';
+
+import style from './style.scss';
+import {UserInfo} from './user-info/c-user-info';
 
 type ReduxPropsType = {|
     +system: SystemType,
@@ -27,10 +28,6 @@ type StateType = {};
 type PropsType = {...PassedPropsType, ...$Exact<ContextRouterType>, ...ReduxPropsType};
 
 class Header extends Component<ReduxPropsType, PassedPropsType, StateType> {
-    props: PropsType;
-
-    state: StateType;
-
     constructor(props: PropsType) {
         super(props);
 
@@ -38,6 +35,9 @@ class Header extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
         view.state = {};
     }
+
+    state: StateType;
+    props: PropsType;
 
     isButtonActive(): boolean {
         const view = this;
@@ -53,10 +53,10 @@ class Header extends Component<ReduxPropsType, PassedPropsType, StateType> {
             <header className={style.header}>
                 <div className={serviceStyle.max_width}>
                     <Link
-                        to={routes.index.badgeCategoryList}
                         className={classNames(style.give_a_badge, {
                             [style.give_a_badge__active]: view.isButtonActive(),
                         })}
+                        to={routes.index.badgeCategoryList}
                     >
                         Give
                         <div/>A Badge

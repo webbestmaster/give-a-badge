@@ -5,16 +5,18 @@
 import type {ComponentType, Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import classNames from 'classnames';
+import Link from 'react-router-dom/Link';
+
 import type {GlobalStateType} from '../../app/reducer';
 import serviceStyle from '../../../css/service.scss';
 import helperStyle from '../../../css/helper.scss';
-import style from './style.scss';
-import classNames from 'classnames';
 import type {NewsType, NewsUserType} from '../title-card-list/api';
 import {newsInfo} from '../title-card-list/api';
-import Link from 'react-router-dom/Link';
 import {getBadgeCampaignPath, getBadgeWonPath} from '../app/routes';
 import {formatTimeDMY} from '../../lib/time';
+
+import style from './style.scss';
 
 type ReduxPropsType = {};
 
@@ -30,9 +32,6 @@ type StateType = {|
 type PropsType = $Exact<{...ReduxPropsType, ...PassedPropsType}>;
 
 class TitleCard extends Component<ReduxPropsType, PassedPropsType, StateType> {
-    props: PropsType;
-    state: StateType;
-
     constructor(props: PropsType) {
         super(props);
 
@@ -42,6 +41,9 @@ class TitleCard extends Component<ReduxPropsType, PassedPropsType, StateType> {
             state: 0,
         };
     }
+
+    state: StateType;
+    props: PropsType;
 
     renderFaceList(): Node {
         const view = this;
@@ -68,8 +70,8 @@ class TitleCard extends Component<ReduxPropsType, PassedPropsType, StateType> {
                         if (!isMoreThenMax || faceIndex < maxVisibleFace - 1) {
                             return (
                                 <div
-                                    key={userInList.id}
                                     className={peopleFaceClassName}
+                                    key={userInList.id}
                                     style={{backgroundImage: `url('${userInList.imageUrl}')`}}
                                 />
                             );
@@ -121,7 +123,7 @@ class TitleCard extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const {newsData} = props;
 
         return (
-            <Link to={view.getLinkPath()} className={style.card}>
+            <Link className={style.card} to={view.getLinkPath()}>
                 <div className={style.badge_icon} style={{backgroundImage: `url('${newsData.reason.imageUrl}')`}}/>
 
                 {view.renderFaceList()}

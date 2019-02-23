@@ -7,12 +7,14 @@
 import type {ComponentType, Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+
 import type {GlobalStateType} from '../../../app/reducer';
-import style from './style.scss';
 import serviceStyle from '../../../../css/service.scss';
 import type {SystemType} from '../../system/reducer/root';
 import type {AuthType} from '../../auth/reducer';
 import * as authApi from '../../auth/api';
+
+import style from './style.scss';
 
 type ReduxPropsType = {|
     // eslint-disable-next-line id-match
@@ -34,9 +36,6 @@ type StateType = {|
 type PropsType = $Exact<{...ReduxPropsType, ...PassedPropsType}>;
 
 class UserInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
-    props: PropsType;
-    state: StateType;
-
     constructor(props: PropsType) {
         super(props);
         const view = this;
@@ -45,6 +44,9 @@ class UserInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
             state: 0,
         };
     }
+
+    state: StateType;
+    props: PropsType;
 
     async logout() {
         await authApi.logout();
@@ -66,10 +68,10 @@ class UserInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
         return (
             <div className={style.user_info__desktop}>
                 <button
-                    type="button"
                     className={style.logout_button}
                     onClick={view.handleLogOut}
                     onKeyPress={view.handleLogOut}
+                    type="button"
                 />
                 <h5 className={style.user_name}>
                     <span className={serviceStyle.ellipsis}>
@@ -91,10 +93,10 @@ class UserInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
         return (
             <div className={style.user_info__mobile}>
                 <button
-                    type="button"
                     className={style.logout_button}
                     onClick={view.handleLogOut}
                     onKeyPress={view.handleLogOut}
+                    type="button"
                 />
                 <div className={style.user_avatar} style={{backgroundImage: `url('${auth.user.imageUrl}')`}}/>
             </div>

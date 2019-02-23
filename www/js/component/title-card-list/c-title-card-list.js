@@ -7,18 +7,20 @@
 import type {ComponentType, Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import InfiniteScroll from 'react-infinite-scroll-component';
+
 import type {GlobalStateType} from '../../app/reducer';
-import style from './style.scss';
 import type {AuthType} from '../auth/reducer';
 import {TitleCard} from '../title-card/c-title-card';
+import {Spinner} from '../ui/spinner/c-spinner';
+
+import style from './style.scss';
 import type {ApplyGetNewAchtungListResponseType, ApplyGetNewListResponseType} from './action';
 import {applyGetNewListResponse, applyGetNewAchtungListResponse} from './action';
 import type {GetNewsAchtungListType, GetNewsListType, NewsType} from './api';
 import * as api from './api';
 import type {TitleNewsListType} from './reducer';
 import {extractNewsList} from './helper';
-import InfiniteScroll from 'react-infinite-scroll-component';
-import {Spinner} from '../ui/spinner/c-spinner';
 
 type ReduxPropsType = {|
     +auth: AuthType,
@@ -50,9 +52,20 @@ const reduxAction: ReduxActionType = {
 export const pageSize = 20;
 
 class TitleCardList extends Component<ReduxPropsType, PassedPropsType, StateType> {
-    // eslint-disable-next-line id-match
-    props: PropsType;
+    static renderTitleCard(news: NewsType): Node {
+        return <TitleCard key={news.id} newsData={news}/>;
+    }
+
     state: StateType;
+
+    componentDidMount() {
+        const view = this;
+
+        view.fetchNews();
+        view.fetchNewsAchtung();
+    }
+
+    props: PropsType;
 
     async fetchNews(): Promise<null | GetNewsListType> {
         const view = this;
@@ -94,13 +107,6 @@ class TitleCardList extends Component<ReduxPropsType, PassedPropsType, StateType
         return getNewsAchtungListResponse;
     }
 
-    componentDidMount() {
-        const view = this;
-
-        view.fetchNews();
-        view.fetchNewsAchtung();
-    }
-
     /*
     async componentDidUpdate(prevProps: PropsType, prevState: StateType, snapshot?: mixed) {
         const view = this;
@@ -133,10 +139,6 @@ class TitleCardList extends Component<ReduxPropsType, PassedPropsType, StateType
         window.ga('send', 'event', 'Badge List Load', fetchNewsKListResult.last === true ? 'Finish' : 'Part');
     };
 
-    static renderTitleCard(news: NewsType): Node {
-        return <TitleCard key={news.id} newsData={news}/>;
-    }
-
     renderCardList(): Node {
         const view = this;
         const {props} = view;
@@ -155,9 +157,9 @@ class TitleCardList extends Component<ReduxPropsType, PassedPropsType, StateType
         return (
             <InfiniteScroll
                 dataLength={newsList.length} // This is important field to render the next data
-                next={view.infiniteScrollNext}
                 hasMore={!lastNewsResponse.last}
                 loader={<Spinner/>}
+                next={view.infiniteScrollNext}
             >
                 <div className={style.card_list}>{newsList.map(TitleCardList.renderTitleCard)}</div>
             </InfiniteScroll>

@@ -7,7 +7,9 @@
 import type {ComponentType, Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+
 import type {GlobalStateType} from '../../app/reducer';
+
 import type {LocaleType} from './reducer';
 import type {LocaleNameType} from './const';
 import {allLocales, localeConst} from './const';
@@ -65,8 +67,8 @@ export function getLocalizedString(
 
 class Locale extends Component<ReduxPropsType, PassedPropsType, StateType> {
     // eslint-disable-next-line id-match
-    props: $Exact<{...ReduxPropsType, ...PassedPropsType}>;
     state: StateType;
+    props: $Exact<{...ReduxPropsType, ...PassedPropsType}>;
 
     render(): string {
         const view = this;

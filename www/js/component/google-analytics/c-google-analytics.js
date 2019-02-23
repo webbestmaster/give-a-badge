@@ -9,6 +9,7 @@
 import type {Node} from 'react';
 import React, {Component} from 'react';
 import withRouter from 'react-router-dom/withRouter';
+
 import type {ContextRouterType} from '../../../type/react-router-dom-v4';
 
 type PassedPropsType = {|
@@ -23,8 +24,17 @@ type PropsType = $Exact<{
 type StateType = void;
 
 class GoogleAnalytics extends Component<PropsType, StateType> {
-    props: PropsType;
     state: StateType;
+
+    componentDidMount() {
+        const view = this;
+
+        view.loadScript();
+
+        view.bindEventListener();
+    }
+
+    props: PropsType;
 
     loadScript() {
         const view = this;
@@ -78,14 +88,6 @@ class GoogleAnalytics extends Component<PropsType, StateType> {
                 // window.ga('send', 'event', 'Badge List Load', fetchNewsKListResult.last === true ? 'Finish' : 'Part');
             }
         });
-    }
-
-    componentDidMount() {
-        const view = this;
-
-        view.loadScript();
-
-        view.bindEventListener();
     }
 
     render(): Node {

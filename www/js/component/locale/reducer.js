@@ -3,9 +3,11 @@
 /* global window */
 
 import {combineReducers} from 'redux';
+
+import type {ActionDataType} from '../../app/reducer-type';
+
 import type {LocaleNameType} from './const';
 import {localeConst} from './const';
-import type {ActionDataType} from '../../app/reducer-type';
 
 function getLocaleName(): LocaleNameType {
     const savedLocaleName = window.localStorage.getItem(localeConst.key.localStorage.localeName);

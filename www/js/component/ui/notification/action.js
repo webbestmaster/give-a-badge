@@ -4,6 +4,7 @@
 
 import type {Node} from 'react';
 import React from 'react';
+
 import type {SnackBarTypeType} from './snack-bar/c-snack-bar';
 import {SnackBar} from './snack-bar/c-snack-bar';
 

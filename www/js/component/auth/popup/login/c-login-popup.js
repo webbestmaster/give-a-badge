@@ -5,20 +5,22 @@
 import type {ComponentType, Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import type {GlobalStateType} from '../../../../app/reducer';
-import type {AuthType, UserType} from '../../reducer';
-import type {SetPopupStateType, SetUserType} from '../../action';
-import {closeLoginPopup, setUser} from '../../action';
-import {authConst} from '../../const';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+
+import type {AuthType, UserType} from '../../reducer';
+import type {SetPopupStateType, SetUserType} from '../../action';
+import {closeLoginPopup, setUser} from '../../action';
+import {authConst} from '../../const';
+import type {GlobalStateType} from '../../../../app/reducer';
 import * as api from '../../api';
-import style from './style.scss';
 import {getLocalizedString, Locale} from '../../../locale/c-locale';
 import type {LocaleType} from '../../../locale/reducer';
 import {defaultShowEventName, shackBarErrorHandler, showSnackBar} from '../../../ui/notification/action';
+
+import style from './style.scss';
 
 type ReduxPropsType = {|
     auth: AuthType,
@@ -55,11 +57,6 @@ type NodeType = {|
 |};
 
 class LoginPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
-    // eslint-disable-next-line id-match
-    props: PropsType;
-    state: StateType;
-    node: NodeType;
-
     constructor(props: PropsType) {
         super(props);
 
@@ -77,6 +74,10 @@ class LoginPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
             password: React.createRef(),
         };
     }
+
+    state: StateType;
+    props: PropsType;
+    node: NodeType;
 
     async onFormSubmit(evt: SyntheticEvent<EventTarget>) {
         evt.preventDefault();
@@ -117,29 +118,29 @@ class LoginPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const {isOpen} = auth.popup[authConst.popupName.login];
 
         return (
-            <Dialog key="dialog" open={isOpen} keepMounted>
+            <Dialog keepMounted key="dialog" open={isOpen}>
                 <form className={style.form} onSubmit={view.handleFormSubmit}>
                     <DialogTitle id="alert-dialog-slide-title">
                         <Locale stringKey="LOGIN_POPUP__HEADER"/>
                     </DialogTitle>
                     <fieldset className={style.login_fieldset}>
                         <TextField
+                            autoComplete="current-password"
+                            inputRef={view.node.login}
                             placeholder={getLocalizedString('LOGIN_POPUP__LOGIN_PLACEHOLDER', locale.name)}
                             required
                             type="text"
-                            autoComplete="current-password"
-                            inputRef={view.node.login}
                         />
                         <TextField
+                            autoComplete="current-password"
+                            inputRef={view.node.password}
+                            margin="normal"
                             placeholder={getLocalizedString('LOGIN_POPUP__PASSWORD_PLACEHOLDER', locale.name)}
                             required
                             type="password"
-                            autoComplete="current-password"
-                            margin="normal"
-                            inputRef={view.node.password}
                         />
                     </fieldset>
-                    <Button margin="normal" variant="contained" color="primary" type="submit">
+                    <Button color="primary" margin="normal" type="submit" variant="contained">
                         <Locale stringKey="LOGIN_POPUP__LOGIN_BUTTON"/>
                     </Button>
                 </form>

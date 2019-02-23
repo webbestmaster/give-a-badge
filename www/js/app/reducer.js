@@ -2,13 +2,10 @@
 
 import type {TitleNewsListType} from '../component/title-card-list/reducer';
 import {titleNewsList} from '../component/title-card-list/reducer';
-
 import type {AuthType} from '../component/auth/reducer';
 import {auth} from '../component/auth/reducer';
-
 import type {SystemType} from '../component/system/reducer/root';
 import {system} from '../component/system/reducer/root';
-
 import type {LocaleType} from '../component/locale/reducer';
 import {locale} from '../component/locale/reducer';
 

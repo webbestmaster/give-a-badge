@@ -5,16 +5,16 @@
 import type {ComponentType, Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+
 import type {GlobalStateType} from '../../app/reducer';
-import {BadgeCategoryListItem} from './item/c-item';
 import {HalfPopup} from '../ui/half-popup/c-half-popup';
 import {HalfPopupHeader} from '../ui/half-popup/header/c-header';
-import type {BadgeCategoryListType} from './api';
-import {getBadgeCategoryList} from './api';
-// import type {ExtractedCategoryType} from './helper';
-// import {extractCategoryList} from './helper';
 import {Locale} from '../locale/c-locale';
 import type {ContextRouterType} from '../../../type/react-router-dom-v4';
+
+import type {BadgeCategoryListType} from './api';
+import {getBadgeCategoryList} from './api';
+import {BadgeCategoryListItem} from './item/c-item';
 
 type ReduxPropsType = {};
 
@@ -40,10 +40,6 @@ const reduxAction: ReduxActionType = {
 };
 
 class BadgeCategoryList extends Component<ReduxPropsType, PassedPropsType, StateType> {
-    // eslint-disable-next-line id-match
-    props: PropsType;
-    state: StateType;
-
     constructor(props: PropsType) {
         super(props);
 
@@ -54,6 +50,16 @@ class BadgeCategoryList extends Component<ReduxPropsType, PassedPropsType, State
             badgeCategoryList: null,
         };
     }
+
+    state: StateType;
+
+    async componentDidMount() {
+        const view = this;
+
+        await view.fetchBadgeCategoryList();
+    }
+
+    props: PropsType;
 
     async fetchBadgeCategoryList(): Promise<BadgeCategoryListType | null> {
         const view = this;
@@ -70,12 +76,6 @@ class BadgeCategoryList extends Component<ReduxPropsType, PassedPropsType, State
         return badgeCategoryList;
     }
 
-    async componentDidMount() {
-        const view = this;
-
-        await view.fetchBadgeCategoryList();
-    }
-
     render(): Node {
         const view = this;
         const {props, state} = view;
@@ -90,7 +90,7 @@ class BadgeCategoryList extends Component<ReduxPropsType, PassedPropsType, State
                     Object.keys(badgeCategoryList).map(
                         (key: string): Node => {
                             return (
-                                <BadgeCategoryListItem key={key} name={key} categoryList={badgeCategoryList[key]}/>
+                                <BadgeCategoryListItem categoryList={badgeCategoryList[key]} key={key} name={key}/>
                             );
                         }
                     ) :

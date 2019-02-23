@@ -8,6 +8,7 @@ import type {Node} from 'react';
 import React, {Component} from 'react';
 import Swiper from 'swiper';
 import classNames from 'classnames';
+
 import style from './style.scss';
 
 export const direction = {
@@ -33,11 +34,6 @@ type AttrType = {|
 |};
 
 export class Scroll extends Component<StateType, PropsType> {
-    state: StateType;
-    props: PropsType;
-    node: NodeType;
-    attr: AttrType;
-
     constructor(props: PropsType) {
         super(props);
 
@@ -51,6 +47,34 @@ export class Scroll extends Component<StateType, PropsType> {
             swiper: null,
         };
     }
+
+    state: StateType;
+
+    componentDidMount() {
+        const view = this;
+
+        view.initSwiper()
+            .then((): void => console.log('swiper initialized'))
+            .catch((error: Error) => {
+                console.error('error with view.initSwiper()');
+                console.error(error);
+            });
+    }
+
+    componentDidUpdate() {
+        const view = this;
+
+        view.recount()
+            .then((): void => console.log('swiper recounted'))
+            .catch((error: Error) => {
+                console.error('error with swiper recounted');
+                console.error(error);
+            });
+    }
+
+    props: PropsType;
+    attr: AttrType;
+    node: NodeType;
 
     async initSwiper(): Promise<void> {
         const view = this;
@@ -77,28 +101,6 @@ export class Scroll extends Component<StateType, PropsType> {
         return view.recount();
     }
 
-    componentDidMount() {
-        const view = this;
-
-        view.initSwiper()
-            .then((): void => console.log('swiper initialized'))
-            .catch((error: Error) => {
-                console.error('error with view.initSwiper()');
-                console.error(error);
-            });
-    }
-
-    componentDidUpdate() {
-        const view = this;
-
-        view.recount()
-            .then((): void => console.log('swiper recounted'))
-            .catch((error: Error) => {
-                console.error('error with swiper recounted');
-                console.error(error);
-            });
-    }
-
     async recount(): Promise<void> {
         return new Promise((resolve: () => void) => {
             requestAnimationFrame(() => {
@@ -118,10 +120,10 @@ export class Scroll extends Component<StateType, PropsType> {
             <div className={classNames('swiper-container', style.swiper_container)} ref={view.node.wrapper}>
                 <div className={classNames('swiper-wrapper', style.swiper_wrapper)}>
                     <div
-                        style={{width}}
                         className={classNames('swiper-slide', style.swiper_slide, {
                             [style.swiper_slide__horizontal]: isHorizontal,
                         })}
+                        style={{width}}
                     >
                         {props.children}
                     </div>

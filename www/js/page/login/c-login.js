@@ -6,6 +6,7 @@ import type {Node} from 'react';
 import React, {Component} from 'react';
 import withRouter from 'react-router-dom/withRouter';
 import {connect} from 'react-redux';
+
 import type {GlobalStateType} from '../../app/reducer';
 import type {SystemType} from '../../component/system/reducer/root';
 import type {AuthType} from '../../component/auth/reducer';
@@ -28,8 +29,8 @@ type PropsType = $Exact<{
 
 // eslint-disable-next-line react/prefer-stateless-function
 class Login extends Component<ReduxPropsType, PassedPropsType, StateType> {
-    props: PropsType;
     state: StateType;
+    props: PropsType;
 
     render(): Node {
         return null;

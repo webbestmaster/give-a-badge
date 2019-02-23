@@ -62,6 +62,20 @@
         "filenames/no-index": 2,
         "import/no-useless-path-segments": 2,
         "import/no-default-export": 2,
+        "import/order": [
+            2,
+            {
+                "newlines-between": "always-and-inside-groups",
+                "groups": [
+                    "builtin",
+                    "internal",
+                    "external",
+                    "parent",
+                    "sibling",
+                    "index"
+                ]
+            }
+        ],
         "no-loops/no-loops": 2,
         "optimize-regex/optimize-regex": 1,
         "lodash/prefer-lodash-method": 0,
@@ -133,8 +147,17 @@
             }
         ],
         "react/no-unused-prop-types": 0,
-        "react/sort-comp": 0,
-        "react/jsx-sort-props": 0,
+        "react/sort-comp": 1,
+        "react/jsx-sort-props": [
+            2,
+            {
+                "reservedFirst": false,
+                "shorthandLast": false,
+                "ignoreCase": false,
+                "callbacksLast": false,
+                "noSortAlphabetically": false
+            }
+        ],
         "react/jsx-closing-bracket-location": [
             1,
             "line-aligned"

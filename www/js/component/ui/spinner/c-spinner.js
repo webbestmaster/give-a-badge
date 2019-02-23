@@ -5,8 +5,9 @@
 import type {Node} from 'react';
 import React, {Component} from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import style from './style.scss';
 import classNames from 'classnames';
+
+import style from './style.scss';
 
 type PassedPropsType = {
     +isFullSize?: boolean,

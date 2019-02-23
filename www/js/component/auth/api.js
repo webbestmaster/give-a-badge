@@ -3,6 +3,7 @@
 /* global window, fetch */
 
 import {appConst, serverApi} from '../../app/const';
+
 import type {UserType} from './reducer';
 
 type GetMeResponseType = {+hasError: true} | {+hasError: false, +userData: UserType};

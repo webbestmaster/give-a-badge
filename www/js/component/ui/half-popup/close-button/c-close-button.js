@@ -4,10 +4,12 @@
 
 import type {Node} from 'react';
 import React, {Component} from 'react';
-import type {ContextRouterType} from '../../../../../type/react-router-dom-v4';
 import withRouter from 'react-router-dom/withRouter';
-import style from './style.scss';
+
+import type {ContextRouterType} from '../../../../../type/react-router-dom-v4';
 import {routes} from '../../../app/routes';
+
+import style from './style.scss';
 
 type PassedPropsType = {|
     // +passedProp: string
@@ -24,9 +26,6 @@ type StateType = {|
 |};
 
 class CloseButton extends Component<PropsType, StateType> {
-    props: PropsType;
-    state: StateType;
-
     constructor(props: PropsType) {
         super(props);
 
@@ -36,6 +35,9 @@ class CloseButton extends Component<PropsType, StateType> {
             state: 0,
         };
     }
+
+    state: StateType;
+    props: PropsType;
 
     onClick() {
         const view = this;
@@ -61,10 +63,10 @@ class CloseButton extends Component<PropsType, StateType> {
 
         return (
             <button
-                type="button"
-                onKeyPress={view.handleOnClick}
-                onClick={view.handleOnClick}
                 className={style.close_button__wrapper}
+                onClick={view.handleOnClick}
+                onKeyPress={view.handleOnClick}
+                type="button"
             />
         );
     }

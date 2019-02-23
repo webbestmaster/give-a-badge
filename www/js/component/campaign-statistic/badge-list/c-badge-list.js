@@ -4,13 +4,15 @@
 
 import type {ComponentType, Node} from 'react';
 import React, {Component} from 'react';
-import style from './style.scss';
-import type {CampaignStatisticDataListType, CampaignStatisticDataType, DataType} from '../api';
 import classNames from 'classnames';
-import {direction, Scroll} from '../../ui/scroll/c-scroll';
 import {connect} from 'react-redux';
+
+import type {CampaignStatisticDataListType, CampaignStatisticDataType, DataType} from '../api';
+import {direction, Scroll} from '../../ui/scroll/c-scroll';
 import type {GlobalStateType} from '../../../app/reducer';
 import type {SystemType} from '../../system/reducer/root';
+
+import style from './style.scss';
 
 type ReduxPropsType = {|
     +system: SystemType,
@@ -36,9 +38,6 @@ type StateType = {|
 |};
 
 class BadgeList extends Component<PropsType, StateType> {
-    props: PropsType;
-    state: StateType;
-
     constructor(props: PropsType) {
         super(props);
 
@@ -48,6 +47,23 @@ class BadgeList extends Component<PropsType, StateType> {
             selectedBadgeIdList: [],
         };
     }
+
+    state: StateType;
+
+    componentDidUpdate() {
+        const view = this;
+        const {props, state} = view;
+        const {selectedBadgeIdList} = state;
+
+        if (selectedBadgeIdList.length === 0 && props.campaignStatisticDataList.length > 0) {
+            view.setState(
+                {selectedBadgeIdList: view.getBadgeList().map((badge: DataType): number | string => badge.id)},
+                view.onChangeBadgeList
+            );
+        }
+    }
+
+    props: PropsType;
 
     getBadgeList(): Array<DataType> {
         const view = this;
@@ -143,33 +159,20 @@ class BadgeList extends Component<PropsType, StateType> {
 
         return (
             <button
-                title={badgeData.name}
-                type="button"
-                key={badgeData.id}
-                onClick={handleOnClick}
-                onKeyPress={handleOnClick}
                 className={classNames(style.badge_tem, {
                     [style.badge_item__selected]: selectedBadgeIdList.includes(badgeData.id),
                     [style.badge_item__mobile]: props.system.screen.isMobile,
                 })}
+                key={badgeData.id}
+                onClick={handleOnClick}
+                onKeyPress={handleOnClick}
+                title={badgeData.name}
+                type="button"
             >
-                <img className={style.badge_item_image} src={badgeData.imageUrl} alt={badgeData.name}/>
+                <img alt={badgeData.name} className={style.badge_item_image} src={badgeData.imageUrl}/>
             </button>
         );
     };
-
-    componentDidUpdate() {
-        const view = this;
-        const {props, state} = view;
-        const {selectedBadgeIdList} = state;
-
-        if (selectedBadgeIdList.length === 0 && props.campaignStatisticDataList.length > 0) {
-            view.setState(
-                {selectedBadgeIdList: view.getBadgeList().map((badge: DataType): number | string => badge.id)},
-                view.onChangeBadgeList
-            );
-        }
-    }
 
     render(): Node {
         const view = this;
@@ -179,7 +182,7 @@ class BadgeList extends Component<PropsType, StateType> {
 
         if (props.system.screen.isMobile) {
             return (
-                <Scroll key="mobile-swiper" direction={direction.horizontal}>
+                <Scroll direction={direction.horizontal} key="mobile-swiper">
                     <div className={style.badge_list__mobile}>{badgeList.map(view.renderBadge)}</div>
                 </Scroll>
             );

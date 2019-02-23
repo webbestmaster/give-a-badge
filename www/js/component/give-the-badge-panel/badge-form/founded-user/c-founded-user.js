@@ -6,10 +6,12 @@ import type {ComponentType, Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import classNames from 'classnames';
+
 import type {GlobalStateType} from '../../../../app/reducer';
 import type {FoundedUserType} from '../api';
-import style from './style.scss';
 import {isString} from '../../../../lib/is';
+
+import style from './style.scss';
 
 type ReduxPropsType = {
     // +reduxProp: boolean
@@ -42,10 +44,6 @@ const reduxAction: ReduxActionType = {
 };
 
 class FoundedUser extends Component<ReduxPropsType, PassedPropsType, StateType> {
-    // eslint-disable-next-line id-match
-    props: PropsType;
-    state: StateType;
-
     constructor(props: PropsType) {
         super(props);
 
@@ -55,6 +53,9 @@ class FoundedUser extends Component<ReduxPropsType, PassedPropsType, StateType> 
             // state: 0
         };
     }
+
+    state: StateType;
+    props: PropsType;
 
     handleClick = (evt: SyntheticEvent<EventTarget>) => {
         const view = this;
@@ -75,8 +76,8 @@ class FoundedUser extends Component<ReduxPropsType, PassedPropsType, StateType> 
         // <a/> with href="#/..." added for i11y only
         return (
             <a
-                href="/#/add-user-in-result"
                 className={classNames(style.founded_user_wrapper, additionalClassName)}
+                href="/#/add-user-in-result"
                 onClick={view.handleClick}
                 onKeyPress={view.handleClick}
                 title={name}

@@ -3,7 +3,6 @@
 /* global window, PROJECT_ID */
 
 export type LocaleNameType = 'en-US' | 'ru-RU' | 'zh-CN' | 'zh-TW';
-
 import {enUs} from './translation/en-us/data';
 import {ruRu} from './translation/ru-ru/data';
 import {zhCn} from './translation/zh-cn/data';

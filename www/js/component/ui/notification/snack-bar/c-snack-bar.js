@@ -4,6 +4,7 @@
 
 import type {Node} from 'react';
 import React, {Component} from 'react';
+
 import style from './snack-bar.style.scss';
 
 export type SnackBarTypeType = 'error' | 'info' | 'success' | 'warning' | null;
@@ -20,8 +21,8 @@ type PropsType = {
 type StateType = void;
 
 export class SnackBar extends Component<PropsType, StateType> {
-    props: PropsType;
     state: StateType;
+    props: PropsType;
 
     // eslint-disable-next-line complexity
     renderIcon(): Node {

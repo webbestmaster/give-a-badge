@@ -6,18 +6,20 @@ import type {ComponentType, Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import classNames from 'classnames';
+
 import type {GlobalStateType} from '../../app/reducer';
 import type {ContextRouterType} from '../../../type/react-router-dom-v4';
 import {HalfPopup} from '../ui/half-popup/c-half-popup';
-import type {BadgeWonServerDataType} from './api';
-import {getBadgeWonServerData} from './api';
 import {isString} from '../../lib/is';
 import {routes} from '../app/routes';
-import style from './style.scss';
 import type {SystemType} from '../system/reducer/root';
 import {triggerResize} from '../ui/helper';
 import {Locale} from '../locale/c-locale';
 import {formatTimeDMY} from '../../lib/time';
+
+import style from './style.scss';
+import {getBadgeWonServerData} from './api';
+import type {BadgeWonServerDataType} from './api';
 
 type ReduxPropsType = {|
     +system: SystemType,
@@ -53,10 +55,6 @@ const reduxAction: ReduxActionType = {
 };
 
 class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
-    props: PropsType;
-    state: StateType;
-    node: NodeType;
-
     constructor(props: PropsType) {
         super(props);
 
@@ -72,6 +70,8 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
             faceList: React.createRef(),
         };
     }
+
+    state: StateType;
 
     async componentDidMount() {
         const view = this;
@@ -99,6 +99,9 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
         view.setState({badgeWonServerData}, triggerResize);
     }
 
+    props: PropsType;
+    node: NodeType;
+
     toggleIsShowMore() {
         const view = this;
         const {props, state} = view;
@@ -118,7 +121,7 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const {imageUrl, name} = badgeWonServerData.reason;
 
         return (
-            <h3 ref={view.node.header} className={style.header}>
+            <h3 className={style.header} ref={view.node.header}>
                 <div
                     className={style.header__badge_image}
                     style={{
@@ -269,9 +272,9 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
             return (
                 <button
                     className={classNames(style.show_more_less_button, style.show_more_less_button__open)}
-                    type="button"
                     onClick={view.handleShowMore}
                     onKeyPress={view.handleShowMore}
+                    type="button"
                 >
                     <Locale stringKey="BADGE_WON_LIST__SHOW_LESS"/>
                     <span className={style.show_more_less_button__arrow}>‹</span>
@@ -284,9 +287,9 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
         return (
             <button
                 className={style.show_more_less_button}
-                type="button"
                 onClick={view.handleShowMore}
                 onKeyPress={view.handleShowMore}
+                type="button"
             >
                 <Locale stringKey="BADGE_WON_LIST__SHOW_ALL"/>
                 {': '}
@@ -311,9 +314,9 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
         return (
             <>
                 <div
-                    style={view.getPeopleListStyle()}
-                    ref={view.node.faceList}
                     className={classNames(style.people_list, {[style.people_list__open]: isShowMore})}
+                    ref={view.node.faceList}
+                    style={view.getPeopleListStyle()}
                 >
                     {toUsers.map(
                         (userData: {+id: string | number, +imageUrl: string, +name: string}): Node => {

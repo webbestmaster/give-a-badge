@@ -4,10 +4,12 @@
 
 import type {Node} from 'react';
 import React, {Component} from 'react';
-import style from './style.scss';
+
 import {Scroll} from '../../ui/scroll/c-scroll';
 import {Locale} from '../../locale/c-locale';
 import type {CampaignStatisticDataListType, CampaignStatisticDataType, DataType} from '../api';
+
+import style from './style.scss';
 
 type PassedPropsType = {|
     +campaignStatisticDataList: CampaignStatisticDataListType,
@@ -23,9 +25,6 @@ type StateType = {|
 |};
 
 export class CommentList extends Component<PropsType, StateType> {
-    props: PropsType;
-    state: StateType;
-
     constructor(props: PropsType) {
         super(props);
 
@@ -35,6 +34,9 @@ export class CommentList extends Component<PropsType, StateType> {
             state: 0,
         };
     }
+
+    state: StateType;
+    props: PropsType;
 
     getCommentList(): Array<DataType> {
         const view = this;
@@ -50,7 +52,7 @@ export class CommentList extends Component<PropsType, StateType> {
 
     renderComment = (badgeData: DataType, index: number): Node => {
         return (
-            <div title={badgeData.name} key={`${index}/${badgeData.id}`} className={style.comment_item}>
+            <div className={style.comment_item} key={`${index}/${badgeData.id}`} title={badgeData.name}>
                 <div
                     className={style.comment_item_face}
                     style={{backgroundImage: `url(${'https://loremflickr.com/108/108'})`}}
@@ -84,7 +86,7 @@ export class CommentList extends Component<PropsType, StateType> {
                 </h3>
                 <div className={style.comment_list_scroll}>
                     {/* 465 comment width, 17 * 2 - left and right padding */}
-                    <Scroll slideWidth={commentList.length * 465 + 17 * 2} direction="horizontal">
+                    <Scroll direction="horizontal" slideWidth={commentList.length * 465 + 17 * 2}>
                         <div className={style.comment_list_wrapper}>{commentList.map(view.renderComment)}</div>
                     </Scroll>
                 </div>

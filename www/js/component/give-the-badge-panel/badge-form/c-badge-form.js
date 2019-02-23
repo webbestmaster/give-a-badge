@@ -6,19 +6,15 @@ import type {ComponentType, Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import classNames from 'classnames';
-import type {GlobalStateType} from '../../../app/reducer';
-import {getLocalizedString, Locale} from '../../locale/c-locale';
-import type {LocaleType} from '../../locale/reducer';
-import type {FoundedUserListType, FoundedUserType} from './api';
-import {badgeAssign, searchUser} from './api';
-import {FoundedUser} from './founded-user/c-founded-user';
 import Transition from 'react-transition-group/Transition';
 import type {TransitionStatus} from 'react-transition-group';
-import style from './style.scss';
-import foundedUserStyle from './founded-user/style.scss';
+import withRouter from 'react-router-dom/withRouter';
+
 import serviceStyle from '../../../../css/service.scss';
 import type {SystemType} from '../../system/reducer/root';
-import withRouter from 'react-router-dom/withRouter';
+import type {LocaleType} from '../../locale/reducer';
+import {getLocalizedString, Locale} from '../../locale/c-locale';
+import type {GlobalStateType} from '../../../app/reducer';
 import type {ContextRouterType} from '../../../../type/react-router-dom-v4';
 import {routes} from '../../app/routes';
 import type {GetNewsListType} from '../../title-card-list/api';
@@ -28,6 +24,12 @@ import {pageSize} from '../../title-card-list/c-title-card-list';
 import type {ApplyGetNewListResponseType} from '../../title-card-list/action';
 import {applyGetNewListResponse} from '../../title-card-list/action';
 import {defaultShowEventName, hideAllSnackBars, shackBarErrorHandler, showSnackBar} from '../../ui/notification/action';
+
+import foundedUserStyle from './founded-user/style.scss';
+import style from './style.scss';
+import {FoundedUser} from './founded-user/c-founded-user';
+import {badgeAssign, searchUser} from './api';
+import type {FoundedUserListType, FoundedUserType} from './api';
 
 type ReduxPropsType = {
     +locale: LocaleType,
@@ -102,11 +104,6 @@ console.warn('TODO: return MIN_SEARCH_STRING_LENGTH to 3');
 const MIN_SEARCH_STRING_LENGTH = 1;
 
 class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
-    // eslint-disable-next-line id-match
-    props: PropsType;
-    state: StateType;
-    node: NodeType;
-
     constructor(props: PropsType) {
         super(props);
 
@@ -131,6 +128,10 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
             },
         };
     }
+
+    state: StateType;
+    props: PropsType;
+    node: NodeType;
 
     async fetchNews() {
         const view = this;
@@ -375,10 +376,10 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
                                     return (
                                         <FoundedUser
                                             className={isInSelectedUserList ? foundedUserStyle.already_selected : ''}
-                                            onClick={view.createHandleOnClickUser(isInSelectedUserList, foundedUser)}
-                                            isActive={!isInSelectedUserList}
                                             foundedUser={foundedUser}
+                                            isActive={!isInSelectedUserList}
                                             key={foundedUserId}
+                                            onClick={view.createHandleOnClickUser(isInSelectedUserList, foundedUser)}
                                         />
                                     );
                                 }
@@ -404,20 +405,20 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const {selectedUserList} = state;
 
         if (selectedUserList.length === 0) {
-            return <div key="selected-user-list" className={style.selected_user_list__empty}/>;
+            return <div className={style.selected_user_list__empty} key="selected-user-list"/>;
         }
 
         return (
-            <div key="selected-user-list" className={style.selected_user_list}>
+            <div className={style.selected_user_list} key="selected-user-list">
                 {selectedUserList.map(
                     (foundedUser: FoundedUserType): Node => {
                         return (
                             <button
                                 className={style.selected_user_wrapper}
-                                type="button"
+                                key={foundedUser.id}
                                 onClick={view.createHandlerForRemoveFromSelectedUserList(foundedUser)}
                                 onKeyPress={view.createHandlerForRemoveFromSelectedUserList(foundedUser)}
-                                key={foundedUser.id}
+                                type="button"
                             >
                                 <div className={style.remove_face_icon}/>
                                 <div
@@ -479,13 +480,13 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
             >
                 <form className={style.badge_form} onSubmit={view.handleSubmitForm}>
                     <input
-                        ref={view.node.search.input}
                         className={style.search_input}
-                        onFocus={view.handleSearchInputOnFocus}
                         onBlur={view.handleSearchInputOnBlur}
+                        onFocus={view.handleSearchInputOnFocus}
                         onInput={view.handleSearchInputOnInput}
-                        type="text"
                         placeholder={getLocalizedString('SEARCH_PEOPLE__INPUT_PLACEHOLDER', props.locale.name)}
+                        ref={view.node.search.input}
+                        type="text"
                     />
 
                     {view.renderSearchUserList()}
@@ -493,10 +494,10 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
                     <textarea
                         className={style.badge_description}
-                        onInput={view.handleTextAreaOnInput}
                         cols="30"
-                        rows="10"
+                        onInput={view.handleTextAreaOnInput}
                         placeholder={getLocalizedString('SEARCH_PEOPLE__TEXT_AREA_PLACEHOLDER', props.locale.name)}
+                        rows="10"
                     />
 
                     <button

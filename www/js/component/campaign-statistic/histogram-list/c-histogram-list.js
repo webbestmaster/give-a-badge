@@ -4,16 +4,18 @@
 
 import type {ComponentType, Node} from 'react';
 import React, {Component} from 'react';
-import style from './style.scss';
+import {connect} from 'react-redux';
+import classNames from 'classnames';
+
 import type {CampaignStatisticDataListType, DataType} from '../api';
 import {Scroll} from '../../ui/scroll/c-scroll';
+import type {GlobalStateType} from '../../../app/reducer';
+import {noHistogramListActiveUserId} from '../c-campaign-statistic';
+
+import style from './style.scss';
 import type {BadgeOfUserType} from './helper';
 import {extractUserList, getBadgeListOfUser, getBadgeListSum} from './helper';
 import {histogramListConst} from './histogram-list-const';
-import {connect} from 'react-redux';
-import type {GlobalStateType} from '../../../app/reducer';
-import classNames from 'classnames';
-import {noHistogramListActiveUserId} from '../c-campaign-statistic';
 
 type ReduxPropsType = {
     // +auth: AuthType,
@@ -45,9 +47,6 @@ type StateType = {|
 |};
 
 class HistogramList extends Component<PropsType, StateType> {
-    props: PropsType;
-    state: StateType;
-
     constructor(props: PropsType) {
         super(props);
 
@@ -58,14 +57,17 @@ class HistogramList extends Component<PropsType, StateType> {
         };
     }
 
+    state: StateType;
+    props: PropsType;
+
     renderColumnPart = (badgeOfUser: BadgeOfUserType): Node => {
         const view = this;
         const maxRating = view.getMaxRating();
         const height = badgeOfUser.count / maxRating * histogramListConst.column.height.max;
 
         return (
-            <div title={badgeOfUser.name} key={badgeOfUser.id} style={{height}} className={style.histogram_column_part}>
-                <img src={badgeOfUser.imageUrl} className={style.histogram_column_part_image} alt={badgeOfUser.name}/>
+            <div className={style.histogram_column_part} key={badgeOfUser.id} style={{height}} title={badgeOfUser.name}>
+                <img alt={badgeOfUser.name} className={style.histogram_column_part_image} src={badgeOfUser.imageUrl}/>
             </div>
         );
     };
@@ -100,13 +102,13 @@ class HistogramList extends Component<PropsType, StateType> {
 
         return (
             <button
-                onClick={view.createHandlerOnHistogramItemClick(columnData.user.id)}
                 className={classNames(style.histogram_item_wrapper, {
                     [style.histogram_item_wrapper__active]: isActiveColumn || !hasSelectedUser,
                     [style.histogram_item_wrapper__show_face_select_mask]: isActiveColumn && hasSelectedUser,
                 })}
-                type="button"
                 key={columnData.user.id}
+                onClick={view.createHandlerOnHistogramItemClick(columnData.user.id)}
+                type="button"
             >
                 <div className={style.histogram_item}>
                     <div className={style.histogram_column}>{columnData.badgeList.map(view.renderColumnPart)}</div>
@@ -149,7 +151,7 @@ class HistogramList extends Component<PropsType, StateType> {
 
         return (
             // 76 - column height, 38 * 2 - left and right padding
-            <Scroll slideWidth={itemList.length * 76 + 38 * 2} direction="horizontal">
+            <Scroll direction="horizontal" slideWidth={itemList.length * 76 + 38 * 2}>
                 <div className={style.histogram_list_wrapper}>{itemList.map(view.renderItem)}</div>
             </Scroll>
         );

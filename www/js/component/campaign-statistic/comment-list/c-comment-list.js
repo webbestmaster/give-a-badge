@@ -4,9 +4,11 @@
 
 import type {Node} from 'react';
 import React, {Component} from 'react';
-import style from './style.scss';
+
 import {Locale} from '../../locale/c-locale';
 import type {CampaignStatisticDataListType, CampaignStatisticDataType} from '../api';
+
+import style from './style.scss';
 import {getCommentListAboutUser} from './helper';
 
 type PassedPropsType = {|
@@ -25,9 +27,6 @@ type StateType = {|
 |};
 
 export class CommentList extends Component<PropsType, StateType> {
-    props: PropsType;
-    state: StateType;
-
     constructor(props: PropsType) {
         super(props);
 
@@ -37,6 +36,9 @@ export class CommentList extends Component<PropsType, StateType> {
             state: 0,
         };
     }
+
+    state: StateType;
+    props: PropsType;
 
     getCommentList(): CampaignStatisticDataListType {
         const view = this;

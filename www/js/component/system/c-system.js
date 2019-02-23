@@ -7,15 +7,17 @@
 import type {ComponentType, Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import type {OnResizeType} from './action';
-import {onResize} from './action';
-import type {GlobalStateType} from '../../app/reducer';
-import type {SystemType} from './reducer/root';
 import classNames from 'classnames';
-import style from './style.css';
-import {screenNameReference} from './reducer/screen';
+
+import type {GlobalStateType} from '../../app/reducer';
 import type {LocaleType} from '../locale/reducer';
 import {localeNameReference} from '../locale/const';
+
+import type {OnResizeType} from './action';
+import {onResize} from './action';
+import type {SystemType} from './reducer/root';
+import style from './style.css';
+import {screenNameReference} from './reducer/screen';
 import {setIsGlobalScrollEnable} from './helper';
 
 type ReduxPropsType = {|
@@ -45,9 +47,6 @@ type PropsType = $Exact<{
 type StateType = null;
 
 class System extends Component<ReduxPropsType, PassedPropsType, StateType> {
-    props: PropsType;
-    state: StateType;
-
     constructor(props: PropsType) {
         super(props);
 
@@ -55,6 +54,8 @@ class System extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
         view.state = null;
     }
+
+    state: StateType;
 
     componentDidMount() {
         const view = this;
@@ -81,6 +82,8 @@ class System extends Component<ReduxPropsType, PassedPropsType, StateType> {
             setIsGlobalScrollEnable(props.system.scroll.isEnable);
         }
     }
+
+    props: PropsType;
 
     getClassName(): string {
         const view = this;

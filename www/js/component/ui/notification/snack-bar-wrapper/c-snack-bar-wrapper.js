@@ -2,6 +2,7 @@
 
 import type {Node} from 'react';
 import React from 'react';
+
 import style from './snack-bar-wrapper.style.scss';
 
 export function SnackBarWrapper({children}: {children: Node | Array<Node>}): Node {

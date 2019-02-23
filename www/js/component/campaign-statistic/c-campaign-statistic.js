@@ -5,21 +5,23 @@
 import type {ComponentType, Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import classNames from 'classnames';
+import withRouter from 'react-router-dom/withRouter';
+
 import type {GlobalStateType} from '../../app/reducer';
 import type {ContextRouterType} from '../../../type/react-router-dom-v4';
 import {HalfPopup} from '../ui/half-popup/c-half-popup';
 import {HalfPopupHeader} from '../ui/half-popup/header/c-header';
 import {Locale} from '../locale/c-locale';
+import type {SystemType} from '../system/reducer/root';
+import type {AuthType} from '../auth/reducer';
+
 import style from './style.scss';
 import {BadgeList} from './badge-list/c-badge-list';
 import {HistogramList} from './histogram-list/c-histogram-list';
 import {CommentList} from './comment-list/c-comment-list';
 import type {CampaignStatisticDataListType} from './api';
 import {getCampaignStatistic} from './api';
-import type {SystemType} from '../system/reducer/root';
-import classNames from 'classnames';
-import withRouter from 'react-router-dom/withRouter';
-import type {AuthType} from '../auth/reducer';
 
 type ReduxPropsType = {|
     +system: SystemType,
@@ -54,9 +56,6 @@ type StateType = {|
 export const noHistogramListActiveUserId = -1;
 
 class CampaignStatistic extends Component<ReduxPropsType, PassedPropsType, StateType> {
-    props: PropsType;
-    state: StateType;
-
     constructor(props: PropsType) {
         super(props);
 
@@ -68,6 +67,16 @@ class CampaignStatistic extends Component<ReduxPropsType, PassedPropsType, State
             histogramListActiveUserId: noHistogramListActiveUserId,
         };
     }
+
+    state: StateType;
+
+    async componentDidMount() {
+        const view = this;
+
+        await view.fetchCampaignStatistic();
+    }
+
+    props: PropsType;
 
     async fetchCampaignStatistic() {
         const view = this;
@@ -81,12 +90,6 @@ class CampaignStatistic extends Component<ReduxPropsType, PassedPropsType, State
         }
 
         view.setState({campaignStatisticDataList});
-    }
-
-    async componentDidMount() {
-        const view = this;
-
-        await view.fetchCampaignStatistic();
     }
 
     setHistogramListActiveUserId(userId: string | number) {
@@ -135,8 +138,8 @@ class CampaignStatistic extends Component<ReduxPropsType, PassedPropsType, State
             <div className={style.histogram_list__wrapper}>
                 <HistogramList
                     campaignStatisticDataList={campaignStatisticDataList}
-                    selectedBadgeIdList={selectedBadgeIdList}
                     onChangeActiveUser={view.handleOnChangeHistogramListActiveUser}
+                    selectedBadgeIdList={selectedBadgeIdList}
                 />
             </div>
         );
@@ -150,9 +153,9 @@ class CampaignStatistic extends Component<ReduxPropsType, PassedPropsType, State
         return (
             <div className={style.comment_list__wrapper}>
                 <CommentList
-                    histogramListActiveUserId={histogramListActiveUserId}
-                    campaignStatisticDataList={campaignStatisticDataList}
                     activeBadgeIdList={selectedBadgeIdList}
+                    campaignStatisticDataList={campaignStatisticDataList}
+                    histogramListActiveUserId={histogramListActiveUserId}
                 />
             </div>
         );

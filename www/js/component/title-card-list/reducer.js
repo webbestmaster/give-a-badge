@@ -1,8 +1,10 @@
 // @flow
 
 import {combineReducers} from 'redux';
-import {titleCardListConst} from './const';
+
 import type {ActionDataType} from '../../app/reducer-type';
+
+import {titleCardListConst} from './const';
 import type {GetNewsListType, GetNewsAchtungListType} from './api';
 
 export type TitleNewsListType = {|

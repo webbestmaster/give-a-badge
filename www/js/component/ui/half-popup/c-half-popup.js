@@ -5,16 +5,18 @@
 import type {ComponentType, Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import classNames from 'classnames';
+import withRouter from 'react-router-dom/withRouter';
+
 import type {GlobalStateType} from '../../../app/reducer';
-import style from './style.scss';
-import {CloseButton} from './close-button/c-close-button';
 import type {OnSetIsScrollEnableType} from '../../system/action';
 import {setIsScrollEnable} from '../../system/action';
 import {isString} from '../../../lib/is';
-import classNames from 'classnames';
-import errorImage from './i/error.svg';
 import type {ContextRouterType} from '../../../../type/react-router-dom-v4';
-import withRouter from 'react-router-dom/withRouter';
+
+import errorImage from './i/error.svg';
+import {CloseButton} from './close-button/c-close-button';
+import style from './style.scss';
 
 type ReduxPropsType = {
     // +reduxProp: boolean
@@ -56,10 +58,6 @@ const reduxAction: ReduxActionType = {
 };
 
 class HalfPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
-    // eslint-disable-next-line id-match
-    props: PropsType;
-    state: StateType;
-
     constructor(props: PropsType) {
         super(props);
 
@@ -71,11 +69,19 @@ class HalfPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
         };
     }
 
+    state: StateType;
+
     componentDidMount() {
         const view = this;
         const {state, props} = view;
 
         props.setIsScrollEnable(false, state.disableScrollId);
+    }
+
+    componentDidCatch(error: Error, info: mixed) {
+        const view = this;
+
+        view.setState({error});
     }
 
     componentWillUnmount() {
@@ -85,11 +91,7 @@ class HalfPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
         props.setIsScrollEnable(true, state.disableScrollId);
     }
 
-    componentDidCatch(error: Error, info: mixed) {
-        const view = this;
-
-        view.setState({error});
-    }
+    props: PropsType;
 
     renderContent(): Node {
         const view = this;
@@ -102,7 +104,7 @@ class HalfPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
         if (error instanceof Error) {
             return (
                 <div className={style.half_popup__container}>
-                    <img className={style.error_image} src={errorImage} alt="error"/>
+                    <img alt="error" className={style.error_image} src={errorImage}/>
                     <p className={style.error_text}>{error.message}</p>
                 </div>
             );
@@ -136,8 +138,8 @@ class HalfPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
             <div className={style.half_popup__wrapper}>
                 <div className={style.half_popup__fade}/>
                 <div
-                    onClick={view.handleOnClickBackground}
                     className={classNames(style.half_popup__set_container_position, containerPositionClassName)}
+                    onClick={view.handleOnClickBackground}
                 >
                     <CloseButton/>
                     {view.renderContent()}

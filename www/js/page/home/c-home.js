@@ -4,15 +4,16 @@
 
 import type {Node} from 'react';
 import React, {Component} from 'react';
-import {Header} from '../../component/header/c-header';
-import {TitleCardList} from '../../component/title-card-list/c-title-card-list';
 import Route from 'react-router-dom/Route';
-import {BadgeCategoryList} from '../../component/badge-category-list/c-badge-category-list';
-import {GiveTheBadgePanel} from '../../component/give-the-badge-panel/c-give-the-badge-panel';
-import {BadgeWon} from '../../component/badge-won/c-badge-won';
 import Switch from 'react-router-dom/Switch';
 import withRouter from 'react-router-dom/withRouter';
 import {connect} from 'react-redux';
+
+import {Header} from '../../component/header/c-header';
+import {TitleCardList} from '../../component/title-card-list/c-title-card-list';
+import {BadgeCategoryList} from '../../component/badge-category-list/c-badge-category-list';
+import {GiveTheBadgePanel} from '../../component/give-the-badge-panel/c-give-the-badge-panel';
+import {BadgeWon} from '../../component/badge-won/c-badge-won';
 import type {GlobalStateType} from '../../app/reducer';
 import {routes} from '../../component/app/routes';
 import {LoadComponent} from '../../lib/c-load-component';
@@ -37,9 +38,6 @@ type PropsType = $Exact<{
 
 // eslint-disable-next-line react/prefer-stateless-function
 class Home extends Component<ReduxPropsType, PassedPropsType, StateType> {
-    props: PropsType;
-    state: StateType;
-
     static async loadCampaignStatisticComponent(): Promise<Node> {
         const {CampaignStatistic} = await import('../../component/campaign-statistic/c-campaign-statistic');
 
@@ -59,17 +57,20 @@ class Home extends Component<ReduxPropsType, PassedPropsType, StateType> {
         return null;
     }
 
+    state: StateType;
+    props: PropsType;
+
     render(): Node {
         return (
             <>
                 <Header key="header"/>
                 <TitleCardList key="title-card-list"/>
                 <Switch key="home-switch">
-                    <Route component={Home.index} path={routes.index.index} exact/>
-                    <Route component={BadgeCategoryList} path={routes.index.badgeCategoryList} exact/>
-                    <Route component={GiveTheBadgePanel} path={routes.index.giveTheBadge} exact/>
-                    <Route component={BadgeWon} path={routes.index.badgeWon} exact/>
-                    <Route component={Home.campaignStatistic} path={routes.index.statistic} exact/>
+                    <Route component={Home.index} exact path={routes.index.index}/>
+                    <Route component={BadgeCategoryList} exact path={routes.index.badgeCategoryList}/>
+                    <Route component={GiveTheBadgePanel} exact path={routes.index.giveTheBadge}/>
+                    <Route component={BadgeWon} exact path={routes.index.badgeWon}/>
+                    <Route component={Home.campaignStatistic} exact path={routes.index.statistic}/>
                     <Route component={NotFound}/>
                 </Switch>
             </>

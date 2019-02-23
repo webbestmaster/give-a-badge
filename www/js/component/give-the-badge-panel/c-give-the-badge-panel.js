@@ -5,12 +5,14 @@
 import type {ComponentType, Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+
 import type {GlobalStateType} from '../../app/reducer';
 import {HalfPopup} from '../ui/half-popup/c-half-popup';
 import {HalfPopupHeader} from '../ui/half-popup/header/c-header';
 import {Locale} from '../locale/c-locale';
 import type {ContextRouterType} from '../../../type/react-router-dom-v4';
 import {isString} from '../../lib/is';
+
 import {BadgeForm} from './badge-form/c-badge-form';
 import {BadgeInfo} from './badge-info/c-badge-info';
 
@@ -43,10 +45,6 @@ const reduxAction: ReduxActionType = {
 };
 
 class GiveTheBadgePanel extends Component<ReduxPropsType, PassedPropsType, StateType> {
-    // eslint-disable-next-line id-match
-    props: PropsType;
-    state: StateType;
-
     constructor(props: PropsType) {
         super(props);
 
@@ -57,6 +55,8 @@ class GiveTheBadgePanel extends Component<ReduxPropsType, PassedPropsType, State
         };
     }
 
+    state: StateType;
+
     componentDidMount() {
         const view = this;
         const {props, state} = view;
@@ -65,6 +65,8 @@ class GiveTheBadgePanel extends Component<ReduxPropsType, PassedPropsType, State
 
         console.log('badge id:', badgeId);
     }
+
+    props: PropsType;
 
     render(): Node {
         const view = this;

@@ -5,16 +5,18 @@
 import type {ComponentType, Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import type {GlobalStateType} from '../../../app/reducer';
-import type {BadgeType} from '../../badge-category-list/api';
-import {getBadgeCategoryList} from '../../badge-category-list/api';
-import style from './style.scss';
-import type {SystemType} from '../../system/reducer/root';
 import classNames from 'classnames';
 import withRouter from 'react-router-dom/withRouter';
+
+import type {SystemType} from '../../system/reducer/root';
+import {getBadgeCategoryList} from '../../badge-category-list/api';
+import type {BadgeType} from '../../badge-category-list/api';
+import type {GlobalStateType} from '../../../app/reducer';
 import {routes} from '../../app/routes';
 import type {ContextRouterType} from '../../../../type/react-router-dom-v4';
 import {Locale} from '../../locale/c-locale';
+
+import style from './style.scss';
 
 type ReduxPropsType = {|
     +system: SystemType,
@@ -45,10 +47,6 @@ const reduxAction: ReduxActionType = {
 };
 
 class BadgeInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
-    // eslint-disable-next-line id-match
-    props: PropsType;
-    state: StateType;
-
     constructor(props: PropsType) {
         super(props);
 
@@ -58,6 +56,16 @@ class BadgeInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
             badgeInfo: null,
         };
     }
+
+    state: StateType;
+
+    async componentDidMount() {
+        const view = this;
+
+        await view.fetchBadgeInfo();
+    }
+
+    props: PropsType;
 
     async fetchBadgeInfo(): Promise<BadgeType | null> {
         const view = this;
@@ -92,12 +100,6 @@ class BadgeInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
         view.setState({badgeInfo});
 
         return badgeInfo;
-    }
-
-    async componentDidMount() {
-        const view = this;
-
-        await view.fetchBadgeInfo();
     }
 
     renderBadgeLeft(): Node {

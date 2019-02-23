@@ -5,14 +5,16 @@
 import type {ComponentType, Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import type {GlobalStateType} from '../../../app/reducer';
-import style from './style.scss';
-import {HalfPopupSubHeader} from '../../ui/half-popup/sub-header/c-sub-header';
-import type {BadgeType} from '../api';
 import Link from 'react-router-dom/Link';
 import classNames from 'classnames';
+
+import {HalfPopupSubHeader} from '../../ui/half-popup/sub-header/c-sub-header';
+import type {BadgeType} from '../api';
+import type {GlobalStateType} from '../../../app/reducer';
 import serviceStyle from '../../../../css/service.scss';
 import {getBadgePath} from '../../app/routes';
+
+import style from './style.scss';
 
 type ReduxPropsType = {
     // +reduxProp: boolean
@@ -45,9 +47,16 @@ const reduxAction: ReduxActionType = {
 };
 
 class BadgeCategoryListItem extends Component<ReduxPropsType, PassedPropsType, StateType> {
-    // eslint-disable-next-line id-match
-    props: PropsType;
+    static renderItemLeft(badgeCategory: BadgeType): Node {
+        if (badgeCategory.countLeft === null) {
+            return null;
+        }
+
+        return <span className={style.badge_left}>{badgeCategory.countLeft}</span>;
+    }
+
     state: StateType;
+    props: PropsType;
 
     renderBadgeList(): Node {
         const view = this;
@@ -60,10 +69,10 @@ class BadgeCategoryListItem extends Component<ReduxPropsType, PassedPropsType, S
                     (badgeCategory: BadgeType): Node => {
                         return (
                             <Link
-                                key={badgeCategory.id}
-                                to={getBadgePath(badgeCategory.id)}
                                 className={style.badge_item}
+                                key={badgeCategory.id}
                                 title={badgeCategory.name}
+                                to={getBadgePath(badgeCategory.id)}
                             >
                                 <div
                                     className={style.badge_image}
@@ -77,14 +86,6 @@ class BadgeCategoryListItem extends Component<ReduxPropsType, PassedPropsType, S
                 )}
             </div>
         );
-    }
-
-    static renderItemLeft(badgeCategory: BadgeType): Node {
-        if (badgeCategory.countLeft === null) {
-            return null;
-        }
-
-        return <span className={style.badge_left}>{badgeCategory.countLeft}</span>;
     }
 
     render(): Node {
