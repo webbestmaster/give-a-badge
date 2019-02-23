@@ -168,8 +168,22 @@ class TitleCardList extends Component<ReduxPropsType, PassedPropsType, StateType
 
     render(): Node {
         const view = this;
+        const {props} = view;
 
-        return view.renderCardList();
+        return (
+            <>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+
+                {JSON.stringify(props.titleNewsList.newsAchtungResponseList)}
+                <hr/>
+                {view.renderCardList()}
+            </>
+        );
     }
 }
 

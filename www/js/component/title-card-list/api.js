@@ -59,7 +59,7 @@ export type GetNewsListType = {
         +ignoreCase: boolean,
         +property: string,
         +nullHandling: 'NATIVE',
-    |}>,
+    |}> | null,
     +totalPages: number,
     +totalElements: number,
 };
@@ -78,7 +78,7 @@ export type GetNewsAchtungListType = {
         +ignoreCase: boolean,
         +property: string,
         +nullHandling: 'NATIVE',
-    |}>,
+    |}> | null,
     +totalPages: number,
     +totalElements: number,
 };
