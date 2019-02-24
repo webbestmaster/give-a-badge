@@ -4,8 +4,8 @@ import type {SetLocaleType} from '../component/locale/action';
 import type {OnResizeType, OnSetIsScrollEnableType} from '../component/system/action';
 import type {SetPopupStateType, SetUserType} from '../component/auth/action';
 import type {
-    ApplyGetNewListResponseType,
     ApplyGetNewAchtungListResponseType,
+    ApplyGetNewListResponseType,
 } from '../component/title-card-list/action';
 
 type DefaultActionDataType = {|type: string|};

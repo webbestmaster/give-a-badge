@@ -5,7 +5,7 @@ import {combineReducers} from 'redux';
 import type {ActionDataType} from '../../app/reducer-type';
 
 import {titleCardListConst} from './const';
-import type {GetNewsListType, GetNewsAchtungListType} from './api';
+import type {GetNewsAchtungListType, GetNewsListType} from './api';
 
 export type TitleNewsListType = {|
     +newsResponseList: Array<GetNewsListType>,

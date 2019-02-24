@@ -9,8 +9,8 @@ import classNames from 'classnames';
 import withRouter from 'react-router-dom/withRouter';
 
 import type {SystemType} from '../../system/reducer/root';
-import {getBadgeCategoryList} from '../../badge-category-list/api';
 import type {BadgeType} from '../../badge-category-list/api';
+import {getBadgeCategoryList} from '../../badge-category-list/api';
 import type {GlobalStateType} from '../../../app/reducer';
 import {routes} from '../../app/routes';
 import type {ContextRouterType} from '../../../../type/react-router-dom-v4';

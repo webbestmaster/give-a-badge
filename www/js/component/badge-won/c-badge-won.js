@@ -18,8 +18,8 @@ import {Locale} from '../locale/c-locale';
 import {formatTimeDMY} from '../../lib/time';
 
 import style from './style.scss';
-import {getBadgeWonServerData} from './api';
 import type {BadgeWonServerDataType} from './api';
+import {getBadgeWonServerData} from './api';
 
 type ReduxPropsType = {|
     +system: SystemType,

@@ -28,8 +28,8 @@ import {defaultShowEventName, hideAllSnackBars, shackBarErrorHandler, showSnackB
 import foundedUserStyle from './founded-user/style.scss';
 import style from './style.scss';
 import {FoundedUser} from './founded-user/c-founded-user';
-import {badgeAssign, searchUser} from './api';
 import type {FoundedUserListType, FoundedUserType} from './api';
+import {badgeAssign, searchUser} from './api';
 
 type ReduxPropsType = {
     +locale: LocaleType,

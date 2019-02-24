@@ -18,7 +18,7 @@ import {Locale} from '../locale/c-locale';
 
 import style from './style.scss';
 import type {ApplyGetNewAchtungListResponseType, ApplyGetNewListResponseType} from './action';
-import {applyGetNewListResponse, applyGetNewAchtungListResponse} from './action';
+import {applyGetNewAchtungListResponse, applyGetNewListResponse} from './action';
 import type {GetNewsAchtungListType, GetNewsListType, NewsAchtungType, NewsType} from './api';
 import * as api from './api';
 import type {TitleNewsListType} from './reducer';

@@ -12,9 +12,6 @@ import type {GlobalStateType} from '../../app/reducer';
 import serviceStyle from '../../../css/service.scss';
 import helperStyle from '../../../css/helper.scss';
 import type {NewsAchtungType, NewsUserType} from '../title-card-list/api';
-import {newsInfo} from '../title-card-list/api';
-import {getBadgeCampaignPath, getBadgeWonPath} from '../app/routes';
-import {formatTimeDMY} from '../../lib/time';
 
 import style from './style.scss';
 
@@ -94,20 +91,6 @@ class TitleAchtungCard extends Component<ReduxPropsType, PassedPropsType, StateT
         );
     }
 
-    /*
-    renderAuthor(): Node {
-        const view = this;
-        const {props, state} = view;
-        const {newsData} = props;
-
-        if (newsData.author === null) {
-            return null;
-        }
-
-        return <div className={style.bottom_face} style={{backgroundImage: `url('${newsData.author.imageUrl}')`}}/>;
-    }
-*/
-
     render(): Node {
         const view = this;
         const {props} = view;
@@ -122,13 +105,6 @@ class TitleAchtungCard extends Component<ReduxPropsType, PassedPropsType, StateT
                 <div className={style.review}>
                     <p className={classNames(helperStyle.line_cap_3, style.review__text)}>{newsData.comment}</p>
                 </div>
-
-                {/*
-                <div className={classNames(serviceStyle.clear_self, style.bottom_data_wrapper)}>
-                    {view.renderAuthor()}
-                    <p className={style.bottom_date}>{formatTimeDMY(newsData.date)}</p>
-                </div>
-*/}
             </Link>
         );
     }

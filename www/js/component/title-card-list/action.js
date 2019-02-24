@@ -1,6 +1,6 @@
 // @flow
 
-import type {GetNewsListType, GetNewsAchtungListType} from './api';
+import type {GetNewsAchtungListType, GetNewsListType} from './api';
 import {titleCardListConst} from './const';
 
 export type ApplyGetNewListResponseType = {|
