@@ -31,8 +31,10 @@
 
 .people_list {
     border-bottom: 1px solid #f1f5fa;
+    box-sizing: border-box;
     display: block;
     margin-bottom: 17px;
+    min-height: 91px;
     padding: 29px 5px 8px 14px;
     position: relative;
 }

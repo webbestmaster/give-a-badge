@@ -45,12 +45,12 @@ class TitleAchtungCard extends Component<ReduxPropsType, PassedPropsType, StateT
     state: StateType;
     props: PropsType;
 
-    /*
     renderFaceList(): Node {
         const view = this;
         const {props, state} = view;
         const {newsData} = props;
-        const userList = newsData.toUsers;
+        const userList = newsData.toUsers || [];
+
         const isSingleItem = userList.length === 1;
         const peopleFaceClassName = classNames(style.people_face, {
             [style.people_face__single]: isSingleItem,
@@ -81,7 +81,7 @@ class TitleAchtungCard extends Component<ReduxPropsType, PassedPropsType, StateT
                         if (faceIndex === maxVisibleFace - 1) {
                             return (
                                 <div className={style.people_face__number} key="face-number">
-                                    +{newsData.totalToUsers - maxVisibleFace + 1}
+                                    +{userList.length - maxVisibleFace + 1}
                                     &nbsp;
                                 </div>
                             );
@@ -93,7 +93,6 @@ class TitleAchtungCard extends Component<ReduxPropsType, PassedPropsType, StateT
             </div>
         );
     }
-*/
 
     /*
     renderAuthor(): Node {
@@ -118,12 +117,13 @@ class TitleAchtungCard extends Component<ReduxPropsType, PassedPropsType, StateT
             <Link className={style.card} to="#">
                 <div className={style.badge_icon} style={{backgroundImage: `url('${newsData.imageUrl}')`}}/>
 
-                {/*
                 {view.renderFaceList()}
 
                 <div className={style.review}>
                     <p className={classNames(helperStyle.line_cap_3, style.review__text)}>{newsData.comment}</p>
                 </div>
+
+                {/*
                 <div className={classNames(serviceStyle.clear_self, style.bottom_data_wrapper)}>
                     {view.renderAuthor()}
                     <p className={style.bottom_date}>{formatTimeDMY(newsData.date)}</p>
