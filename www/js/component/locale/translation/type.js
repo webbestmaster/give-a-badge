@@ -4,6 +4,9 @@ export type LangDataType = {|
     /* eslint-disable id-match, id-length */
     +META__LANGUAGE_NAME: string,
 
+    +TITLE_BADGE_LIST__HEADER__ACHTUNG_NEWS: string,
+    +TITLE_BADGE_LIST__HEADER__MAIN_NEWS: string,
+
     +LOGIN_POPUP__HEADER: string,
     +LOGIN_POPUP__LOGIN_PLACEHOLDER: string,
     +LOGIN_POPUP__PASSWORD_PLACEHOLDER: string,

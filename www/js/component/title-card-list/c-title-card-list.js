@@ -12,15 +12,17 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import type {GlobalStateType} from '../../app/reducer';
 import type {AuthType} from '../auth/reducer';
 import {TitleCard} from '../title-card/c-title-card';
+import {TitleAchtungCard} from '../title-card/c-title-achtung-card';
 import {Spinner} from '../ui/spinner/c-spinner';
+import {Locale} from '../locale/c-locale';
 
 import style from './style.scss';
 import type {ApplyGetNewAchtungListResponseType, ApplyGetNewListResponseType} from './action';
 import {applyGetNewListResponse, applyGetNewAchtungListResponse} from './action';
-import type {GetNewsAchtungListType, GetNewsListType, NewsType} from './api';
+import type {GetNewsAchtungListType, GetNewsListType, NewsAchtungType, NewsType} from './api';
 import * as api from './api';
 import type {TitleNewsListType} from './reducer';
-import {extractNewsList} from './helper';
+import {extractNewsAchtungList, extractNewsList} from './helper';
 
 type ReduxPropsType = {|
     +auth: AuthType,
@@ -54,6 +56,10 @@ export const pageSize = 20;
 class TitleCardList extends Component<ReduxPropsType, PassedPropsType, StateType> {
     static renderTitleCard(news: NewsType): Node {
         return <TitleCard key={news.id} newsData={news}/>;
+    }
+
+    static renderAchtungTitleCard(news: NewsAchtungType): Node {
+        return <TitleAchtungCard key={news.entityId} newsData={news}/>;
     }
 
     state: StateType;
@@ -145,6 +151,7 @@ class TitleCardList extends Component<ReduxPropsType, PassedPropsType, StateType
         const {titleNewsList} = props;
 
         const newsList = extractNewsList(titleNewsList);
+        const newsAchtungList = extractNewsAchtungList(titleNewsList);
         const {newsResponseList} = titleNewsList;
         const newsResponseListLength = newsResponseList.length;
 
@@ -161,29 +168,26 @@ class TitleCardList extends Component<ReduxPropsType, PassedPropsType, StateType
                 loader={<Spinner/>}
                 next={view.infiniteScrollNext}
             >
-                <div className={style.card_list}>{newsList.map(TitleCardList.renderTitleCard)}</div>
+                <div className={style.card_list}>
+                    <h3 className={style.card_list_container__header}>
+                        <Locale stringKey="TITLE_BADGE_LIST__HEADER__ACHTUNG_NEWS"/>
+                    </h3>
+                    <div className={style.card_list_container}>
+                        {newsAchtungList.map(TitleCardList.renderAchtungTitleCard)}
+                    </div>
+                    <h3 className={style.card_list_container__header}>
+                        <Locale stringKey="TITLE_BADGE_LIST__HEADER__MAIN_NEWS"/>
+                    </h3>
+                    <div className={style.card_list_container}>{newsList.map(TitleCardList.renderTitleCard)}</div>
+                </div>
             </InfiniteScroll>
         );
     }
 
     render(): Node {
         const view = this;
-        const {props} = view;
 
-        return (
-            <>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-
-                {JSON.stringify(props.titleNewsList.newsAchtungResponseList)}
-                <hr/>
-                {view.renderCardList()}
-            </>
-        );
+        return view.renderCardList();
     }
 }
 

@@ -11,7 +11,7 @@ import Link from 'react-router-dom/Link';
 import type {GlobalStateType} from '../../app/reducer';
 import serviceStyle from '../../../css/service.scss';
 import helperStyle from '../../../css/helper.scss';
-import type {NewsType, NewsUserType} from '../title-card-list/api';
+import type {NewsAchtungType, NewsUserType} from '../title-card-list/api';
 import {newsInfo} from '../title-card-list/api';
 import {getBadgeCampaignPath, getBadgeWonPath} from '../app/routes';
 import {formatTimeDMY} from '../../lib/time';
@@ -21,7 +21,7 @@ import style from './style.scss';
 type ReduxPropsType = {};
 
 type PassedPropsType = {|
-    +newsData: NewsType,
+    +newsData: NewsAchtungType,
 |};
 
 type StateType = {|
@@ -31,7 +31,7 @@ type StateType = {|
 // eslint-disable-next-line id-match
 type PropsType = $Exact<{...ReduxPropsType, ...PassedPropsType}>;
 
-class TitleCard extends Component<ReduxPropsType, PassedPropsType, StateType> {
+class TitleAchtungCard extends Component<ReduxPropsType, PassedPropsType, StateType> {
     constructor(props: PropsType) {
         super(props);
 
@@ -45,6 +45,7 @@ class TitleCard extends Component<ReduxPropsType, PassedPropsType, StateType> {
     state: StateType;
     props: PropsType;
 
+    /*
     renderFaceList(): Node {
         const view = this;
         const {props, state} = view;
@@ -92,7 +93,9 @@ class TitleCard extends Component<ReduxPropsType, PassedPropsType, StateType> {
             </div>
         );
     }
+*/
 
+    /*
     renderAuthor(): Node {
         const view = this;
         const {props, state} = view;
@@ -104,18 +107,7 @@ class TitleCard extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
         return <div className={style.bottom_face} style={{backgroundImage: `url('${newsData.author.imageUrl}')`}}/>;
     }
-
-    getLinkPath(): string {
-        const view = this;
-        const {props} = view;
-        const {newsData} = props;
-
-        if (newsData.newsType === newsInfo.type.campaignResults) {
-            return getBadgeCampaignPath(newsData.entityId);
-        }
-
-        return getBadgeWonPath(newsData.id);
-    }
+*/
 
     render(): Node {
         const view = this;
@@ -123,9 +115,10 @@ class TitleCard extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const {newsData} = props;
 
         return (
-            <Link className={style.card} to={view.getLinkPath()}>
-                <div className={style.badge_icon} style={{backgroundImage: `url('${newsData.reason.imageUrl}')`}}/>
+            <Link className={style.card} to="#">
+                <div className={style.badge_icon} style={{backgroundImage: `url('${newsData.imageUrl}')`}}/>
 
+                {/*
                 {view.renderFaceList()}
 
                 <div className={style.review}>
@@ -135,14 +128,15 @@ class TitleCard extends Component<ReduxPropsType, PassedPropsType, StateType> {
                     {view.renderAuthor()}
                     <p className={style.bottom_date}>{formatTimeDMY(newsData.date)}</p>
                 </div>
+*/}
             </Link>
         );
     }
 }
 
-const ConnectedComponent = connect<ComponentType<TitleCard>, PassedPropsType, ReduxPropsType, {}>(
+const ConnectedComponent = connect<ComponentType<TitleAchtungCard>, PassedPropsType, ReduxPropsType, {}>(
     (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({}),
     {}
-)(TitleCard);
+)(TitleAchtungCard);
 
-export {ConnectedComponent as TitleCard};
+export {ConnectedComponent as TitleAchtungCard};

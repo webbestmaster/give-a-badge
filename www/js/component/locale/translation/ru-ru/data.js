@@ -6,6 +6,9 @@ export const ruRu: LangDataType = {
     /* eslint-disable id-match, id-length */
     META__LANGUAGE_NAME: 'Русский',
 
+    TITLE_BADGE_LIST__HEADER__ACHTUNG_NEWS: 'Ахтунг Новости',
+    TITLE_BADGE_LIST__HEADER__MAIN_NEWS: 'Основные Новости',
+
     LOGIN_POPUP__HEADER: 'Login',
     LOGIN_POPUP__LOGIN_PLACEHOLDER: 'Login',
     LOGIN_POPUP__PASSWORD_PLACEHOLDER: 'Password',

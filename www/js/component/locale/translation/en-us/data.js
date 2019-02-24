@@ -6,6 +6,9 @@ export const enUs: LangDataType = {
     /* eslint-disable id-match, id-length */
     META__LANGUAGE_NAME: 'English',
 
+    TITLE_BADGE_LIST__HEADER__ACHTUNG_NEWS: 'Achtung News',
+    TITLE_BADGE_LIST__HEADER__MAIN_NEWS: 'Main News',
+
     LOGIN_POPUP__HEADER: 'Login',
     LOGIN_POPUP__LOGIN_PLACEHOLDER: 'Login',
     LOGIN_POPUP__PASSWORD_PLACEHOLDER: 'Password',
