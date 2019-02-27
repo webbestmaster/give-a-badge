@@ -12,6 +12,8 @@ import type {GlobalStateType} from '../../app/reducer';
 import serviceStyle from '../../../css/service.scss';
 import helperStyle from '../../../css/helper.scss';
 import type {NewsAchtungType, NewsUserType} from '../title-card-list/api';
+import {getBadgeCampaignPath, getBadgePath} from '../app/routes';
+import {actionRequireName} from '../title-card-list/api';
 
 import style from './style.scss';
 
@@ -91,13 +93,31 @@ class TitleAchtungCard extends Component<ReduxPropsType, PassedPropsType, StateT
         );
     }
 
+    getLinkValue(): string {
+        const view = this;
+        const {props} = view;
+        const {newsData} = props;
+
+        if (newsData.actionRequired === actionRequireName.lookAtCampaignResults) {
+            return getBadgeCampaignPath(newsData.entityId);
+        }
+
+        if (newsData.actionRequired === actionRequireName.assignBadge) {
+            return getBadgePath(newsData.entityId);
+        }
+
+        console.error('unsupported actionRequire type', newsData);
+
+        return '#';
+    }
+
     render(): Node {
         const view = this;
         const {props} = view;
         const {newsData} = props;
 
         return (
-            <Link className={style.card} to="#">
+            <Link className={classNames(style.card, style.card__achtung)} to={view.getLinkValue()}>
                 <div className={style.badge_icon} style={{backgroundImage: `url('${newsData.imageUrl}')`}}/>
 
                 {view.renderFaceList()}

@@ -35,8 +35,15 @@ export type NewsType = {|
     +tags: [],
 |};
 
+type ActionRequireType = 'ASSIGN_BADGE' | 'LOOK_AT_CAMPAIGN_RESULTS';
+
+export const actionRequireName: {+[key: string]: ActionRequireType} = {
+    assignBadge: 'ASSIGN_BADGE',
+    lookAtCampaignResults: 'LOOK_AT_CAMPAIGN_RESULTS',
+};
+
 export type NewsAchtungType = {|
-    +actionRequired: 'ASSIGN_BADGE' | 'LOOK_AT_CAMPAIGN_RESULTS',
+    +actionRequired: ActionRequireType,
     +comment: string,
     +entityId: number,
     +id: number | null,
