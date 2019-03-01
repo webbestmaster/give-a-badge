@@ -145,13 +145,49 @@ class TitleCardList extends Component<ReduxPropsType, PassedPropsType, StateType
         window.ga('send', 'event', 'Badge List Load', fetchNewsKListResult.last === true ? 'Finish' : 'Part');
     };
 
+    renderAchtungNews(): Node {
+        const view = this;
+        const {props} = view;
+        const {titleNewsList} = props;
+        const newsAchtungList = extractNewsAchtungList(titleNewsList);
+
+        if (newsAchtungList.length === 0) {
+            return null;
+        }
+
+        return (
+            <>
+                <h3 className={style.card_list_container__header}>
+                    <Locale stringKey="TITLE_BADGE_LIST__HEADER__ACHTUNG_NEWS"/>
+                </h3>
+                <div className={style.card_list_container}>
+                    {newsAchtungList.map(TitleCardList.renderAchtungTitleCard)}
+                </div>
+            </>
+        );
+    }
+
+    renderMainNews(): Node {
+        const view = this;
+        const {props} = view;
+        const {titleNewsList} = props;
+        const newsList = extractNewsList(titleNewsList);
+
+        return (
+            <>
+                <h3 className={style.card_list_container__header}>
+                    <Locale stringKey="TITLE_BADGE_LIST__HEADER__MAIN_NEWS"/>
+                </h3>
+                <div className={style.card_list_container}>{newsList.map(TitleCardList.renderTitleCard)}</div>
+            </>
+        );
+    }
+
     renderCardList(): Node {
         const view = this;
         const {props} = view;
         const {titleNewsList} = props;
-
         const newsList = extractNewsList(titleNewsList);
-        const newsAchtungList = extractNewsAchtungList(titleNewsList);
         const {newsResponseList} = titleNewsList;
         const newsResponseListLength = newsResponseList.length;
 
@@ -169,16 +205,8 @@ class TitleCardList extends Component<ReduxPropsType, PassedPropsType, StateType
                 next={view.infiniteScrollNext}
             >
                 <div className={style.card_list}>
-                    <h3 className={style.card_list_container__header}>
-                        <Locale stringKey="TITLE_BADGE_LIST__HEADER__ACHTUNG_NEWS"/>
-                    </h3>
-                    <div className={style.card_list_container}>
-                        {newsAchtungList.map(TitleCardList.renderAchtungTitleCard)}
-                    </div>
-                    <h3 className={style.card_list_container__header}>
-                        <Locale stringKey="TITLE_BADGE_LIST__HEADER__MAIN_NEWS"/>
-                    </h3>
-                    <div className={style.card_list_container}>{newsList.map(TitleCardList.renderTitleCard)}</div>
+                    {view.renderAchtungNews()}
+                    {view.renderMainNews()}
                 </div>
             </InfiniteScroll>
         );
