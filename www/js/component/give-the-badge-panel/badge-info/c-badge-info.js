@@ -10,11 +10,10 @@ import withRouter from 'react-router-dom/withRouter';
 
 import type {SystemType} from '../../system/reducer/root';
 import type {BadgeType} from '../../badge-category-list/api';
-import {getBadgeCategoryList} from '../../badge-category-list/api';
 import type {GlobalStateType} from '../../../app/reducer';
-import {routes} from '../../app/routes';
 import type {ContextRouterType} from '../../../../type/react-router-dom-v4';
 import {Locale} from '../../locale/c-locale';
+import {isNumber} from '../../../lib/is';
 
 import style from './style.scss';
 
@@ -27,7 +26,7 @@ type ReduxActionType = {
 };
 
 type PassedPropsType = {|
-    +badgeId: string,
+    +badgeInfo: BadgeType,
 |};
 
 type PropsType = $Exact<{
@@ -39,7 +38,7 @@ type PropsType = $Exact<{
 }>;
 
 type StateType = {|
-    +badgeInfo: BadgeType | null,
+    state: number,
 |};
 
 const reduxAction: ReduxActionType = {
@@ -53,79 +52,35 @@ class BadgeInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const view = this;
 
         view.state = {
-            badgeInfo: null,
+            state: 0,
         };
     }
 
     state: StateType;
 
-    async componentDidMount() {
-        const view = this;
-
-        await view.fetchBadgeInfo();
-    }
-
     props: PropsType;
-
-    async fetchBadgeInfo(): Promise<BadgeType | null> {
-        const view = this;
-        const {props, state} = view;
-        const {badgeId} = props;
-
-        const badgeCategoryList = await getBadgeCategoryList();
-
-        if (badgeCategoryList instanceof Error) {
-            console.error('can not get getBadgeCategoryList', badgeCategoryList);
-            return null;
-        }
-
-        const allBadgeList = [];
-
-        Object.keys(badgeCategoryList).forEach((key: string) => {
-            allBadgeList.push(...badgeCategoryList[key]);
-        });
-
-        const badgeInfo =
-            allBadgeList.find(
-                (badgeCategoryInList: BadgeType): boolean => String(badgeCategoryInList.id) === badgeId
-            ) || null;
-
-        if (badgeInfo === null) {
-            console.error('can not find badgeInfo');
-            console.error('move to home page');
-            props.history.push(routes.index.index);
-            return null;
-        }
-
-        view.setState({badgeInfo});
-
-        return badgeInfo;
-    }
 
     renderBadgeLeft(): Node {
         const view = this;
         const {props, state} = view;
-        const {badgeInfo} = state;
+        const {badgeInfo} = props;
+        const {countLeft} = badgeInfo;
 
-        if (badgeInfo === null || badgeInfo.countLeft === null) {
+        if (!isNumber(countLeft)) {
             return null;
         }
 
         return (
             <h5 className={style.badge_left}>
-                <Locale stringKey="GIVE_THE_BADGE__BADGE_LEFT" valueMap={{left: badgeInfo.countLeft}}/>
+                <Locale stringKey="GIVE_THE_BADGE__BADGE_LEFT" valueMap={{left: countLeft}}/>
             </h5>
         );
     }
 
     renderBadgeImage(): Node {
         const view = this;
-        const {props, state} = view;
-        const {badgeInfo} = state;
-
-        if (badgeInfo === null) {
-            return null;
-        }
+        const {props} = view;
+        const {badgeInfo} = props;
 
         return (
             <>
@@ -142,11 +97,7 @@ class BadgeInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
     renderDesktop(): Node {
         const view = this;
         const {props, state} = view;
-        const {badgeInfo} = state;
-
-        if (badgeInfo === null) {
-            return null;
-        }
+        const {badgeInfo} = props;
 
         return (
             <div className={style.badge_info}>
@@ -162,11 +113,7 @@ class BadgeInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
     renderMobile(): Node {
         const view = this;
         const {props, state} = view;
-        const {badgeInfo} = state;
-
-        if (badgeInfo === null) {
-            return null;
-        }
+        const {badgeInfo} = props;
 
         return (
             <div className={style.badge_info}>
