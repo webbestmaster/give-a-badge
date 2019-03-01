@@ -19,6 +19,10 @@
 
 .search_input {
     @extend %input-text;
+
+    &.search_input__disabled {
+        @extend %input-text--disabled;
+    }
 }
 
 .badge_description {

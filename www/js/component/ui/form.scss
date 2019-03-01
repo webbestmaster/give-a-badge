@@ -12,6 +12,11 @@
     width: 100%;
 }
 
+%input-text--disabled {
+    background-color: #dedede;
+    pointer-events: none;
+}
+
 %text-area,
 .text-area {
     @extend %input-text;

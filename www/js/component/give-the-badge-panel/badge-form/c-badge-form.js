@@ -24,6 +24,8 @@ import {pageSize} from '../../title-card-list/c-title-card-list';
 import type {ApplyGetNewListResponseType} from '../../title-card-list/action';
 import {applyGetNewListResponse} from '../../title-card-list/action';
 import {defaultShowEventName, hideAllSnackBars, shackBarErrorHandler, showSnackBar} from '../../ui/notification/action';
+import type {BadgeType} from '../../badge-category-list/api';
+import {getBadgeCategoryList} from '../../badge-category-list/api';
 
 import foundedUserStyle from './founded-user/style.scss';
 import style from './style.scss';
@@ -59,6 +61,7 @@ type StateType = {|
     //     +isOpen: boolean,
     //     +isSuccess: boolean,
     // |},
+    +badgeInfo: BadgeType | null,
     +searchString: string,
     +descriptionText: string,
     +searchUserList: FoundedUserListType,
@@ -114,6 +117,7 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
             //     isOpen: false,
             //     isSuccess: false
             // },
+            badgeInfo: null,
             searchString: '',
             descriptionText: '',
             hasSearchInputFocus: false,
@@ -130,6 +134,13 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
     }
 
     state: StateType;
+
+    async componentDidMount() {
+        const view = this;
+
+        await view.fetchBadgeInfo();
+    }
+
     props: PropsType;
     node: NodeType;
 
@@ -468,6 +479,51 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
         view.updateDescription(evt.currentTarget.value);
     };
 
+    async fetchBadgeInfo(): Promise<BadgeType | null> {
+        const view = this;
+        const {props, state} = view;
+        const {badgeId} = props;
+
+        const badgeCategoryList = await getBadgeCategoryList();
+
+        if (badgeCategoryList instanceof Error) {
+            console.error('can not get getBadgeCategoryList', badgeCategoryList);
+            return null;
+        }
+
+        const allBadgeList = [];
+
+        Object.keys(badgeCategoryList).forEach((key: string) => {
+            allBadgeList.push(...badgeCategoryList[key]);
+        });
+
+        const badgeInfo =
+            allBadgeList.find(
+                (badgeCategoryInList: BadgeType): boolean => String(badgeCategoryInList.id) === badgeId
+            ) || null;
+
+        if (badgeInfo === null) {
+            console.error('can not find badgeInfo');
+            console.error('move to home page');
+            props.history.push(routes.index.index);
+            return null;
+        }
+
+        view.setState({badgeInfo});
+
+        return badgeInfo;
+    }
+
+    isSearchDisabled(): boolean {
+        const view = this;
+        const {state} = view;
+        const {selectedUserList, badgeInfo} = state;
+
+        const badgeLeft = badgeInfo && typeof badgeInfo.countLeft === 'number' ? badgeInfo.countLeft : Infinity;
+
+        return selectedUserList.length >= badgeLeft;
+    }
+
     render(): Node {
         const view = this;
         const {props, state} = view;
@@ -480,7 +536,9 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
             >
                 <form className={style.badge_form} onSubmit={view.handleSubmitForm}>
                     <input
-                        className={style.search_input}
+                        className={classNames(style.search_input, {
+                            [style.search_input__disabled]: view.isSearchDisabled(),
+                        })}
                         onBlur={view.handleSearchInputOnBlur}
                         onFocus={view.handleSearchInputOnFocus}
                         onInput={view.handleSearchInputOnInput}
