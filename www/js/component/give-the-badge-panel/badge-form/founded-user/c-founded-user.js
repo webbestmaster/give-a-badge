@@ -35,25 +35,13 @@ type PropsType = $Exact<{
     +children: Node,
 }>;
 
-type StateType = {
-    // +state: number
-};
+type StateType = void;
 
 const reduxAction: ReduxActionType = {
     // setSmth // imported from actions
 };
 
 class FoundedUser extends Component<ReduxPropsType, PassedPropsType, StateType> {
-    constructor(props: PropsType) {
-        super(props);
-
-        const view = this;
-
-        view.state = {
-            // state: 0
-        };
-    }
-
     state: StateType;
     props: PropsType;
 
