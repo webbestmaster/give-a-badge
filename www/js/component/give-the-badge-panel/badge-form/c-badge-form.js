@@ -2,11 +2,12 @@
 
 /* eslint consistent-this: ["error", "view"] */
 
+import Transition from 'react-transition-group/Transition';
+
 import type {ComponentType, Node} from 'react';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import classNames from 'classnames';
-import Transition from 'react-transition-group/Transition';
 import type {TransitionStatus} from 'react-transition-group';
 import withRouter from 'react-router-dom/withRouter';
 
@@ -477,7 +478,13 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const {state, props} = view;
         const {selectedUserList} = state;
         const {badgeInfo} = props;
-        const {countLeft} = badgeInfo;
+        const {settings} = badgeInfo;
+
+        if (!settings) {
+            return false;
+        }
+
+        const {countLeft} = settings;
 
         const badgeLeft = isNumber(countLeft) ? countLeft : Infinity;
 

@@ -28,8 +28,8 @@ export type BadgeType = {
     +category: string,
     +imageUrl: string,
     +settings: {
-        +countLeft?: number,
-        +toUsersMax?: number,
+        +countLeft: number | null,
+        +toUsersMax: number | null,
         +special: boolean,
     } | null,
 };

@@ -52,7 +52,13 @@ class BadgeInfo extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const view = this;
         const {props} = view;
         const {badgeInfo} = props;
-        const {countLeft} = badgeInfo;
+        const {settings} = badgeInfo;
+
+        if (!settings) {
+            return null;
+        }
+
+        const {countLeft} = settings;
 
         if (!isNumber(countLeft)) {
             return null;

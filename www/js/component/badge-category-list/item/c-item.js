@@ -48,11 +48,19 @@ const reduxAction: ReduxActionType = {
 
 class BadgeCategoryListItem extends Component<ReduxPropsType, PassedPropsType, StateType> {
     static renderItemLeft(badgeCategory: BadgeType): Node {
-        if (badgeCategory.countLeft === null) {
+        const {settings} = badgeCategory;
+
+        if (!settings) {
             return null;
         }
 
-        return <span className={style.badge_left}>{badgeCategory.countLeft}</span>;
+        const {countLeft} = settings;
+
+        if (countLeft === null) {
+            return null;
+        }
+
+        return <span className={style.badge_left}>{countLeft}</span>;
     }
 
     state: StateType;
