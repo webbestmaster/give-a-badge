@@ -4,13 +4,34 @@
 
 import {appConst, serverApi} from '../../app/const';
 
+/*
+export type BadgeType = {
+    +id: number,
+    +name: string,
+    +description?: string,
+    +category: string,
+    +imageUrl: string,
+/!*
+    +settings?: {
+        +countLeft?: number,
+        +toUsersMax?: number,
+        +special: boolean,
+    },
+*!/
+};
+*/
+
 export type BadgeType = {
     +id: number,
     +name: string,
     +description: string | null,
     +category: string,
-    +countLeft: number | null,
     +imageUrl: string,
+    +settings: {
+        +countLeft?: number,
+        +toUsersMax?: number,
+        +special: boolean,
+    } | null,
 };
 
 export type BadgeCategoryListType = {[key: string]: Array<BadgeType>};
