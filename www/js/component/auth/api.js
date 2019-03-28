@@ -42,7 +42,7 @@ export async function login(username: string, password: string): Promise<GetMeRe
     return await window
         .fetch(appConst.api.login, {
             ...serverApi.request.paramMap.postForm,
-            body: `username=${username}&password=${password}`,
+            body: `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`,
         })
         .then(getMe);
 }
