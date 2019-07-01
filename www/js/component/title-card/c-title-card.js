@@ -65,30 +65,28 @@ class TitleCard extends Component<ReduxPropsType, PassedPropsType, StateType> {
                     [style.people_list__single_item]: isSingleItem,
                 })}
             >
-                {userList.map(
-                    (userInList: NewsUserType, faceIndex: number): Node => {
-                        if (!isMoreThenMax || faceIndex < maxVisibleFace - 1) {
-                            return (
-                                <div
-                                    className={peopleFaceClassName}
-                                    key={userInList.id}
-                                    style={{backgroundImage: `url('${userInList.imageUrl}')`}}
-                                />
-                            );
-                        }
-
-                        if (faceIndex === maxVisibleFace - 1) {
-                            return (
-                                <div className={style.people_face__number} key="face-number">
-                                    +{newsData.totalToUsers - maxVisibleFace + 1}
-                                    &nbsp;
-                                </div>
-                            );
-                        }
-
-                        return null;
+                {userList.map((userInList: NewsUserType, faceIndex: number): Node => {
+                    if (!isMoreThenMax || faceIndex < maxVisibleFace - 1) {
+                        return (
+                            <div
+                                className={peopleFaceClassName}
+                                key={userInList.id}
+                                style={{backgroundImage: `url('${userInList.imageUrl}')`}}
+                            />
+                        );
                     }
-                )}
+
+                    if (faceIndex === maxVisibleFace - 1) {
+                        return (
+                            <div className={style.people_face__number} key="face-number">
+                                +{newsData.totalToUsers - maxVisibleFace + 1}
+                                &nbsp;
+                            </div>
+                        );
+                    }
+
+                    return null;
+                })}
             </div>
         );
     }

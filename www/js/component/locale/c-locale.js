@@ -9,6 +9,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 import type {GlobalStateType} from '../../app/reducer';
+import {hasProperty} from '../../lib/is';
 
 import type {LocaleType} from './reducer';
 import type {LocaleNameType} from './const';
@@ -54,7 +55,7 @@ export function getLocalizedString(
             return 'TEXT';
         }
 
-        if (!allLocales[localeConst.defaults.localeName].hasOwnProperty(stringKey)) {
+        if (!hasProperty(allLocales[localeConst.defaults.localeName], stringKey)) {
             console.error('has no key stringKey', stringKey);
             return stringKey;
         }

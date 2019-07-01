@@ -318,20 +318,18 @@ class BadgeWon extends Component<ReduxPropsType, PassedPropsType, StateType> {
                     ref={view.node.faceList}
                     style={view.getPeopleListStyle()}
                 >
-                    {toUsers.map(
-                        (userData: {+id: string | number, +imageUrl: string, +name: string}): Node => {
-                            return (
-                                <div className={style.won_badge_face} key={userData.id}>
-                                    <div
-                                        className={style.won_badge_face_image}
-                                        style={{
-                                            backgroundImage: `url('${userData.imageUrl}')`,
-                                        }}
-                                    />
-                                </div>
-                            );
-                        }
-                    )}
+                    {toUsers.map((userData: {+id: string | number, +imageUrl: string, +name: string}): Node => {
+                        return (
+                            <div className={style.won_badge_face} key={userData.id}>
+                                <div
+                                    className={style.won_badge_face_image}
+                                    style={{
+                                        backgroundImage: `url('${userData.imageUrl}')`,
+                                    }}
+                                />
+                            </div>
+                        );
+                    })}
                 </div>
                 {view.renderShowMoreButton()}
             </>

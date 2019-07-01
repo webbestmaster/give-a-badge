@@ -10,7 +10,7 @@ declare module 'material-ui/AppBar/AppBar' {
         className?: string,
         classes?: Object,
         color?: Color,
-        position?: Position
+        position?: Position,
     }>;
 }
 
@@ -29,7 +29,7 @@ declare module 'material-ui/Avatar/Avatar' {
         imgProps?: Object,
         sizes?: string,
         src?: string,
-        srcSet?: string
+        srcSet?: string,
     }>;
 }
 
@@ -45,7 +45,7 @@ declare module 'material-ui/Badge/Badge' {
         children: React$Node,
         className?: string,
         classes?: Object,
-        color?: Color
+        color?: Color,
     }>;
 }
 
@@ -60,7 +60,7 @@ declare module 'material-ui/BottomNavigation/BottomNavigation' {
         classes?: Object,
         onChange?: Function,
         showLabels?: boolean,
-        value: any
+        value: any,
     }>;
 }
 
@@ -74,7 +74,7 @@ declare module 'material-ui/BottomNavigation/BottomNavigationAction' {
         onClick?: Function,
         selected?: boolean,
         showLabel?: boolean,
-        value?: any
+        value?: any,
     }>;
 }
 
@@ -99,7 +99,7 @@ declare module 'material-ui/Button/Button' {
         fab?: boolean,
         href?: string,
         raised?: boolean,
-        type?: string
+        type?: string,
     }>;
 }
 
@@ -133,7 +133,7 @@ declare module 'material-ui/ButtonBase/ButtonBase' {
         role?: string,
         rootRef?: Function,
         tabIndex?: number | string,
-        type?: string
+        type?: string,
     }>;
 }
 
@@ -155,7 +155,7 @@ declare module 'material-ui/ButtonBase/Ripple' {
         pulsate?: boolean,
         rippleSize: number,
         rippleX: number,
-        rippleY: number
+        rippleY: number,
     }>;
 }
 
@@ -163,14 +163,14 @@ declare module 'material-ui/ButtonBase/TouchRipple' {
     declare module.exports: React$ComponentType<{
         center?: boolean,
         className?: string,
-        classes?: Object
+        classes?: Object,
     }>;
 }
 
 declare module 'material-ui/Card/Card' {
     declare module.exports: React$ComponentType<{
         className?: string,
-        raised?: boolean
+        raised?: boolean,
     }>;
 }
 
@@ -179,14 +179,14 @@ declare module 'material-ui/Card/CardActions' {
         children?: React$Node,
         className?: string,
         classes?: Object,
-        disableActionSpacing?: boolean
+        disableActionSpacing?: boolean,
     }>;
 }
 
 declare module 'material-ui/Card/CardContent' {
     declare module.exports: React$ComponentType<{
         className?: string,
-        classes?: Object
+        classes?: Object,
     }>;
 }
 
@@ -197,7 +197,7 @@ declare module 'material-ui/Card/CardHeader' {
         className?: string,
         classes?: Object,
         subheader?: React$Node,
-        title?: React$Node
+        title?: React$Node,
     }>;
 }
 
@@ -208,7 +208,7 @@ declare module 'material-ui/Card/CardMedia' {
         component?: React$ElementType,
         image?: string,
         src?: string,
-        style?: Object
+        style?: Object,
     }>;
 }
 
@@ -237,7 +237,7 @@ declare module 'material-ui/Checkbox/Checkbox' {
         name?: string,
         onChange?: Function,
         tabIndex?: number | string,
-        value?: string
+        value?: string,
     }>;
 }
 
@@ -257,7 +257,7 @@ declare module 'material-ui/Chip/Chip' {
         onClick?: Function,
         onDelete?: (event: SyntheticEvent<>) => void,
         onKeyDown?: Function,
-        tabIndex?: number | string
+        tabIndex?: number | string,
     }>;
 }
 
@@ -381,7 +381,7 @@ declare module 'material-ui/Dialog/Dialog' {
         onExiting?: TransitionCallback,
         open?: boolean,
         transition?: React$ComponentType<*>,
-        transitionDuration?: TransitionDuration
+        transitionDuration?: TransitionDuration,
     }>;
 }
 
@@ -389,7 +389,7 @@ declare module 'material-ui/Dialog/DialogActions' {
     declare module.exports: React$ComponentType<{
         children?: React$Node,
         className?: string,
-        classes?: Object
+        classes?: Object,
     }>;
 }
 
@@ -397,7 +397,7 @@ declare module 'material-ui/Dialog/DialogContent' {
     declare module.exports: React$ComponentType<{
         children?: React$Node,
         className?: string,
-        classes?: Object
+        classes?: Object,
     }>;
 }
 
@@ -405,7 +405,7 @@ declare module 'material-ui/Dialog/DialogContentText' {
     declare module.exports: React$ComponentType<{
         children?: React$Node,
         className?: string,
-        classes?: Object
+        classes?: Object,
     }>;
 }
 
@@ -414,7 +414,7 @@ declare module 'material-ui/Dialog/DialogTitle' {
         children?: React$Node,
         className?: string,
         classes?: Object,
-        disableTypography?: boolean
+        disableTypography?: boolean,
     }>;
 }
 
@@ -437,7 +437,7 @@ declare module 'material-ui/Divider/Divider' {
         className?: string,
         classes?: Object,
         inset?: boolean,
-        light?: boolean
+        light?: boolean,
     }>;
 }
 
@@ -462,7 +462,7 @@ declare module 'material-ui/Drawer/Drawer' {
         onClose?: Function,
         open?: boolean,
         transitionDuration?: TransitionDuration,
-        type?: Type
+        type?: Type,
     }>;
 }
 declare module 'material-ui/Drawer' {
@@ -486,7 +486,7 @@ declare module 'material-ui/SwipeableDrawer/SwipeableDrawer' {
         onClose?: Function,
         open?: boolean,
         transitionDuration?: TransitionDuration,
-        type?: Type
+        type?: Type,
     }>;
 }
 
@@ -503,7 +503,7 @@ declare module 'material-ui/ExpansionPanel/ExpansionPanel' {
         defaultExpanded?: boolean,
         disabled?: boolean,
         expanded?: boolean,
-        onChange?: Function
+        onChange?: Function,
     }>;
 }
 
@@ -511,7 +511,7 @@ declare module 'material-ui/ExpansionPanel/ExpansionPanelActions' {
     declare module.exports: React$ComponentType<{
         children?: React$Node,
         className?: string,
-        classes?: Object
+        classes?: Object,
     }>;
 }
 
@@ -519,7 +519,7 @@ declare module 'material-ui/ExpansionPanel/ExpansionPanelDetails' {
     declare module.exports: React$ComponentType<{
         children?: React$Node,
         className?: string,
-        classes?: Object
+        classes?: Object,
     }>;
 }
 
@@ -532,7 +532,7 @@ declare module 'material-ui/ExpansionPanel/ExpansionPanelSummary' {
         expanded?: boolean,
         expandIcon?: React$Node,
         onChange?: Function,
-        onClick?: Function
+        onClick?: Function,
     }>;
 }
 
@@ -557,7 +557,7 @@ declare module 'material-ui/Form/FormControl' {
         margin?: Margin,
         onBlur?: Function,
         onFocus?: Function,
-        required?: boolean
+        required?: boolean,
     }>;
 }
 
@@ -572,7 +572,7 @@ declare module 'material-ui/Form/FormControlLabel' {
         label: React$Node,
         name?: string,
         onChange?: Function,
-        value?: string
+        value?: string,
     }>;
 }
 
@@ -581,7 +581,7 @@ declare module 'material-ui/Form/FormGroup' {
         children?: React$Node,
         classes?: Object,
         className?: string,
-        row?: boolean
+        row?: boolean,
     }>;
 }
 
@@ -592,7 +592,7 @@ declare module 'material-ui/Form/FormHelperText' {
         className?: string,
         disabled?: boolean,
         error?: boolean,
-        margin?: 'dense'
+        margin?: 'dense',
     }>;
 }
 
@@ -605,7 +605,7 @@ declare module 'material-ui/Form/FormLabel' {
         disabled?: boolean,
         error?: boolean,
         focused?: boolean,
-        required?: boolean
+        required?: boolean,
     }>;
 }
 
@@ -615,7 +615,7 @@ declare module 'material-ui/Form' {
         FormLabel: $Exports<'material-ui/Form/FormLabel'>,
         FormControl: $Exports<'material-ui/Form/FormControl'>,
         FormHelperText: $Exports<'material-ui/Form/FormHelperText'>,
-        FormControlLabel: $Exports<'material-ui/Form/FormControlLabel'>
+        FormControlLabel: $Exports<'material-ui/Form/FormControlLabel'>,
     };
 }
 
@@ -646,7 +646,7 @@ declare module 'material-ui/Grid/Grid' {
         sm?: GridSizes,
         md?: GridSizes,
         lg?: GridSizes,
-        xl?: GridSizes
+        xl?: GridSizes,
     }>;
 }
 
@@ -665,7 +665,7 @@ declare module 'material-ui/GridList/GridList' {
         cols?: number,
         component?: React$ElementType,
         spacing?: number,
-        style?: Object
+        style?: Object,
     }>;
 }
 
@@ -676,7 +676,7 @@ declare module 'material-ui/GridList/GridListTile' {
         className?: string,
         cols?: number,
         component?: React$ElementType,
-        rows?: number
+        rows?: number,
     }>;
 }
 
@@ -691,7 +691,7 @@ declare module 'material-ui/GridList/GridListTileBar' {
         className?: string,
         subtitle?: React$Node,
         title: React$Node,
-        titlePosition?: TitlePosition
+        titlePosition?: TitlePosition,
     }>;
 }
 
@@ -720,7 +720,7 @@ declare module 'material-ui/Hidden/Hidden' {
         lgDown?: boolean,
         xlDown?: boolean,
         implementation?: 'js' | 'css',
-        initialWidth?: number
+        initialWidth?: number,
     }>;
 }
 
@@ -752,7 +752,7 @@ declare module 'material-ui/Icon/Icon' {
         children?: React$Node,
         className?: string,
         classes?: Object,
-        color?: Color
+        color?: Color,
     }>;
 }
 
@@ -771,7 +771,7 @@ declare module 'material-ui/IconButton/IconButton' {
         color?: Color,
         disabled?: boolean,
         disableRipple?: boolean,
-        rootRef?: Function
+        rootRef?: Function,
     }>;
 }
 
@@ -817,7 +817,7 @@ declare module 'material-ui/Input/Input' {
         rowsMax?: string | number,
         startAdornment?: React$Node,
         type?: string,
-        value?: string | number | Array<string | number>
+        value?: string | number | Array<string | number>,
     }>;
 }
 
@@ -828,7 +828,7 @@ declare module 'material-ui/Input/InputAdornment' {
         className?: string,
         component?: React$ElementType,
         disableTypography?: boolean,
-        position: 'start' | 'end'
+        position: 'start' | 'end',
     }>;
 }
 
@@ -844,7 +844,7 @@ declare module 'material-ui/Input/InputLabel' {
         focused?: boolean,
         margin?: 'dense',
         required?: boolean,
-        shrink?: boolean
+        shrink?: boolean,
     }>;
 }
 
@@ -860,7 +860,7 @@ declare module 'material-ui/Input/Textarea' {
         rows: Rows,
         rowsMax?: string | number,
         textareaRef?: Function,
-        value?: string | number
+        value?: string | number,
     }>;
 }
 
@@ -871,7 +871,7 @@ declare module 'material-ui/internal/dom' {
 declare module 'material-ui/Portal/Portal' {
     declare module.exports: React$ComponentType<{
         children?: React$Node,
-        open?: boolean
+        open?: boolean,
     }>;
 }
 
@@ -898,7 +898,7 @@ declare module 'material-ui/internal/SwitchBase' {
         name?: string,
         onChange?: Function,
         tabIndex?: number | string,
-        value?: string
+        value?: string,
     }>;
 }
 
@@ -911,7 +911,7 @@ declare module 'material-ui/internal/transition' {
         enter?: string,
         enterActive?: string,
         exit?: string,
-        exitActive?: string
+        exitActive?: string,
     };
 }
 
@@ -934,7 +934,7 @@ declare module 'material-ui/List/List' {
         dense?: boolean,
         disablePadding?: boolean,
         rootRef?: Function,
-        subheader?: React$Node
+        subheader?: React$Node,
     }>;
 }
 
@@ -948,7 +948,7 @@ declare module 'material-ui/List/ListItem' {
         dense?: boolean,
         disabled?: boolean,
         disableGutters?: boolean,
-        divider?: boolean
+        divider?: boolean,
     }>;
 }
 
@@ -956,7 +956,7 @@ declare module 'material-ui/List/ListItemAvatar' {
     declare module.exports: React$ComponentType<{
         children: React$Element<any>,
         classes?: Object,
-        className?: string
+        className?: string,
     }>;
 }
 
@@ -964,7 +964,7 @@ declare module 'material-ui/List/ListItemIcon' {
     declare module.exports: React$ComponentType<{
         children: React$Element<any>,
         classes?: Object,
-        className?: string
+        className?: string,
     }>;
 }
 
@@ -972,7 +972,7 @@ declare module 'material-ui/List/ListItemSecondaryAction' {
     declare module.exports: React$ComponentType<{
         children?: React$Node,
         classes?: Object,
-        className?: string
+        className?: string,
     }>;
 }
 
@@ -983,7 +983,7 @@ declare module 'material-ui/List/ListItemText' {
         disableTypography?: boolean,
         inset?: boolean,
         primary?: React$Node,
-        secondary?: React$Node
+        secondary?: React$Node,
     }>;
 }
 
@@ -997,7 +997,7 @@ declare module 'material-ui/List/ListSubheader' {
         component?: React$ElementType,
         color?: Color,
         disableSticky?: boolean,
-        inset?: boolean
+        inset?: boolean,
     }>;
 }
 
@@ -1027,7 +1027,7 @@ declare module 'material-ui/Menu/Menu' {
         open?: boolean,
         PaperProps?: Object,
         PopoverClasses?: Object,
-        transitionDuration?: TransitionDuration
+        transitionDuration?: TransitionDuration,
     }>;
 }
 
@@ -1038,7 +1038,7 @@ declare module 'material-ui/Menu/MenuItem' {
         className?: string,
         component?: React$ElementType,
         role?: string,
-        selected?: boolean
+        selected?: boolean,
     }>;
 }
 
@@ -1047,7 +1047,7 @@ declare module 'material-ui/Menu/MenuList' {
         children?: React$Node,
         className?: string,
         onBlur?: Function,
-        onKeyDown?: (event: SyntheticUIEvent<>, key: string) => void
+        onKeyDown?: (event: SyntheticUIEvent<>, key: string) => void,
     }>;
 }
 
@@ -1067,7 +1067,7 @@ declare module 'material-ui/MobileStepper/MobileStepper' {
         nextButton: React$Element<any>,
         position?: Position,
         steps: number,
-        type?: Type
+        type?: Type,
     }>;
 }
 
@@ -1076,7 +1076,7 @@ declare module 'material-ui/Modal/Backdrop' {
         children?: React$Node,
         classes?: Object,
         className?: string,
-        invisible?: boolean
+        invisible?: boolean,
     }>;
 }
 
@@ -1121,7 +1121,7 @@ declare module 'material-ui/Modal/Modal' {
         onExiting?: TransitionCallback,
         onExited?: TransitionCallback,
         onClose?: Function,
-        open: boolean
+        open: boolean,
     }>;
 }
 
@@ -1140,7 +1140,7 @@ declare module 'material-ui/Paper/Paper' {
         children?: React$Node,
         component?: React$ElementType,
         elevation?: number,
-        square?: boolean
+        square?: boolean,
     }>;
 }
 
@@ -1153,12 +1153,12 @@ declare module 'material-ui/Popover/Popover' {
 
     declare type Position = {
         top: number,
-        left: number
+        left: number,
     };
 
     declare type Origin = {
         horizontal: 'left' | 'center' | 'right' | number,
-        vertical: 'top' | 'center' | 'bottom' | number
+        vertical: 'top' | 'center' | 'bottom' | number,
     };
 
     declare module.exports: React$ComponentType<{
@@ -1183,7 +1183,7 @@ declare module 'material-ui/Popover/Popover' {
         role?: string,
         transformOrigin?: Origin,
         transitionClasses?: TransitionClasses,
-        transitionDuration?: number | {enter?: number, exit?: number} | 'auto'
+        transitionDuration?: number | {enter?: number, exit?: number} | 'auto',
     }>;
 }
 
@@ -1201,14 +1201,14 @@ declare module 'material-ui/Progress/CircularProgress' {
         size?: number,
         style?: Object,
         thickness?: number,
-        value?: number
+        value?: number,
     }>;
 }
 
 declare module 'material-ui/Progress' {
     declare module.exports: {
         CircularProgress: $Exports<'material-ui/Progress/CircularProgress'>,
-        LinearProgress: $Exports<'material-ui/Progress/LinearProgress'>
+        LinearProgress: $Exports<'material-ui/Progress/LinearProgress'>,
     };
 }
 
@@ -1222,7 +1222,7 @@ declare module 'material-ui/Progress/LinearProgress' {
         color?: Color,
         mode?: Mode,
         value?: number,
-        valueBuffer?: number
+        valueBuffer?: number,
     }>;
 }
 
@@ -1247,7 +1247,7 @@ declare module 'material-ui/Radio/Radio' {
         name?: string,
         onChange?: Function,
         tabIndex?: number | string,
-        value?: string
+        value?: string,
     }>;
 }
 
@@ -1258,7 +1258,7 @@ declare module 'material-ui/Radio/RadioGroup' {
         onBlur?: Function,
         onChange?: Function,
         onKeyDown?: Function,
-        value?: string
+        value?: string,
     }>;
 }
 
@@ -1284,7 +1284,7 @@ declare module 'material-ui/Select/Select' {
         open?: boolean,
         MenuProps?: Object,
         renderValue?: Function,
-        value?: $ReadOnlyArray<string | number> | string | number
+        value?: $ReadOnlyArray<string | number> | string | number,
     }>;
 }
 
@@ -1306,7 +1306,7 @@ declare module 'material-ui/Select/SelectInput' {
         readOnly?: boolean,
         renderValue?: Function,
         selectRef?: Function,
-        value?: string | number | $ReadOnlyArray<string | number>
+        value?: string | number | $ReadOnlyArray<string | number>,
     }>;
 }
 
@@ -1320,7 +1320,7 @@ declare module 'material-ui/Snackbar/Snackbar' {
 
     declare type Origin = {
         horizontal?: 'left' | 'center' | 'right' | number,
-        vertical?: 'top' | 'center' | 'bottom' | number
+        vertical?: 'top' | 'center' | 'bottom' | number,
     };
 
     declare module.exports: React$ComponentType<{
@@ -1345,7 +1345,7 @@ declare module 'material-ui/Snackbar/Snackbar' {
         open: boolean,
         SnackbarContentProps?: Object,
         transition?: React$ComponentType<*>,
-        transitionDuration?: TransitionDuration
+        transitionDuration?: TransitionDuration,
     }>;
 }
 
@@ -1354,7 +1354,7 @@ declare module 'material-ui/Snackbar/SnackbarContent' {
         action?: React$Node,
         classes?: Object,
         className?: string,
-        message: React$Node
+        message: React$Node,
     }>;
 }
 
@@ -1382,7 +1382,7 @@ declare module 'material-ui/Stepper/Step' {
         index?: number,
         last?: boolean,
         optional?: boolean,
-        orientation?: Orientation
+        orientation?: Orientation,
     }>;
 }
 
@@ -1402,7 +1402,7 @@ declare module 'material-ui/Stepper/StepButton' {
         icon?: Icon,
         last?: boolean,
         optional?: boolean,
-        orientation?: Orientation
+        orientation?: Orientation,
     }>;
 }
 
@@ -1413,7 +1413,7 @@ declare module 'material-ui/Stepper/StepConnector' {
         alternativeLabel?: boolean,
         classes?: Object,
         className?: string,
-        orientation?: Orientation
+        orientation?: Orientation,
     }>;
 }
 
@@ -1432,7 +1432,7 @@ declare module 'material-ui/Stepper/StepContent' {
         optional?: boolean,
         orientation?: Orientation,
         transition?: Function,
-        transitionDuration?: TransitionDuration
+        transitionDuration?: TransitionDuration,
     }>;
 }
 
@@ -1443,7 +1443,7 @@ declare module 'material-ui/Stepper/StepIcon' {
         active?: boolean,
         classes?: Object,
         completed?: boolean,
-        icon?: Icon
+        icon?: Icon,
     }>;
 }
 
@@ -1462,7 +1462,7 @@ declare module 'material-ui/Stepper/StepLabel' {
         icon?: Icon,
         last?: boolean,
         optional?: boolean,
-        orientation?: Orientation
+        orientation?: Orientation,
     }>;
 }
 
@@ -1481,7 +1481,7 @@ declare module 'material-ui/Stepper/Stepper' {
         className?: string,
         connector?: React$Element<StepConnector> | Node,
         nonLinear?: boolean,
-        orientation?: Orientation
+        orientation?: Orientation,
     }>;
 }
 
@@ -1492,7 +1492,7 @@ declare module 'material-ui/Stepper/StepPositionIcon' {
         active?: boolean,
         classes?: Object,
         className?: string,
-        position?: Icon
+        position?: Icon,
     }>;
 }
 
@@ -1506,7 +1506,7 @@ declare module 'material-ui/styles/colorManipulator' {
         emphasize: (color: string, coefficient: number) => any,
         fade: (color: string, value: number) => any,
         darken: (color: string, coefficient: number) => any,
-        ligthen: (color: string, coefficient: number) => any
+        ligthen: (color: string, coefficient: number) => any,
     };
 }
 
@@ -1515,7 +1515,7 @@ declare module 'material-ui/styles/createBreakpoints' {
 
     declare module.exports: {
         keys: Array<Breakpoint>,
-        default: (breakpoints: Object) => any
+        default: (breakpoints: Object) => any,
     };
 }
 
@@ -1546,7 +1546,7 @@ declare module 'material-ui/styles/jssPreset' {
 }
 
 declare module 'material-ui/styles/getStylesCreator' {
-    declare module.exports: (stylesOrCreator: Object | ((Object) => Object)) => any;
+    declare module.exports: (stylesOrCreator: Object | (Object => Object)) => any;
 }
 
 declare module 'material-ui/styles' {
@@ -1555,7 +1555,7 @@ declare module 'material-ui/styles' {
         // withStyles: $Exports<'material-ui/styles/withStyles'>,
         withTheme: $Exports<'material-ui/styles/withTheme'>,
         createMuiTheme: $Exports<'material-ui/styles/createMuiTheme'>,
-        jssPreset: $Exports<'material-ui/styles/jssPreset'>
+        jssPreset: $Exports<'material-ui/styles/jssPreset'>,
     };
 }
 
@@ -1678,7 +1678,7 @@ declare module 'material-ui/SvgIcon/SvgIcon' {
         classes?: Object,
         className?: string,
         titleAccess?: string,
-        viewBox?: string
+        viewBox?: string,
     }>;
 }
 
@@ -1701,7 +1701,7 @@ declare module 'material-ui/Switch/Switch' {
         name?: string,
         onChange?: Function,
         tabIndex?: number | string,
-        value?: string
+        value?: string,
     }>;
 }
 
@@ -1721,7 +1721,7 @@ declare module 'material-ui/Table/Table' {
         children?: React$Node,
         classes?: Object,
         className?: string,
-        component?: React$ElementType
+        component?: React$ElementType,
     }>;
 }
 
@@ -1730,7 +1730,7 @@ declare module 'material-ui/Table/TableBody' {
         children?: React$Node,
         classes?: Object,
         className?: string,
-        component?: React$ElementType
+        component?: React$ElementType,
     }>;
 }
 
@@ -1743,7 +1743,7 @@ declare module 'material-ui/Table/TableCell' {
         className?: string,
         component?: React$ElementType,
         numeric?: boolean,
-        padding?: Padding
+        padding?: Padding,
     }>;
 }
 
@@ -1752,7 +1752,7 @@ declare module 'material-ui/Table/TableFooter' {
         children?: React$Node,
         classes?: Object,
         className?: string,
-        component?: React$ElementType
+        component?: React$ElementType,
     }>;
 }
 
@@ -1761,7 +1761,7 @@ declare module 'material-ui/Table/TableHead' {
         children?: React$Node,
         classes?: Object,
         className?: string,
-        component?: React$ElementType
+        component?: React$ElementType,
     }>;
 }
 
@@ -1770,7 +1770,7 @@ declare module 'material-ui/Table/TablePagination' {
         from: number,
         to: number,
         count: number,
-        page: number
+        page: number,
     };
     declare type LabelDisplayedRows = (paginationInfo: LabelDisplayedRowsArgs) => Node;
 
@@ -1785,7 +1785,7 @@ declare module 'material-ui/Table/TablePagination' {
         onChangeRowsPerPage: (event: SyntheticInputEvent<>) => void,
         page: number,
         rowsPerPage: number,
-        rowsPerPageOptions?: Array<number>
+        rowsPerPageOptions?: Array<number>,
     }>;
 }
 
@@ -1796,7 +1796,7 @@ declare module 'material-ui/Table/TableRow' {
         className?: string,
         component?: React$ElementType,
         hover?: boolean,
-        selected?: boolean
+        selected?: boolean,
     }>;
 }
 
@@ -1808,7 +1808,7 @@ declare module 'material-ui/Table/TableSortLabel' {
         children?: React$Node,
         classes?: Object,
         className?: string,
-        direction?: Direction
+        direction?: Direction,
     }>;
 }
 
@@ -1831,21 +1831,21 @@ declare module 'material-ui/Tabs/Tab' {
         selected?: boolean,
         style?: Object,
         textColor?: 'accent' | 'primary' | 'inherit' | string,
-        value?: any
+        value?: any,
     }>;
 }
 
 declare module 'material-ui/Tabs/TabIndicator' {
     declare type IndicatorStyle = {
         left: number,
-        width: number
+        width: number,
     };
 
     declare module.exports: React$ComponentType<{
         classes?: Object,
         className?: string,
         color: 'accent' | 'primary' | string,
-        style: IndicatorStyle
+        style: IndicatorStyle,
     }>;
 }
 
@@ -1870,7 +1870,7 @@ declare module 'material-ui/Tabs/Tabs' {
         scrollButtons?: ScrollButtons,
         TabScrollButton?: React$ComponentType<*>,
         textColor?: TextColor,
-        value: any
+        value: any,
     }>;
 }
 
@@ -1880,7 +1880,7 @@ declare module 'material-ui/Tabs/TabScrollButton' {
         className?: string,
         direction: 'left' | 'right',
         onClick?: Function,
-        visible?: boolean
+        visible?: boolean,
     }>;
 }
 
@@ -1921,7 +1921,7 @@ declare module 'material-ui/TextField/TextField' {
         SelectProps?: Object,
         type?: string,
         value?: string | number,
-        margin?: 'none' | 'dense' | 'normal'
+        margin?: 'none' | 'dense' | 'normal',
     }>;
 }
 
@@ -1934,7 +1934,7 @@ declare module 'material-ui/Toolbar/Toolbar' {
         classes?: Object,
         children?: React$Node,
         className?: string,
-        disableGutters?: boolean
+        disableGutters?: boolean,
     }>;
 }
 
@@ -1972,7 +1972,7 @@ declare module 'material-ui/Tooltip/Tooltip' {
         enterDelay?: number,
         leaveDelay?: number,
         placement?: Placement,
-        PopperProps?: Object
+        PopperProps?: Object,
     }>;
 }
 
@@ -1997,7 +1997,7 @@ declare module 'material-ui/transitions/Collapse' {
         onExiting?: TransitionCallback,
         style?: Object,
         timeout?: TransitionDuration,
-        unmountOnExit?: boolean
+        unmountOnExit?: boolean,
     }>;
 }
 
@@ -2012,7 +2012,7 @@ declare module 'material-ui/transitions/Fade' {
         onEntering?: TransitionCallback,
         onExit?: TransitionCallback,
         style?: Object,
-        timeout?: TransitionDuration
+        timeout?: TransitionDuration,
     }>;
 }
 
@@ -2025,7 +2025,7 @@ declare module 'material-ui/transitions/Zoom' {
         onEnter?: TransitionCallback,
         onExit?: TransitionCallback,
         style?: Object,
-        timeout?: TransitionDuration
+        timeout?: TransitionDuration,
     }>;
 }
 
@@ -2047,7 +2047,7 @@ declare module 'material-ui/transitions/Grow' {
         rootRef?: Function,
         style?: Object,
         transitionClasses?: TransitionClasses,
-        timeout?: TransitionDuration
+        timeout?: TransitionDuration,
     }>;
 }
 
@@ -2057,7 +2057,7 @@ declare module 'material-ui/transitions' {
         Grow: $Exports<'material-ui/transitions/Grow'>,
         Fade: $Exports<'material-ui/transitions/Fade'>,
         Collapse: $Exports<'material-ui/transitions/Collapse'>,
-        Zoom: $Exports<'material-ui/transitions/Zoom'>
+        Zoom: $Exports<'material-ui/transitions/Zoom'>,
     };
 }
 
@@ -2079,7 +2079,7 @@ declare module 'material-ui/transitions/Slide' {
         onExiting?: TransitionCallback,
         onExited?: TransitionCallback,
         style?: Object,
-        timeout?: TransitionDuration
+        timeout?: TransitionDuration,
     }>;
 }
 
@@ -2114,7 +2114,7 @@ declare module 'material-ui/Typography/Typography' {
         headlineMapping?: {[key: Type]: string},
         noWrap?: boolean,
         paragraph?: boolean,
-        variant?: Type
+        variant?: Type,
     }>;
 }
 
@@ -2125,7 +2125,7 @@ declare module 'material-ui/utils/addEventListener' {
 declare module 'material-ui/utils/ClickAwayListener' {
     declare module.exports: React$ComponentType<{
         children: React$Node,
-        onClickAway: (event: Event) => void
+        onClickAway: (event: Event) => void,
     }>;
 }
 
@@ -2139,7 +2139,7 @@ declare module 'material-ui/utils/helpers' {
         contains: (obj: Object, pred: Object) => any,
         findIndex: (arr: Array<any>, pred: any) => any,
         find: (arr: Array<any>, pred: any) => any,
-        createChainedFunction: (...funcs: Array<any>) => any
+        createChainedFunction: (...funcs: Array<any>) => any,
     };
 }
 
@@ -2147,7 +2147,7 @@ declare module 'material-ui/utils/keyboardFocus' {
     declare module.exports: {
         focusKeyPressed: Function,
         detectKeyboardFocus: Function,
-        listenForFocusKeys: Function
+        listenForFocusKeys: Function,
     };
 }
 
@@ -2155,7 +2155,7 @@ declare module 'material-ui/utils/manageAriaHidden' {
     declare module.exports: {
         ariaHidden: Function,
         hideSiblings: Function,
-        showSiblings: Function
+        showSiblings: Function,
     };
 }
 
@@ -2163,7 +2163,7 @@ declare module 'material-ui/utils/reactHelpers' {
     declare module.exports: {
         cloneChildrenWithClassName: (children?: React$Node, className: string) => any,
         isMuiElement: (element: any, muiNames: Array<string>) => any,
-        isMuiComponent: (element: any, muiNames: Array<string>) => any
+        isMuiComponent: (element: any, muiNames: Array<string>) => any,
     };
 }
 
@@ -2173,7 +2173,7 @@ declare module 'material-ui/utils/requirePropFactory' {
 
 declare module 'material-ui/utils/withWidth' {
     declare module.exports: (
-        options: Object
+        options: Object,
     ) => <Props: {}>(Component: React$ComponentType<Props>) => React$ComponentType<Props>;
 }
 

@@ -30,11 +30,9 @@ export async function getBadgeWonServerData(badgeId: string | number): Promise<B
     return window
         .fetch(getBadgeWonUrl)
         .then((response: Response): Promise<BadgeWonServerDataType> => response.json())
-        .catch(
-            (error: Error): Error => {
-                console.error('can not get badge won');
-                console.error(error);
-                return error;
-            }
-        );
+        .catch((error: Error): Error => {
+            console.error('can not get badge won');
+            console.error(error);
+            return error;
+        });
 }

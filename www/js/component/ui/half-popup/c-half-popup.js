@@ -98,8 +98,8 @@ class HalfPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const {props, state} = view;
         const {error} = state;
 
-        const containerClassName =
-            props.className && isString(props.className.container) ? props.className.container : '';
+        const containerClassName
+            = props.className && isString(props.className.container) ? props.className.container : '';
 
         if (error instanceof Error) {
             return (
@@ -130,8 +130,8 @@ class HalfPopup extends Component<ReduxPropsType, PassedPropsType, StateType> {
         const view = this;
         const {props} = view;
 
-        const containerPositionClassName =
-            props.className && isString(props.className.containerPosition) ? props.className.containerPosition : '';
+        const containerPositionClassName
+            = props.className && isString(props.className.containerPosition) ? props.className.containerPosition : '';
 
         /* eslint-disable jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events */
         return (

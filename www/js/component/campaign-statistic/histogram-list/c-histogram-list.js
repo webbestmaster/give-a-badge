@@ -128,14 +128,12 @@ class HistogramList extends Component<PropsType, StateType> {
         const {state, props} = view;
         const {campaignStatisticDataList, selectedBadgeIdList} = props;
 
-        return extractUserList(campaignStatisticDataList).map(
-            (userData: DataType): ColumnDataType => {
-                return {
-                    user: userData,
-                    badgeList: getBadgeListOfUser(campaignStatisticDataList, userData, selectedBadgeIdList),
-                };
-            }
-        );
+        return extractUserList(campaignStatisticDataList).map((userData: DataType): ColumnDataType => {
+            return {
+                user: userData,
+                badgeList: getBadgeListOfUser(campaignStatisticDataList, userData, selectedBadgeIdList),
+            };
+        });
     }
 
     getMaxRating(): number {

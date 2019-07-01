@@ -73,25 +73,23 @@ class BadgeCategoryListItem extends Component<ReduxPropsType, PassedPropsType, S
 
         return (
             <div className={style.badge_item_list}>
-                {categoryList.map(
-                    (badgeCategory: BadgeType): Node => {
-                        return (
-                            <Link
-                                className={style.badge_item}
-                                key={badgeCategory.id}
-                                title={badgeCategory.name}
-                                to={getBadgePath(badgeCategory.id)}
-                            >
-                                <div
-                                    className={style.badge_image}
-                                    style={{backgroundImage: `url('${badgeCategory.imageUrl}')`}}
-                                />
-                                <h5 className={style.badge_name}>{badgeCategory.name}</h5>
-                                {BadgeCategoryListItem.renderItemLeft(badgeCategory)}
-                            </Link>
-                        );
-                    }
-                )}
+                {categoryList.map((badgeCategory: BadgeType): Node => {
+                    return (
+                        <Link
+                            className={style.badge_item}
+                            key={badgeCategory.id}
+                            title={badgeCategory.name}
+                            to={getBadgePath(badgeCategory.id)}
+                        >
+                            <div
+                                className={style.badge_image}
+                                style={{backgroundImage: `url('${badgeCategory.imageUrl}')`}}
+                            />
+                            <h5 className={style.badge_name}>{badgeCategory.name}</h5>
+                            {BadgeCategoryListItem.renderItemLeft(badgeCategory)}
+                        </Link>
+                    );
+                })}
             </div>
         );
     }
@@ -114,7 +112,7 @@ const ConnectedComponent = connect<
     ComponentType<BadgeCategoryListItem>,
     PassedPropsType,
     ReduxPropsType,
-    ReduxActionType
+    ReduxActionType,
 >(
     (state: GlobalStateType, props: PassedPropsType): ReduxPropsType => ({
         // reduxProp: true

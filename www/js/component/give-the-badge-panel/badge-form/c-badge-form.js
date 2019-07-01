@@ -227,13 +227,11 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
         view.fetchNews()
             .then((): void => console.log('success fetch news after badge assign'))
-            .catch(
-                (error: Error): Error => {
-                    console.error('Can NOT fetch news after badge assign');
-                    console.error(error);
-                    return error;
-                }
-            );
+            .catch((error: Error): Error => {
+                console.error('Can NOT fetch news after badge assign');
+                console.error(error);
+                return error;
+            });
 
         console.log('badge assigned');
         console.log(resultBadgeAssign);
@@ -373,22 +371,20 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
                             className={classNames(style.founded_user_list)}
                             style={{...searchData.style.initial, ...searchData.style.transition[transitionState]}}
                         >
-                            {searchUserList.map(
-                                (foundedUser: FoundedUserType): Node => {
-                                    const foundedUserId = foundedUser.id;
-                                    const isInSelectedUserList = view.isInSelectedUserList(foundedUserId);
+                            {searchUserList.map((foundedUser: FoundedUserType): Node => {
+                                const foundedUserId = foundedUser.id;
+                                const isInSelectedUserList = view.isInSelectedUserList(foundedUserId);
 
-                                    return (
-                                        <FoundedUser
-                                            className={isInSelectedUserList ? foundedUserStyle.already_selected : ''}
-                                            foundedUser={foundedUser}
-                                            isActive={!isInSelectedUserList}
-                                            key={foundedUserId}
-                                            onClick={view.createHandleOnClickUser(isInSelectedUserList, foundedUser)}
-                                        />
-                                    );
-                                }
-                            )}
+                                return (
+                                    <FoundedUser
+                                        className={isInSelectedUserList ? foundedUserStyle.already_selected : ''}
+                                        foundedUser={foundedUser}
+                                        isActive={!isInSelectedUserList}
+                                        key={foundedUserId}
+                                        onClick={view.createHandleOnClickUser(isInSelectedUserList, foundedUser)}
+                                    />
+                                );
+                            })}
                         </div>
                     );
                 }}
@@ -415,26 +411,24 @@ class BadgeForm extends Component<ReduxPropsType, PassedPropsType, StateType> {
 
         return (
             <div className={style.selected_user_list} key="selected-user-list">
-                {selectedUserList.map(
-                    (foundedUser: FoundedUserType): Node => {
-                        return (
-                            <button
-                                className={style.selected_user_wrapper}
-                                key={foundedUser.id}
-                                onClick={view.createHandlerForRemoveFromSelectedUserList(foundedUser)}
-                                onKeyPress={view.createHandlerForRemoveFromSelectedUserList(foundedUser)}
-                                type="button"
-                            >
-                                <div className={style.remove_face_icon}/>
-                                <div
-                                    className={style.selected_user_image}
-                                    style={{backgroundImage: `url('${foundedUser.imageUrl}')`}}
-                                    title={foundedUser.name}
-                                />
-                            </button>
-                        );
-                    }
-                )}
+                {selectedUserList.map((foundedUser: FoundedUserType): Node => {
+                    return (
+                        <button
+                            className={style.selected_user_wrapper}
+                            key={foundedUser.id}
+                            onClick={view.createHandlerForRemoveFromSelectedUserList(foundedUser)}
+                            onKeyPress={view.createHandlerForRemoveFromSelectedUserList(foundedUser)}
+                            type="button"
+                        >
+                            <div className={style.remove_face_icon}/>
+                            <div
+                                className={style.selected_user_image}
+                                style={{backgroundImage: `url('${foundedUser.imageUrl}')`}}
+                                title={foundedUser.name}
+                            />
+                        </button>
+                    );
+                })}
             </div>
         );
     }

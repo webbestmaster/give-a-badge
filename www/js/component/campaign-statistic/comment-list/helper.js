@@ -15,8 +15,8 @@ export function getCommentListAboutUser(
 
     const filteredByUserIdCampaignDataList = filteredByBadgeIdCampaignDataList.filter(
         (campaignStatisticData: CampaignStatisticDataType): boolean =>
-            campaignStatisticData.toUsers.some(
-                (userData: DataType): boolean => [userData.id, noHistogramListActiveUserId].includes(userId)
+            campaignStatisticData.toUsers.some((userData: DataType): boolean =>
+                [userData.id, noHistogramListActiveUserId].includes(userId)
             )
     );
 

@@ -25,16 +25,14 @@ function getLocaleName(): LocaleNameType {
 
     let localeName = localeConst.defaults.localeName;
 
-    navigatorLanguages.every(
-        (deviceLocaleName: string): boolean => {
-            if (localeNameList.includes(deviceLocaleName)) {
-                localeName = deviceLocaleName;
-                return false;
-            }
-
-            return true;
+    navigatorLanguages.every((deviceLocaleName: string): boolean => {
+        if (localeNameList.includes(deviceLocaleName)) {
+            localeName = deviceLocaleName;
+            return false;
         }
-    );
+
+        return true;
+    });
 
     return localeName;
 }

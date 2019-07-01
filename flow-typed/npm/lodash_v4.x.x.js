@@ -55,24 +55,24 @@ declare module 'lodash' {
         evaluate?: RegExp,
         imports?: Object,
         interpolate?: RegExp,
-        variable?: string
+        variable?: string,
     };
 
     declare type TruncateOptions = {
         length?: number,
         omission?: string,
-        separator?: RegExp | string
+        separator?: RegExp | string,
     };
 
     declare type DebounceOptions = {
         leading?: boolean,
         maxWait?: number,
-        trailing?: boolean
+        trailing?: boolean,
     };
 
     declare type ThrottleOptions = {
         leading?: boolean,
-        trailing?: boolean
+        trailing?: boolean,
     };
 
     declare type NestedArray<T> = Array<Array<T>>;
@@ -152,7 +152,7 @@ declare module 'lodash' {
             a2?: ?Array<T>,
             a3?: ?Array<T>,
             a4?: ?Array<T>,
-            iteratee?: ?ValueOnlyIteratee<T>
+            iteratee?: ?ValueOnlyIteratee<T>,
         ): Array<T>;
         //Workaround until (...parameter: T, parameter2: U) works
         intersectionWith<T>(a1?: ?Array<T>, comparator?: ?Comparator<T>): Array<T>;
@@ -163,7 +163,7 @@ declare module 'lodash' {
             a2?: ?Array<T>,
             a3?: ?Array<T>,
             a4?: ?Array<T>,
-            comparator?: ?Comparator<T>
+            comparator?: ?Comparator<T>,
         ): Array<T>;
         join<T>(array: Array<T>, separator?: ?string): string;
         join<T>(array: void | null, separator?: ?string): '';
@@ -258,7 +258,7 @@ declare module 'lodash' {
             a2: Array<B>,
             a3: Array<C>,
             a4: Array<D>,
-            iteratee: (A, B, C, D) => T
+            iteratee: (A, B, C, D) => T,
         ): Array<T>;
 
         // Collection
@@ -321,49 +321,49 @@ declare module 'lodash' {
         orderBy<T>(
             array: $ReadOnlyArray<T>,
             iteratees?: ?$ReadOnlyArray<Iteratee<T>> | ?string,
-            orders?: ?$ReadOnlyArray<'asc' | 'desc'> | ?string
+            orders?: ?$ReadOnlyArray<'asc' | 'desc'> | ?string,
         ): Array<T>;
         orderBy<T>(
             array: null | void,
             iteratees?: ?$ReadOnlyArray<Iteratee<T>> | ?string,
-            orders?: ?$ReadOnlyArray<'asc' | 'desc'> | ?string
+            orders?: ?$ReadOnlyArray<'asc' | 'desc'> | ?string,
         ): Array<T>;
         orderBy<V, T: Object>(
             object: T,
             iteratees?: $ReadOnlyArray<OIteratee<*>> | string,
-            orders?: $ReadOnlyArray<'asc' | 'desc'> | string
+            orders?: $ReadOnlyArray<'asc' | 'desc'> | string,
         ): Array<V>;
         partition<T>(array?: ?Array<T>, predicate?: ?Predicate<T>): [Array<T>, Array<T>];
         partition<V, A, T: {[id: string]: A}>(object: T, predicate?: OPredicate<A, T>): [Array<V>, Array<V>];
         reduce<T, U>(
             array: Array<T>,
             iteratee?: (accumulator: U, value: T, index: number, array: ?Array<T>) => U,
-            accumulator?: U
+            accumulator?: U,
         ): U;
         reduce<T, U>(
             array: void | null,
             iteratee?: ?(accumulator: U, value: T, index: number, array: ?Array<T>) => U,
-            accumulator?: ?U
+            accumulator?: ?U,
         ): void | null;
         reduce<T: Object, U>(
             object: T,
             iteratee?: (accumulator: U, value: any, key: string, object: T) => U,
-            accumulator?: U
+            accumulator?: U,
         ): U;
         reduceRight<T, U>(
             array: void | null,
             iteratee?: ?(accumulator: U, value: T, index: number, array: ?Array<T>) => U,
-            accumulator?: ?U
+            accumulator?: ?U,
         ): void | null;
         reduceRight<T, U>(
             array: Array<T>,
             iteratee?: ?(accumulator: U, value: T, index: number, array: ?Array<T>) => U,
-            accumulator?: ?U
+            accumulator?: ?U,
         ): U;
         reduceRight<T: Object, U>(
             object: T,
             iteratee?: ?(accumulator: U, value: any, key: string, object: T) => U,
-            accumulator?: ?U
+            accumulator?: ?U,
         ): U;
         reject<T>(array: ?Array<T>, predicate?: Predicate<T>): Array<T>;
         reject<V: Object, A, T: {[id: string]: A}>(object?: ?T, predicate?: ?OPredicate<A, T>): Array<V>;
@@ -454,8 +454,8 @@ declare module 'lodash' {
                 key: number | string,
                 object: T,
                 other: U,
-                stack: any
-            ) => boolean | void
+                stack: any,
+            ) => boolean | void,
         ): boolean;
         isError(value: Error): true;
         isError(value: any): false;
@@ -473,7 +473,7 @@ declare module 'lodash' {
         isMatchWith<T: Object, U: Object>(
             object?: ?T,
             source?: ?U,
-            customizer?: ?(objValue: any, srcValue: any, key: number | string, object: T, source: U) => boolean | void
+            customizer?: ?(objValue: any, srcValue: any, key: number | string, object: T, source: U) => boolean | void,
         ): boolean;
         isNaN(value: Function | string | void | null | Object): false;
         isNaN(value: number): boolean;
@@ -560,20 +560,20 @@ declare module 'lodash' {
         assignInWith<T: Object, A: Object>(
             object: T,
             s1: A,
-            customizer?: (objValue: any, srcValue: any, key: string, object: T, source: A) => any | void
+            customizer?: (objValue: any, srcValue: any, key: string, object: T, source: A) => any | void,
         ): Object;
         assignInWith<T: Object, A: Object, B: Object>(
             object: T,
             s1: A,
             s2: B,
-            customizer?: (objValue: any, srcValue: any, key: string, object: T, source: A | B) => any | void
+            customizer?: (objValue: any, srcValue: any, key: string, object: T, source: A | B) => any | void,
         ): Object;
         assignInWith<T: Object, A: Object, B: Object, C: Object>(
             object: T,
             s1: A,
             s2: B,
             s3: C,
-            customizer?: (objValue: any, srcValue: any, key: string, object: T, source: A | B | C) => any | void
+            customizer?: (objValue: any, srcValue: any, key: string, object: T, source: A | B | C) => any | void,
         ): Object;
         assignInWith<T: Object, A: Object, B: Object, C: Object, D: Object>(
             object: T,
@@ -581,26 +581,26 @@ declare module 'lodash' {
             s2: B,
             s3: C,
             s4: D,
-            customizer?: (objValue: any, srcValue: any, key: string, object: T, source: A | B | C | D) => any | void
+            customizer?: (objValue: any, srcValue: any, key: string, object: T, source: A | B | C | D) => any | void,
         ): Object;
         assignWith(): {};
         assignWith<T: Object, A: Object>(
             object: T,
             s1: A,
-            customizer?: (objValue: any, srcValue: any, key: string, object: T, source: A) => any | void
+            customizer?: (objValue: any, srcValue: any, key: string, object: T, source: A) => any | void,
         ): Object;
         assignWith<T: Object, A: Object, B: Object>(
             object: T,
             s1: A,
             s2: B,
-            customizer?: (objValue: any, srcValue: any, key: string, object: T, source: A | B) => any | void
+            customizer?: (objValue: any, srcValue: any, key: string, object: T, source: A | B) => any | void,
         ): Object;
         assignWith<T: Object, A: Object, B: Object, C: Object>(
             object: T,
             s1: A,
             s2: B,
             s3: C,
-            customizer?: (objValue: any, srcValue: any, key: string, object: T, source: A | B | C) => any | void
+            customizer?: (objValue: any, srcValue: any, key: string, object: T, source: A | B | C) => any | void,
         ): Object;
         assignWith<T: Object, A: Object, B: Object, C: Object, D: Object>(
             object: T,
@@ -608,7 +608,7 @@ declare module 'lodash' {
             s2: B,
             s3: C,
             s4: D,
-            customizer?: (objValue: any, srcValue: any, key: string, object: T, source: A | B | C | D) => any | void
+            customizer?: (objValue: any, srcValue: any, key: string, object: T, source: A | B | C | D) => any | void,
         ): Object;
         at(object?: ?Object, ...paths: Array<string>): Array<any>;
         at(object?: ?Object, paths: Array<string>): Array<any>;
@@ -629,20 +629,20 @@ declare module 'lodash' {
         extendWith<T: Object, A: Object>(
             object?: ?T,
             s1?: ?A,
-            customizer?: ?(objValue: any, srcValue: any, key: string, object: T, source: A) => any | void
+            customizer?: ?(objValue: any, srcValue: any, key: string, object: T, source: A) => any | void,
         ): Object;
         extendWith<T: Object, A: Object, B: Object>(
             object: T,
             s1: A,
             s2: B,
-            customizer?: (objValue: any, srcValue: any, key: string, object: T, source: A | B) => any | void
+            customizer?: (objValue: any, srcValue: any, key: string, object: T, source: A | B) => any | void,
         ): Object;
         extendWith<T: Object, A: Object, B: Object, C: Object>(
             object: T,
             s1: A,
             s2: B,
             s3: C,
-            customizer?: (objValue: any, srcValue: any, key: string, object: T, source: A | B | C) => any | void
+            customizer?: (objValue: any, srcValue: any, key: string, object: T, source: A | B | C) => any | void,
         ): Object;
         extendWith<T: Object, A: Object, B: Object, C: Object, D: Object>(
             object: T,
@@ -650,7 +650,7 @@ declare module 'lodash' {
             s2: B,
             s3: C,
             s4: D,
-            customizer?: (objValue: any, srcValue: any, key: string, object: T, source: A | B | C | D) => any | void
+            customizer?: (objValue: any, srcValue: any, key: string, object: T, source: A | B | C | D) => any | void,
         ): Object;
         findKey<A, T: {[id: string]: A}>(object: T, predicate?: ?OPredicate<A, T>): string | void;
         findKey<A, T: {[id: string]: A}>(object: void | null, predicate?: ?OPredicate<A, T>): void;
@@ -689,20 +689,20 @@ declare module 'lodash' {
         mergeWith(): {};
         mergeWith<T: Object, A: Object>(
             object: T,
-            customizer?: (objValue: any, srcValue: any, key: string, object: T, source: A) => any | void
+            customizer?: (objValue: any, srcValue: any, key: string, object: T, source: A) => any | void,
         ): Object;
         mergeWith<T: Object, A: Object, B: Object>(
             object: T,
             s1: A,
             s2: B,
-            customizer?: (objValue: any, srcValue: any, key: string, object: T, source: A | B) => any | void
+            customizer?: (objValue: any, srcValue: any, key: string, object: T, source: A | B) => any | void,
         ): Object;
         mergeWith<T: Object, A: Object, B: Object, C: Object>(
             object: T,
             s1: A,
             s2: B,
             s3: C,
-            customizer?: (objValue: any, srcValue: any, key: string, object: T, source: A | B | C) => any | void
+            customizer?: (objValue: any, srcValue: any, key: string, object: T, source: A | B | C) => any | void,
         ): Object;
         mergeWith<T: Object, A: Object, B: Object, C: Object, D: Object>(
             object: T,
@@ -710,7 +710,7 @@ declare module 'lodash' {
             s2: B,
             s3: C,
             s4: D,
-            customizer?: (objValue: any, srcValue: any, key: string, object: T, source: A | B | C | D) => any | void
+            customizer?: (objValue: any, srcValue: any, key: string, object: T, source: A | B | C | D) => any | void,
         ): Object;
         omit(object?: ?Object, ...props: Array<string>): Object;
         omit(object?: ?Object, props: Array<string>): Object;
@@ -727,13 +727,13 @@ declare module 'lodash' {
             object: T,
             path?: ?Array<string> | string,
             value: any,
-            customizer?: (nsValue: any, key: string, nsObject: T) => any
+            customizer?: (nsValue: any, key: string, nsObject: T) => any,
         ): Object;
         setWith<T: void | null>(
             object: T,
             path?: ?Array<string> | string,
             value?: ?any,
-            customizer?: ?(nsValue: any, key: string, nsObject: T) => any
+            customizer?: ?(nsValue: any, key: string, nsObject: T) => any,
         ): T;
         toPairs(object?: ?Object | Array<*>): Array<[string, any]>;
         toPairsIn(object?: ?Object): Array<[string, any]>;
@@ -748,7 +748,7 @@ declare module 'lodash' {
             object: T,
             path?: ?(string[]) | ?string,
             updater?: ?Function,
-            customizer?: ?Function
+            customizer?: ?Function,
         ): T;
         values(object?: ?Object): Array<any>;
         valuesIn(object?: ?Object): Array<any>;
@@ -790,7 +790,7 @@ declare module 'lodash' {
         replace(
             string: void | null,
             pattern?: ?RegExp | ?string,
-            replacement: ?((string: string) => string) | ?string
+            replacement: ?((string: string) => string) | ?string,
         ): '';
         snakeCase(string: string): string;
         snakeCase(string: void | null): '';
@@ -930,24 +930,24 @@ declare module 'lodash/fp' {
         evaluate?: RegExp,
         imports?: Object,
         interpolate?: RegExp,
-        variable?: string
+        variable?: string,
     };
 
     declare type TruncateOptions = {
         length?: number,
         omission?: string,
-        separator?: RegExp | string
+        separator?: RegExp | string,
     };
 
     declare type DebounceOptions = {
         leading?: boolean,
         maxWait?: number,
-        trailing?: boolean
+        trailing?: boolean,
     };
 
     declare type ThrottleOptions = {
         leading?: boolean,
-        trailing?: boolean
+        trailing?: boolean,
     };
 
     declare type NestedArray<T> = Array<Array<T>>;
@@ -993,13 +993,13 @@ declare module 'lodash/fp' {
         difference<T>(values: $ReadOnlyArray<T>): (array: $ReadOnlyArray<T>) => T[];
         difference<T>(values: $ReadOnlyArray<T>, array: $ReadOnlyArray<T>): T[];
         differenceBy<T>(
-            iteratee: ValueOnlyIteratee<T>
+            iteratee: ValueOnlyIteratee<T>,
         ): ((values: $ReadOnlyArray<T>) => (array: $ReadOnlyArray<T>) => T[]) &
             ((values: $ReadOnlyArray<T>, array: $ReadOnlyArray<T>) => T[]);
         differenceBy<T>(iteratee: ValueOnlyIteratee<T>, values: $ReadOnlyArray<T>): (array: $ReadOnlyArray<T>) => T[];
         differenceBy<T>(iteratee: ValueOnlyIteratee<T>, values: $ReadOnlyArray<T>, array: $ReadOnlyArray<T>): T[];
         differenceWith<T>(
-            values: $ReadOnlyArray<T>
+            values: $ReadOnlyArray<T>,
         ): ((comparator: Comparator<T>) => (array: $ReadOnlyArray<T>) => T[]) &
             ((comparator: Comparator<T>, array: $ReadOnlyArray<T>) => T[]);
         differenceWith<T>(values: $ReadOnlyArray<T>, comparator: Comparator<T>): (array: $ReadOnlyArray<T>) => T[];
@@ -1017,22 +1017,22 @@ declare module 'lodash/fp' {
         dropLastWhile<T>(predicate: Predicate<T>): (array: Array<T>) => Array<T>;
         dropLastWhile<T>(predicate: Predicate<T>, array: Array<T>): Array<T>;
         fill<T, U>(
-            start: number
+            start: number,
         ): ((
-            end: number
+            end: number,
         ) => ((value: U) => (array: Array<T>) => Array<T | U>) & ((value: U, array: Array<T>) => Array<T | U>)) &
             ((end: number, value: U) => (array: Array<T>) => Array<T | U>) &
             ((end: number, value: U, array: Array<T>) => Array<T | U>);
         fill<T, U>(
             start: number,
-            end: number
+            end: number,
         ): ((value: U) => (array: Array<T>) => Array<T | U>) & ((value: U, array: Array<T>) => Array<T | U>);
         fill<T, U>(start: number, end: number, value: U): (array: Array<T>) => Array<T | U>;
         fill<T, U>(start: number, end: number, value: U, array: Array<T>): Array<T | U>;
         findIndex<T>(predicate: Predicate<T>): (array: $ReadOnlyArray<T>) => number;
         findIndex<T>(predicate: Predicate<T>, array: $ReadOnlyArray<T>): number;
         findIndexFrom<T>(
-            predicate: Predicate<T>
+            predicate: Predicate<T>,
         ): ((fromIndex: number) => (array: $ReadOnlyArray<T>) => number) &
             ((fromIndex: number, array: $ReadOnlyArray<T>) => number);
         findIndexFrom<T>(predicate: Predicate<T>, fromIndex: number): (array: $ReadOnlyArray<T>) => number;
@@ -1040,7 +1040,7 @@ declare module 'lodash/fp' {
         findLastIndex<T>(predicate: Predicate<T>): (array: $ReadOnlyArray<T>) => number;
         findLastIndex<T>(predicate: Predicate<T>, array: $ReadOnlyArray<T>): number;
         findLastIndexFrom<T>(
-            predicate: Predicate<T>
+            predicate: Predicate<T>,
         ): ((fromIndex: number) => (array: $ReadOnlyArray<T>) => number) &
             ((fromIndex: number, array: $ReadOnlyArray<T>) => number);
         findLastIndexFrom<T>(predicate: Predicate<T>, fromIndex: number): (array: $ReadOnlyArray<T>) => number;
@@ -1057,7 +1057,7 @@ declare module 'lodash/fp' {
         indexOf<T>(value: T): (array: Array<T>) => number;
         indexOf<T>(value: T, array: Array<T>): number;
         indexOfFrom<T>(
-            value: T
+            value: T,
         ): ((fromIndex: number) => (array: Array<T>) => number) & ((fromIndex: number, array: Array<T>) => number);
         indexOfFrom<T>(value: T, fromIndex: number): (array: Array<T>) => number;
         indexOfFrom<T>(value: T, fromIndex: number, array: Array<T>): number;
@@ -1066,12 +1066,12 @@ declare module 'lodash/fp' {
         intersection<T>(a1: Array<T>): (a2: Array<T>) => Array<T>;
         intersection<T>(a1: Array<T>, a2: Array<T>): Array<T>;
         intersectionBy<T>(
-            iteratee: ValueOnlyIteratee<T>
+            iteratee: ValueOnlyIteratee<T>,
         ): ((a1: Array<T>) => (a2: Array<T>) => Array<T>) & ((a1: Array<T>, a2: Array<T>) => Array<T>);
         intersectionBy<T>(iteratee: ValueOnlyIteratee<T>, a1: Array<T>): (a2: Array<T>) => Array<T>;
         intersectionBy<T>(iteratee: ValueOnlyIteratee<T>, a1: Array<T>, a2: Array<T>): Array<T>;
         intersectionWith<T>(
-            comparator: Comparator<T>
+            comparator: Comparator<T>,
         ): ((a1: Array<T>) => (a2: Array<T>) => Array<T>) & ((a1: Array<T>, a2: Array<T>) => Array<T>);
         intersectionWith<T>(comparator: Comparator<T>, a1: Array<T>): (a2: Array<T>) => Array<T>;
         intersectionWith<T>(comparator: Comparator<T>, a1: Array<T>, a2: Array<T>): Array<T>;
@@ -1081,7 +1081,7 @@ declare module 'lodash/fp' {
         lastIndexOf<T>(value: T): (array: Array<T>) => number;
         lastIndexOf<T>(value: T, array: Array<T>): number;
         lastIndexOfFrom<T>(
-            value: T
+            value: T,
         ): ((fromIndex: number) => (array: Array<T>) => number) & ((fromIndex: number, array: Array<T>) => number);
         lastIndexOfFrom<T>(value: T, fromIndex: number): (array: Array<T>) => number;
         lastIndexOfFrom<T>(value: T, fromIndex: number, array: Array<T>): number;
@@ -1092,12 +1092,12 @@ declare module 'lodash/fp' {
         pullAll<T>(values: Array<T>): (array: Array<T>) => Array<T>;
         pullAll<T>(values: Array<T>, array: Array<T>): Array<T>;
         pullAllBy<T>(
-            iteratee: ValueOnlyIteratee<T>
+            iteratee: ValueOnlyIteratee<T>,
         ): ((values: Array<T>) => (array: Array<T>) => Array<T>) & ((values: Array<T>, array: Array<T>) => Array<T>);
         pullAllBy<T>(iteratee: ValueOnlyIteratee<T>, values: Array<T>): (array: Array<T>) => Array<T>;
         pullAllBy<T>(iteratee: ValueOnlyIteratee<T>, values: Array<T>, array: Array<T>): Array<T>;
         pullAllWith<T>(
-            comparator: Function
+            comparator: Function,
         ): ((values: T[]) => (array: T[]) => T[]) & ((values: T[], array: T[]) => T[]);
         pullAllWith<T>(comparator: Function, values: T[]): (array: T[]) => T[];
         pullAllWith<T>(comparator: Function, values: T[], array: T[]): T[];
@@ -1107,14 +1107,14 @@ declare module 'lodash/fp' {
         remove<T>(predicate: Predicate<T>, array: Array<T>): Array<T>;
         reverse<T>(array: Array<T>): Array<T>;
         slice<T>(
-            start: number
+            start: number,
         ): ((end: number) => (array: Array<T>) => Array<T>) & ((end: number, array: Array<T>) => Array<T>);
         slice<T>(start: number, end: number): (array: Array<T>) => Array<T>;
         slice<T>(start: number, end: number, array: Array<T>): Array<T>;
         sortedIndex<T>(value: T): (array: Array<T>) => number;
         sortedIndex<T>(value: T, array: Array<T>): number;
         sortedIndexBy<T>(
-            iteratee: ValueOnlyIteratee<T>
+            iteratee: ValueOnlyIteratee<T>,
         ): ((value: T) => (array: Array<T>) => number) & ((value: T, array: Array<T>) => number);
         sortedIndexBy<T>(iteratee: ValueOnlyIteratee<T>, value: T): (array: Array<T>) => number;
         sortedIndexBy<T>(iteratee: ValueOnlyIteratee<T>, value: T, array: Array<T>): number;
@@ -1123,7 +1123,7 @@ declare module 'lodash/fp' {
         sortedLastIndex<T>(value: T): (array: Array<T>) => number;
         sortedLastIndex<T>(value: T, array: Array<T>): number;
         sortedLastIndexBy<T>(
-            iteratee: ValueOnlyIteratee<T>
+            iteratee: ValueOnlyIteratee<T>,
         ): ((value: T) => (array: Array<T>) => number) & ((value: T, array: Array<T>) => number);
         sortedLastIndexBy<T>(iteratee: ValueOnlyIteratee<T>, value: T): (array: Array<T>) => number;
         sortedLastIndexBy<T>(iteratee: ValueOnlyIteratee<T>, value: T, array: Array<T>): number;
@@ -1148,12 +1148,12 @@ declare module 'lodash/fp' {
         union<T>(a1: Array<T>): (a2: Array<T>) => Array<T>;
         union<T>(a1: Array<T>, a2: Array<T>): Array<T>;
         unionBy<T>(
-            iteratee: ValueOnlyIteratee<T>
+            iteratee: ValueOnlyIteratee<T>,
         ): ((a1: Array<T>) => (a2: Array<T>) => Array<T>) & ((a1: Array<T>, a2: Array<T>) => Array<T>);
         unionBy<T>(iteratee: ValueOnlyIteratee<T>, a1: Array<T>): (a2: Array<T>) => Array<T>;
         unionBy<T>(iteratee: ValueOnlyIteratee<T>, a1: Array<T>, a2: Array<T>): Array<T>;
         unionWith<T>(
-            comparator: Comparator<T>
+            comparator: Comparator<T>,
         ): ((a1: Array<T>) => (a2: Array<T>) => Array<T>) & ((a1: Array<T>, a2: Array<T>) => Array<T>);
         unionWith<T>(comparator: Comparator<T>, a1: Array<T>): (a2: Array<T>) => Array<T>;
         unionWith<T>(comparator: Comparator<T>, a1: Array<T>, a2: Array<T>): Array<T>;
@@ -1172,22 +1172,22 @@ declare module 'lodash/fp' {
         symmetricDifference<T>(a1: Array<T>): (a2: Array<T>) => Array<T>;
         symmetricDifference<T>(a1: Array<T>, a2: Array<T>): Array<T>;
         xorBy<T>(
-            iteratee: ValueOnlyIteratee<T>
+            iteratee: ValueOnlyIteratee<T>,
         ): ((a1: Array<T>) => (a2: Array<T>) => Array<T>) & ((a1: Array<T>, a2: Array<T>) => Array<T>);
         xorBy<T>(iteratee: ValueOnlyIteratee<T>, a1: Array<T>): (a2: Array<T>) => Array<T>;
         xorBy<T>(iteratee: ValueOnlyIteratee<T>, a1: Array<T>, a2: Array<T>): Array<T>;
         symmetricDifferenceBy<T>(
-            iteratee: ValueOnlyIteratee<T>
+            iteratee: ValueOnlyIteratee<T>,
         ): ((a1: Array<T>) => (a2: Array<T>) => Array<T>) & ((a1: Array<T>, a2: Array<T>) => Array<T>);
         symmetricDifferenceBy<T>(iteratee: ValueOnlyIteratee<T>, a1: Array<T>): (a2: Array<T>) => Array<T>;
         symmetricDifferenceBy<T>(iteratee: ValueOnlyIteratee<T>, a1: Array<T>, a2: Array<T>): Array<T>;
         xorWith<T>(
-            comparator: Comparator<T>
+            comparator: Comparator<T>,
         ): ((a1: Array<T>) => (a2: Array<T>) => Array<T>) & ((a1: Array<T>, a2: Array<T>) => Array<T>);
         xorWith<T>(comparator: Comparator<T>, a1: Array<T>): (a2: Array<T>) => Array<T>;
         xorWith<T>(comparator: Comparator<T>, a1: Array<T>, a2: Array<T>): Array<T>;
         symmetricDifferenceWith<T>(
-            comparator: Comparator<T>
+            comparator: Comparator<T>,
         ): ((a1: Array<T>) => (a2: Array<T>) => Array<T>) & ((a1: Array<T>, a2: Array<T>) => Array<T>);
         symmetricDifferenceWith<T>(comparator: Comparator<T>, a1: Array<T>): (a2: Array<T>) => Array<T>;
         symmetricDifferenceWith<T>(comparator: Comparator<T>, a1: Array<T>, a2: Array<T>): Array<T>;
@@ -1201,7 +1201,7 @@ declare module 'lodash/fp' {
         zipObjectDeep(props: any[]): (values: any) => Object;
         zipObjectDeep(props: any[], values: any): Object;
         zipWith<T>(
-            iteratee: Iteratee<T>
+            iteratee: Iteratee<T>,
         ): ((a1: NestedArray<T>) => (a2: NestedArray<T>) => Array<T>) &
             ((a1: NestedArray<T>, a2: NestedArray<T>) => Array<T>);
         zipWith<T>(iteratee: Iteratee<T>, a1: NestedArray<T>): (a2: NestedArray<T>) => Array<T>;
@@ -1224,72 +1224,72 @@ declare module 'lodash/fp' {
         find<T>(predicate: Predicate<T> | OPredicate<T>): (collection: $ReadOnlyArray<T> | {[id: any]: T}) => T | void;
         find<T>(predicate: Predicate<T> | OPredicate<T>, collection: $ReadOnlyArray<T> | {[id: any]: T}): T | void;
         findFrom<T>(
-            predicate: Predicate<T> | OPredicate<T>
+            predicate: Predicate<T> | OPredicate<T>,
         ): ((fromIndex: number) => (collection: $ReadOnlyArray<T> | {[id: any]: T}) => T | void) &
             ((fromIndex: number, collection: $ReadOnlyArray<T> | {[id: any]: T}) => T | void);
         findFrom<T>(
             predicate: Predicate<T> | OPredicate<T>,
-            fromIndex: number
+            fromIndex: number,
         ): (collection: Array<T> | {[id: any]: T}) => T | void;
         findFrom<T>(
             predicate: Predicate<T> | OPredicate<T>,
             fromIndex: number,
-            collection: $ReadOnlyArray<T> | {[id: any]: T}
+            collection: $ReadOnlyArray<T> | {[id: any]: T},
         ): T | void;
         findLast<T>(
-            predicate: Predicate<T> | OPredicate<T>
+            predicate: Predicate<T> | OPredicate<T>,
         ): (collection: $ReadOnlyArray<T> | {[id: any]: T}) => T | void;
         findLast<T>(predicate: Predicate<T> | OPredicate<T>, collection: $ReadOnlyArray<T> | {[id: any]: T}): T | void;
         findLastFrom<T>(
-            predicate: Predicate<T> | OPredicate<T>
+            predicate: Predicate<T> | OPredicate<T>,
         ): ((fromIndex: number) => (collection: $ReadOnlyArray<T> | {[id: any]: T}) => T | void) &
             ((fromIndex: number, collection: $ReadOnlyArray<T> | {[id: any]: T}) => T | void);
         findLastFrom<T>(
             predicate: Predicate<T> | OPredicate<T>,
-            fromIndex: number
+            fromIndex: number,
         ): (collection: $ReadOnlyArray<T> | {[id: any]: T}) => T | void;
         findLastFrom<T>(
             predicate: Predicate<T> | OPredicate<T>,
             fromIndex: number,
-            collection: $ReadOnlyArray<T> | {[id: any]: T}
+            collection: $ReadOnlyArray<T> | {[id: any]: T},
         ): T | void;
         flatMap<T, U>(
-            iteratee: FlatMapIteratee<T, U> | OFlatMapIteratee<T, U>
+            iteratee: FlatMapIteratee<T, U> | OFlatMapIteratee<T, U>,
         ): (collection: Array<T> | {[id: any]: T}) => Array<U>;
         flatMap<T, U>(
             iteratee: FlatMapIteratee<T, U> | OFlatMapIteratee<T, U>,
-            collection: Array<T> | {[id: any]: T}
+            collection: Array<T> | {[id: any]: T},
         ): Array<U>;
         flatMapDeep<T, U>(
-            iteratee: FlatMapIteratee<T, U> | OFlatMapIteratee<T, U>
+            iteratee: FlatMapIteratee<T, U> | OFlatMapIteratee<T, U>,
         ): (collection: Array<T> | {[id: any]: T}) => Array<U>;
         flatMapDeep<T, U>(
             iteratee: FlatMapIteratee<T, U> | OFlatMapIteratee<T, U>,
-            collection: Array<T> | {[id: any]: T}
+            collection: Array<T> | {[id: any]: T},
         ): Array<U>;
         flatMapDepth<T, U>(
-            iteratee: FlatMapIteratee<T, U> | OFlatMapIteratee<T, U>
+            iteratee: FlatMapIteratee<T, U> | OFlatMapIteratee<T, U>,
         ): ((depth: number) => (collection: Array<T> | {[id: any]: T}) => Array<U>) &
             ((depth: number, collection: Array<T> | {[id: any]: T}) => Array<U>);
         flatMapDepth<T, U>(
             iteratee: FlatMapIteratee<T, U> | OFlatMapIteratee<T, U>,
-            depth: number
+            depth: number,
         ): (collection: Array<T> | {[id: any]: T}) => Array<U>;
         flatMapDepth<T, U>(
             iteratee: FlatMapIteratee<T, U> | OFlatMapIteratee<T, U>,
             depth: number,
-            collection: Array<T> | {[id: any]: T}
+            collection: Array<T> | {[id: any]: T},
         ): Array<U>;
         forEach<T>(iteratee: Iteratee<T> | OIteratee<T>): (collection: Array<T> | {[id: any]: T}) => Array<T>;
         forEach<T>(iteratee: Iteratee<T> | OIteratee<T>, collection: Array<T> | {[id: any]: T}): Array<T>;
         forEachRight<T>(iteratee: Iteratee<T> | OIteratee<T>): (collection: Array<T> | {[id: any]: T}) => Array<T>;
         forEachRight<T>(iteratee: Iteratee<T> | OIteratee<T>, collection: Array<T> | {[id: any]: T}): Array<T>;
         groupBy<V, T>(
-            iteratee: ValueOnlyIteratee<T>
+            iteratee: ValueOnlyIteratee<T>,
         ): (collection: $ReadOnlyArray<T> | {[id: any]: T}) => {[key: V]: Array<T>};
         groupBy<V, T>(
             iteratee: ValueOnlyIteratee<T>,
-            collection: $ReadOnlyArray<T> | {[id: any]: T}
+            collection: $ReadOnlyArray<T> | {[id: any]: T},
         ): {[key: V]: Array<T>};
         includes<T>(value: T): (collection: Array<T> | {[id: any]: T}) => boolean;
         includes<T>(value: T, collection: Array<T> | {[id: any]: T}): boolean;
@@ -1300,104 +1300,104 @@ declare module 'lodash/fp' {
         contains<T>(value: T): (collection: Array<T> | {[id: any]: T}) => boolean;
         contains<T>(value: T, collection: Array<T> | {[id: any]: T}): boolean;
         includesFrom(
-            value: string
+            value: string,
         ): ((fromIndex: number) => (str: string) => boolean) & ((fromIndex: number, str: string) => boolean);
         includesFrom(value: string, fromIndex: number): (str: string) => boolean;
         includesFrom(value: string, fromIndex: number, str: string): boolean;
         includesFrom<T>(
-            value: T
+            value: T,
         ): ((fromIndex: number) => (collection: Array<T>) => boolean) &
             ((fromIndex: number, collection: Array<T>) => boolean);
         includesFrom<T>(value: T, fromIndex: number): (collection: Array<T>) => boolean;
         includesFrom<T>(value: T, fromIndex: number, collection: Array<T>): boolean;
         invokeMap<T>(
-            path: ((value: T) => Array<string> | string) | Array<string> | string
+            path: ((value: T) => Array<string> | string) | Array<string> | string,
         ): (collection: Array<T> | {[id: any]: T}) => Array<any>;
         invokeMap<T>(
             path: ((value: T) => Array<string> | string) | Array<string> | string,
-            collection: Array<T> | {[id: any]: T}
+            collection: Array<T> | {[id: any]: T},
         ): Array<any>;
         invokeArgsMap<T>(
-            path: ((value: T) => Array<string> | string) | Array<string> | string
+            path: ((value: T) => Array<string> | string) | Array<string> | string,
         ): ((collection: Array<T> | {[id: any]: T}) => (args: Array<any>) => Array<any>) &
             ((collection: Array<T> | {[id: any]: T}, args: Array<any>) => Array<any>);
         invokeArgsMap<T>(
             path: ((value: T) => Array<string> | string) | Array<string> | string,
-            collection: Array<T> | {[id: any]: T}
+            collection: Array<T> | {[id: any]: T},
         ): (args: Array<any>) => Array<any>;
         invokeArgsMap<T>(
             path: ((value: T) => Array<string> | string) | Array<string> | string,
             collection: Array<T> | {[id: any]: T},
-            args: Array<any>
+            args: Array<any>,
         ): Array<any>;
         keyBy<T, V>(iteratee: ValueOnlyIteratee<T>): (collection: $ReadOnlyArray<T> | {[id: any]: T}) => {[key: V]: T};
         keyBy<T, V>(iteratee: ValueOnlyIteratee<T>, collection: $ReadOnlyArray<T> | {[id: any]: T}): {[key: V]: T};
         indexBy<T, V>(
-            iteratee: ValueOnlyIteratee<T>
+            iteratee: ValueOnlyIteratee<T>,
         ): (collection: $ReadOnlyArray<T> | {[id: any]: T}) => {[key: V]: T};
         indexBy<T, V>(iteratee: ValueOnlyIteratee<T>, collection: $ReadOnlyArray<T> | {[id: any]: T}): {[key: V]: T};
         map<T, U>(
-            iteratee: MapIterator<T, U> | OMapIterator<T, U>
+            iteratee: MapIterator<T, U> | OMapIterator<T, U>,
         ): (collection: Array<T> | {[id: any]: T}) => Array<U>;
         map<T, U>(iteratee: MapIterator<T, U> | OMapIterator<T, U>, collection: Array<T> | {[id: any]: T}): Array<U>;
         map(iteratee: (char: string) => any): (str: string) => string;
         map(iteratee: (char: string) => any, str: string): string;
         pluck<T, U>(
-            iteratee: MapIterator<T, U> | OMapIterator<T, U>
+            iteratee: MapIterator<T, U> | OMapIterator<T, U>,
         ): (collection: Array<T> | {[id: any]: T}) => Array<U>;
         pluck<T, U>(iteratee: MapIterator<T, U> | OMapIterator<T, U>, collection: Array<T> | {[id: any]: T}): Array<U>;
         pluck(iteratee: (char: string) => any): (str: string) => string;
         pluck(iteratee: (char: string) => any, str: string): string;
         orderBy<T>(
-            iteratees: $ReadOnlyArray<Iteratee<T> | OIteratee<*>> | string
+            iteratees: $ReadOnlyArray<Iteratee<T> | OIteratee<*>> | string,
         ): ((
-            orders: $ReadOnlyArray<'asc' | 'desc'> | string
+            orders: $ReadOnlyArray<'asc' | 'desc'> | string,
         ) => (collection: $ReadOnlyArray<T> | {[id: any]: T}) => Array<T>) &
             ((
-            orders: $ReadOnlyArray<'asc' | 'desc'> | string,
-            collection: $ReadOnlyArray<T> | {[id: any]: T}
-        ) => Array<T>);
+                orders: $ReadOnlyArray<'asc' | 'desc'> | string,
+                collection: $ReadOnlyArray<T> | {[id: any]: T},
+            ) => Array<T>);
         orderBy<T>(
             iteratees: $ReadOnlyArray<Iteratee<T> | OIteratee<*>> | string,
-            orders: $ReadOnlyArray<'asc' | 'desc'> | string
+            orders: $ReadOnlyArray<'asc' | 'desc'> | string,
         ): (collection: $ReadOnlyArray<T> | {[id: any]: T}) => Array<T>;
         orderBy<T>(
             iteratees: $ReadOnlyArray<Iteratee<T> | OIteratee<*>> | string,
             orders: $ReadOnlyArray<'asc' | 'desc'> | string,
-            collection: $ReadOnlyArray<T> | {[id: any]: T}
+            collection: $ReadOnlyArray<T> | {[id: any]: T},
         ): Array<T>;
         partition<T>(
-            predicate: Predicate<T> | OPredicate<T>
+            predicate: Predicate<T> | OPredicate<T>,
         ): (collection: Array<T> | {[id: any]: T}) => [Array<T>, Array<T>];
         partition<T>(
             predicate: Predicate<T> | OPredicate<T>,
-            collection: Array<T> | {[id: any]: T}
+            collection: Array<T> | {[id: any]: T},
         ): [Array<T>, Array<T>];
         reduce<T, U>(
-            iteratee: (accumulator: U, value: T) => U
+            iteratee: (accumulator: U, value: T) => U,
         ): ((accumulator: U) => (collection: Array<T> | {[id: any]: T}) => U) &
             ((accumulator: U, collection: Array<T> | {[id: any]: T}) => U);
         reduce<T, U>(
             iteratee: (accumulator: U, value: T) => U,
-            accumulator: U
+            accumulator: U,
         ): (collection: Array<T> | {[id: any]: T}) => U;
         reduce<T, U>(
             iteratee: (accumulator: U, value: T) => U,
             accumulator: U,
-            collection: Array<T> | {[id: any]: T}
+            collection: Array<T> | {[id: any]: T},
         ): U;
         reduceRight<T, U>(
-            iteratee: (value: T, accumulator: U) => U
+            iteratee: (value: T, accumulator: U) => U,
         ): ((accumulator: U) => (collection: Array<T> | {[id: any]: T}) => U) &
             ((accumulator: U, collection: Array<T> | {[id: any]: T}) => U);
         reduceRight<T, U>(
             iteratee: (value: T, accumulator: U) => U,
-            accumulator: U
+            accumulator: U,
         ): (collection: Array<T> | {[id: any]: T}) => U;
         reduceRight<T, U>(
             iteratee: (value: T, accumulator: U) => U,
             accumulator: U,
-            collection: Array<T> | {[id: any]: T}
+            collection: Array<T> | {[id: any]: T},
         ): U;
         reject<T>(predicate: Predicate<T> | OPredicate<T>): (collection: Array<T> | {[id: any]: T}) => Array<T>;
         reject<T>(predicate: Predicate<T> | OPredicate<T>, collection: Array<T> | {[id: any]: T}): Array<T>;
@@ -1411,11 +1411,11 @@ declare module 'lodash/fp' {
         any<T>(predicate: Predicate<T> | OPredicate<T>): (collection: Array<T> | {[id: any]: T}) => boolean;
         any<T>(predicate: Predicate<T> | OPredicate<T>, collection: Array<T> | {[id: any]: T}): boolean;
         sortBy<T>(
-            iteratees: $ReadOnlyArray<Iteratee<T> | OIteratee<T>> | Iteratee<T> | OIteratee<T>
+            iteratees: $ReadOnlyArray<Iteratee<T> | OIteratee<T>> | Iteratee<T> | OIteratee<T>,
         ): (collection: $ReadOnlyArray<T> | {[id: any]: T}) => Array<T>;
         sortBy<T>(
             iteratees: $ReadOnlyArray<Iteratee<T> | OIteratee<T>> | Iteratee<T> | OIteratee<T>,
-            collection: $ReadOnlyArray<T> | {[id: any]: T}
+            collection: $ReadOnlyArray<T> | {[id: any]: T},
         ): Array<T>;
 
         // Date
@@ -1482,13 +1482,13 @@ declare module 'lodash/fp' {
         cloneWith<T, U>(customizer: (value: T, key: number | string, object: T, stack: any) => U): (value: T) => U;
         cloneWith<T, U>(customizer: (value: T, key: number | string, object: T, stack: any) => U, value: T): U;
         conformsTo<T: {[key: string]: mixed}>(
-            predicates: T & {[key: string]: (x: any) => boolean}
+            predicates: T & {[key: string]: (x: any) => boolean},
         ): (source: T) => boolean;
         conformsTo<T: {[key: string]: mixed}>(predicates: T & {[key: string]: (x: any) => boolean}, source: T): boolean;
         where<T: {[key: string]: mixed}>(predicates: T & {[key: string]: (x: any) => boolean}): (source: T) => boolean;
         where<T: {[key: string]: mixed}>(predicates: T & {[key: string]: (x: any) => boolean}, source: T): boolean;
         conforms<T: {[key: string]: mixed}>(
-            predicates: T & {[key: string]: (x: any) => boolean}
+            predicates: T & {[key: string]: (x: any) => boolean},
         ): (source: T) => boolean;
         conforms<T: {[key: string]: mixed}>(predicates: T & {[key: string]: (x: any) => boolean}, source: T): boolean;
         eq(value: any): (other: any) => boolean;
@@ -1520,8 +1520,8 @@ declare module 'lodash/fp' {
                 key: number | string,
                 object: T,
                 other: U,
-                stack: any
-            ) => boolean | void
+                stack: any,
+            ) => boolean | void,
         ): ((value: T) => (other: U) => boolean) & ((value: T, other: U) => boolean);
         isEqualWith<T, U>(
             customizer: (
@@ -1530,9 +1530,9 @@ declare module 'lodash/fp' {
                 key: number | string,
                 object: T,
                 other: U,
-                stack: any
+                stack: any,
             ) => boolean | void,
-            value: T
+            value: T,
         ): (other: U) => boolean;
         isEqualWith<T, U>(
             customizer: (
@@ -1541,10 +1541,10 @@ declare module 'lodash/fp' {
                 key: number | string,
                 object: T,
                 other: U,
-                stack: any
+                stack: any,
             ) => boolean | void,
             value: T,
-            other: U
+            other: U,
         ): boolean;
         isError(value: any): boolean;
         isFinite(value: any): boolean;
@@ -1558,16 +1558,16 @@ declare module 'lodash/fp' {
         whereEq(source: Object): (object: Object) => boolean;
         whereEq(source: Object, object: Object): boolean;
         isMatchWith<T: Object, U: Object>(
-            customizer: (objValue: any, srcValue: any, key: number | string, object: T, source: U) => boolean | void
+            customizer: (objValue: any, srcValue: any, key: number | string, object: T, source: U) => boolean | void,
         ): ((source: U) => (object: T) => boolean) & ((source: U, object: T) => boolean);
         isMatchWith<T: Object, U: Object>(
             customizer: (objValue: any, srcValue: any, key: number | string, object: T, source: U) => boolean | void,
-            source: U
+            source: U,
         ): (object: T) => boolean;
         isMatchWith<T: Object, U: Object>(
             customizer: (objValue: any, srcValue: any, key: number | string, object: T, source: U) => boolean | void,
             source: U,
-            object: T
+            object: T,
         ): boolean;
         isNaN(value: any): boolean;
         isNative(value: any): boolean;
@@ -1627,12 +1627,12 @@ declare module 'lodash/fp' {
 
         // number
         clamp(
-            lower: number
+            lower: number,
         ): ((upper: number) => (number: number) => number) & ((upper: number, number: number) => number);
         clamp(lower: number, upper: number): (number: number) => number;
         clamp(lower: number, upper: number, number: number): number;
         inRange(
-            start: number
+            start: number,
         ): ((end: number) => (number: number) => boolean) & ((end: number, number: number) => boolean);
         inRange(start: number, end: number): (number: number) => boolean;
         inRange(start: number, end: number, number: number): boolean;
@@ -1648,49 +1648,49 @@ declare module 'lodash/fp' {
         assignIn<A, B>(a: A): (b: B) => A & B;
         assignIn<A, B>(a: A, b: B): A & B;
         assignInWith<T: Object, A: Object>(
-            customizer: (objValue: any, srcValue: any, key: string, object: T, source: A) => any | void
+            customizer: (objValue: any, srcValue: any, key: string, object: T, source: A) => any | void,
         ): ((object: T) => (s1: A) => Object) & ((object: T, s1: A) => Object);
         assignInWith<T: Object, A: Object>(
             customizer: (objValue: any, srcValue: any, key: string, object: T, source: A) => any | void,
-            object: T
+            object: T,
         ): (s1: A) => Object;
         assignInWith<T: Object, A: Object>(
             customizer: (objValue: any, srcValue: any, key: string, object: T, source: A) => any | void,
             object: T,
-            s1: A
+            s1: A,
         ): Object;
         assignWith<T: Object, A: Object>(
-            customizer: (objValue: any, srcValue: any, key: string, object: T, source: A) => any | void
+            customizer: (objValue: any, srcValue: any, key: string, object: T, source: A) => any | void,
         ): ((object: T) => (s1: A) => Object) & ((object: T, s1: A) => Object);
         assignWith<T: Object, A: Object>(
             customizer: (objValue: any, srcValue: any, key: string, object: T, source: A) => any | void,
-            object: T
+            object: T,
         ): (s1: A) => Object;
         assignWith<T: Object, A: Object>(
             customizer: (objValue: any, srcValue: any, key: string, object: T, source: A) => any | void,
             object: T,
-            s1: A
+            s1: A,
         ): Object;
         assignInAllWith(
-            customizer: (objValue: any, srcValue: any, key: string, object: Object, source: Object) => any | void
+            customizer: (objValue: any, srcValue: any, key: string, object: Object, source: Object) => any | void,
         ): (objects: Array<Object>) => Object;
         assignInAllWith(
             customizer: (objValue: any, srcValue: any, key: string, object: Object, source: Object) => any | void,
-            objects: Array<Object>
+            objects: Array<Object>,
         ): Object;
         extendAllWith(
-            customizer: (objValue: any, srcValue: any, key: string, object: Object, source: Object) => any | void
+            customizer: (objValue: any, srcValue: any, key: string, object: Object, source: Object) => any | void,
         ): (objects: Array<Object>) => Object;
         extendAllWith(
             customizer: (objValue: any, srcValue: any, key: string, object: Object, source: Object) => any | void,
-            objects: Array<Object>
+            objects: Array<Object>,
         ): Object;
         assignAllWith(
-            customizer: (objValue: any, srcValue: any, key: string, object: Object, source: Object) => any | void
+            customizer: (objValue: any, srcValue: any, key: string, object: Object, source: Object) => any | void,
         ): (objects: Array<Object>) => Object;
         assignAllWith(
             customizer: (objValue: any, srcValue: any, key: string, object: Object, source: Object) => any | void,
-            objects: Array<Object>
+            objects: Array<Object>,
         ): Object;
         at(paths: Array<string>): (object: Object) => Array<any>;
         at(paths: Array<string>, object: Object): Array<any>;
@@ -1714,16 +1714,16 @@ declare module 'lodash/fp' {
         extend<A, B>(a: A, b: B): A & B;
         // alias for _.assignInWith
         extendWith<T: Object, A: Object>(
-            customizer: (objValue: any, srcValue: any, key: string, object: T, source: A) => any | void
+            customizer: (objValue: any, srcValue: any, key: string, object: T, source: A) => any | void,
         ): ((object: T) => (s1: A) => Object) & ((object: T, s1: A) => Object);
         extendWith<T: Object, A: Object>(
             customizer: (objValue: any, srcValue: any, key: string, object: T, source: A) => any | void,
-            object: T
+            object: T,
         ): (s1: A) => Object;
         extendWith<T: Object, A: Object>(
             customizer: (objValue: any, srcValue: any, key: string, object: T, source: A) => any | void,
             object: T,
-            s1: A
+            s1: A,
         ): Object;
         findKey<A, T: {[id: any]: A}>(predicate: OPredicate<A>): (object: T) => string | void;
         findKey<A, T: {[id: any]: A}>(predicate: OPredicate<A>, object: T): string | void;
@@ -1746,19 +1746,19 @@ declare module 'lodash/fp' {
         path(path: Array<string> | string): (object: Object | Array<any>) => any;
         path(path: Array<string> | string, object: Object | Array<any>): any;
         getOr(
-            defaultValue: any
+            defaultValue: any,
         ): ((path: Array<string> | string) => (object: Object | Array<any>) => any) &
             ((path: Array<string> | string, object: Object | Array<any>) => any);
         getOr(defaultValue: any, path: Array<string> | string): (object: Object | Array<any>) => any;
         getOr(defaultValue: any, path: Array<string> | string, object: Object | Array<any>): any;
         propOr(
-            defaultValue: any
+            defaultValue: any,
         ): ((path: Array<string> | string) => (object: Object | Array<any>) => any) &
             ((path: Array<string> | string, object: Object | Array<any>) => any);
         propOr(defaultValue: any, path: Array<string> | string): (object: Object | Array<any>) => any;
         propOr(defaultValue: any, path: Array<string> | string, object: Object | Array<any>): any;
         pathOr(
-            defaultValue: any
+            defaultValue: any,
         ): ((path: Array<string> | string) => (object: Object | Array<any>) => any) &
             ((path: Array<string> | string, object: Object | Array<any>) => any);
         pathOr(defaultValue: any, path: Array<string> | string): (object: Object | Array<any>) => any;
@@ -1774,7 +1774,7 @@ declare module 'lodash/fp' {
         invoke(path: Array<string> | string): (object: Object) => any;
         invoke(path: Array<string> | string, object: Object): any;
         invokeArgs(
-            path: Array<string> | string
+            path: Array<string> | string,
         ): ((object: Object) => (args: Array<any>) => any) & ((object: Object, args: Array<any>) => any);
         invokeArgs(path: Array<string> | string, object: Object): (args: Array<any>) => any;
         invokeArgs(path: Array<string> | string, object: Object, args: Array<any>): any;
@@ -1789,23 +1789,23 @@ declare module 'lodash/fp' {
         merge(object: Object, source: Object): Object;
         mergeAll(objects: Array<Object>): Object;
         mergeWith<T: Object, A: Object, B: Object>(
-            customizer: (objValue: any, srcValue: any, key: string, object: T, source: A | B) => any | void
+            customizer: (objValue: any, srcValue: any, key: string, object: T, source: A | B) => any | void,
         ): ((object: T) => (s1: A) => Object) & ((object: T, s1: A) => Object);
         mergeWith<T: Object, A: Object, B: Object>(
             customizer: (objValue: any, srcValue: any, key: string, object: T, source: A | B) => any | void,
-            object: T
+            object: T,
         ): (s1: A) => Object;
         mergeWith<T: Object, A: Object, B: Object>(
             customizer: (objValue: any, srcValue: any, key: string, object: T, source: A | B) => any | void,
             object: T,
-            s1: A
+            s1: A,
         ): Object;
         mergeAllWith(
-            customizer: (objValue: any, srcValue: any, key: string, object: Object, source: Object) => any | void
+            customizer: (objValue: any, srcValue: any, key: string, object: Object, source: Object) => any | void,
         ): (objects: Array<Object>) => Object;
         mergeAllWith(
             customizer: (objValue: any, srcValue: any, key: string, object: Object, source: Object) => any | void,
-            objects: Array<Object>
+            objects: Array<Object>,
         ): Object;
         omit(props: Array<string>): (object: Object) => Object;
         omit(props: Array<string>, object: Object): Object;
@@ -1822,46 +1822,46 @@ declare module 'lodash/fp' {
         result(path: Array<string> | string): (object: Object) => any;
         result(path: Array<string> | string, object: Object): any;
         set(
-            path: Array<string> | string
+            path: Array<string> | string,
         ): ((value: any) => (object: Object) => Object) & ((value: any, object: Object) => Object);
         set(path: Array<string> | string, value: any): (object: Object) => Object;
         set(path: Array<string> | string, value: any, object: Object): Object;
         assoc(
-            path: Array<string> | string
+            path: Array<string> | string,
         ): ((value: any) => (object: Object) => Object) & ((value: any, object: Object) => Object);
         assoc(path: Array<string> | string, value: any): (object: Object) => Object;
         assoc(path: Array<string> | string, value: any, object: Object): Object;
         assocPath(
-            path: Array<string> | string
+            path: Array<string> | string,
         ): ((value: any) => (object: Object) => Object) & ((value: any, object: Object) => Object);
         assocPath(path: Array<string> | string, value: any): (object: Object) => Object;
         assocPath(path: Array<string> | string, value: any, object: Object): Object;
         setWith<T>(
-            customizer: (nsValue: any, key: string, nsObject: T) => any
+            customizer: (nsValue: any, key: string, nsObject: T) => any,
         ): ((
-            path: Array<string> | string
+            path: Array<string> | string,
         ) => ((value: any) => (object: T) => Object) & ((value: any, object: T) => Object)) &
             ((path: Array<string> | string, value: any) => (object: T) => Object) &
             ((path: Array<string> | string, value: any, object: T) => Object);
         setWith<T>(
             customizer: (nsValue: any, key: string, nsObject: T) => any,
-            path: Array<string> | string
+            path: Array<string> | string,
         ): ((value: any) => (object: T) => Object) & ((value: any, object: T) => Object);
         setWith<T>(
             customizer: (nsValue: any, key: string, nsObject: T) => any,
             path: Array<string> | string,
-            value: any
+            value: any,
         ): (object: T) => Object;
         setWith<T>(
             customizer: (nsValue: any, key: string, nsObject: T) => any,
             path: Array<string> | string,
             value: any,
-            object: T
+            object: T,
         ): Object;
         toPairs(object: Object | Array<*>): Array<[string, any]>;
         toPairsIn(object: Object): Array<[string, any]>;
         transform(
-            iteratee: OIteratee<*>
+            iteratee: OIteratee<*>,
         ): ((accumulator: any) => (collection: Object | $ReadOnlyArray<any>) => any) &
             ((accumulator: any, collection: Object | $ReadOnlyArray<any>) => any);
         transform(iteratee: OIteratee<*>, accumulator: any): (collection: Object | $ReadOnlyArray<any>) => any;
@@ -1873,20 +1873,20 @@ declare module 'lodash/fp' {
         dissocPath(path: Array<string> | string): (object: Object) => boolean;
         dissocPath(path: Array<string> | string, object: Object): boolean;
         update(
-            path: string[] | string
+            path: string[] | string,
         ): ((updater: Function) => (object: Object) => Object) & ((updater: Function, object: Object) => Object);
         update(path: string[] | string, updater: Function): (object: Object) => Object;
         update(path: string[] | string, updater: Function, object: Object): Object;
         updateWith(
-            customizer: Function
+            customizer: Function,
         ): ((
-            path: string[] | string
+            path: string[] | string,
         ) => ((updater: Function) => (object: Object) => Object) & ((updater: Function, object: Object) => Object)) &
             ((path: string[] | string, updater: Function) => (object: Object) => Object) &
             ((path: string[] | string, updater: Function, object: Object) => Object);
         updateWith(
             customizer: Function,
-            path: string[] | string
+            path: string[] | string,
         ): ((updater: Function) => (object: Object) => Object) & ((updater: Function, object: Object) => Object);
         updateWith(customizer: Function, path: string[] | string, updater: Function): (object: Object) => Object;
         updateWith(customizer: Function, path: string[] | string, updater: Function, object: Object): Object;
@@ -1912,21 +1912,21 @@ declare module 'lodash/fp' {
         pad(length: number): (string: string) => string;
         pad(length: number, string: string): string;
         padChars(
-            chars: string
+            chars: string,
         ): ((length: number) => (string: string) => string) & ((length: number, string: string) => string);
         padChars(chars: string, length: number): (string: string) => string;
         padChars(chars: string, length: number, string: string): string;
         padEnd(length: number): (string: string) => string;
         padEnd(length: number, string: string): string;
         padCharsEnd(
-            chars: string
+            chars: string,
         ): ((length: number) => (string: string) => string) & ((length: number, string: string) => string);
         padCharsEnd(chars: string, length: number): (string: string) => string;
         padCharsEnd(chars: string, length: number, string: string): string;
         padStart(length: number): (string: string) => string;
         padStart(length: number, string: string): string;
         padCharsStart(
-            chars: string
+            chars: string,
         ): ((length: number) => (string: string) => string) & ((length: number, string: string) => string);
         padCharsStart(chars: string, length: number): (string: string) => string;
         padCharsStart(chars: string, length: number, string: string): string;
@@ -1935,12 +1935,12 @@ declare module 'lodash/fp' {
         repeat(n: number): (string: string) => string;
         repeat(n: number, string: string): string;
         replace(
-            pattern: RegExp | string
+            pattern: RegExp | string,
         ): ((replacement: ((string: string) => string) | string) => (string: string) => string) &
             ((replacement: ((string: string) => string) | string, string: string) => string);
         replace(
             pattern: RegExp | string,
-            replacement: ((string: string) => string) | string
+            replacement: ((string: string) => string) | string,
         ): (string: string) => string;
         replace(pattern: RegExp | string, replacement: ((string: string) => string) | string, string: string): string;
         snakeCase(string: string): string;
@@ -2000,7 +2000,7 @@ declare module 'lodash/fp' {
         method(path: Array<string> | string): Function;
         methodOf(object: Object): Function;
         mixin<T: Function | Object>(
-            object: T
+            object: T,
         ): ((source: Object) => (options: {chain: boolean}) => T) & ((source: Object, options: {chain: boolean}) => T);
         mixin<T: Function | Object>(object: T, source: Object): (options: {chain: boolean}) => T;
         mixin<T: Function | Object>(object: T, source: Object, options: {chain: boolean}): T;
@@ -2020,14 +2020,14 @@ declare module 'lodash/fp' {
         range(start: number): (end: number) => Array<number>;
         range(start: number, end: number): Array<number>;
         rangeStep(
-            step: number
+            step: number,
         ): ((start: number) => (end: number) => Array<number>) & ((start: number, end: number) => Array<number>);
         rangeStep(step: number, start: number): (end: number) => Array<number>;
         rangeStep(step: number, start: number, end: number): Array<number>;
         rangeRight(start: number): (end: number) => Array<number>;
         rangeRight(start: number, end: number): Array<number>;
         rangeStepRight(
-            step: number
+            step: number,
         ): ((start: number) => (end: number) => Array<number>) & ((start: number, end: number) => Array<number>);
         rangeStepRight(step: number, start: number): (end: number) => Array<number>;
         rangeStepRight(step: number, start: number, end: number): Array<number>;
@@ -2053,7 +2053,7 @@ declare module 'lodash/fp' {
             curry?: boolean,
             fixed?: boolean,
             immutable?: boolean,
-            rearg?: boolean
+            rearg?: boolean,
         }): void;
 
         // Properties

@@ -42,11 +42,29 @@
         "node": false
     },
     "settings": {
+        "react": {
+            "version": "detect"
+        },
         "flowtype": {
             "onlyFilesWithFlowAnnotation": true
         }
     },
     "rules": {
+        "unicorn/prevent-abbreviations": [2, {
+            "replacements": {
+                "attr": false,
+                "attrs": false,
+                "arg": false,
+                "args": false,
+                "prop": false,
+                "props": false,
+                "prev": false,
+                "dev": false,
+                "evt": false,
+                "src": false,
+                "ref": false
+            }
+        }],
         "babel/new-cap": 1,
         "babel/no-invalid-this": 1,
         "babel/object-curly-spacing": 1,
@@ -189,6 +207,8 @@
         ],
         "react/jsx-one-expression-per-line": 0,
         //        "react/destructuring-assignment": [1, "never"],
+        "react/state-in-constructor": 0,
+        "no-return-await": 1,
         "no-console": 0,
         "no-empty-label": 0,
         "no-warning-comments": 0,
@@ -566,7 +586,7 @@
         ],
         "operator-linebreak": [
             1,
-            "after"
+            "before"
         ],
         "padded-blocks": [
             1,

@@ -91,8 +91,8 @@ class GiveTheBadgePanel extends Component<ReduxPropsType, PassedPropsType, State
             allBadgeList.push(...badgeCategoryList[key]);
         });
 
-        const badgeInfo =
-            allBadgeList.find(
+        const badgeInfo
+            = allBadgeList.find(
                 (badgeCategoryInList: BadgeType): boolean => String(badgeCategoryInList.id) === badgeId
             ) || null;
 

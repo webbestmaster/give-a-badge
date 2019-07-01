@@ -47,13 +47,11 @@ export async function badgeAssign(badgeAssigneeInput: BadgeAssignInputType): Pro
             ...serverApi.request.paramMap.postJSON,
             body: JSON.stringify(badgeAssigneeInput),
         })
-        .catch(
-            (error: Error): Error => {
-                console.error('badgeAssign: can not give badge', badgeAssignUrl, badgeAssigneeInput);
-                console.error(error);
-                return error;
-            }
-        );
+        .catch((error: Error): Error => {
+            console.error('badgeAssign: can not give badge', badgeAssignUrl, badgeAssigneeInput);
+            console.error(error);
+            return error;
+        });
 
     if (response instanceof Error) {
         console.error('badgeAssign: can not give badge', badgeAssignUrl, badgeAssigneeInput);

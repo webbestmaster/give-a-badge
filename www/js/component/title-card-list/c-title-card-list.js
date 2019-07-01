@@ -33,7 +33,7 @@ type ReduxActionType = {|
     +applyGetNewListResponse: (getNewsListResponse: GetNewsListType, inBegin: boolean) => ApplyGetNewListResponseType,
     +applyGetNewAchtungListResponse: (
         getNewsAchtungListResponse: GetNewsAchtungListType,
-        inBegin: boolean
+        inBegin: boolean,
     ) => ApplyGetNewAchtungListResponseType,
 |};
 

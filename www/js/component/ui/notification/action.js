@@ -5,6 +5,8 @@
 import type {Node} from 'react';
 import React from 'react';
 
+import {hasProperty} from '../../../lib/is';
+
 import type {SnackBarTypeType} from './snack-bar/c-snack-bar';
 import {SnackBar} from './snack-bar/c-snack-bar';
 
@@ -46,13 +48,13 @@ export type SnackBarDetailType = ShowSnackBarDetailType | HideSnackBarDetailType
 
 export function showSnackBar(content: Node, options: SnackBarOptionsType, customEventName: string): Promise<void> {
     return new Promise((resolve: () => void) => {
-        const snackBarType = options.hasOwnProperty('type') ? options.type : null;
+        const snackBarType = hasProperty(options, 'type') ? options.type : null;
 
         const detail: ShowSnackBarDetailType = {
             ...defaultOptions,
             ...options,
             isShow: true,
-            id: options.hasOwnProperty('id') ? options.id : JSON.stringify(content),
+            id: hasProperty(options, 'id') ? options.id : JSON.stringify(content),
             content: <SnackBar type={snackBarType}>{content}</SnackBar>,
             handleOnHide: (): void => resolve(),
         };

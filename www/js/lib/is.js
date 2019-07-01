@@ -47,3 +47,7 @@ export function isFunction(value: mixed): boolean %checks {
 export function isNotFunction(value: mixed): boolean %checks {
     return typeof value !== 'function';
 }
+
+export function hasProperty(object: mixed, propertyName: string): boolean %checks {
+    return Reflect.apply(Object.prototype.hasOwnProperty, object, [propertyName]);
+}

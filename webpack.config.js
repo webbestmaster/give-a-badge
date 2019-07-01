@@ -1,18 +1,20 @@
 /* global process, __dirname */
+
 /* eslint no-process-env: 0, id-match: 0, optimize-regex/optimize-regex: 0 */
+
 const path = require('path');
 
 const webpack = require('webpack');
-
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer'); // eslint-disable-line no-unused-vars
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
+const {UnusedFilesWebpackPlugin} = require('unused-files-webpack-plugin');
 
 const DEVELOPMENT = 'development';
 const PRODUCTION = 'production';
@@ -38,26 +40,31 @@ const definePluginParams = {
     // IS_DEVELOPMENT: JSON.stringify(IS_DEVELOPMENT)
 };
 
-const fileRegExp = /\.(png|jpg|jpeg|gif|svg|woff2?)$/;
+const fileRegExp = /\.(png|jpg|jpeg|gif|svg|otf|ttf|woff2?)$/;
+
+const pathToDist = '/dist';
+
+const duplicateList = ['/@babel/runtime', 'warning', 'invariant', 'hoist-non-react-statics'];
+
+const alias = duplicateList.reduce((accumulator, packageName) => {
+    return {...accumulator, [packageName]: path.resolve(CWD, `node_modules/${packageName}`)};
+}, {});
 
 const webpackConfig = {
-    entry: [
-        './www/css/root.scss',
-        './www/js/root.js',
-    ],
+    entry: ['./www/css/root.scss', './www/js/root.js'],
     output: {
-        path: path.join(CWD, '/dist'),
+        path: path.join(CWD, pathToDist),
         publicPath: '/',
-        filename: '[name].js',
-        chunkFilename: '[name].async-import.js',
+        filename: IS_DEVELOPMENT ? '[name].js' : '[name].[hash:6].js',
+        chunkFilename: IS_DEVELOPMENT ? '[name].async-import.js' : '[name].[hash:6].async-import.js',
     },
 
     devtool: IS_PRODUCTION ? false : 'source-map',
 
     optimization: Object.assign(
         {},
-        IS_DEVELOPMENT ?
-            {
+        IS_DEVELOPMENT
+            ? {
                 splitChunks: {
                     cacheGroups: {
                         main: {
@@ -73,9 +80,9 @@ const webpackConfig = {
                             reuseExistingChunk: true,
                             test: /\.s?css$/,
                         },
-                        image: {
+                        asset: {
                             chunks: 'initial',
-                            name: 'image',
+                            name: 'asset',
                             priority: -15,
                             test: fileRegExp,
                         },
@@ -87,8 +94,8 @@ const webpackConfig = {
                         },
                     },
                 },
-            } :
-            {
+            }
+            : {
                 minimizer: [
                     new TerserPlugin({
                         terserOptions: {
@@ -126,8 +133,8 @@ const webpackConfig = {
                         // all query parameters are passed to it.
                         // - name - The name is a standard option.
                         query: {
-                            limit: 10e3, // 10k bytes
-                            name: 'img/img-[name]-[hash:6].[ext]',
+                            limit: IS_PRODUCTION ? 10e3 : 1, // 10k bytes for production
+                            name: 'asset/[name]-[hash:6].[ext]',
                         },
                     },
                     {
@@ -160,9 +167,9 @@ const webpackConfig = {
             {
                 test: /\.scss$/,
                 use: [
-                    IS_PRODUCTION ?
-                        MiniCssExtractPlugin.loader :
-                        {
+                    IS_PRODUCTION
+                        ? MiniCssExtractPlugin.loader
+                        : {
                             loader: 'style-loader',
                             options: {
                                 sourceMap: IS_DEVELOPMENT,
@@ -177,8 +184,9 @@ const webpackConfig = {
                         loader: 'css-loader',
                         options: {
                             sourceMap: IS_DEVELOPMENT,
-                            modules: true,
-                            localIdentName: IS_DEVELOPMENT ? '[local]----[hash:6]' : '[hash:6]', // '[local]----[path]--[name]--[hash:6]'
+                            modules: {
+                                localIdentName: IS_DEVELOPMENT ? '[local]----[hash:6]' : '[hash:6]', // '[local]----[path]--[name]--[hash:6]'
+                            },
                         },
                     },
                     {
@@ -196,9 +204,9 @@ const webpackConfig = {
             {
                 test: /\.css$/,
                 use: [
-                    IS_PRODUCTION ?
-                        MiniCssExtractPlugin.loader :
-                        {
+                    IS_PRODUCTION
+                        ? MiniCssExtractPlugin.loader
+                        : {
                             loader: 'style-loader',
                             options: {
                                 sourceMap: IS_DEVELOPMENT,
@@ -213,8 +221,9 @@ const webpackConfig = {
                         loader: 'css-loader',
                         options: {
                             sourceMap: IS_DEVELOPMENT,
-                            modules: true,
-                            localIdentName: '[local]',
+                            modules: {
+                                localIdentName: '[local]', // '[local]----[path]--[name]--[hash:6]'
+                            },
                         },
                     },
                     {
@@ -230,17 +239,12 @@ const webpackConfig = {
             },
         ],
     },
-    // resolve module warning, see DuplicatePackageCheckerPlugin
     resolve: {
-        alias: {
-            warning: path.resolve(__dirname, 'node_modules/warning'),
-            '@babel/runtime': path.resolve(__dirname, 'node_modules/@babel/runtime'),
-            'hoist-non-react-statics': path.resolve(__dirname, 'node_modules/hoist-non-react-statics'),
-        },
+        alias,
     },
     plugins: [
         new DuplicatePackageCheckerPlugin(),
-        new CleanWebpackPlugin(['./dist']),
+        new CleanWebpackPlugin(),
         new webpack.DefinePlugin(definePluginParams),
         new HtmlWebpackPlugin({
             template: './www/index.html',
@@ -261,17 +265,28 @@ const webpackConfig = {
         }),
         new ScriptExtHtmlWebpackPlugin({defaultAttribute: 'defer'}),
         new CopyWebpackPlugin([{from: './www/favicon.ico', to: './favicon.ico'}], {debug: false}),
+        new UnusedFilesWebpackPlugin({
+            patterns: ['www/**/*.*'],
+            globOptions: {
+                // TODO: remove 'www/js/lib/**/*.*' for prod version
+                ignore: ['www/**/*.scss.flow', 'www/**/*.css.flow', 'www/js/lib/**/*.*'],
+            },
+        }),
         new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /en/),
     ],
     devServer: {
+        contentBase: path.join(CWD, pathToDist),
+        host: '0.0.0.0',
+        port: 8183,
+        historyApiFallback: {
+            disableDotRule: true,
+        },
+        // inline: false,
+        // hot: true,
+        // hotOnly: false,
         proxy: [
             {
-                context: [
-                    '/api/',
-                    '/login',
-                    '/login-page',
-                    '/logout',
-                ],
+                context: ['/api/', '/login', '/login-page', '/logout'],
                 // target: 'https://badge.by',
                 // target: 'http://206.81.28.99',
                 // target: 'http://172.21.96.250',

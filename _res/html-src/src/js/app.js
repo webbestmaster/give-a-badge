@@ -1,24 +1,18 @@
-
-
-const app = (function () {
+const app = (function() {
     const winWidth = document.documentElement.clientWidth;
-
 
     const winHeight = document.documentElement.clientHeight;
 
-
-    const _onLoad = function () {
+    const _onLoad = function() {
         let ps;
 
-
         let psList;
-
 
         const headroom = new Headroom(document.getElementById('headroom'));
 
         headroom.init();
 
-        $(document).mouseup(function (e) {
+        $(document).mouseup(function(e) {
             const div = $('.js-outsideclick');
 
             if (!div.is(e.target) && div.has(e.target).length === 0) {
@@ -27,7 +21,7 @@ const app = (function () {
             }
         });
 
-        $(document).mouseup(function (e) {
+        $(document).mouseup(function(e) {
             const div = $('.js-outsideclick-search-users');
 
             if (!div.is(e.target) && div.has(e.target).length === 0) {
@@ -35,20 +29,21 @@ const app = (function () {
             }
         });
 
-
         // включалка поиска
-        $('.js-search-ctrl').on('click', function (e) {
+        $('.js-search-ctrl').on('click', function(e) {
             e.preventDefault();
 
             $('#searchBody').toggleClass('is-active');
             $('#logo').toggleClass('is-moveup');
 
-            $(this).parents('form').get(0).reset();
+            $(this)
+                .parents('form')
+                .get(0)
+                .reset();
         });
 
-
         // включалка модалок
-        $('[data-toggle]').on('click', function (e) {
+        $('[data-toggle]').on('click', function(e) {
             e.preventDefault();
 
             // закрываем все модалки
@@ -71,10 +66,12 @@ const app = (function () {
             const id = $(this).attr('href');
 
             // показываем первую вкладку в модалке
-            $(id).find('.js-modal-body').eq(0).removeClass('hidden');
+            $(id)
+                .find('.js-modal-body')
+                .eq(0)
+                .removeClass('hidden');
 
             const target = document.querySelector(id);
-
 
             const targetScroll = target.querySelector('.js-perfectScrollbar');
 
@@ -94,9 +91,8 @@ const app = (function () {
             }
         });
 
-
         // закрыватель модалки (закрывает все модалки)
-        $('[data-modal-close]').on('click', function (e) {
+        $('[data-modal-close]').on('click', function(e) {
             e.preventDefault();
 
             $('html,body').removeClass('is-modal-active');
@@ -104,18 +100,15 @@ const app = (function () {
             $('[data-toggle]').removeClass('is-active');
         });
 
-
         // переключатель внутри модалки
-        $('[data-modal-switch]').on('click', function (e) {
+        $('[data-modal-switch]').on('click', function(e) {
             e.preventDefault();
 
             $('.js-modal-body').addClass('hidden');
 
             const id = $(this).attr('href');
 
-
             const target = document.querySelector(id);
-
 
             const targetScroll = target.querySelector('.js-perfectScrollbar');
 
@@ -134,14 +127,14 @@ const app = (function () {
         });
 
         // разворачивалка списка пользователей в катрочке категории
-        $('[data-expand-userlist]').on('click', function (e) {
+        $('[data-expand-userlist]').on('click', function(e) {
             e.preventDefault();
 
-            const $list = $(this).parent().find('.js-categoryCard-list');
-
+            const $list = $(this)
+                .parent()
+                .find('.js-categoryCard-list');
 
             const $modal = $(this).parents('.modal');
-
 
             const modalHeight = $modal.height();
 
@@ -161,7 +154,6 @@ const app = (function () {
 
             const $modalScroll = $modal.find('.js-perfectScrollbar');
 
-
             const modalScrollValue = $modalScroll.scrollTop();
 
             // if ( ps ) ps.destroy();
@@ -175,7 +167,7 @@ const app = (function () {
             $list.toggleClass('is-active');
         });
 
-        $('[data-block-expander]').on('click', function (e) {
+        $('[data-block-expander]').on('click', function(e) {
             e.preventDefault();
 
             const id = $(this).attr('href');
@@ -187,50 +179,51 @@ const app = (function () {
             }
         });
 
-
         // поиск
-        $('#search').on('submit', function (e) {
+        $('#search').on('submit', function(e) {
             e.preventDefault();
 
             $('#cardsContainer').removeClass('is-loaded');
 
             // здесь будет обработка запроса
 
-            setTimeout(function () {
+            setTimeout(function() {
                 $('#cardsContainer').addClass('is-loaded');
             }, 1000);
         });
 
-
         // поиск пользователей
-        $('.js-people-search-input').on('keyup', function (e) {
+        $('.js-people-search-input').on('keyup', function(e) {
             // запускаем поиск
             const value = $(this).val();
 
-
-            const $searchListContainer = $(this).parent().find('.js-people-search-list');
+            const $searchListContainer = $(this)
+                .parent()
+                .find('.js-people-search-list');
 
             // если есть текст
             if (value) {
                 const searchStr = value.toLowerCase();
 
-
                 const values = $searchListContainer.find('.js-value');
-
 
                 let length = 0;
 
-                $.each(values, function (idx, item) {
+                $.each(values, function(idx, item) {
                     const itemText = $(item).text();
 
                     if (itemText.toLowerCase().indexOf(searchStr) === -1) {
-                        $(item).parents('.js-people-search-list-item').hide();
+                        $(item)
+                            .parents('.js-people-search-list-item')
+                            .hide();
                     } else {
                         // найдено
                         length += 1;
                         // $searchListContainer.show();
                         $searchListContainer.addClass('is-active');
-                        $(item).parents('.js-people-search-list-item').show();
+                        $(item)
+                            .parents('.js-people-search-list-item')
+                            .show();
                     }
                 });
 
@@ -246,17 +239,23 @@ const app = (function () {
         });
 
         // добавляем пользователя в список
-        $('.js-people-search-list-item').on('click', function (e) {
+        $('.js-people-search-list-item').on('click', function(e) {
             const $container = $(this).parents('.js-category-people');
 
+            const imgPic = $(this)
+                .find('img')
+                .attr('src');
 
-            const imgPic = $(this).find('img').attr('src');
+            const name = $(this)
+                .find('.js-value')
+                .text();
 
-
-            const name = $(this).find('.js-value').text();
-
-
-            const html = '<div class="categoryUserList-item js-category-people-item"><div class="userPic userPic--ctrl"><img src="' + imgPic + '" alt="' + name + '"/><svg class="icon"><use xlink:href="assets/img/sprite.svg#cross"></use></svg></div></div>';
+            const html =
+                '<div class="categoryUserList-item js-category-people-item"><div class="userPic userPic--ctrl"><img src="' +
+                imgPic +
+                '" alt="' +
+                name +
+                '"/><svg class="icon"><use xlink:href="assets/img/sprite.svg#cross"></use></svg></div></div>';
 
             $container.find('.js-people-search-input').val('');
 
@@ -265,14 +264,14 @@ const app = (function () {
         });
 
         // удалить пользователя
-        $('body').on('click', '.js-category-people-item', function (e) {
+        $('body').on('click', '.js-category-people-item', function(e) {
             e.preventDefault();
 
             $(this).remove();
         });
 
         // форма
-        $('.js-category-people-form').on('submit', function (e) {
+        $('.js-category-people-form').on('submit', function(e) {
             e.preventDefault();
 
             const btn = $(this).find('button[type="submit"]');
@@ -282,15 +281,14 @@ const app = (function () {
 
             const formData = $(this).serialize();
 
-            setTimeout(function () {
+            setTimeout(function() {
                 btn.attr('disabled', false);
                 btn.removeClass('is-process');
             }, 2000);
         });
     };
 
-
-    const init = function () {
+    const init = function() {
         svg4everybody();
         document.addEventListener('DOMContentLoaded', _onLoad);
     };

@@ -42,11 +42,9 @@ export async function getBadgeCategoryList(): Promise<BadgeCategoryListType | Er
     return window
         .fetch(getBadgeCategoryListUrl, serverApi.request.paramMap.get)
         .then((response: Response): Promise<BadgeCategoryListType> => response.json())
-        .catch(
-            (error: Error): Error => {
-                console.log('can not get category list');
-                console.error(error);
-                return error;
-            }
-        );
+        .catch((error: Error): Error => {
+            console.log('can not get category list');
+            console.error(error);
+            return error;
+        });
 }

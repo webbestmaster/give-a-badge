@@ -43,11 +43,9 @@ export class CommentList extends Component<PropsType, StateType> {
         const {props} = view;
         const {campaignStatisticDataList} = props;
 
-        return campaignStatisticDataList.map(
-            (campaignStatisticData: CampaignStatisticDataType): DataType => {
-                return campaignStatisticData.badge;
-            }
-        );
+        return campaignStatisticDataList.map((campaignStatisticData: CampaignStatisticDataType): DataType => {
+            return campaignStatisticData.badge;
+        });
     }
 
     renderComment = (badgeData: DataType, index: number): Node => {

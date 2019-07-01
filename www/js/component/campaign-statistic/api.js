@@ -26,11 +26,9 @@ export function getCampaignStatistic(campaignId: string | number): Promise<Campa
     return window
         .fetch(campaignStatisticUrl)
         .then((response: Response): Promise<CampaignStatisticDataListType | Error> => response.json())
-        .catch(
-            (error: Error): Error => {
-                console.error('ca not get campaign statistic by url:', campaignStatisticUrl);
-                console.error(error);
-                return error;
-            }
-        );
+        .catch((error: Error): Error => {
+            console.error('ca not get campaign statistic by url:', campaignStatisticUrl);
+            console.error(error);
+            return error;
+        });
 }

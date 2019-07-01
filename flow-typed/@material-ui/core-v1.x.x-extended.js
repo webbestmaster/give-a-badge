@@ -5,55 +5,55 @@
 // add your declare module here
 
 declare module '@material-ui/core/Button' {
-    declare module .exports: $Exports<'material-ui/Button/Button'>
+    declare module.exports: $Exports<'material-ui/Button/Button'>;
 }
 
 declare module '@material-ui/core/AppBar' {
-    declare module .exports: $Exports<'material-ui/AppBar/AppBar'>
+    declare module.exports: $Exports<'material-ui/AppBar/AppBar'>;
 }
 
 declare module '@material-ui/core/Toolbar' {
-    declare module .exports: $Exports<'material-ui/Toolbar'>
+    declare module.exports: $Exports<'material-ui/Toolbar'>;
 }
 
 declare module '@material-ui/core/Typography' {
-    declare module .exports: $Exports<'material-ui/Typography'>
+    declare module.exports: $Exports<'material-ui/Typography'>;
 }
 
 declare module '@material-ui/core/Dialog' {
-    declare module .exports: $Exports<'material-ui/Dialog/Dialog'>
+    declare module.exports: $Exports<'material-ui/Dialog/Dialog'>;
 }
 
 declare module '@material-ui/core/DialogTitle' {
-    declare module .exports: $Exports<'material-ui/Dialog/DialogTitle'>
+    declare module.exports: $Exports<'material-ui/Dialog/DialogTitle'>;
 }
 
 declare module '@material-ui/core/styles/createMuiTheme' {
-    declare module .exports: $Exports<'material-ui/styles/createMuiTheme'>
+    declare module.exports: $Exports<'material-ui/styles/createMuiTheme'>;
 }
 
 declare module '@material-ui/core/styles/MuiThemeProvider' {
-    declare module .exports: $Exports<'material-ui/styles/MuiThemeProvider'>
+    declare module.exports: $Exports<'material-ui/styles/MuiThemeProvider'>;
 }
 
 declare module '@material-ui/core/TextField' {
-    declare module .exports: $Exports<'material-ui/TextField/TextField'>
+    declare module.exports: $Exports<'material-ui/TextField/TextField'>;
 }
 
 declare module '@material-ui/core/CircularProgress' {
-    declare module .exports: $Exports<'material-ui/Progress/CircularProgress'>
+    declare module.exports: $Exports<'material-ui/Progress/CircularProgress'>;
 }
 
 declare module '@material-ui/core/Snackbar' {
-    declare module .exports: $Exports<'material-ui/Snackbar/Snackbar'>
+    declare module.exports: $Exports<'material-ui/Snackbar/Snackbar'>;
 }
 
 declare module '@material-ui/core/IconButton' {
-    declare module .exports: $Exports<'material-ui/IconButton/IconButton'>
+    declare module.exports: $Exports<'material-ui/IconButton/IconButton'>;
 }
 
 declare module '@material-ui/icons/Close' {
-    declare module .exports: $Exports<'material-ui/svg-icons/Cancel'>
+    declare module.exports: $Exports<'material-ui/svg-icons/Cancel'>;
 }
 
 // Filename aliases (copy from original file)

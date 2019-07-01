@@ -44,9 +44,9 @@ class GoogleAnalytics extends Component<PropsType, StateType> {
         /* eslint-disable max-params, func-names, flowtype/require-parameter-type, id-length, no-param-reassign, no-unused-expressions, babel/no-unused-expressions, no-sequences, unicorn/prefer-query-selector */
         (function (i, s, o, g, r, a, m) {
             i.GoogleAnalyticsObject = r;
-            i[r] =
-                i[r] ||
-                function () {
+            i[r]
+                = i[r]
+                || function () {
                     (i[r].q = i[r].q || []).push(arguments);
                 },
             i[r].l = Number(new Date());

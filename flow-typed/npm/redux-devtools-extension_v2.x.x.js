@@ -19,7 +19,7 @@ declare type $npm$ReduxDevtoolsExtension$DevToolsOptions = {
               symbol?: boolean,
               map?: boolean,
               set?: boolean,
-              function?: boolean | Function
+              function?: boolean | Function,
           },
     actionSanitizer?: <A: {type: string}>(action: A, id: number) => A,
     stateSanitizer?: <S>(state: S, index: number) => S,
@@ -42,41 +42,41 @@ declare type $npm$ReduxDevtoolsExtension$DevToolsOptions = {
         skip?: boolean,
         reorder?: boolean,
         dispatch?: boolean,
-        test?: boolean
-    }
+        test?: boolean,
+    },
 };
 
-declare function $npm$ReduxDevtoolsExtension$composeWithDevTools<A, B>(ab: (A) => B): (A) => B;
+declare function $npm$ReduxDevtoolsExtension$composeWithDevTools<A, B>(ab: (A) => B): A => B;
 declare function $npm$ReduxDevtoolsExtension$composeWithDevTools(
-    options: $npm$ReduxDevtoolsExtension$DevToolsOptions
+    options: $npm$ReduxDevtoolsExtension$DevToolsOptions,
 ): compose;
-declare function $npm$ReduxDevtoolsExtension$composeWithDevTools<A, B, C>(bc: (B) => C, ab: (A) => B): (A) => C;
+declare function $npm$ReduxDevtoolsExtension$composeWithDevTools<A, B, C>(bc: (B) => C, ab: (A) => B): A => C;
 declare function $npm$ReduxDevtoolsExtension$composeWithDevTools<A, B, C, D>(
     cd: (C) => D,
     bc: (B) => C,
-    ab: (A) => B
-): (A) => D;
+    ab: (A) => B,
+): A => D;
 declare function $npm$ReduxDevtoolsExtension$composeWithDevTools<A, B, C, D, E>(
     de: (D) => E,
     cd: (C) => D,
     bc: (B) => C,
-    ab: (A) => B
-): (A) => E;
+    ab: (A) => B,
+): A => E;
 declare function $npm$ReduxDevtoolsExtension$composeWithDevTools<A, B, C, D, E, F>(
     ef: (E) => F,
     de: (D) => E,
     cd: (C) => D,
     bc: (B) => C,
-    ab: (A) => B
-): (A) => F;
+    ab: (A) => B,
+): A => F;
 declare function $npm$ReduxDevtoolsExtension$composeWithDevTools<A, B, C, D, E, F, G>(
     fg: (F) => G,
     ef: (E) => F,
     de: (D) => E,
     cd: (C) => D,
     bc: (B) => C,
-    ab: (A) => B
-): (A) => G;
+    ab: (A) => B,
+): A => G;
 declare function $npm$ReduxDevtoolsExtension$composeWithDevTools<A, B, C, D, E, F, G, H>(
     gh: (G) => H,
     fg: (F) => G,
@@ -84,8 +84,8 @@ declare function $npm$ReduxDevtoolsExtension$composeWithDevTools<A, B, C, D, E, 
     de: (D) => E,
     cd: (C) => D,
     bc: (B) => C,
-    ab: (A) => B
-): (A) => H;
+    ab: (A) => B,
+): A => H;
 declare function $npm$ReduxDevtoolsExtension$composeWithDevTools<A, B, C, D, E, F, G, H, I>(
     hi: (H) => I,
     gh: (G) => H,
@@ -94,11 +94,11 @@ declare function $npm$ReduxDevtoolsExtension$composeWithDevTools<A, B, C, D, E, 
     de: (D) => E,
     cd: (C) => D,
     bc: (B) => C,
-    ab: (A) => B
-): (A) => H;
+    ab: (A) => B,
+): A => H;
 
 declare function $npm$ReduxDevtoolsExtension$devToolsEnhancer<S, A>(
-    options?: $npm$ReduxDevtoolsExtension$DevToolsOptions
+    options?: $npm$ReduxDevtoolsExtension$DevToolsOptions,
 ): StoreEnhancer<S, A>;
 
 declare module 'redux-devtools-extension' {

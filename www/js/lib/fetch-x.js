@@ -1,5 +1,8 @@
 // @flow
-/* global window, fetch, setTimeout */
+
+/* global window, fetch */
+
+import {hasProperty} from './is';
 
 const promiseCache = {};
 
@@ -19,9 +22,9 @@ export function fetchX<ExpectedResponseType>(
     url: string,
     options?: OptionsType
 ): Promise<ExpectedResponseType | Error> {
-    const cacheProperty = url + ' - ' + JSON.stringify(options);
+    const cacheProperty = url + ' - ' + (JSON.stringify(options) || '');
 
-    if (promiseCache.hasOwnProperty(cacheProperty)) {
+    if (hasProperty(promiseCache, cacheProperty)) {
         console.log(`fetchX - url: ${url}, options: ${JSON.stringify(options || {})} - get from cache`);
         return promiseCache[cacheProperty];
     }
@@ -29,13 +32,11 @@ export function fetchX<ExpectedResponseType>(
     promiseCache[cacheProperty] = window
         .fetch(url, options)
         .then((rawResult: Response): Promise<ExpectedResponseType> => rawResult.json())
-        .catch(
-            (error: Error): Error => {
-                console.error('can not fetch url:', url);
-                console.error(error);
-                return error;
-            }
-        );
+        .catch((error: Error): Error => {
+            console.error('can not fetch url:', url);
+            console.error(error);
+            return error;
+        });
 
     return promiseCache[cacheProperty];
 }

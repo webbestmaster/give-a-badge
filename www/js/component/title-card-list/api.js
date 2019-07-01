@@ -98,7 +98,7 @@ export async function getNewsList(pageIndex: number, pageSize: number): Promise<
     const response: Response = await window.fetch(getNewUrl, serverApi.request.paramMap.get);
 
     if (response.ok) {
-        return await response.json();
+        return response.json();
     }
 
     return null;
@@ -112,7 +112,7 @@ export async function getNewsAchtungList(pageIndex: number, pageSize: number): P
     const response: Response = await window.fetch(getNewUrl, serverApi.request.paramMap.get);
 
     if (response.ok) {
-        return await response.json();
+        return response.json();
     }
 
     return null;

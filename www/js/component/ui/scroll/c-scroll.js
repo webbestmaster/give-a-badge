@@ -92,7 +92,7 @@ export class Scroll extends Component<StateType, PropsType> {
             freeMode: true,
             watchOverflow: true, // disable this cause swiper has scroll bar and bug after resize
             scrollbar: {
-                // eslint-disable-next-line id-length
+                // eslint-disable-next-line id-length, unicorn/prevent-abbreviations
                 el: '.swiper-scrollbar',
             },
             mousewheel: true,

@@ -16,7 +16,7 @@ type ReduceMapType = {|
     +newsResponseList: (newsResponseList: Array<GetNewsListType>, actionData: ActionDataType) => Array<GetNewsListType>,
     +newsAchtungResponseList: (
         newsResponseList: Array<GetNewsAchtungListType>,
-        actionData: ActionDataType
+        actionData: ActionDataType,
     ) => Array<GetNewsAchtungListType>,
 |};
 
@@ -35,9 +35,9 @@ const titleNewsList = combineReducers<ReduceMapType, TitleNewsListType>({
 
         const {getNewsListResponse} = actionData.payload;
 
-        return actionData.payload.inBegin ?
-            [getNewsListResponse, ...newsResponseList] :
-            [...newsResponseList, getNewsListResponse];
+        return actionData.payload.inBegin
+            ? [getNewsListResponse, ...newsResponseList]
+            : [...newsResponseList, getNewsListResponse];
     },
     newsAchtungResponseList: (
         newsResponseList: Array<GetNewsAchtungListType> = [],
@@ -53,9 +53,9 @@ const titleNewsList = combineReducers<ReduceMapType, TitleNewsListType>({
 
         const {getNewsAchtungListResponse} = actionData.payload;
 
-        return actionData.payload.inBegin ?
-            [getNewsAchtungListResponse, ...newsResponseList] :
-            [...newsResponseList, getNewsAchtungListResponse];
+        return actionData.payload.inBegin
+            ? [getNewsAchtungListResponse, ...newsResponseList]
+            : [...newsResponseList, getNewsAchtungListResponse];
     },
 });
 

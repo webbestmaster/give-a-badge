@@ -120,8 +120,8 @@ export class Notification extends Component<PropsType, StateType> {
         const {state} = view;
         const {list} = state;
 
-        const snackBar =
-            list.find((snackBarData: ShowSnackBarDetailType): boolean => snackBarData.id === snackBarId) || null;
+        const snackBar
+            = list.find((snackBarData: ShowSnackBarDetailType): boolean => snackBarData.id === snackBarId) || null;
 
         if (snackBar === null) {
             console.log('Notification ---> Item is NOT exists!');

@@ -34,16 +34,14 @@ export type ScreenType = {|
 function getScreenName(screenWidth: number): ScreenWidthNameType {
     let screenName = 'mobile';
 
-    Object.keys(screenMinWidth).every(
-        (screenNameInList: ScreenWidthNameType): boolean => {
-            if (screenWidth >= screenMinWidth[screenNameInList]) {
-                screenName = screenNameInList;
-                return false;
-            }
-
-            return true;
+    Object.keys(screenMinWidth).every((screenNameInList: ScreenWidthNameType): boolean => {
+        if (screenWidth >= screenMinWidth[screenNameInList]) {
+            screenName = screenNameInList;
+            return false;
         }
-    );
+
+        return true;
+    });
 
     return screenName;
 }

@@ -86,15 +86,11 @@ class BadgeCategoryList extends Component<ReduxPropsType, PassedPropsType, State
                 <HalfPopupHeader>
                     <Locale stringKey="CATEGORY_LIST__CATEGORIES"/>
                 </HalfPopupHeader>
-                {badgeCategoryList ?
-                    Object.keys(badgeCategoryList).map(
-                        (key: string): Node => {
-                            return (
-                                <BadgeCategoryListItem categoryList={badgeCategoryList[key]} key={key} name={key}/>
-                            );
-                        }
-                    ) :
-                    null}
+                {badgeCategoryList
+                    ? Object.keys(badgeCategoryList).map((key: string): Node => {
+                        return <BadgeCategoryListItem categoryList={badgeCategoryList[key]} key={key} name={key}/>;
+                    })
+                    : null}
             </HalfPopup>
         );
     }
