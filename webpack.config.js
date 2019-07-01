@@ -286,7 +286,7 @@ const webpackConfig = {
         // hotOnly: false,
         proxy: [
             {
-                context: ['/api/', '/login', '/login-page', '/logout'],
+                context: ['/api/', '/login', '/login-page', '/logout', '/static/img'],
                 // target: 'https://badge.by',
                 // target: 'http://206.81.28.99',
                 // target: 'http://172.21.96.250',
