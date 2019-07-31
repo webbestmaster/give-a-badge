@@ -116,6 +116,7 @@ class HistogramList extends Component<PropsType, StateType> {
                         <div
                             className={style.histogram_face_image}
                             style={{backgroundImage: `url(${columnData.user.imageUrl})`}}
+                            title={columnData.user.name}
                         />
                     </div>
                 </div>

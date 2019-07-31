@@ -72,6 +72,7 @@ class TitleCard extends Component<ReduxPropsType, PassedPropsType, StateType> {
                                 className={peopleFaceClassName}
                                 key={userInList.id}
                                 style={{backgroundImage: `url('${userInList.imageUrl}')`}}
+                                title={userInList.name}
                             />
                         );
                     }

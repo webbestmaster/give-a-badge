@@ -54,6 +54,7 @@ export class CommentList extends Component<PropsType, StateType> {
                 <div
                     className={style.comment_item_face}
                     style={{backgroundImage: `url(${campaignStatisticData.assigner.imageUrl})`}}
+                    title={campaignStatisticData.assigner.name}
                 />
                 <div className={style.comment_item_text_cloud}>
                     <p className={style.comment_item_text}>{campaignStatisticData.comment}</p>
